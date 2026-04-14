@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 13:52:48 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 15:40:35 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int main(void)
 		int i = 0;
 		while (str[i])
 		{
-			printf("%s : len =%d\n",str[i],ft_strlen(str[i]));
+			printf("%s : len =%zu\n",str[i],ft_strlen(str[i]));
 			i++;
 		}
 		printf("---------\n");
@@ -102,4 +102,18 @@ int main(void)
 		printf("---------\n");
 
 	}
+
+/* 	// ft_memset()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_memset() ---\n");
+		char *str[] = {"ajQT09 #/=@-\\~", "", "	 ", "test", NULL };
+		int i = 0;
+		while (str[i])
+		{
+			printf("%s : len =%d\n",str[i],ft_memset(str[i]));
+			i++;
+		}
+		printf("---------\n");
+	} */
 }
