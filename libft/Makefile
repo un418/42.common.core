@@ -28,15 +28,19 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f $(TEST_OBJ)
+# To remove before delivering the project
+	rm -f $(TEST_OBJ) 
 	
 re: fclean all
 
+# To remove before delivering the project
 test: $(NAME)
 	$(CC) $(CFLAGS)  $(TEST_SRC) -L. -l:libft.a -o $(TEST_OBJ)
 	./test.o
 
+# Find out why it don't work in another folder #TODO
 #$(CC) $(CFLAGS) -c $(TEST_FOLDER)/$(TEST_SRC) -L. -l:libft.a -o $(TEST_FOLDER)/$(TEST_OBJ)
 #./$(TEST_FOLDER)/$(TEST_OBJ)
 
+# Remove test phony target before delivering the project
 .PHONY: all clean fclean re test
