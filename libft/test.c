@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 17:47:23 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 18:31:51 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int main(void)
 	}
 
 	// ft_memset()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_memset() ---\n");
 		char str[] = "coucou";
@@ -115,4 +115,18 @@ int main(void)
 		printf("sizeof str[i]=%zu\n",ft_strlen(str));
 		printf("---------\n");
 	}
+
+	// ft_bzero()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_bzero() ---\n");
+		char str[] = "coucou";
+		printf("before:%s \n",str);
+		printf("sizeof str[i]=%zu\n",ft_strlen(str));
+		ft_bzero(str,ft_strlen(str));
+		printf("after:%s \n",str);
+		printf("sizeof str[i]=%zu\n",ft_strlen(str));
+		printf("---------\n");
+	}
+
 }
