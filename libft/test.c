@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 17:22:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 17:47:23 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,23 +103,6 @@ int main(void)
 
 	}
 
-/* 	// ft_memset()
-	if (1 || test_all)
-	{
-		printf("--- TEST for ft_memset() ---\n");
-		char *str[] = {"ajQT09 #/=@-\\~", "", "	 ", "test", NULL };
-		int i = 0;
-		while (str[i])
-		{
-			printf("before:%s \n",str[i]);
-			printf("sizeof str[i]=%zu\n",ft_strlen(str[i]));
-			ft_memset(str[i],0,4);
-			printf("after:%s \n",str[i]);
-			i++;
-		}
-		printf("---------\n");
-	} */
-
 	// ft_memset()
 	if (1 || test_all)
 	{
@@ -127,7 +110,7 @@ int main(void)
 		char str[] = "coucou";
 		printf("before:%s \n",str);
 		printf("sizeof str[i]=%zu\n",ft_strlen(str));
-		ft_memset(str,0,ft_strlen(str));
+		ft_memset(str,45,ft_strlen(str));
 		printf("after:%s \n",str);
 		printf("sizeof str[i]=%zu\n",ft_strlen(str));
 		printf("---------\n");
