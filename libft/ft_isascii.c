@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:06:10 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 13:17:49 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:52:36 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@ isascii()
 checks whether c is a 7-bit unsigned char value
 that fits into the ASCII character set.
 */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

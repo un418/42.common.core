@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 12:38:20 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 12:53:28 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:52:31 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 isdigit() :
 checks for a digit (0 through 9).
 */
+
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

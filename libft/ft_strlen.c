@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:30:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 13:53:33 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:52:14 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ excluding the terminating null byte ('\0').
 RETURN VALUE
 The strlen() function returns the number of bytes in the string pointed to by s.
 */
+
+#include "libft.h"
 
 int	ft_strlen(char *str)
 {

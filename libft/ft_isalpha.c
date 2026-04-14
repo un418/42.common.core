@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:21:37 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 12:25:03 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:52:41 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ is true—letters which are neither uppercase nor lowercase.
 // Deliberatly choose to not call ft_islower and ft_isupper and duplicate code
 // Because I want my libft efficient
 // and avoid the overhead cost of calling two external fonction.
+
+#include "libft.h"
 
 int	ft_isalpha(int c)
 {
