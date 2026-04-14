@@ -26,7 +26,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I. -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
@@ -40,7 +40,7 @@ re: fclean all
 
 # To remove before delivering the project
 test: $(NAME)
-	$(CC) $(CFLAGS)  $(TEST_SRC) -L. -l:libft.a -o $(TEST_OBJ)
+	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
 	./test.o
 
 # Find out why it don't work in another folder #TODO
