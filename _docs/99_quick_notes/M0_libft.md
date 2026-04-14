@@ -1,5 +1,13 @@
+## Important Instruction
 
+- **Submitting unused files is not allowed.**
+- **All files must be placed at the root of your repository.**
+- **Every .c file must compile with the following flags: -Wall -Wextra -Werror.**
 
+- **You must use the ar command to create your library. The use of libtool is strictly forbidden.**
+-  **Your libft.a must be created at the root of your repository.**
+
+- To begin, you must reimplement a set of functions from the libc. Your version will have the same **prototypes** and behaviors as the originals, adhering s**trictly to their definitions in the man page**. The **only difference will be their names**, which must start with the ’ft_’ prefix. For example, strlen becomes ft_strlen.
 ## 1. Configure Makefile
 
 - [x] makefile compile file as librairy
@@ -26,7 +34,53 @@ ar rcs libmylib.a mylib.o
 
 
 ## 2. Be able to test code
-Find a way to test the code via a main function that call the librairy
+Find a way to test the code via a main function that call the library
+- https://github.com/un418/42.common.core/commit/5581fd65a7693c45c6d228e9a83cc22ba587d449
+- https://github.com/un418/42.common.core/commit/8d4a48f7d20b09c4a4fec19eaa6bc9c2ab5dc66e
+
+## Others
+
+#### ? Is TAB (ASCII = 9) a printable caracter ? 
+- This website say no : https://www.ascii-code.com/
+- But test with printf works ???
+  
+## ft_strlen
+
+> [!INFO] 📏 The `size_t` Type
+> `size_t` is an **unsigned integer type** defined in `<stddef.h>` (and inherited by `<stdlib.h>` or `<stdio.h>`). It is the dedicated type for representing the size of any object in memory.
+> 
+> ---
+> ### 🚀 Key Features
+> - **Portability**: Its actual size is architecture-dependent. It is **32-bit** on 32-bit systems and **64-bit** on 64-bit systems. This ensures it can always address the maximum theoretical limit of your RAM.
+> - **Safety**: Being **unsigned**, it inherently prevents negative lengths. It is the perfect fit for array indexing and loop counters.
+> - **Standard Usage**: It is the mandatory type for core functions like `malloc()`, `strlen()`, `memcpy()`, and `memset()`.
+> 
+> ---
+> ### ⚠️ Risks & Gotchas
+> - **Underflow**: Since it cannot be negative, executing `0 - 1` on a `size_t` will cause it to "wrap around" to its maximum possible value (a massive number), often leading to infinite loops.
+> - **Comparison**: Avoid comparing `int` and `size_t` directly. You will trigger **signed/unsigned comparison warnings** because the compiler struggles to decide how to handle the sign bit.
+> 
+> > [!TIP] Best Practice
+> > Always use `size_t` for any variable that stores a **count**, a **length**, or an **index**. It makes your code future-proof and 64-bit compatible.
+
+> [!ABSTRACT] 🛡️ The `const` Qualifier in Pointers
+> In function prototypes like `strcmp(const char *s1, ...)`, the `const` keyword before the pointer type defines **Pointer to Constant Data**.
+> 
+> ---
+> ### 🔑 Key Implications
+> - **Immutability**: The function treats the memory pointed to by `s1` as **read-only**. Any attempt to modify the characters (e.g., `s1[i] = 'x'`) will trigger a **compiler error**.
+> - **Contract of Trust**: It informs the developer that the function is safe to use with data that *must not* change (like string literals stored in the read-only data segment).
+> - **Compatibility**: You can pass a non-const variable to a `const char *` parameter, but you **cannot** pass a `const char *` to a function expecting a regular `char *` without a warning/error.
+> 
+> ---
+> ### ⚙️ Memory Layout
+> | Syntax | Meaning | Can change data? | Can change pointer address? |
+> | :--- | :--- | :--- | :--- |
+> | `const char *s` | Pointer to constant | **No** | Yes |
+> | `char * const s` | Constant pointer | Yes | **No** |
+> 
+> > [!TIP] Best Practice
+> > Always use `const` for any function parameter that only needs to **read** data. It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
 
 ## Q & A
 - **Declaring global variables is strictly forbidden.**
@@ -69,8 +123,6 @@ Find a way to test the code via a main function that call the librairy
 
 
 
-• **Submitting unused files is not allowed.**
-• **All files must be placed at the root of your repository.**
-• **Every .c file must compile with the following flags: -Wall -Wextra -Werror.**
-• **You must use the ar command to create your library. The use of libtool is strictly forbidden.**
-• **Your libft.a must be created at the root of your repository.
+## Point of Attention
+
+* `size_t` type and `const char *s1` constant definition in function prototype : Check to add in libftTester
