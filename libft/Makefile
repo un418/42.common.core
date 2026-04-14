@@ -17,7 +17,8 @@ SRCS		=	ft_isalpha.c	\
 				ft_isascii.c	\
 				ft_isprint.c	\
 				ft_strlen.c		\
-				ft_memset.c
+				ft_memset.c		\
+				ft_bzero.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -35,7 +36,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 # To remove before delivering the project
-	rm -f $(TEST_OBJ) 
+	rm -f $(TEST_OBJ)
 	
 re: fclean all
 
