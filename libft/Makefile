@@ -11,7 +11,8 @@ CFLAGS		= -Wall -Wextra -Werror
 
 HEADER		= libft.h
 
-SRCS		= ft_isalpha.c
+SRCS		=	ft_isalpha.c \
+				ft_isdigit.c
 
 OBJS		= $(SRCS:.c=.o)
 
