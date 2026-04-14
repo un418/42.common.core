@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 13:27:57 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:52:48 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int main(void)
 	}
 
 	// ft_isprint()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_isprint() ---\n");
 		char *str = "ajQT09 #/=@-\\~";
@@ -84,5 +84,22 @@ int main(void)
 		printf("TAB : %d\n",ft_isprint('	'));
 		printf("NULL : %d\n",ft_isprint(0));
 		printf("---------\n");
+	}
+
+	// ft_strlen()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strlen() ---\n");
+		char *str[] = {"ajQT09 #/=@-\\~", "", "	 ", "test", NULL };
+		int i = 0;
+		while (str[i])
+		{
+			printf("%s : len =%d\n",str[i],ft_strlen(str[i]));
+			i++;
+		}
+		printf("---------\n");
+		printf("TEST PRINT TAB via printf: %c ; %d\n",9,'	');
+		printf("---------\n");
+
 	}
 }
