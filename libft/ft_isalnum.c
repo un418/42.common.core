@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 12:59:09 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 13:02:00 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:52:47 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ it is equivalent to (isalpha(c) || isdigit(c)).
 // Deliberatly choose to not call ft_isalpha and ft_isdigit and duplicate code
 // Because I want my libft efficient
 // and avoid the overhead cost of calling two external fonction.
+
+#include "libft.h"
 
 int	ft_isalnum(int c)
 {
