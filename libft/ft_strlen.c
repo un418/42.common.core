@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 12:22:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 13:33:39 by adaferna         ###   ########.fr       */
+/*   Created: 2026/04/14 13:30:40 by adaferna          #+#    #+#             */
+/*   Updated: 2026/04/14 13:53:33 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+/* 
+DESCRIPTION
+The strlen() function calculates the length of the string pointed to by s,
+excluding the terminating null byte ('\0').
+RETURN VALUE
+The strlen() function returns the number of bytes in the string pointed to by s.
+*/
 
-int	ft_isalpha(int c);
-int	ft_isdigit(int c);
-int	ft_isalnum(int c);
-int	ft_isascii(int c);
-int	ft_isprint(int c);
-int	ft_strlen(char *str);
+int	ft_strlen(char *str)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
