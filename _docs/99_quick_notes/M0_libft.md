@@ -1,3 +1,11 @@
+```bash
+# avoid running nominette on test.c
+ norminette $(ls *.c | grep -v test)
+ # alias to update note
+ ga $(git rev-parse --show-toplevel)/_docs && gcmsg "update notes" && gp
+
+```
+
 ## Important Instruction
 
 - **Submitting unused files is not allowed.**
@@ -7,7 +15,7 @@
 - **You must use the ar command to create your library. The use of libtool is strictly forbidden.**
 -  **Your libft.a must be created at the root of your repository.**
 
-- To begin, you must reimplement a set of functions from the libc. Your version will have the same **prototypes** and behaviors as the originals, adhering s**trictly to their definitions in the man page**. The **only difference will be their names**, which must start with the ’ft_’ prefix. For example, strlen becomes ft_strlen.
+- To begin, you must reimplement a set of functions from the libc. Your version will have the same **prototypes** and behaviors as the originals, adhering **strictly to their definitions in the man page**. The **only difference will be their names**, which must start with the ’ft_’ prefix. For example, strlen becomes ft_strlen.
 ## 1. Configure Makefile
 
 - [x] makefile compile file as librairy
