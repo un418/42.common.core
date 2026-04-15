@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 18:31:51 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/15 12:41:40 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int main(void)
 	}
 
 	// ft_bzero()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_bzero() ---\n");
 		char str[] = "coucou";
@@ -129,4 +129,37 @@ int main(void)
 		printf("---------\n");
 	}
 
+	// ft_memcpy()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_memcpy() ---\n");
+		printf("-Test1: \n");
+		char src[] = "coucou";
+		char dst[] = "-----------";
+		printf("before - src:%s \n",src);
+		printf("before - dst:%s \n",dst);
+		ft_memcpy(dst,src,ft_strlen(src));
+		printf("after - src:%s \n",src);
+		printf("after - dst:%s \n",dst);
+		
+		printf("-Test2: Memory Overlapping\n");
+		char src2[] = "coucou";
+		char dst2[] = "---";
+		printf("before - src2:%s \n",src2);
+		printf("before - dst2:%s \n",dst2);
+		ft_memcpy(dst2,src2,ft_strlen(src2));
+		printf("after - src2:%s \n",src2);
+		printf("after - dst2:%s \n",dst2);
+		printf("---------\n");
+
+		printf("-Test3: Memory Overlapping\n");
+		char src3[] = "coucou";
+		char dst3[] = "";
+		printf("before - src3:%s \n",src3);
+		printf("before - dst3:%s \n",dst3);
+		ft_memcpy(dst3,src3,ft_strlen(src3));
+		printf("after - src3:%s \n",src3);
+		printf("after - dst3:%s \n",dst3);
+		printf("---------\n");
+	}
 }
