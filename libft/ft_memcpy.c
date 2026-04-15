@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:16:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/15 12:35:43 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/15 12:55:11 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 	ptr = dest;
 	while (n--)
-	{
-		*ptr = *(char *)src;
-		ptr++;
-		src++;
-	}
+		*ptr++ = *(char *)src++;
 	return (dest);
 }
