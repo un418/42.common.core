@@ -90,6 +90,21 @@ Find a way to test the code via a main function that call the library
 > > [!TIP] Best Practice
 > > Always use `const` for any function parameter that only needs to **read** data. It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
 
+
+### memove
+
+#### Memory Overlapping Mental Model
+Memory overlap happens when you try to copy data between two regions that share the same physical memory space. This typically occurs when you are shifting data within the same array or buffer. 
+##### The Visual Example
+Imagine an array of 5 characters: `[ 'A', 'B', 'C', 'D', 'E' ]`.  
+You want to move the first 3 characters (`ABC`) one position to the right.
+- **Source (`src`)**: Starts at index 0 (`ABC`)
+- **Destination (`dst`)**: Starts at index 1 (`BCD`)
+##### Why `memcpy` Fails
+A standard `memcpy` often copies from left to right. If it copies one byte at a time:
+1. Copy `src[0]` ('A') to `dst[0]` (index 1). Array is now `[A, A, C, D, E]`.
+2. Copy `src[1]` to `dst[1]`. **Problem**: `src[1]` was originally 'B', but it was just overwritten by 'A'!
+3. The result becomes `[A, A, A, A, E]` instead of `[A, A, B, C, E]`.
 ## Q & A
 - **Declaring global variables is strictly forbidden.**
 
