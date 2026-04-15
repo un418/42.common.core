@@ -1,0 +1,19 @@
+{
+    "tasks": [
+        {
+            "label": "build libft debug",
+            "command": "make",
+            "args": [ "debug" ],
+            "options": {
+                "cwd": "${workspaceFolder}/libft"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+			"problemMatcher": ["$gcc"],
+            "detail": "Build via Makefile in debug mode"
+        }
+    ],
+    "version": "2.0.0"
+}
