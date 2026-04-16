@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/15 17:05:46 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:52:45 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,34 +154,11 @@ int main(void)
 			printf("after - dst2:%s \n",dst2);
 		}
 
-		if (0)
-		{
-			printf("-Test3: Memory Overlapping\n");
-			char src3[] = "zouzou";
-			printf("before - src3:%s \n",src3);
-			printf("before - dst3:%s \n",&src3[3]);
-			ft_memmove(&src3[1],src3,ft_strlen(src3)-1);
-			printf("after - src3:%s \n",src3);
-			printf("after - dst3:%s \n",&src3[1]);
-		}
-
-		if (0)
-		{
-			printf("-Test4: Memory Overlapping\n");
-			char src4[] = "zouzou";
-			char *dst4 = &src4[3];
-			printf("before - src4:%s \n",src4);
-			printf("before - dst4:%s \n",dst4);
-			ft_memcpy(dst4,src4,ft_strlen(src4));
-			printf("after - src4:%s \n",src4);
-			printf("after - dst4:%s \n",dst4);
-		}
-
 		if (1)
 		{
 			printf("-Test5: Memory Overlapping\n");
 			char src5[] = "123456789";
-			char *dst5 = &src5[3];
+			char *dst5 = &src5[1];
 			printf("before - src5:%s \n",src5);
 			printf("before - dst5:%s \n",dst5);
 			ft_memcpy(dst5,src5,3);
@@ -216,28 +193,6 @@ int main(void)
 			printf("after - dst2:%s \n",dst2);
 		}
 
-		if (0)
-		{
-			printf("-Test3: Memory Overlapping\n");
-			char src3[] = "zouzou";
-			printf("before - src3:%s \n",src3);
-			printf("before - dst3:%s \n",&src3[3]);
-			ft_memmove(&src3[1],src3,ft_strlen(src3)-2);
-			printf("after - src3:%s \n",src3);
-			printf("after - dst3:%s \n",&src3[1]);
-		}
-
-		if (0)
-		{
-			printf("-Test4: Memory Overlapping\n");
-			char src4[] = "youyou";
-			char *dst4 = &src4[3];
-			printf("before - src4:%s \n",src4);
-			printf("before - dst4:%s \n",dst4);
-			ft_memmove(dst4,src4,ft_strlen(src4));
-			printf("after - src4:%s \n",src4);
-			printf("after - dst4:%s \n",dst4);
-		}
 		if (1)
 		{
 			printf("-Test5: Memory Overlapping\n");
