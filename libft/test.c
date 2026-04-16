@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 20:08:13 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/16 21:07:16 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ int main(void)
 	}
 	
 	// ft_toupper()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_toupper() ---\n");
 		printf("Test1 ---\n");
@@ -280,7 +280,7 @@ int main(void)
 	}
 
 	// ft_tolower()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_tolower() ---\n");
 		printf("Test1 ---\n");
@@ -303,7 +303,7 @@ int main(void)
 		printf("---------\n");
 	}
 	// ft_strchr()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strchr() ---\n");
 		{
@@ -312,9 +312,9 @@ int main(void)
 			char find = '2';
 			printf("str:%s \n", str);
 			printf("find:%c \n", find);
-			printf("&str:%p \n", str);
+			printf("&str  :%p \n", str);
 			char *match = ft_strchr(str,find);
-			printf("&str:%p \n", match);
+			printf("&match:%p \n", match);
 		}
 
 		{
@@ -323,9 +323,9 @@ int main(void)
 			char find = 'a';
 			printf("str:%s \n", str);
 			printf("find:%c \n", find);
-			printf("&str:%p \n", str);
+			printf("&str  :%p \n", str);
 			char *match = ft_strchr(str,find);
-			printf("&str:%p \n", match);
+			printf("&match:%p \n", match);
 		}
 
 		{
@@ -334,9 +334,9 @@ int main(void)
 			char find = 'a';
 			printf("str:%s \n", str);
 			printf("find:%c \n", find);
-			printf("&str:%p \n", str);
+			printf("&str  :%p \n", str);
 			char *match = ft_strchr(str,find);
-			printf("&str:%p \n", match);
+			printf("&match:%p \n", match);
 		}
 
 		{
@@ -345,9 +345,58 @@ int main(void)
 			char find = '\0';
 			printf("str:%s \n", str);
 			printf("find:%c \n", find);
-			printf("&str:%p \n", str);
+			printf("&str  :%p \n", str);
 			char *match = ft_strchr(str,find);
-			printf("&str:%p \n", match);
+			printf("&match:%p \n", match);
+		}
+		printf("---------\n");
+	}
+	// ft_strrchr()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strrchr() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *str = "121";
+			char find = '1';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_strrchr(str,find);
+			printf("&match:%p \n", match);
+		}
+
+		{
+			printf("-- Test2 --\n");
+			char *str = "123456789";
+			char find = 'a';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_strrchr(str,find);
+			printf("&match:%p \n", match);
+		}
+
+		{
+			printf("-- Test3 --\n");
+			char *str = "a";
+			char find = 'a';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_strrchr(str,find);
+			printf("&match:%p \n", match);
+		}
+
+		{
+			printf("-- Test4 --\n");
+			char *str = "";
+			char find = '\0';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_strrchr(str,find);
+			printf("&match:%p \n", match);
 		}
 		printf("---------\n");
 	}
