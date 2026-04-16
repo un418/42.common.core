@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 15:52:45 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:22:17 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int main(void)
 	}
 
 	// ft_memcpy()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_memcpy() ---\n");
 		printf("-Test1: \n");
@@ -169,7 +169,7 @@ int main(void)
 	}
 
 	// ft_memmove()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_memmove() ---\n");
 		printf("-Test1: \n");
@@ -203,6 +203,54 @@ int main(void)
 			ft_memmove(dst5,src5,3);
 			printf("after - src5:%s \n",src5);
 			printf("after - dst5:%s \n",dst5);
+		}
+		printf("---------\n");
+	}
+
+	// ft_strlcpy()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strlcpy() ---\n");
+		if (1)
+		{
+			printf("Test1: ft_strlcpy(dst1,src1,ft_strlen(src1)\n");
+			char src1[] = "ABCDE";
+			char dst1[] = "12345";
+			printf("before - src:%s \n",src1);
+			printf("before - dst:%s \n",dst1);
+			size_t ret = ft_strlcpy(dst1,src1,ft_strlen(src1 + 1));
+			printf("after - src:%s \n",src1);
+			printf("after - dst:%s \n",dst1);
+			printf("ft strlen(src): %zu \n",ft_strlen(src1));
+			printf("ft return value: %zu \n",ret);
+		}
+
+		if (1)
+		{
+			printf("Test2: ft_strlcpy(dst2,src2,0)\n");
+			char src2[] = "ABCDE";
+			char dst2[] = "12345";
+			printf("before - src:%s \n",src2);
+			printf("before - dst:%s \n",dst2);
+			size_t ret = ft_strlcpy(dst2,src2,0);
+			printf("after - src:%s \n",src2);
+			printf("after - dst:%s \n",dst2);
+			printf("ft strlen(src): %zu \n",ft_strlen(src2));
+			printf("ft return value: %zu \n",ret);
+		}
+		
+		if (1)
+		{
+			printf("Test3: ft_strlcpy(dst3,src3,4)\n");
+			char src3[] = "ABCDE";
+			char dst3[] = "1234";
+			printf("before - src:%s \n",src3);
+			printf("before - dst:%s \n",dst3);
+			size_t ret = ft_strlcpy(dst3,src3,4);
+			printf("after - src:%s \n",src3);
+			printf("after - dst:%s \n",dst3);
+			printf("ft strlen(src): %zu \n",ft_strlen(src3));
+			printf("ft return value: %zu \n",ret);
 		}
 		printf("---------\n");
 	}
