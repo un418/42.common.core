@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 12:57:51 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/15 17:11:59 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:48:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,25 @@ The memmove() function returns a pointer to dest.
 */
 
 #include "libft.h"
-/* 
+
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	tmp;
+	char	*p_dest;
+	char	*p_src;
 
-	while (n--)
+	p_dest = (char *)dest;
+	p_src = (char *)src;
+	if (dest == src)
+		return (dest);
+	else if (src > dest)
+		while (n--)
+			*p_dest++ = *p_src++;
+	else if (dest > src)
 	{
-		tmp = *(char *)src++;
-		*(char *)dest++ = tmp;
+		p_dest += n - 1;
+		p_src += n - 1;
+		while (n--)
+			*p_dest-- = *p_src--;
 	}
-	return (dest);
-} */
-
-#include <stdio.h>
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	char	tmp[n+1];
-	int		i;
-
-	i = 0;
-	while (i < (int)n)
-		tmp[i++] = *(char *)src++;
-	tmp[i] = 0;
-	printf("tmp:%s\n",tmp);
-	i = 0;
-	while (i < (int)n)
-		*(char *)dest++ = tmp[i++];
 	return (dest);
 }
