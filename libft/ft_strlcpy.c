@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:35:07 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 18:37:21 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:50:58 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ it was done to make truncation detection simple.
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	const char *p_src;
+	const char	*p_src;
 
 	p_src = src;
-	if ( size != 0)
+	if (size != 0)
 	{
 		while (--size && *src)
 			*dst++ = *src++;
 		*dst = '\0';
 	}
-	return(ft_strlen(p_src));
+	return (ft_strlen(p_src));
 }
