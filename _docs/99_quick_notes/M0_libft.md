@@ -94,6 +94,7 @@ Find a way to test the code via a main function that call the library
 ### memove
 
 #### Memory Overlapping Mental Model
+https://cs50.stackexchange.com/questions/14615/memory-overlap-in-c
 Memory overlap happens when you try to copy data between two regions that share the same physical memory space. This typically occurs when you are shifting data within the same array or buffer. 
 ##### The Visual Example
 Imagine an array of 5 characters: `[ 'A', 'B', 'C', 'D', 'E' ]`.  
