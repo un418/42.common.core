@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 18:22:17 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/16 19:18:11 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ int main(void)
 	}
 
 	// ft_strlcpy()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strlcpy() ---\n");
 		if (1)
@@ -253,5 +253,32 @@ int main(void)
 			printf("ft return value: %zu \n",ret);
 		}
 		printf("---------\n");
+	}
+	
+	// ft_toupper()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_toupper() ---\n");
+		printf("Test1 ---\n");
+		char c = 'a';
+		printf("before:%c \n", c);
+		printf("before:%d \n", c);
+		c = ft_toupper(c);
+		printf("after:%c \n",c);
+		printf("after:%d \n", c);
+
+		{
+			printf("Test2 ---\n");
+			char c = 'E';
+			printf("before:%c \n", c);
+			printf("before:%d \n", c);
+			c = ft_toupper((int)c);
+			printf("after:%c \n",c);
+			printf("after:%d \n", c);
+		}
+		printf("---------\n");
+
+
+
 	}
 }
