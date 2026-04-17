@@ -6,11 +6,12 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 21:07:16 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:06:42 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h> 
 
 #include <stdio.h>
 int main(void)
@@ -351,8 +352,9 @@ int main(void)
 		}
 		printf("---------\n");
 	}
+
 	// ft_strrchr()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strrchr() ---\n");
 		{
@@ -397,6 +399,86 @@ int main(void)
 			printf("&str  :%p \n", str);
 			char *match = ft_strrchr(str,find);
 			printf("&match:%p \n", match);
+		}
+		printf("---------\n");
+	}
+	
+	// ft_strncmp()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strncmp() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *str1 = "111";
+			char *str2 = "111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,3));
+			printf("strncmp   :%d\n",strncmp(str1,str2,3));
+		}
+		{
+			printf("-- Test2 --\n");
+			char *str1 = "111";
+			char *str2 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,3));
+			printf("strncmp   :%d\n",strncmp(str1,str2,3));
+		}
+		{
+			printf("-- Test3 --\n");
+			char *str1 = "11111";
+			char *str2 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,3));
+			printf("strncmp   :%d\n",strncmp(str1,str2,3));
+		}
+		{
+			printf("-- Test4 --\n");
+			char *str1 = "11111";
+			char *str2 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,4));
+			printf("strncmp   :%d\n",strncmp(str1,str2,4));
+		}
+		{
+			printf("-- Test5 --\n");
+			char *str2 = "";
+			char *str1 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,4));
+			printf("strncmp   :%d\n",strncmp(str1,str2,4));
+		}
+		{
+			printf("-- Test5 --\n");
+			char *str1 = "11";
+			char *str2 = "22";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,1));
+			printf("strncmp   :%d\n",strncmp(str1,str2,1));
+		}
+		{
+			printf("-- Test5 --\n");
+			char *str1 = "";
+			char *str2 = "";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_strncmp:%d\n",ft_strncmp(str1,str2,-1));
+			printf("strncmp   :%d\n",strncmp(str1,str2,-1));
+		}
+		{
+			printf("-- Test6 --\n");
+			printf("ft_strncmp:%d\n",ft_strncmp("test", "testss", 7));
+			printf("strncmp   :%d\n",strncmp("test", "testss", 7));
+		}
+		{
+			printf("-- Test7 --\n");
+			printf("ft_strncmp:%d\n",ft_strncmp("", "test", 4));
+			printf("strncmp   :%d\n",strncmp("", "test", 4));
 		}
 		printf("---------\n");
 	}
