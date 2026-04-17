@@ -7,7 +7,6 @@
 ```
 
 ## Important Instruction
-
 - **Submitting unused files is not allowed.**
 - **All files must be placed at the root of your repository.**
 - **Every .c file must compile with the following flags: -Wall -Wextra -Werror.**
@@ -19,7 +18,6 @@
 ## 1. Configure Makefile
 
 - [x] makefile compile file as librairy
-
 - https://www.geeksforgeeks.org/c/how-do-i-create-a-library-in-c/
 
 ### Create Library  archive
@@ -91,7 +89,7 @@ Find a way to test the code via a main function that call the library
 > > Always use `const` for any function parameter that only needs to **read** data. It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
 
 
-### memove
+## memove
 
 #### Memory Overlapping Mental Model
 https://cs50.stackexchange.com/questions/14615/memory-overlap-in-c
@@ -106,6 +104,28 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 1. Copy `src[0]` ('A') to `dst[0]` (index 1). Array is now `[A, A, C, D, E]`.
 2. Copy `src[1]` to `dst[1]`. **Problem**: `src[1]` was originally 'B', but it was just overwritten by 'A'!
 3. The result becomes `[A, A, A, A, E]` instead of `[A, A, B, C, E]`.
+
+
+## memcmp
+
+> [!WARNING] **Pointer Arithmetic vs. Dereferencing (`char *ptr` vs `unsigned char *ptr`)**
+> 
+> ### 1. Pointer Arithmetic: Identical Behavior
+> Operations like `ptr + 1` or `ptr++` behave exactly the same for both types. 
+> Both pointers advance the memory address by **1 byte** because `sizeof(char) == sizeof(unsigned char) == 1`. The compiler strictly looks at the size of the data type, not its sign.
+> 
+> ### 2. Dereferencing (`*ptr`): The Danger Zone
+> The critical difference emerges when you read the value at the address (`*ptr`), especially during **integer promotion** (which happens automatically in C when doing math, comparisons, or returning values).
+> 
+> * **`*p_s1` (Signed) $\rightarrow$ Sign Extension:** >     If the 8th bit is `1` (negative value), the compiler fills the newly added bits with `1`s when promoting to an `int`. 
+>     *Example:* `0xFF` (1 byte) becomes `0xFFFFFFFF` (4 bytes, still `-1`).
+> 
+> * **`*p_s2` (Unsigned) $\rightarrow$ Zero Extension:** >     The value is strictly treated as a magnitude (0-255). The compiler fills the new bits with `0`s.
+>     *Example:* `0xFF` (1 byte) becomes `0x000000FF` (4 bytes, `255`).
+> 
+> **Core Takeaway:** > Arithmetic moves the pointer; dereferencing interprets the memory. Always use `unsigned char *` when reading raw memory (like parsing `void *` buffers) to prevent destructive bugs caused by unintended sign extensions during byte evaluation.
+
+#TODO  - Reread code to see if I not mistaken on that point
 ## Q & A
 - **Declaring global variables is strictly forbidden.**
 
@@ -149,4 +169,5 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 
 ## Point of Attention
 
-* `size_t` type and `const char *s1` constant definition in function prototype : Check to add in libftTester
+* `size_t` type and `const char *s1` constant definition in function prototype : 
+	*  Check prototype conform to man : to add in libftTester
