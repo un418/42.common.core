@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/17 18:04:32 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/17 21:18:41 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ int main(void)
 		printf("---------\n");
 	}
 	// ft_strchr()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strchr() ---\n");
 		{
@@ -483,7 +483,7 @@ int main(void)
 		printf("---------\n");
 	}
 	// ft_memchr()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_memchr() ---\n");
 		{
@@ -529,7 +529,7 @@ int main(void)
 			char *match = ft_memchr(str,find,10);
 			printf("&match:%p \n", match);
 		}
-				{
+		{
 			printf("-- Test5 --\n");
 			char *str = "123456";
 			char find = '\0';
@@ -540,5 +540,111 @@ int main(void)
 			printf("&match:%p \n", match);
 		}
 		printf("---------\n");
+	}
+	// ft_memcmp()
+	if (0 || test_all)
+	{
+		printf("--- TEST for ft_memcmp() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *str1 = "111";
+			char *str2 = "111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,3));
+			printf("memcmp   :%d\n",memcmp(str1,str2,3));
+		}
+		{
+			printf("-- Test2 --\n");
+			char *str1 = "111";
+			char *str2 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,3));
+			printf("memcmp   :%d\n",memcmp(str1,str2,3));
+		}
+		{
+			printf("-- Test3 --\n");
+			char *str1 = "11111";
+			char *str2 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,3));
+			printf("memcmp   :%d\n",memcmp(str1,str2,3));
+		}
+		{
+			printf("-- Test4 --\n");
+			char *str1 = "11111";
+			char *str2 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,4));
+			printf("memcmp   :%d\n",memcmp(str1,str2,4));
+		}
+		{
+			printf("-- Test5 --\n");
+			char *str2 = "";
+			char *str1 = "1111";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,4));
+			printf("memcmp   :%d\n",memcmp(str1,str2,4));
+		}
+		{
+			printf("-- Test5 --\n");
+			char *str1 = "11";
+			char *str2 = "22";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,1));
+			printf("memcmp   :%d\n",memcmp(str1,str2,1));
+		}
+/* 		{
+			printf("-- Test5 --\n");
+			char *str1 = "";
+			char *str2 = "";
+			printf("str1:%s \n", str1);
+			printf("str2:%s \n", str2);
+			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,-1));
+			printf("memcmp   :%d\n",memcmp(str1,str2,-1));
+		} */
+		{
+			printf("-- Test6 --\n");
+			printf("ft_memcmp:%d\n",ft_memcmp("test", "testss", 7));
+			printf("memcmp   :%d\n",memcmp("test", "testss", 7));
+		}
+		{
+			printf("-- Test7 --\n");
+			printf("ft_memcmp:%d\n",ft_memcmp("", "test", 4));
+			printf("memcmp   :%d\n",memcmp("", "test", 4));
+		}
+		printf("---------\n");
+	}
+
+	//ft_strnstr
+	#include <bsd/string.h>
+	if (1 || test_all)
+	{
+		{
+			printf("-- Test1 --\n");
+			const char *largestring = "Foo Bar Baz";
+			const char *smallstring = "Bar";
+			printf("ft_strnstr:%p\n",ft_strnstr(largestring, smallstring, 4));
+			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 4));
+		}
+		{
+			printf("-- Test2 --\n");
+			const char *largestring = "Foo Bar Baz";
+			const char *smallstring = "Bar";
+			printf("ft_strnstr:%p\n",ft_strnstr(largestring, smallstring, 100));
+			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 100));
+		}
+		{
+			printf("-- Test3 --\n");
+			const char *largestring = "Foo Bar Baz";
+			const char *smallstring = "Bar";
+			printf("ft_strnstr:%p\n",ft_strnstr(largestring, smallstring, 7));
+			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 7));
+		}
 	}
 }
