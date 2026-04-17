@@ -12,6 +12,12 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 DBGFLAGS	= -g
 
+ifeq ($(BSD), 1)
+    BSDFLAG = -lbsd
+endif
+# make test BSD=1
+
+
 HEADER		= libft.h
 
 SRCS		=	ft_isalpha.c	\
@@ -30,7 +36,9 @@ SRCS		=	ft_isalpha.c	\
 				ft_strchr.c		\
 				ft_strrchr.c	\
 				ft_strncmp.c	\
-				ft_memchr.c
+				ft_memchr.c		\
+				ft_memcmp.c		\
+				ft_strnstr.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -55,12 +63,12 @@ re: fclean all
 
 # To remove before delivering the project
 test: $(NAME)
-	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
 #	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
 	./test.o
 
 debug: $(NAME)
-	$(CC) $(CFLAGS) $(DBGFLAGS) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)
+	$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)
 	./debug.o
 
 
