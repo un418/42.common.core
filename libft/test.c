@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/17 17:06:42 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/17 18:04:32 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ int main(void)
 		printf("---------\n");
 	}
 	// ft_strchr()
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 		printf("--- TEST for ft_strchr() ---\n");
 		{
@@ -404,7 +404,7 @@ int main(void)
 	}
 	
 	// ft_strncmp()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strncmp() ---\n");
 		{
@@ -479,6 +479,65 @@ int main(void)
 			printf("-- Test7 --\n");
 			printf("ft_strncmp:%d\n",ft_strncmp("", "test", 4));
 			printf("strncmp   :%d\n",strncmp("", "test", 4));
+		}
+		printf("---------\n");
+	}
+	// ft_memchr()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_memchr() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *str = "123456789";
+			char find = '2';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_memchr(str,find,5);
+			printf("&match:%p \n", match);
+		}
+
+		{
+			printf("-- Test2 --\n");
+			char *str = "123456789";
+			char find = 'a';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_memchr(str,find,10);
+			printf("&match:%p \n", match);
+		}
+
+		{
+			printf("-- Test3 --\n");
+			char *str = "";
+			char find = 'a';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_memchr(str,find,10);
+			printf("&match:%p \n", match);
+		}
+
+		{
+			printf("-- Test4 --\n");
+			char *str = "";
+			char find = '\0';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_memchr(str,find,10);
+			printf("&match:%p \n", match);
+		}
+				{
+			printf("-- Test5 --\n");
+			char *str = "123456";
+			char find = '\0';
+			printf("str:%s \n", str);
+			printf("find:%c \n", find);
+			printf("&str  :%p \n", str);
+			char *match = ft_memchr(str,find,10);
+			printf("&match:%p \n", match);
 		}
 		printf("---------\n");
 	}
