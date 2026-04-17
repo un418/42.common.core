@@ -34,7 +34,7 @@ SRCS		=	ft_isalpha.c	\
 
 OBJS		= $(SRCS:.c=.o)
 
-all: $(NAME) test
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
@@ -70,4 +70,4 @@ debug: $(NAME)
 #./$(TEST_FOLDER)/$(TEST_OBJ)
 
 # Remove test phony target before delivering the project
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test debug
