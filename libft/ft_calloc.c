@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 16:40:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/20 19:06:09 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/20 19:23:45 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ or by a successful call to calloc() with nmemb or size equal to zero.
 // it give the max number of element can have this type without overflow.
 // So if nmemb is superior of this value,
 // that open the door to a Heap-based Buffer Overflow
+// Defensive programming:
+// Always check division by 0.
 
 #include "libft.h"
 
@@ -48,7 +50,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*ptr;
 
 	ptr = NULL;
-	if (nmemb > (size_t)-1 / size)
+	if (size > 0 && nmemb > (size_t)-1 / size )
 	{
 		return (NULL);
 	}
