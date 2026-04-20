@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/17 21:18:41 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/20 16:35:11 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -643,6 +643,13 @@ int main(void)
 			printf("-- Test3 --\n");
 			const char *largestring = "Foo Bar Baz";
 			const char *smallstring = "Bar";
+			printf("ft_strnstr:%p\n",ft_strnstr(largestring, smallstring, 7));
+			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 7));
+		}
+			{
+			printf("-- Test4 --\n");
+			const char *largestring = "Foo Bar Baz";
+			const char *smallstring = "Barasdasdasdasadadssd";
 			printf("ft_strnstr:%p\n",ft_strnstr(largestring, smallstring, 7));
 			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 7));
 		}

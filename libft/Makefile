@@ -67,8 +67,8 @@ test: $(NAME)
 #	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
 	./test.o
 
-debug: $(NAME)
-	$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)
+debug: $(NAME) 
+	$(CC) $(CFLAGS) $(DBGFLAGS) -lbsd $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)
 	./debug.o
 
 
