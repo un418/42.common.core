@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 16:40:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/20 19:23:45 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/20 19:28:34 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*ptr;
 
 	ptr = NULL;
-	if (size > 0 && nmemb > (size_t)-1 / size )
+	if (size > 0 && nmemb > (size_t)-1 / size)
 	{
 		return (NULL);
 	}
