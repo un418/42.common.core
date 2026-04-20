@@ -126,6 +126,60 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 > **Core Takeaway:** > Arithmetic moves the pointer; dereferencing interprets the memory. Always use `unsigned char *` when reading raw memory (like parsing `void *` buffers) to prevent destructive bugs caused by unintended sign extensions during byte evaluation.
 
 #TODO  - Reread code to see if I not mistaken on that point
+
+## calloc
+
+#### type limits and bit operation
+
+```c
+// https://cplayground.com/
+#include <stdio.h>
+#include <limits.h>
+
+int main() {
+    // Retrieve min/ max value of a type via bit operation
+    printf("Max of unsigned int = %u\n", (unsigned int)-1);
+    // overflow of a unsigned int to have all bit at 1, 
+    // then bytes operation to move all bytes to the right and release the sign bit at 0.
+    // casting the result to an int give INT_MAX
+    printf("inline = %d\n", (int)((unsigned int)-1 >> 1 ));
+    // Size of because we use bit operation and not bytes operation
+    // This operation set value at one on binary then we move the bit to the place of the sign bit
+    // casting to an int give INT_MIN
+    printf("inline = %d\n", (int)((unsigned int)1 << (sizeof(int) * 8 - 1)));
+    return 0;
+}
+
+```
+
+> [!danger] Integer Overflow
+> Occurs when an arithmetic operation yields a value exceeding the maximum capacity of a **signed** data type. In C, this results in **Undefined Behavior (UB)**.
+> ```c
+> int max = (int)(((unsigned int)-1) >> 1);
+> int overflow = max + 1; // Undefined Behavior
+> ```
+
+> [!warning] Unsigned Wrap-around
+> Occurs when a calculation exceeds the maximum value of an **unsigned** type (like `size_t`). This is strictly defined by the C standard: the value wraps around to `0` using modulo arithmetic. 
+> ```c
+> size_t max = (size_t)-1;
+> size_t wrap = max + 1; // wrap == 0
+> ```
+
+> [!warning] Integer Underflow
+> Occurs when a calculation drops below the minimum representable value. For unsigned types, subtracting from `0` wraps around to the absolute maximum value.
+> ```c
+> size_t zero = 0;
+> size_t underflow = zero - 1; // underflow == (size_t)-1
+> ```
+
+> [!bug] Heap-based Buffer Overflow
+> A memory corruption vulnerability on the heap. Often the direct consequence of passing a wrapped-around/overflowed size to `malloc()`, leading to an undersized allocation and subsequent out-of-bounds memory writes.
+> ```c
+> char *ptr = malloc(10);
+> if (ptr)
+>     ptr[10] = 'A'; // Heap corruption (valid indices: 0 to 9)
+> ```
 ## Q & A
 - **Declaring global variables is strictly forbidden.**
 
