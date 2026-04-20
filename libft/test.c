@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/20 16:35:11 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/20 18:59:46 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -620,10 +620,11 @@ int main(void)
 		}
 		printf("---------\n");
 	}
-
+/* 
 	//ft_strnstr
+	// to disable because strnstr used for test need bsd compilation all the time.
 	#include <bsd/string.h>
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		{
 			printf("-- Test1 --\n");
@@ -652,6 +653,19 @@ int main(void)
 			const char *smallstring = "Barasdasdasdasadadssd";
 			printf("ft_strnstr:%p\n",ft_strnstr(largestring, smallstring, 7));
 			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 7));
+		}
+	}
+ */
+	//ft_calloc
+	if (1 || test_all)
+	{
+		{
+			printf("-- Test1 --\n");
+			printf("calloc   :%p\n",calloc(50, sizeof(long)));
+			printf("calloc   :%p\n",calloc(50, sizeof(int)));
+			printf("ft_calloc:%p\n",ft_calloc(10, sizeof(size_t)));
+			printf("ft_calloc:%p\n",ft_calloc(10, sizeof(char)));
+			printf("ft_calloc:%p\n",ft_calloc((size_t)-1, sizeof(char)));
 		}
 	}
 }
