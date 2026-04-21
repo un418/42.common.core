@@ -39,7 +39,8 @@ SRCS		=	ft_isalpha.c	\
 				ft_memchr.c		\
 				ft_memcmp.c		\
 				ft_strnstr.c	\
-				ft_calloc.c
+				ft_calloc.c		\
+				ft_atoi.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -64,8 +65,10 @@ re: fclean all
 
 # To remove before delivering the project
 test: $(NAME)
-	$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
-#	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
+	#Linux Only
+	#$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
+	#MacOS / Linux
+	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
 	./test.o
 
 debug: $(NAME) 

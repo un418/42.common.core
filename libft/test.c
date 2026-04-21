@@ -6,14 +6,18 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/20 18:59:46 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/21 19:46:54 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h> 
 
 #include <stdio.h>
+#include <string.h> 
+#include <ctype.h>
+#include <limits.h>
+
+
 int main(void)
 {
 	int test_all = 0;
@@ -599,7 +603,9 @@ int main(void)
 			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,1));
 			printf("memcmp   :%d\n",memcmp(str1,str2,1));
 		}
-/* 		{
+
+		/* 
+		{
 			printf("-- Test5 --\n");
 			char *str1 = "";
 			char *str2 = "";
@@ -607,7 +613,8 @@ int main(void)
 			printf("str2:%s \n", str2);
 			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,-1));
 			printf("memcmp   :%d\n",memcmp(str1,str2,-1));
-		} */
+		}
+		 */
 		{
 			printf("-- Test6 --\n");
 			printf("ft_memcmp:%d\n",ft_memcmp("test", "testss", 7));
@@ -620,7 +627,7 @@ int main(void)
 		}
 		printf("---------\n");
 	}
-/* 
+	/* 
 	//ft_strnstr
 	// to disable because strnstr used for test need bsd compilation all the time.
 	#include <bsd/string.h>
@@ -655,9 +662,9 @@ int main(void)
 			printf("strnstr   :%p\n",strnstr(largestring, smallstring, 7));
 		}
 	}
- */
+	 */
 	//ft_calloc
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		{
 			printf("-- Test1 --\n");
@@ -666,6 +673,64 @@ int main(void)
 			printf("ft_calloc:%p\n",ft_calloc(10, sizeof(size_t)));
 			printf("ft_calloc:%p\n",ft_calloc(10, sizeof(char)));
 			printf("ft_calloc:%p\n",ft_calloc((size_t)-1, sizeof(char)));
+		}
+	}
+	//ft_atoi
+	if (1 || test_all)
+	{
+		if (1 || test_all)
+		{
+			// Replicate isspace
+			printf("-- Test Helper ft_isspace --\n");
+			for (unsigned char i = 0; i < 255; i++)
+			{
+				if (isspace(i))
+					printf("ascii #%d isspace\n",i);
+			}
+			for (unsigned char i = 0; i < 255; i++)
+			{
+				if (isspace(i))
+					printf("ascii #%d ft_isspace\n",i);
+			}
+
+		}
+		if (1 || test_all)
+		{
+			printf("-- Test1 --\n");
+			printf("ft_atoi(\"   +1234-+\"):%d\n",ft_atoi("   +1234-+"));
+			printf("   atoi(\"   +1234-+\"):%d\n",atoi("   +1234-+"));
+		}
+		{
+			printf("-- Test2 --\n");
+			printf("ft_atoi(\"\"):%d\n",ft_atoi(""));
+			printf("   atoi(\"\"):%d\n",atoi(""));
+		}
+		{
+			printf("-- Test3 --\n");
+			printf("ft_atoi(\"   +-1234-+\"):%d\n",ft_atoi("   +-1234-+"));
+			printf("   atoi(\"   +-1234-+\"):%d\n",atoi("   +-1234-+"));
+		}
+		{
+			printf("-- Test$ --\n");
+			printf("ft_atoi(\" q  +-91234-+\"):%d\n",ft_atoi(" q  +-91234-+"));
+			printf("   atoi(\" q  +-91234-+\"):%d\n",atoi(" q  +-91234-+"));
+		}
+		{
+			printf("-- Test3 --\n");
+
+			printf("INT64_MAX:%lld\n",INT64_MAX);
+			printf("INT64_MIN:%lld\n",INT64_MIN);
+			printf("INT32_MAX:%d\n",INT32_MAX);
+			printf("INT32_MIN:%d\n",INT32_MIN);
+			printf("INT_MAX:%d\n",INT_MAX);
+			printf("INT_MIN:%d\n",INT_MIN);
+
+
+			printf("ft_atoi(\"2147483647\"):%d\n",ft_atoi("2147483647"));
+			printf("   atoi(\"2147483647\"):%d\n",atoi("2147483647"));
+
+			printf("ft_atoi(\"-2147483648\"):%d\n",ft_atoi("-2147483648"));
+			printf("   atoi(\"-2147483648\"):%d\n",atoi("-2147483648"));
 		}
 	}
 }
