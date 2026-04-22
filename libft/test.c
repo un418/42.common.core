@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 16:21:22 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:43:33 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -678,7 +678,7 @@ x			printf("str1:%s \n", str1);
 		}
 	}
 	//ft_atoi
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		if (1 || test_all)
 		{
@@ -780,5 +780,14 @@ x			printf("str1:%s \n", str1);
 			printf("ft return value: %zu \n",ret);
 		}
 		printf("---------\n");
+	}
+	
+	// ft_strdup()
+	if (1 || test_all)
+	{
+		char *s_dup;
+		printf("--- TEST for ft_stdup() ---\n");
+		printf("ft_strdup return value:%s \n", s_dup= ft_strdup("test dup"));
+		free (s_dup);
 	}
 }
