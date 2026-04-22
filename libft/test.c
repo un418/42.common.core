@@ -6,14 +6,14 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/21 19:46:54 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 00:22:00 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
 #include <ctype.h>
 #include <limits.h>
 
@@ -146,7 +146,7 @@ int main(void)
 		ft_memcpy(dst,src,ft_strlen(src));
 		printf("after - src:%s \n",src);
 		printf("after - dst:%s \n",dst);
-		
+
 		if (0)
 		{
 			printf("-Test2: Stack Overflow\n");
@@ -185,7 +185,7 @@ int main(void)
 		ft_memmove(dst,src,ft_strlen(src));
 		printf("after - src:%s \n",src);
 		printf("after - dst:%s \n",dst);
-		
+
 		if (0)
 		{
 			printf("-Test2: Stack Overflow\n");
@@ -243,7 +243,7 @@ int main(void)
 			printf("ft strlen(src): %zu \n",ft_strlen(src2));
 			printf("ft return value: %zu \n",ret);
 		}
-		
+
 		if (1)
 		{
 			printf("Test3: ft_strlcpy(dst3,src3,4)\n");
@@ -259,7 +259,7 @@ int main(void)
 		}
 		printf("---------\n");
 	}
-	
+
 	// ft_toupper()
 	if (0 || test_all)
 	{
@@ -406,7 +406,7 @@ int main(void)
 		}
 		printf("---------\n");
 	}
-	
+
 	// ft_strncmp()
 	if (0 || test_all)
 	{
@@ -604,7 +604,7 @@ int main(void)
 			printf("memcmp   :%d\n",memcmp(str1,str2,1));
 		}
 
-		/* 
+		/*
 		{
 			printf("-- Test5 --\n");
 			char *str1 = "";
@@ -627,7 +627,7 @@ int main(void)
 		}
 		printf("---------\n");
 	}
-	/* 
+	/*
 	//ft_strnstr
 	// to disable because strnstr used for test need bsd compilation all the time.
 	#include <bsd/string.h>
@@ -718,10 +718,10 @@ int main(void)
 		{
 			printf("-- Test3 --\n");
 
-			printf("INT64_MAX:%lld\n",INT64_MAX);
-			printf("INT64_MIN:%lld\n",INT64_MIN);
-			printf("INT32_MAX:%d\n",INT32_MAX);
-			printf("INT32_MIN:%d\n",INT32_MIN);
+			// printf("INT64_MAX:%lld\n",INT64_MAX);
+			// printf("INT64_MIN:%lld\n",INT64_MIN);
+			// printf("INT32_MAX:%d\n",INT32_MAX);
+			// printf("INT32_MIN:%d\n",INT32_MIN);
 			printf("INT_MAX:%d\n",INT_MAX);
 			printf("INT_MIN:%d\n",INT_MIN);
 
@@ -733,4 +733,53 @@ int main(void)
 			printf("   atoi(\"-2147483648\"):%d\n",atoi("-2147483648"));
 		}
 	}
+	// ft_strlcat()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strlcat() ---\n");
+		if (1)
+		{
+			printf("Test1: ft_strlcat(dst1,src1,ft_strlen(src1)\n");
+			char src1[] = "ABCDE";
+			char dst1[20] = "12345";
+			printf("before - src:%s \n",src1);
+			printf("before - dst:%s \n",dst1);
+			size_t ret = ft_strlcat(dst1,src1,5);
+			// size_t ret = ft_strlcat(dst1,src1,ft_strlen(src1 + 1));
+			printf("after - src:%s \n",src1);
+			printf("after - dst:%s \n",dst1);
+			printf("ft strlen(src): %zu \n",ft_strlen(src1));
+			printf("ft return value: %zu \n",ret);
+		}
+
+		if (1)
+		{
+			printf("Test2: ft_strlcat(dst2,src2,0)\n");
+			char src2[] = "ABCDE";
+			char dst2[] = "12345";
+			printf("before - src:%s \n",src2);
+			printf("before - dst:%s \n",dst2);
+			size_t ret = ft_strlcat(dst2,src2,0);
+			printf("after - src:%s \n",src2);
+			printf("after - dst:%s \n",dst2);
+			printf("ft strlen(src): %zu \n",ft_strlen(src2));
+			printf("ft return value: %zu \n",ret);
+		}
+
+		if (1)
+		{
+			printf("Test3: ft_strlcat(dst3,src3,4)\n");
+			char src3[] = "ABCDE";
+			char dst3[] = "1234";
+			printf("before - src:%s \n",src3);
+			printf("before - dst:%s \n",dst3);
+			size_t ret = ft_strlcat(dst3,src3,4);
+			printf("after - src:%s \n",src3);
+			printf("after - dst:%s \n",dst3);
+			printf("ft strlen(src): %zu \n",ft_strlen(src3));
+			printf("ft return value: %zu \n",ret);
+		}
+		printf("---------\n");
+	}
+
 }
