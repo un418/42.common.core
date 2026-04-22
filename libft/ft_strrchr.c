@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:44:16 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 21:19:11 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 17:42:24 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,17 @@ these functions re‐turn a pointer to the terminator.
 char	*ft_strrchr(const char *s, int c)
 {
 	const char	*end_s;
+	char		cc;
 
+	cc = (char)c;
 	end_s = s + ft_strlen(s);
-	if (c == 0)
+	if (cc == 0)
 		return ((char *)end_s);
 	else
 		end_s--;
 	while (end_s >= s)
 	{
-		if (*end_s == c)
+		if (*end_s == cc)
 			return ((char *)end_s);
 		end_s--;
 	}
