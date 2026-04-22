@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 18:18:26 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 19:14:09 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -812,6 +812,18 @@ x			printf("str1:%s \n", str1);
 	{
 		printf("--- TEST for ft_putstr_fd() ---\n");
 		ft_putendl_fd("ABCDE", 1);
+		printf("\n");
+		printf("---------\n");
+	}
+	// ft_putnbr_fd()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_putnbr_fd() ---\n");
+		printf("%d\n",INT_MIN);
+		ft_putnbr_fd(INT_MIN, 1);
+		printf("\n");
+		printf("%d\n",INT_MAX);
+		ft_putnbr_fd(INT_MAX, 1);
 		printf("\n");
 		printf("---------\n");
 	}
