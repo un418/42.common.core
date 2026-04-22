@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 19:14:09 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 20:44:46 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -824,6 +824,49 @@ x			printf("str1:%s \n", str1);
 		printf("\n");
 		printf("%d\n",INT_MAX);
 		ft_putnbr_fd(INT_MAX, 1);
+		printf("\n");
+		printf("---------\n");
+	}
+
+	// ft_substr()
+	if (1 || test_all)
+	{
+		printf("--- TEST1 for ft_substr() ---\n");
+		char *sub = ft_substr("123456789", 0, 7);
+		printf("sub=%s", sub);
+		free(sub);
+		printf("\n");
+		printf("---------\n");
+	}
+	{
+		printf("--- TEST2 for ft_substr() ---\n");
+		char *sub = ft_substr("123456789", 4, 7);
+		printf("sub=%s", sub);
+		free(sub);
+		printf("\n");
+		printf("---------\n");
+	}
+	{
+		printf("--- TEST3 for ft_substr() ---\n");
+		char *sub = ft_substr("123456789", 9, 10);
+		printf("sub=%s", sub);
+		free(sub);
+		printf("\n");
+		printf("---------\n");
+	}
+	{
+		printf("--- TEST4 for ft_substr() ---\n");
+		char *sub = ft_substr("123456789", 12, 12);
+		printf("sub=%s", sub);
+		free(sub);
+		printf("\n");
+		printf("---------\n");
+	}
+	{
+		printf("--- TEST2 for ft_substr() ---\n");
+		char *sub = ft_substr("123456789", 1, 1);
+		printf("sub=%s", sub);
+		free(sub);
 		printf("\n");
 		printf("---------\n");
 	}
