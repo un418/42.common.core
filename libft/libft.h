@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 12:22:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 17:59:50 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 18:05:57 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-#include <unistd.h>
+# include <unistd.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -40,6 +40,6 @@ int		ft_atoi(const char *str);
 // int		ft_isspace(char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strdup(const char *s);
-void ft_putchar_fd(char c, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 #endif
