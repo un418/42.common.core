@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 00:22:00 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:21:22 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <limits.h>
+
+// #include <bsd/string.h>
 
 
 int main(void)
@@ -609,7 +611,7 @@ int main(void)
 			printf("-- Test5 --\n");
 			char *str1 = "";
 			char *str2 = "";
-			printf("str1:%s \n", str1);
+x			printf("str1:%s \n", str1);
 			printf("str2:%s \n", str2);
 			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,-1));
 			printf("memcmp   :%d\n",memcmp(str1,str2,-1));
@@ -739,19 +741,17 @@ int main(void)
 		printf("--- TEST for ft_strlcat() ---\n");
 		if (1)
 		{
-			printf("Test1: ft_strlcat(dst1,src1,ft_strlen(src1)\n");
+			printf("Test1: ft_strlcat(dst1,src1,20)\n");
 			char src1[] = "ABCDE";
 			char dst1[20] = "12345";
 			printf("before - src:%s \n",src1);
 			printf("before - dst:%s \n",dst1);
-			size_t ret = ft_strlcat(dst1,src1,5);
-			// size_t ret = ft_strlcat(dst1,src1,ft_strlen(src1 + 1));
+			size_t ret = ft_strlcat(dst1,src1,20);
 			printf("after - src:%s \n",src1);
 			printf("after - dst:%s \n",dst1);
 			printf("ft strlen(src): %zu \n",ft_strlen(src1));
 			printf("ft return value: %zu \n",ret);
 		}
-
 		if (1)
 		{
 			printf("Test2: ft_strlcat(dst2,src2,0)\n");
@@ -768,12 +768,12 @@ int main(void)
 
 		if (1)
 		{
-			printf("Test3: ft_strlcat(dst3,src3,4)\n");
+			printf("Test3: ft_strlcat(dst3,src3,8)\n");
 			char src3[] = "ABCDE";
-			char dst3[] = "1234";
+			char dst3[] = "12345";
 			printf("before - src:%s \n",src3);
 			printf("before - dst:%s \n",dst3);
-			size_t ret = ft_strlcat(dst3,src3,4);
+			size_t ret = ft_strlcat(dst3,src3,8);
 			printf("after - src:%s \n",src3);
 			printf("after - dst:%s \n",dst3);
 			printf("ft strlen(src): %zu \n",ft_strlen(src3));
@@ -781,5 +781,4 @@ int main(void)
 		}
 		printf("---------\n");
 	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 19:50:50 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 00:36:13 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 16:19:47 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,14 @@ It is the caller's responsibility to handle this.
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	char		*p_dst;
-	const char	*p_src;
-	size_t		total;
+	size_t	len_dst;
 
-	p_dst = dst;
-	p_src = src;
-	total = ft_strlen(p_dst) + ft_strlen(p_src);
-	dstsize--;
-	if (dstsize != 0)
+	len_dst = ft_strlen(dst);
+	if (len_dst >= dstsize)
+		return (dstsize + ft_strlen(src));
+	else
 	{
-		while (dstsize-- && *dst)
-			dst++;
-		while (dstsize-- && *src)
-			*dst++ = *src++;
-		*dst = '\0';
+		ft_strlcpy(dst + len_dst, src, dstsize - len_dst);
+		return (len_dst + ft_strlen(src));
 	}
-	return (total);
 }
