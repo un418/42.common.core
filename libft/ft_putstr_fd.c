@@ -6,11 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 18:03:15 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 18:09:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 18:21:52 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
+ft_putendl_fd() - Output string to file descriptor NOT followed by newline
+
 DESCRIPTION
 Outputs the string ’s’ to the specified file
 descriptor.

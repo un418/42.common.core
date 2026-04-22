@@ -6,12 +6,12 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 18:14:17 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 18:18:08 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/22 18:21:32 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_putendl_fd() - Output string followed by newline
+ft_putendl_fd() - Output string to file descriptor followed by newline
 
 DESCRIPTION
 Outputs the string ’s’ to the specified file
