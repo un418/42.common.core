@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 20:44:46 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/23 11:36:28 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -867,6 +867,17 @@ x			printf("str1:%s \n", str1);
 		char *sub = ft_substr("123456789", 1, 1);
 		printf("sub=%s", sub);
 		free(sub);
+		printf("\n");
+		printf("---------\n");
+	}
+	// ft_strjoin()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strjoin() ---\n");
+		char *join;
+		join = ft_strjoin("str1", "str2");
+		printf("ft_strjoin(\"str1\", \"str2\")=%s", join);
+		free(join);
 		printf("\n");
 		printf("---------\n");
 	}
