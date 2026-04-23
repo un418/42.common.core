@@ -48,7 +48,8 @@ SRCS		=	ft_isalpha.c	\
 				ft_putendl_fd.c	\
 				ft_putnbr_fd.c	\
 				ft_substr.c		\
-				ft_strjoin.c
+				ft_strjoin.c	\
+				ft_strtrim.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -68,20 +69,23 @@ fclean: clean
 # To remove before delivering the project
 	rm -f $(TEST_OBJ)
 	rm -f $(DBG_OBJ)
-	
+
 re: fclean all
 
 # To remove before delivering the project
 test: $(NAME)
 	#Linux Only
-	#$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
 	#MacOS / Linux
-	$(CC) $(CFLAGS)  $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
+	#$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
 	./test.o
 
-debug: $(NAME) 
-	$(CC) $(CFLAGS) $(DBGFLAGS) -lbsd $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)
-	./debug.o
+debug: $(NAME)
+	#Linux Only
+	#$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)
+	#MacOS / Linux
+	$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -lft -o $(DBG_OBJ)
+	#./debug.o
 
 
 
