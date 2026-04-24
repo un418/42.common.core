@@ -11,6 +11,12 @@ DBG_OBJ		= debug.o
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 DBGFLAGS	= -g
+GCC			= 0
+
+ifeq ($(GCC), 1)
+    CC		= /opt/homebrew/Cellar/gcc/15.2.0_1/bin/gcc-15
+endif
+# make test GCC=1
 
 ifeq ($(BSD), 1)
     BSDFLAG = -lbsd
