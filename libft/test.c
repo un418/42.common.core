@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/24 02:56:13 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:23:34 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -829,7 +829,7 @@ x			printf("str1:%s \n", str1);
 	}
 
 	// ft_substr()
-	if (1 || test_all)
+	if (0|| test_all)
 	{
 		printf("--- TEST1 for ft_substr() ---\n");
 		char *sub = ft_substr("123456789", 0, 7);
@@ -871,7 +871,7 @@ x			printf("str1:%s \n", str1);
 		printf("---------\n");
 	}
 	// ft_strjoin()
-	if (1 || test_all)
+	if (0|| test_all)
 	{
 		printf("--- TEST for ft_strjoin() ---\n");
 		char *join;
@@ -882,49 +882,53 @@ x			printf("str1:%s \n", str1);
 		printf("---------\n");
 	}
 	// ft_strtrim()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
-		printf("--- TEST for ft_strtrim() ---\n");
-		char *trim;
-		trim = ft_strtrim("-ABCD-", ".-_");
-		printf("ft_strtrim(\"-ABCD-\", \".-_\")=%s", trim);
-		free(trim);
-		printf("\n");
-		printf("---------\n");
-	}
-	{
-		printf("--- TEST for ft_strtrim() ---\n");
-		char *trim;
-		trim = ft_strtrim("A.B_C-D", "");
-		printf("ft_strtrim(\"A.B_C-D\", \"\")=%s", trim);
-		free(trim);
-		printf("\n");
-		printf("---------\n");
-	}
-	{
-		printf("--- TEST for ft_strtrim() ---\n");
-		char *trim;
-		trim = ft_strtrim("", "");
-		printf("ft_strtrim(\"\", \"\")=%s", trim);
-		free(trim);
-		printf("\n");
-		printf("---------\n");
-	}
-	{
-		printf("--- TEST for ft_strtrim() ---\n");
-		char *trim;
-		trim = ft_strtrim("", "AZE");
-		printf("ft_strtrim(\"\", \"AZE\")=%s", trim);
-		free(trim);
-		printf("\n");
-		printf("---------\n");
+		{
+			printf("--- TEST for ft_strtrim() ---\n");
+			char *trim;
+			trim = ft_strtrim("-ABCD-", ".-_");
+			printf("ft_strtrim(\"-ABCD-\", \".-_\")=%s", trim);
+			free(trim);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strtrim() ---\n");
+			char *trim;
+			trim = ft_strtrim("A.B_C-D", "");
+			printf("ft_strtrim(\"A.B_C-D\", \"\")=%s", trim);
+			free(trim);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strtrim() ---\n");
+			char *trim;
+			trim = ft_strtrim("", "");
+			printf("ft_strtrim(\"\", \"\")=%s", trim);
+			free(trim);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strtrim() ---\n");
+			char *trim;
+			trim = ft_strtrim("", "AZE");
+			printf("ft_strtrim(\"\", \"AZE\")=%s", trim);
+			free(trim);
+			printf("\n");
+			printf("---------\n");
+		}
 	}
 
 	// ft_strplit()
 	if (1 || test_all)
 	{
 		printf("--- TEST for ft_strsplit() ---\n");
+		if (1 || test_all)
 		{
+			printf("-- Test1--\n");
 			char **split;
 			char **p;
 	
@@ -938,8 +942,9 @@ x			printf("str1:%s \n", str1);
 			free(p);
 			printf("---------\n");
 		}
+		if (1 || test_all)
 		{
-			printf("--- TEST for ft_strsplit() ---\n");
+			printf("-- Test2 --\n");
 			char **split;
 			char **p;
 	
@@ -953,8 +958,9 @@ x			printf("str1:%s \n", str1);
 			free(p);
 			printf("---------\n");
 		}
+		if (1 || test_all)
 		{
-			printf("--- TEST for ft_strsplit() ---\n");
+			printf("-- Test3 --\n");
 			char **split;
 			char **p;
 	
@@ -968,8 +974,9 @@ x			printf("str1:%s \n", str1);
 			free(p);
 			printf("---------\n");
 		}
+		if (1 || test_all)
 		{
-			printf("--- TEST for ft_strsplit() ---\n");
+			printf("-- Test4--\n");
 			char **split;
 			char **p;
 	
@@ -983,8 +990,9 @@ x			printf("str1:%s \n", str1);
 			free(p);
 			printf("---------\n");
 		}
+		if (1 || test_all)
 		{
-			printf("--- TEST for ft_strsplit() ---\n");
+			printf("-- Test5--\n");
 			char **split;
 			char **p;
 	
@@ -998,5 +1006,22 @@ x			printf("str1:%s \n", str1);
 			free(p);
 			printf("---------\n");
 		}
+		if (1 || test_all)
+		{
+			printf("-- Test6 --\n");
+			char **split;
+			char **p;
+	
+			split = ft_split("lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse", ' ');
+			p = split;
+			while (*split)
+			{
+				printf("%s\n", *split);
+				free(*split++);
+			}
+			free(p);
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
 	}
 }

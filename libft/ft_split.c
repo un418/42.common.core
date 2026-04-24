@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:41:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/24 02:55:19 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/24 12:43:19 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static size_t	ft_split_len(const char *str, const char c)
 	size_t	i;
 
 	i = 0;
-	while (str[i] != c)
+	while (*str && str[i] != c)
 		i++;
 	return (i);
 }
@@ -66,14 +66,18 @@ static size_t	ft_split_len(const char *str, const char c)
 // helper function to free memory properly in case of error
 static void	ft_split_free(char **split)
 {
-	while (*split)
-		free(*split++);
+	size_t	i;
+
+	i = 0;
+	while (split[i])
+		free(split[i++]);
 	free(split);
 }
 
 // helper function to create substring
 // copy src to dest till delimiter or end of string
-// return pointer to 
+// NULL terminate in place of delimiter match
+// return pointer to last delimiter match
 static char	*ft_split_copy(char *dst, const char *src, const char c)
 {
 	while (*src && *src != c)
@@ -109,5 +113,6 @@ char	**ft_split(char const *s, char c)
 			i++;
 		}
 	}
+	split[i] = NULL;
 	return (split);
 }
