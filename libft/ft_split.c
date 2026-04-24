@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:41:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/24 12:43:19 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:02:23 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,30 @@ static size_t	ft_split_count(const char *str, const char c)
 }
 
 // helper function to get lenght of splitted string
-// count lenght for str to delimiter c
+// count lenght for str to delimiter c or end of string
 static size_t	ft_split_len(const char *str, const char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (*str && str[i] != c)
+	while (str[i] && str[i] != c)
 		i++;
 	return (i);
 }
 
 // helper function to free memory properly in case of error
+// free memory and set pointer to NULL
+// set pointer to NULL allow to retrieve error in case of trying to
+//	read or write data in memory address that have been free earlier.
 static void	ft_split_free(char **split)
 {
-	size_t	i;
-
-	i = 0;
-	while (split[i])
-		free(split[i++]);
+	while (*split)
+	{
+		free(*split);
+		*split++ = NULL;
+	}
 	free(split);
+	split = NULL;
 }
 
 // helper function to create substring
@@ -103,7 +107,7 @@ char	**ft_split(char const *s, char c)
 			p_str++;
 		if (*p_str != c && *p_str)
 		{
-			split[i] = ft_calloc(ft_split_len(s, c) + 1, sizeof(char));
+			split[i] = ft_calloc(ft_split_len(p_str, c) + 1, sizeof(char));
 			if (!split[i])
 			{
 				ft_split_free(split);
@@ -113,6 +117,5 @@ char	**ft_split(char const *s, char c)
 			i++;
 		}
 	}
-	split[i] = NULL;
 	return (split);
 }
