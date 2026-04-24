@@ -49,7 +49,8 @@ SRCS		=	ft_isalpha.c	\
 				ft_putnbr_fd.c	\
 				ft_substr.c		\
 				ft_strjoin.c	\
-				ft_strtrim.c
+				ft_strtrim.c	\
+				ft_split.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -75,9 +76,9 @@ re: fclean all
 # To remove before delivering the project
 test: $(NAME)
 	#Linux Only
-	$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
+	#$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
 	#MacOS / Linux
-	#$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
 	./test.o
 
 debug: $(NAME)

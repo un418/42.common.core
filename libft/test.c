@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/23 14:54:40 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/24 02:56:13 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -918,5 +918,85 @@ x			printf("str1:%s \n", str1);
 		free(trim);
 		printf("\n");
 		printf("---------\n");
+	}
+
+	// ft_strplit()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_strsplit() ---\n");
+		{
+			char **split;
+			char **p;
+	
+			split = ft_split(" AA BB CC DD ", ' ');
+			p = split;
+			while (*split)
+			{
+				printf("%s\n", *split);
+				free(*split++);
+			}
+			free(p);
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strsplit() ---\n");
+			char **split;
+			char **p;
+	
+			split = ft_split(" AA BB CC DD", ' ');
+			p = split;
+			while (*split)
+			{
+				printf("%s\n", *split);
+				free(*split++);
+			}
+			free(p);
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strsplit() ---\n");
+			char **split;
+			char **p;
+	
+			split = ft_split("AA BB CC DD", ' ');
+			p = split;
+			while (*split)
+			{
+				printf("%s\n", *split);
+				free(*split++);
+			}
+			free(p);
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strsplit() ---\n");
+			char **split;
+			char **p;
+	
+			split = ft_split("A", ' ');
+			p = split;
+			while (*split)
+			{
+				printf("%s\n", *split);
+				free(*split++);
+			}
+			free(p);
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST for ft_strsplit() ---\n");
+			char **split;
+			char **p;
+	
+			split = ft_split("", ' ');
+			p = split;
+			while (*split)
+			{
+				printf("%s\n", *split);
+				free(*split++);
+			}
+			free(p);
+			printf("---------\n");
+		}
 	}
 }
