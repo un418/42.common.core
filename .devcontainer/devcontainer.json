@@ -1,0 +1,31 @@
+{
+    "name": "42 Dev Environment",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Devcontainers don't refer to Entrypoint set in Dockerfile
+                "terminal.integrated.defaultProfile.linux": "zsh",
+
+                // --- Indentation and Tabulation ---
+                "editor.tabSize": 4,                          // Visual width of a tab
+                "editor.insertSpaces": false,                 // Use real tabs, not spaces
+                "editor.detectIndentation": false,            // Don't let VS Code override these settings
+                // --- Invisible Characters and Rendering ---
+                "editor.renderWhitespace": "all",             // Show dots for spaces and arrows for tabs
+                "editor.renderControlCharacters": true,       // Show symbols for hidden characters
+                // --- Code Cleanliness and Standards ---
+                "files.trimTrailingWhitespace": true,         // Clean up useless spaces on save
+                "files.insertFinalNewline": true,             // Ensure file ends with a newline (POSIX)
+                "files.trimFinalNewlines": true              // Remove extra empty lines at end of file
+            },
+            "extensions": [
+                "kube.42header",
+                "ms-vscode.cpptools",
+                "ms-vscode.cpp-devtools"
+            ]
+        }
+    }
+}
