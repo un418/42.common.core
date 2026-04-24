@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/24 12:23:34 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:05:48 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -409,6 +409,7 @@ int main(void)
 		printf("---------\n");
 	}
 
+/* 	
 	// ft_strncmp()
 	if (0 || test_all)
 	{
@@ -488,6 +489,7 @@ int main(void)
 		}
 		printf("---------\n");
 	}
+*/
 	// ft_memchr()
 	if (0 || test_all)
 	{
@@ -547,6 +549,7 @@ int main(void)
 		}
 		printf("---------\n");
 	}
+	/* 	
 	// ft_memcmp()
 	if (0 || test_all)
 	{
@@ -605,18 +608,18 @@ int main(void)
 			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,1));
 			printf("memcmp   :%d\n",memcmp(str1,str2,1));
 		}
+ 		
 
-		/*
-		{
-			printf("-- Test5 --\n");
-			char *str1 = "";
-			char *str2 = "";
-x			printf("str1:%s \n", str1);
-			printf("str2:%s \n", str2);
-			printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,-1));
-			printf("memcmp   :%d\n",memcmp(str1,str2,-1));
-		}
-		 */
+		// {
+		// 	printf("-- Test5 --\n");
+		// 	char *str1 = "";
+		// 	char *str2 = "";
+		// 	printf("str1:%s \n", str1);
+		// 	printf("str2:%s \n", str2);
+		// 	printf("ft_memcmp:%d\n",ft_memcmp(str1,str2,-1));
+		// 	printf("memcmp   :%d\n",memcmp(str1,str2,-1));
+		// }
+
 		{
 			printf("-- Test6 --\n");
 			printf("ft_memcmp:%d\n",ft_memcmp("test", "testss", 7));
@@ -629,6 +632,7 @@ x			printf("str1:%s \n", str1);
 		}
 		printf("---------\n");
 	}
+	 */
 	/*
 	//ft_strnstr
 	// to disable because strnstr used for test need bsd compilation all the time.
@@ -792,7 +796,7 @@ x			printf("str1:%s \n", str1);
 	}
 
 	// ft_putchar_fd()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_putchar_fd() ---\n");
 		ft_putchar_fd('A', 1);
@@ -800,7 +804,7 @@ x			printf("str1:%s \n", str1);
 		printf("---------\n");
 	}
 	// ft_putstr_fd()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_putstr_fd() ---\n");
 		ft_putstr_fd("ABCDE12345", 1);
@@ -808,7 +812,7 @@ x			printf("str1:%s \n", str1);
 		printf("---------\n");
 	}
 	// ft_putstr_fd()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_putstr_fd() ---\n");
 		ft_putendl_fd("ABCDE", 1);
@@ -816,7 +820,7 @@ x			printf("str1:%s \n", str1);
 		printf("---------\n");
 	}
 	// ft_putnbr_fd()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_putnbr_fd() ---\n");
 		printf("%d\n",INT_MIN);
@@ -831,45 +835,48 @@ x			printf("str1:%s \n", str1);
 	// ft_substr()
 	if (0|| test_all)
 	{
-		printf("--- TEST1 for ft_substr() ---\n");
-		char *sub = ft_substr("123456789", 0, 7);
-		printf("sub=%s", sub);
-		free(sub);
-		printf("\n");
-		printf("---------\n");
+		{
+			printf("--- TEST1 for ft_substr() ---\n");
+			char *sub = ft_substr("123456789", 0, 7);
+			printf("sub=%s", sub);
+			free(sub);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST2 for ft_substr() ---\n");
+			char *sub = ft_substr("123456789", 4, 7);
+			printf("sub=%s", sub);
+			free(sub);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST3 for ft_substr() ---\n");
+			char *sub = ft_substr("123456789", 9, 10);
+			printf("sub=%s", sub);
+			free(sub);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST4 for ft_substr() ---\n");
+			char *sub = ft_substr("123456789", 12, 12);
+			printf("sub=%s", sub);
+			free(sub);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("--- TEST2 for ft_substr() ---\n");
+			char *sub = ft_substr("123456789", 1, 1);
+			printf("sub=%s", sub);
+			free(sub);
+			printf("\n");
+			printf("---------\n");
+		}
 	}
-	{
-		printf("--- TEST2 for ft_substr() ---\n");
-		char *sub = ft_substr("123456789", 4, 7);
-		printf("sub=%s", sub);
-		free(sub);
-		printf("\n");
-		printf("---------\n");
-	}
-	{
-		printf("--- TEST3 for ft_substr() ---\n");
-		char *sub = ft_substr("123456789", 9, 10);
-		printf("sub=%s", sub);
-		free(sub);
-		printf("\n");
-		printf("---------\n");
-	}
-	{
-		printf("--- TEST4 for ft_substr() ---\n");
-		char *sub = ft_substr("123456789", 12, 12);
-		printf("sub=%s", sub);
-		free(sub);
-		printf("\n");
-		printf("---------\n");
-	}
-	{
-		printf("--- TEST2 for ft_substr() ---\n");
-		char *sub = ft_substr("123456789", 1, 1);
-		printf("sub=%s", sub);
-		free(sub);
-		printf("\n");
-		printf("---------\n");
-	}
+
 	// ft_strjoin()
 	if (0|| test_all)
 	{
@@ -932,7 +939,7 @@ x			printf("str1:%s \n", str1);
 			char **split;
 			char **p;
 	
-			split = ft_split(" AA BB CC DD ", ' ');
+			split = ft_split(" A BB CCC DDDD ", ' ');
 			p = split;
 			while (*split)
 			{
@@ -948,7 +955,7 @@ x			printf("str1:%s \n", str1);
 			char **split;
 			char **p;
 	
-			split = ft_split(" AA BB CC DD", ' ');
+			split = ft_split(" A BB CCC DDDD", ' ');
 			p = split;
 			while (*split)
 			{
@@ -964,7 +971,7 @@ x			printf("str1:%s \n", str1);
 			char **split;
 			char **p;
 	
-			split = ft_split("AA BB CC DD", ' ');
+			split = ft_split("A BB CCC DDDD", ' ');
 			p = split;
 			while (*split)
 			{
