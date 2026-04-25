@@ -10,10 +10,11 @@ DBG_OBJ		= debug.o
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
+#CFLAGS		= -Wall -Wextra -Werror -fsanitize=address,undefined -g -Wshadow -Wstrict-prototypes
 DBGFLAGS	= -g
 GCC			= 0
 
-ifeq ($(GCC), 1)
+ifeq ($(GCC_MAC), 1)
     CC		= /opt/homebrew/Cellar/gcc/15.2.0_1/bin/gcc-15
 endif
 # make test GCC=1
@@ -56,7 +57,8 @@ SRCS		=	ft_isalpha.c	\
 				ft_substr.c		\
 				ft_strjoin.c	\
 				ft_strtrim.c	\
-				ft_split.c
+				ft_split.c		\
+				ft_itoa.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -80,13 +82,15 @@ fclean: clean
 re: fclean all
 
 # To remove before delivering the project
-test: $(NAME)
+# test: CFLAGS =
+test: $(NAME) 
 	#Linux Only
 	#$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(TEST_OBJ)
 	#MacOS / Linux
 	$(CC) $(CFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -lft -o $(TEST_OBJ)
 	./test.o
 
+# debug: CFLAGS =
 debug: $(NAME)
 	#Linux Only
 	#$(CC) $(CFLAGS) $(DBGFLAGS) $(BSDFLAG) $(TEST_SRC) -I. -L. -l:libft.a -o $(DBG_OBJ)

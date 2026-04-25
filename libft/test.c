@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/24 16:33:43 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 03:51:51 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -930,7 +930,7 @@ int main(void)
 	}
 
 	// ft_strplit()
-	if (1 || test_all)
+	if (0|| test_all)
 	{
 		printf("--- TEST for ft_strsplit() ---\n");
 		if (1 || test_all)
@@ -1046,5 +1046,57 @@ int main(void)
 			printf("---------\n");
 		}
 		printf("----------------------------\n");
+	}
+	// ft_itoa()
+	if (1 || test_all)
+	{
+		printf("--- TEST for ft_itoa() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *itoa;
+			itoa = ft_itoa(1234);
+			printf("ft_itoa(\"1234\")=%s", itoa);
+			free(itoa);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("-- Test2 --\n");
+			char *itoa;
+			itoa = ft_itoa(0);
+			printf("ft_itoa(\"1234\")=%s", itoa);
+			free(itoa);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("-- Test3 --\n");
+			char *itoa;
+			itoa = ft_itoa(3);
+			printf("ft_itoa(\"1234\")=%s", itoa);
+			free(itoa);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("-- Test4 --\n");
+			char *itoa;
+			itoa = ft_itoa(-333);
+			printf("ft_itoa(\"1234\")=%s", itoa);
+			free(itoa);
+			printf("\n");
+			printf("---------\n");
+		}
+		{
+			printf("-- Test5 --\n");
+			char *itoa;
+			itoa = ft_itoa(INT_MIN);
+			printf("ft_itoa(\"1234\")=%s", itoa);
+			free(itoa);
+			printf("\n");
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
+
 	}
 }
