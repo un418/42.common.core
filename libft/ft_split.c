@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:41:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/24 15:02:23 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/24 23:58:10 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static size_t	ft_split_len(const char *str, const char c)
 // free memory and set pointer to NULL
 // set pointer to NULL allow to retrieve error in case of trying to
 //	read or write data in memory address that have been free earlier.
-static void	ft_split_free(char **split)
+static void	*ft_split_free(char **split)
 {
 	while (*split)
 	{
@@ -76,13 +76,14 @@ static void	ft_split_free(char **split)
 	}
 	free(split);
 	split = NULL;
+	return (NULL);
 }
 
 // helper function to create substring
 // copy src to dest till delimiter or end of string
 // NULL terminate in place of delimiter match
 // return pointer to last delimiter match
-static char	*ft_split_copy(char *dst, const char *src, const char c)
+static char	*ft_split_extract_to(char *dst, const char *src, const char c)
 {
 	while (*src && *src != c)
 		*dst++ = *src++;
@@ -93,27 +94,24 @@ static char	*ft_split_copy(char *dst, const char *src, const char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**split;
-	char	*p_str;
 	size_t	i;
 
-	p_str = (char *)s;
 	i = 0;
+	if (!s)
+		return (NULL);
 	split = ft_calloc(ft_split_count(s, c) + 1, sizeof(char *));
 	if (!split)
 		return (NULL);
-	while (*p_str)
+	while (*s)
 	{
-		while (*p_str == c && *p_str)
-			p_str++;
-		if (*p_str != c && *p_str)
+		while (*s == c && *s)
+			s++;
+		if (*s != c && *s)
 		{
-			split[i] = ft_calloc(ft_split_len(p_str, c) + 1, sizeof(char));
+			split[i] = ft_calloc(ft_split_len(s, c) + 1, sizeof(char));
 			if (!split[i])
-			{
-				ft_split_free(split);
-				return (NULL);
-			}
-			p_str = ft_split_copy(split[i], p_str, c);
+				return (ft_split_free(split));
+			s = ft_split_extract_to(split[i], s, c);
 			i++;
 		}
 	}
