@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 14:46:42 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:11:26 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1133,6 +1133,22 @@ int main(void)
 			char *striteri = "abcde";
 			ft_striteri(striteri, ft_test_ft_striteri);
 			printf("---------\n");
+		}
+		printf("----------------------------\n");
+	}
+
+	// ft_lstnew()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstnew() ---\n");
+		{
+			printf("-- Test1 --\n");
+			t_list *node;
+			char *content = "abcde";
+			node = ft_lstnew(content);
+			printf("node.content=%p\n",node->content);
+			printf("node.content=%p\n",node->next);
+			free(node);
 		}
 		printf("----------------------------\n");
 	}
