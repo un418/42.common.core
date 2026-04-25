@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 14:05:34 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 14:46:42 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ char ft_test_ft_strmapi(unsigned int i, char c)
 {
 	printf("i=%u,c=%c\n", i, c);
 	return (c);
+}
+
+void ft_test_ft_striteri(unsigned int i, char *c)
+{
+	printf("i=%u,c=%c\n", i, *c);
 }
 
 int main(void)
@@ -1112,9 +1117,21 @@ int main(void)
 			printf("-- Test1 --\n");
 			char *strmapi;
 			strmapi = ft_strmapi(ft_strdup("1234"), ft_test_ft_strmapi);
-			printf("ft_strmapi(ft_strdup(\"1234\"), ft_test_ft_strmapi)=%s", strmapi);
+			printf("ft_strmapi(ft_strdup(\"1234\"), ft_test_ft_strmapi)=%s\n", strmapi);
 			free(strmapi);
-			printf("\n");
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
+	}
+
+	// ft_striteri()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_striteri() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *striteri = "abcde";
+			ft_striteri(striteri, ft_test_ft_striteri);
 			printf("---------\n");
 		}
 		printf("----------------------------\n");
