@@ -6,12 +6,12 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 13:20:02 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 13:51:17 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:41:31 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-ft_strmapi() - Applies function to each character of a string
+ft_strmapi() - Create string by apllying function to each character of a string
 
 DESCRIPTION
  Applies the function f to each character of the string s,
