@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 18:16:02 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:00:41 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1152,7 +1152,8 @@ int main(void)
 		}
 		printf("----------------------------\n");
 	}
-		// ft_lstnew()
+
+	// ft_lstnew()
 	if (1|| test_all)
 	{
 		printf("--- TEST for ft_lstnew() ---\n");
@@ -1170,6 +1171,46 @@ int main(void)
 			printf("lst.next=%p\n",lst->next);
 			printf("lst.next.content=%s\n",(char *)lst->next->content);
 			printf("lst.next.next=%p\n",lst->next->next);
+			free(lst);
+		}
+		printf("----------------------------\n");
+	}
+
+	// ft_lstsize()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstsize() ---\n");
+		{
+			printf("-- Test1 --\n");
+			t_list *lst;
+			char *content = "abcde";
+			lst = ft_lstnew(content);
+			printf("lst.content=%p\n",lst->content);
+			printf("lst.next=%p\n",lst->next);
+			char *content_new = "new";
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
+			free(lst);
+		}
+		{
+			printf("-- Test2 --\n");
+			t_list *lst;
+			char *content = "abcde";
+			lst = ft_lstnew(content);
+			printf("lst.content=%p\n",lst->content);
+			printf("lst.next=%p\n",lst->next);
+			char *content_new = "new";
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
+			free(lst);
+		}
+		{
+			printf("-- Test3 --\n");
+			t_list *lst;
+			lst = NULL;
+			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
 			free(lst);
 		}
 		printf("----------------------------\n");

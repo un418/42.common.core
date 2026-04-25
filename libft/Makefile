@@ -62,7 +62,8 @@ SRCS		=	ft_isalpha.c		\
 				ft_strmapi.c		\
 				ft_striteri.c		\
 				ft_lstnew.c			\
-				ft_lstadd_front.c
+				ft_lstadd_front.c	\
+				ft_lstsize.c
 
 OBJS		= $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 12:22:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 17:28:27 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 20:10:30 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_atoi(const char *str);
-// int		ft_isspace(char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strdup(const char *s);
 void	ft_putchar_fd(char c, int fd);
@@ -58,6 +57,7 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 t_list	*ft_lstnew(void *content);
-void ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
 
 #endif
