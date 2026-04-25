@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 21:00:41 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 23:33:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1211,6 +1211,52 @@ int main(void)
 			t_list *lst;
 			lst = NULL;
 			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
+			free(lst);
+		}
+		printf("----------------------------\n");
+	}
+	// ft_lstlast()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstlast() ---\n");
+		{
+			printf("-- Test1 --\n");
+			t_list *lst;
+			char *content = "abcde";
+			lst = ft_lstnew(content);
+			printf("lst=            %p\n",lst);
+			char *content_new = "new";
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
+			free(lst);
+		}
+		{
+			printf("-- Test2 --\n");
+			t_list *lst;
+			char *content = "abcde";
+			lst = ft_lstnew(content);
+			printf("lst=            %p\n",lst);
+			char *content_new = "new";
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
+			free(lst);
+		}
+		{
+			printf("-- Test3 --\n");
+			t_list *lst;
+			lst = NULL;
+			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
+			free(lst);
+		}
+		{
+			printf("-- Test4 --\n"); 
+			t_list *lst;
+			char *content = "abcde";
+			lst = ft_lstnew(content);
+			printf("lst=            %p\n",lst);
+			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
 			free(lst);
 		}
 		printf("----------------------------\n");
