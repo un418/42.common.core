@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 16:11:26 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 18:16:02 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1147,8 +1147,30 @@ int main(void)
 			char *content = "abcde";
 			node = ft_lstnew(content);
 			printf("node.content=%p\n",node->content);
-			printf("node.content=%p\n",node->next);
+			printf("node.next=%p\n",node->next);
 			free(node);
+		}
+		printf("----------------------------\n");
+	}
+		// ft_lstnew()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstnew() ---\n");
+		{
+			printf("-- Test1 --\n");
+			t_list *lst;
+			char *content = "abcde";
+			lst = ft_lstnew(content);
+			printf("lst.content=%p\n",lst->content);
+			printf("lst.next=%p\n",lst->next);
+			char *content_new = "new";
+			ft_lstadd_front(&lst,ft_lstnew(content_new));
+			printf("ft_lstadd_front(&lst,ft_lstnew(content_new))\n");
+			printf("lst.content=%s\n",(char *)lst->content);
+			printf("lst.next=%p\n",lst->next);
+			printf("lst.next.content=%s\n",(char *)lst->next->content);
+			printf("lst.next.next=%p\n",lst->next->next);
+			free(lst);
 		}
 		printf("----------------------------\n");
 	}
