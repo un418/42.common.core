@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 03:51:51 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/25 14:05:34 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 
 // #include <bsd/string.h>
 
+char ft_test_ft_strmapi(unsigned int i, char c)
+{
+	printf("i=%u,c=%c\n", i, c);
+	return (c);
+}
 
 int main(void)
 {
@@ -1096,7 +1101,22 @@ int main(void)
 			printf("\n");
 			printf("---------\n");
 		}
-		printf("----------------------------\n");
+	printf("----------------------------\n");
+	}
 
+	// ft_strmapi()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_strmapi() ---\n");
+		{
+			printf("-- Test1 --\n");
+			char *strmapi;
+			strmapi = ft_strmapi(ft_strdup("1234"), ft_test_ft_strmapi);
+			printf("ft_strmapi(ft_strdup(\"1234\"), ft_test_ft_strmapi)=%s", strmapi);
+			free(strmapi);
+			printf("\n");
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
 	}
 }
