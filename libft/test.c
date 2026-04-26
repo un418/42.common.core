@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 23:33:56 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/26 01:21:36 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1149,29 +1149,34 @@ int main(void)
 			printf("node.content=%p\n",node->content);
 			printf("node.next=%p\n",node->next);
 			free(node);
+			printf("---------\n");
+
 		}
 		printf("----------------------------\n");
 	}
 
-	// ft_lstnew()
+	// ft_lstadd_front()
 	if (1|| test_all)
 	{
-		printf("--- TEST for ft_lstnew() ---\n");
+		printf("--- TEST for ft_lstadd_front() ---\n");
 		{
 			printf("-- Test1 --\n");
 			t_list *lst;
-			char *content = "abcde";
+			char *content = "1";
 			lst = ft_lstnew(content);
 			printf("lst.content=%p\n",lst->content);
 			printf("lst.next=%p\n",lst->next);
+			printf("----\n");
 			char *content_new = "new";
+			printf("do: ft_lstadd_front(&lst,ft_lstnew(content_new))\n");
 			ft_lstadd_front(&lst,ft_lstnew(content_new));
-			printf("ft_lstadd_front(&lst,ft_lstnew(content_new))\n");
 			printf("lst.content=%s\n",(char *)lst->content);
 			printf("lst.next=%p\n",lst->next);
+			printf("----\n");
 			printf("lst.next.content=%s\n",(char *)lst->next->content);
 			printf("lst.next.next=%p\n",lst->next->next);
 			free(lst);
+			printf("---------\n");
 		}
 		printf("----------------------------\n");
 	}
@@ -1191,6 +1196,7 @@ int main(void)
 			ft_lstadd_front(&lst,ft_lstnew(content_new));
 			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		{
 			printf("-- Test2 --\n");
@@ -1205,6 +1211,7 @@ int main(void)
 			ft_lstadd_front(&lst,ft_lstnew(content_new));
 			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		{
 			printf("-- Test3 --\n");
@@ -1212,6 +1219,7 @@ int main(void)
 			lst = NULL;
 			printf("ft_lstsize(lst)=%d\n",ft_lstsize(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		printf("----------------------------\n");
 	}
@@ -1229,6 +1237,7 @@ int main(void)
 			ft_lstadd_front(&lst,ft_lstnew(content_new));
 			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		{
 			printf("-- Test2 --\n");
@@ -1242,6 +1251,7 @@ int main(void)
 			ft_lstadd_front(&lst,ft_lstnew(content_new));
 			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		{
 			printf("-- Test3 --\n");
@@ -1249,6 +1259,7 @@ int main(void)
 			lst = NULL;
 			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		{
 			printf("-- Test4 --\n"); 
@@ -1258,7 +1269,36 @@ int main(void)
 			printf("lst=            %p\n",lst);
 			printf("ft_lstlast(lst)=%p\n",ft_lstlast(lst));
 			free(lst);
+			printf("---------\n");
 		}
 		printf("----------------------------\n");
 	}
+
+	// ft_lstadd_back()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstadd_back() ---\n");
+		{
+			printf("-- Test1 --\n");
+			t_list *lst;
+			char *content = "1";
+			lst = ft_lstnew(content);
+			printf("lst.content=%s\n",(char *)lst->content);
+			printf("lst.next=%p\n",lst->next);
+			printf("---------\n");
+			char *content_new = "new";
+			ft_lstadd_back(&lst,ft_lstnew(content_new));
+			printf("do: ft_lstadd_back(&lst,ft_lstnew(content_new))\n");
+			printf("---------\n");
+			printf("lst.content=%s\n",(char *)lst->content);
+			printf("lst.next=%p\n",lst->next);
+			printf("----\n");
+			printf("lst.next.content=%s\n",(char *)lst->next->content);
+			printf("lst.next.next=%p\n",lst->next->next);
+			free(lst);
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
+	}
+
 }
