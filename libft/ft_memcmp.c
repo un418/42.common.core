@@ -6,31 +6,23 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:30:02 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/17 18:59:16 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 00:52:05 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
-memcmp - compare memory areas
-
-SYNOPSIS
-int memcmp(const void *s1, const void *s2, size_t n);
+ memcmp - compare memory areas
 
 DESCRIPTION
-The memcmp() function compares the first n bytes
-(each interpreted as unsigned char) of the memory areas s1 and s2.
+ The memcmp() function compares the first n bytes
+  (each interpreted as unsigned char) of the memory areas s1 and s2.
 
 RETURN VALUE
-The memcmp() function returns an integer less than, equal to,
-or greater than zero if the first n bytes of s1 is found, respectively,
-to be less than, to match, or be greater than the first n bytes of s2.
-
-For a nonzero return value, the sign is determined by
-the sign of the difference between the first pair of bytes
-(interpreted as unsigned char) that differ in s1 and s2.
-
-If n is zero, the return value is zero.
+ - zero if the two strings are identical
+ - Zero-length strings are always identical
+ - otherwise returns the difference between the first two differing bytes
+   (treated as unsigned char values, so that ‘\200’ is greater than ‘\0’, for example).
 */
 
 #include "libft.h"
