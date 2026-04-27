@@ -6,6 +6,12 @@
 
 ```
 
+## ToDo List
+- [ ] Where to use malloc vs calloc
+- [ ] verifying unsigned char casting for char
+- [ ] verify sintax fo malloc null pointer check condition exit check
+
+
 ## Important Instruction
 - **Submitting unused files is not allowed.**
 - **All files must be placed at the root of your repository.**
