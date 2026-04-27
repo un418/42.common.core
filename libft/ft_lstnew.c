@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:44:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 22:41:12 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 00:27:46 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_list	*ft_lstnew(void *content)
 {
 	t_list	*node;
 
-	node = ft_calloc(1, sizeof(t_list));
+	node = malloc(sizeof(t_list));
 	if (!node)
 		return (NULL);
 	node->content = content;
