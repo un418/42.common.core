@@ -6,12 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:37:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 21:13:57 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 00:26:47 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstmap - 
+ft_lstmap - Create a new list resulting resulting of 
+  f function to the content of a node and it's successors
 
 PARAMETERS
  - lst: The address of a pointer to a node.
