@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 23:54:18 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 11:45:12 by adaferna         ###   ########.fr       */
+/*   Created: 2026/04/26 01:24:32 by adaferna          #+#    #+#             */
+/*   Updated: 2026/04/26 01:38:41 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstadd_back - Add node at end of linked list
+ft_lstdelone - 
 
 DESCRIPTION 
- Adds the node ’new’ at the end of the list.
+ Takes a node as parameter and frees its content using the function ’del’.
+ Free the node itself but does NOT free the next node.
 PARAMETERS
- - lst: The address of a pointer to the first node of a list.
- - new: The address of a pointer to the node to be added.
+ - lst: The node to free.
+ - del: The address of the function used to delete the content.
 RETURN VALUE
  None
 */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast(*lst)->next = new;
+	del(lst->content);
+	free(lst);
 }

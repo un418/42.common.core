@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 23:54:18 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 11:45:12 by adaferna         ###   ########.fr       */
+/*   Created: 2026/04/26 01:37:56 by adaferna          #+#    #+#             */
+/*   Updated: 2026/04/27 11:58:22 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstadd_back - Add node at end of linked list
+ft_lstclear - 
 
 DESCRIPTION 
- Adds the node ’new’ at the end of the list.
+ Deletes and frees the given node and all its successors,
+  using the function ’del’ and free(3).
+ Finally, set the pointer to the list to NULL.
 PARAMETERS
- - lst: The address of a pointer to the first node of a list.
- - new: The address of a pointer to the node to be added.
+ - lst: The address of a pointer to a node.
+- del: The address of the function used to delete the content of the node.
 RETURN VALUE
  None
 */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast(*lst)->next = new;
+	t_list	*next;
+
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		next = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		(*lst) = next;
+	}
+	*lst = NULL;
 }

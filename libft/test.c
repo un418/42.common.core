@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/26 01:21:36 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:54:43 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1301,4 +1301,25 @@ int main(void)
 		printf("----------------------------\n");
 	}
 
+	// ft_lstclear()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstclear() ---\n");
+		{
+			printf("-- Test1 --\n");
+
+			t_list *lst;
+
+			lst = NULL;
+			for (int i = 1; i < 4; i++)
+			{
+				ft_lstadd_back(&lst,ft_lstnew(ft_lstnew((ft_itoa(i)))));
+				printf("node #%d created\n", i);
+			}
+			ft_lstclear(&lst, free);
+			printf("lst = %p", lst);
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
+	}
 }
