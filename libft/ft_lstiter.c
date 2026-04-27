@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_listiter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/26 01:37:56 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 13:46:37 by adaferna         ###   ########.fr       */
+/*   Created: 2026/04/27 13:22:00 by adaferna          #+#    #+#             */
+/*   Updated: 2026/04/27 13:45:02 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstclear - delete properly a node and it's successors from a t_list
+ft_lstiter - Applies f function to the content of a node and it's successors
 
-DESCRIPTION 
- Deletes and frees the given node and all its successors,
-  using the function ’del’ and free(3).
- Finally, set the pointer to the list to NULL.
+DESCRIPTION
+ Iterates through the list ’lst’ and applies the function ’f’ 
+  to the content of each node.
 PARAMETERS
  - lst: The address of a pointer to a node.
-- del: The address of the function used to delete the content of the node.
+ - f: The address of the function to apply to each node’s content.
 RETURN VALUE
  None
 */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	t_list	*next;
 
 	if (!lst)
 		return ;
-	while (*lst)
+	while (lst)
 	{
-		next = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		(*lst) = next;
+		next = (lst)->next;
+		f(lst->content);
+		(lst) = next;
 	}
 }
