@@ -6,12 +6,12 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 01:37:56 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 12:09:21 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/27 13:25:20 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstclear - 
+ft_lstclear - delete properly a node and it's successor from a t_list
 
 DESCRIPTION 
  Deletes and frees the given node and all its successors,
