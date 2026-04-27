@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_listiter.c                                      :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:22:00 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 13:45:02 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/27 19:55:20 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,9 @@ RETURN VALUE
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*next;
-
-	if (!lst)
-		return ;
 	while (lst)
 	{
-		next = (lst)->next;
 		f(lst->content);
-		(lst) = next;
+		lst = lst->next;
 	}
 }
