@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 14:07:50 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/27 19:48:51 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,35 @@
 
 // #include <bsd/string.h>
 
-char ft_test_ft_strmapi(unsigned int i, char c)
+static char	ft_test_ft_strmapi(unsigned int i, char c)
 {
 	printf("i=%u,c=%c\n", i, c);
 	return (c);
 }
 
-void ft_test_ft_striteri(unsigned int i, char *c)
+static void	ft_test_ft_striteri(unsigned int i, char *c)
 {
 	printf("i=%u,c=%c\n", i, *c);
 }
 
-void ft_test_lstiter(void *content)
+static void	ft_test_lstiter(void *content)
 {
 	printf("content=%s\n",(char *)content);
 }
+
+static char ft_test_ft_strmapi_upper(unsigned int i, char c)
+{
+	printf("do: ft_strmapi_upper() on index #%u\n", i);
+	return (ft_toupper(c));
+}
+
+static void	*ft_test_lstmap(void *content)
+{
+	char *newcontent;
+	newcontent=ft_strmapi(content,ft_test_ft_strmapi_upper);
+	return (newcontent);
+}
+
 
 int main(void)
 {
@@ -1323,7 +1337,7 @@ int main(void)
 				printf("node #%d created\n", i);
 			}
 			ft_lstclear(&lst, free);
-			printf("lst = %p", lst);
+			printf("lst = %p\n", lst);
 			printf("---------\n");
 		}
 		printf("----------------------------\n");
@@ -1347,7 +1361,33 @@ int main(void)
 				printf("node #%d created\n", i);
 			}
 			ft_lstiter(lst, ft_test_lstiter);
-			printf("lst = %p", lst);
+			printf("lst = %p\n", lst);
+			printf("---------\n");
+		}
+		printf("----------------------------\n");
+	}
+
+	// ft_lstmap()
+	if (1|| test_all)
+	{
+		printf("--- TEST for ft_lstmap() ---\n");
+		{
+			printf("-- Test1 --\n");
+
+			t_list *lst;
+			t_list *lstmap;
+
+			lst = NULL;
+			ft_lstadd_back(&lst,ft_lstnew(ft_strdup("aa")));
+			printf("node #a created\n");
+			ft_lstadd_back(&lst,ft_lstnew(ft_strdup("bb")));
+			printf("node #b created\n");
+			ft_lstadd_back(&lst,ft_lstnew(ft_strdup("cc")));
+			printf("node #c created\n");
+			lstmap = ft_lstmap(lst, ft_test_lstmap, free);
+			ft_lstiter(lstmap,ft_test_lstiter);
+
+			printf("lst = %p\n", lstmap);
 			printf("---------\n");
 		}
 		printf("----------------------------\n");
