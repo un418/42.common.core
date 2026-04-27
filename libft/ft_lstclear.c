@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 01:37:56 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 11:58:22 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/27 12:09:21 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		ft_lstdelone(*lst, del);
 		(*lst) = next;
 	}
-	*lst = NULL;
 }
