@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 19:47:28 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 21:01:19 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 00:33:28 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
-	if (!lst)
-		return (0);
-	i = 1;
-	while (lst->next)
+	i = 0;
+	while (lst)
 	{
 		i++;
 		lst = lst->next;
