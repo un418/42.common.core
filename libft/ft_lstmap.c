@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:37:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 18:45:57 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/27 20:37:35 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,11 @@ DESCRIPTION
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*newlist;
-	t_list	*next;
 	t_list	*newnode;
 
-	if (!lst)
-		return (NULL);
 	newlist = NULL;
 	while (lst)
 	{
-		next = lst->next;
 		newnode = ft_lstnew(f(lst->content));
 		if (!newnode)
 		{
@@ -48,7 +44,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 			return (NULL);
 		}
 		ft_lstadd_back(&newlist, newnode);
-		lst = next;
+		lst = lst->next;
 	}
 	return (newlist);
 }
