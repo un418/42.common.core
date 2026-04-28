@@ -214,7 +214,8 @@ int main() {
 > ```
 
 > [!bug] Heap-based Buffer Overflow
-> A memory corruption vulnerability on the heap. Often the direct consequence of passing a wrapped-around/overflowed size to `malloc()`, leading to an undersized allocation and subsequent out-of-bounds memory writes.
+> A memory corruption vulnerability on the heap. 
+> Often the direct consequence of passing a wrapped-around/overflowed size to `malloc()`, leading to an undersized allocation and subsequent out-of-bounds memory writes.
 > ```c
 > char *ptr = malloc(10);
 > if (ptr)
