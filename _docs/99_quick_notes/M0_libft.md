@@ -7,9 +7,14 @@
 ```
 
 ## ToDo List
-- [ ] Where to use malloc vs calloc
+- [ ] Where to use malloc vs calloc ?
+	- [ ] calloc will do useless memory operation to set bytes to zero if the memory is fill right after provisionning, like for string creation
+	- [ ] calloc is good when we provision memory and fill it later like for list of string, or any list of list (cf. ft_split)
 - [ ] verifying unsigned char casting for char
 - [ ] verify sintax fo malloc null pointer check condition exit check
+- [x] Check atoi behavior in int overflow
+	- [x] As the doc say for strtol :"If the value cannot be represented, the behavior is undefined."
+	- [x] compare result between ft_atoi and atoi
 
 
 ## Important Instruction
