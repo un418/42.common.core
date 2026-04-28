@@ -6,31 +6,25 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 18:45:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/16 19:23:22 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 21:43:27 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 NAME
-toupper - convert uppercase
-
-SYNOPSIS
-int toupper(int c);
+ ft_toupper - convert uppercase
 
 DESCRIPTION
-This function convert lowercase letters to uppercase.
+ This function convert lowercase letters to uppercase.
 
-If  c  is a lowercase letter, toupper() returns its uppercase equivalent,
-if an uppercase representation exists in the current locale.
-Otherwise, it returns c.
+ If  c  is a lowercase letter, ft_toupper() returns its uppercase equivalent,
+ Otherwise, it returns c.
 
-If c is neither an unsigned char value nor EOF,
-the behavior of these functions is undefined.
+ If c is neither an unsigned char value nor EOF,
+  the behavior of these functions is undefined.
 
 RETURN VALUE
-The value returned is that of the converted letter,
-or c if the conversion was not possible.
-
+- The converted letter, or c if the conversion was not possible.
 */
 
 #include "libft.h"
@@ -46,8 +40,6 @@ static int	ft_islower(int c)
 int	ft_toupper(int c)
 {
 	if (ft_islower(c))
-	{
 		c = c - 32;
-	}
 	return (c);
 }

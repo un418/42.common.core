@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:26:51 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 21:39:51 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 21:41:29 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static int	ft_isupper(int c)
 int	ft_tolower(int c)
 {
 	if (ft_isupper(c))
-	{
 		c += 32;
-	}
 	return (c);
 }
