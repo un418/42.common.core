@@ -6,19 +6,22 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 22:48:42 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 23:34:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:38:30 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstlast - Return the adress of the last node of a list
+NAME
+ ft_lstlast - Return the adress of the last node of a list
 
 DESCRIPTION
  Returns the last node of the list.
+
 PARAMETERS
  - lst: The beginning of the list.
+
 RETURN VALUE
- Last node of the list
+ - Pointer to the last node of the list
 */
 
 #include "libft.h"

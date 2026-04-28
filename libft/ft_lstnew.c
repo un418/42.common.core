@@ -6,21 +6,24 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:44:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 00:27:46 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:38:55 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstnew - create a new node of struct s_list (alias t_list)
+NAME
+ ft_lstnew - create a new node of struct s_list (alias t_list)
 
 DESCRIPTION
  Allocates memory (using malloc(3)) and returns a new node.
  The ’content’ member variable is initialized with the parameter ’content’.
  The variable ’next’ is initialized to NULL.
+
 PARAMETERS
  - content: The content to store in the new node.
+
 RETURN VALUE
- - pointer to the new node
+ - Pointer to the new node
 */
 
 #include "libft.h"

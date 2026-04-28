@@ -6,21 +6,24 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 01:24:32 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 13:26:13 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:39:07 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstdelone - delete properly ONE node and his content
+NAME
+ ft_lstdelone - delete properly ONE node and his content
 
 DESCRIPTION 
  Takes a node as parameter and frees its content using the function ’del’.
  Free the node itself but does NOT free the next node.
+
 PARAMETERS
  - lst: The node to free.
  - del: The address of the function used to delete the content.
+
 RETURN VALUE
- None
+ - None
 */
 
 #include "libft.h"

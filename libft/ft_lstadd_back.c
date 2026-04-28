@@ -6,20 +6,23 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 23:54:18 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 11:45:12 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:39:32 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_lstadd_back - Add node at end of linked list
+NAME
+ ft_lstadd_back - Add node at end of linked list
 
 DESCRIPTION 
  Adds the node ’new’ at the end of the list.
+
 PARAMETERS
  - lst: The address of a pointer to the first node of a list.
  - new: The address of a pointer to the node to be added.
+
 RETURN VALUE
- None
+ - None
 */
 
 #include "libft.h"

@@ -6,26 +6,32 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:37:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 00:26:47 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:36:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
+NAME
 ft_lstmap - Create a new list resulting resulting of 
   f function to the content of a node and it's successors
+
+DESCRIPTION
+  Create a new list resulting of the successive applications of the function ’f’
+   through the list ’lst’, applies the function ’f’ to each node’s content,
+  The ’del’ function is used to delete the content of a node if needed.
 
 PARAMETERS
  - lst: The address of a pointer to a node.
  - f: The address of the function applied to each node’s content.
  - del: The address of the function used to delete a node’s content if needed.
-RETURN VALUE
- - The new list.
- - NULL if the allocation fails.
-DESCRIPTION
- Create a new list resulting of the successive applications of the function ’f’
-  through the list ’lst’, applies the function ’f’ to each node’s content,
- The ’del’ function is used to delete the content of a node if needed.
 
+IMPLEMENTATION NOTES
+ Deliberatly choose to not use ft_lstadd_back() to preserve performance
+  when working on large linked list.
+
+RETURN VALUE
+ - Pointer to the beginning new list.
+ - NULL if the allocation fails.
 */
 
 #include "libft.h" 
