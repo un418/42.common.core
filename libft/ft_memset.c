@@ -6,22 +6,20 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:07:19 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/15 12:53:27 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 01:10:17 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-SYNOPSIS
-#include <string.h>
-
-void *memset(void *s, int c, size_t n);
-
+NAME
+ memset – fill a byte string with a byte value
+ 
 DESCRIPTION
-The memset() function fills the first n bytes of the memory area
-pointed to by s with the constant byte c.
+ The memset() function writes n bytes of value c (converted to unsigned char)
+  to the string s.
 
 RETURN VALUE
-The memset() function returns a pointer to the memory area s.
+ The memset() function returns the original value of s.
 */
 
 #include "libft.h"
