@@ -6,14 +6,14 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:07:19 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 01:11:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 19:56:55 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
  memset – fill a byte string with a byte value
- 
+
 DESCRIPTION
  The memset() function writes n bytes of value c (converted to unsigned char)
   to the string s.
