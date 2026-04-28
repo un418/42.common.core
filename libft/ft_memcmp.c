@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:30:02 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 00:52:05 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 01:19:51 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ RETURN VALUE
  - zero if the two strings are identical
  - Zero-length strings are always identical
  - otherwise returns the difference between the first two differing bytes
-   (treated as unsigned char values, so that ‘\200’ is greater than ‘\0’, for example).
+   (treated as unsigned char values)
+    - negative values mean s1 < s2
+    - positive values mean s1 > s2
 */
 
 #include "libft.h"
