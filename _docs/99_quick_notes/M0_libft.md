@@ -26,7 +26,9 @@
 - **You must use the ar command to create your library. The use of libtool is strictly forbidden.**
 -  **Your libft.a must be created at the root of your repository.**
 
-- To begin, you must reimplement a set of functions from the libc. Your version will have the same **prototypes** and behaviors as the originals, adhering **strictly to their definitions in the man page**. The **only difference will be their names**, which must start with the ’ft_’ prefix. For example, strlen becomes ft_strlen.
+- To begin, you must reimplement a set of functions from the libc. 
+  Your version will have the same **prototypes** and behaviors as the originals, adhering **strictly to their definitions in the man page**. 
+  The **only difference will be their names**, which must start with the ’ft_’ prefix. For example, strlen becomes ft_strlen.
 ## 1. Configure Makefile
 
 - [x] makefile compile file as librairy
@@ -42,11 +44,8 @@ ar rcs libmylib.a mylib.o
 ```
 
 - **`r` (replace)** : Insère les fichiers objets (`.o`) dans l'archive. Si l'archive contient déjà un fichier portant le même nom, il est remplacé. C'est l'opération de base pour mettre à jour ou créer ta bibliothèque.
-    
 - **`c` (create)** : Crée l'archive si elle n'existe pas déjà. Sans cette option, `ar` pourrait afficher un message d'avertissement sur la sortie d'erreur s'il doit créer un nouveau fichier.
-    
 - **`s` (write index)** : Crée un index des symboles (fonctions, variables globales) dans l'archive ou met à jour un index existant. Cet index permet au lieur (`ld`, appelé via `gcc`) d'accélérer la recherche de symboles sans avoir à parcourir tout le contenu de l'archive. Utiliser `s` équivaut à lancer la commande `ranlib` sur ton fichier `.a`.
-- 
 - https://www.geeksforgeeks.org/c/header-files-in-c-cpp-and-its-uses/
 
 
@@ -98,7 +97,8 @@ Find a way to test the code via a main function that call the library
 > | `char * const s` | Constant pointer | Yes | **No** |
 > 
 > > [!TIP] Best Practice
-> > Always use `const` for any function parameter that only needs to **read** data. It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
+> > Always use `const` for any function parameter that only needs to **read** data. 
+> > It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
 
 
 ## memove
@@ -124,7 +124,8 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 > 
 > ### 1. Pointer Arithmetic: Identical Behavior
 > Operations like `ptr + 1` or `ptr++` behave exactly the same for both types. 
-> Both pointers advance the memory address by **1 byte** because `sizeof(char) == sizeof(unsigned char) == 1`. The compiler strictly looks at the size of the data type, not its sign.
+> Both pointers advance the memory address by **1 byte** because `sizeof(char) == sizeof(unsigned char) == 1`. 
+> The compiler strictly looks at the size of the data type, not its sign.
 > 
 > ### 2. Dereferencing (`*ptr`): The Danger Zone
 > The critical difference emerges when you read the value at the address (`*ptr`), especially during **integer promotion** (which happens automatically in C when doing math, comparisons, or returning values).
@@ -135,7 +136,9 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 > * **`*p_s2` (Unsigned) $\rightarrow$ Zero Extension:** >     The value is strictly treated as a magnitude (0-255). The compiler fills the new bits with `0`s.
 >     *Example:* `0xFF` (1 byte) becomes `0x000000FF` (4 bytes, `255`).
 > 
-> **Core Takeaway:** > Arithmetic moves the pointer; dereferencing interprets the memory. Always use `unsigned char *` when reading raw memory (like parsing `void *` buffers) to prevent destructive bugs caused by unintended sign extensions during byte evaluation.
+> **Core Takeaway:** 
+> Arithmetic moves the pointer; dereferencing interprets the memory. 
+> **Always use `unsigned char *`** when reading raw memory (like parsing `void *` buffers) to **prevent destructive bugs caused by unintended sign extensions **during byte evaluation.
 
 #TODO  - Reread code to see if I not mistaken on that point
 
@@ -171,18 +174,21 @@ int main() {
 > int overflow = max + 1; // Undefined Behavior
 > ```
 
-> [!warning] Unsigned Wrap-around
-> Occurs when a calculation exceeds the maximum value of an **unsigned** type (like `size_t`). This is strictly defined by the C standard: the value wraps around to `0` using modulo arithmetic. 
-> ```c
-> size_t max = (size_t)-1;
-> size_t wrap = max + 1; // wrap == 0
-> ```
-
 > [!warning] Integer Underflow
-> Occurs when a calculation drops below the minimum representable value. For unsigned types, subtracting from `0` wraps around to the absolute maximum value.
+> Occurs when a calculation drops below the minimum representable value. 
+> For unsigned types, subtracting from `0` wraps around to the absolute maximum value.
 > ```c
 > size_t zero = 0;
 > size_t underflow = zero - 1; // underflow == (size_t)-1
+> ```
+
+
+> [!warning] Unsigned Wrap-around
+> Occurs when a calculation exceeds the maximum value of an **unsigned** type (like `size_t`). 
+> This is strictly defined by the C standard: the value wraps around to `0` using modulo arithmetic. 
+> ```c
+> size_t max = (size_t)-1;
+> size_t wrap = max + 1; // wrap == 0
 > ```
 
 > [!bug] Heap-based Buffer Overflow
