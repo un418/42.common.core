@@ -15,6 +15,7 @@
 - [x] Check atoi behavior in int overflow
 	- [x] As the doc say for strtol :"If the value cannot be represented, the behavior is undefined."
 	- [x] compare result between ft_atoi and atoi
+- [ ] rename helper function on ft_islower
 
 
 ## Important Instruction
