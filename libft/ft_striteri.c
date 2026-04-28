@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 14:31:37 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/25 15:42:35 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 20:30:39 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-
-ft_striteri() - Applies function to each character of a string
+NAME
+ ft_striteri() - Applies function to each character of a string
 
 DESCRITPTION
  Applies the function ’f’ to each character of the string passed as argument,
@@ -20,10 +20,12 @@ DESCRITPTION
  Each character is passed by address to ’f’ so it can be modified if necessary.
  Also note that ft_striteri() only operate on true “C” strings.
  This means that for ft_striteri() `*s` must be NUL-terminated.
-PARAMETERS
+
+ PARAMETERS
  - s: The string to iterate over.
  - f: The function to apply to each character.
-RETURN VALUE
+
+ RETURN VALUE
  - None
 */
 
