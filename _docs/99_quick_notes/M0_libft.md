@@ -62,6 +62,19 @@ Find a way to test the code via a main function that call the library
 - This website say no : https://www.ascii-code.com/
 - But test with printf works ???
   
+
+## ft_isalnum
+
+* Why the official isalnum return 8 instead of one when there is match ? 
+
+> [!NOTE] `isalnum` & Lookup Table (Optimization)
+> 
+> The `ctype.h` functions use a **lookup table** (a pre-calculated 256-entry array) for maximum performance. Each ASCII character is assigned a **bitmask** representing its properties:
+> - The return value is the result of a bitwise `&` operation: `return (table[c] & _IS_ALNUM_BIT);`.
+> - You often get values like `8`, `1024`, or `2048` because it returns the specific bit assigned to that category.
+> 
+> **Golden Rule:** In C, "true" is any non-zero value. Never check `if (isalnum(c) == 1)`; always use `if (isalnum(c))`.
+
 ## ft_strlen
 
 > [!INFO] 📏 The `size_t` Type
@@ -121,7 +134,8 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 
 ## memcmp
 
-> [!WARNING] **Pointer Arithmetic vs. Dereferencing (`char *ptr` vs `unsigned char *ptr`)**
+> [!WARNING] 
+> **Pointer Arithmetic vs. Dereferencing (`char *ptr` vs `unsigned char *ptr`)**
 > 
 > ### 1. Pointer Arithmetic: Identical Behavior
 > Operations like `ptr + 1` or `ptr++` behave exactly the same for both types. 
@@ -140,6 +154,13 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 > **Core Takeaway:** 
 > Arithmetic moves the pointer; dereferencing interprets the memory. 
 > **Always use `unsigned char *`** when reading raw memory (like parsing `void *` buffers) to **prevent destructive bugs caused by unintended sign extensions **during byte evaluation.
+
+> [!NOTE] Why `int` instead of `unsigned char` in `mem... functions?
+> 
+> 1. **Historical Legacy**: In K&R C (pre-ANSI), arguments of type `char` were automatically promoted to `int` during function calls.
+> 2. **API Consistency**: Many standard functions (like `fgetc`) return `int` to include the `EOF` constant (-1), which doesn't fit in an `unsigned char`.
+> 3. **CPU Efficiency**: Processors handle data in their native word size (usually `int`) more efficiently than masking a single byte in a register.
+> 4. **Internal Logic**: Although passed as an `int`, the value is explicitly cast to `unsigned char` inside the function to ensure 8-bit processing.
 
 #TODO  - Reread code to see if I not mistaken on that point
 
