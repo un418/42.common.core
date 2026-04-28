@@ -6,52 +6,38 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:44:16 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 17:42:24 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 21:56:48 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
-strchr - locate last occurrence of the character in string
-
-SYNOPSIS
-
-char *strrchr(const char *s, int c);
-
+ ft_strrchr - locate last occurrence of the character in string
 
 DESCRIPTION
-The strrchr() function returns a pointer 
-to the last occurrence of the character c in the string s.
-
-Here "character" means "byte";
-these functions do not work with wide or multibyte characters.
+ The ft_strrchr() function locates the first occurrence of c
+  (converted to a char) in the string pointed to by s.
+ The terminating null character is considered part of the string,
+  therefore if c is ‘\0’, the functions locate the terminating ‘\0’.
 
 RETURN VALUE
-The  strrchr()functions return a pointer to the matched character
-or NULL if the character is not found.
-The terminating null byte is considered part of the string,
-so that if c is specified as '\0',
-these functions re‐turn a pointer to the terminator.
+ - Return a pointer to the last occurrence of the character
+ - Return NULL if the character is not found
 */
 
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char	*end_s;
-	char		cc;
+	const char	*p_end;
 
-	cc = (char)c;
-	end_s = s + ft_strlen(s);
-	if (cc == 0)
-		return ((char *)end_s);
-	else
-		end_s--;
-	while (end_s >= s)
+	p_end = s + ft_strlen(s);
+	while (1)
 	{
-		if (*end_s == cc)
-			return ((char *)end_s);
-		end_s--;
+		if (*p_end == (char)c)
+			return ((char *)p_end);
+		if (p_end == s)
+			return (NULL);
+		p_end--;
 	}
-	return (NULL);
 }
