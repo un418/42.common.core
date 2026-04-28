@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 17:53:27 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 22:08:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int main(void)
 	}
 
 	// ft_isalnum()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_isalnum() ---\n");
 		char *str = "ajQT09 #/=@-\\~";
@@ -357,7 +357,7 @@ int main(void)
 		printf("---------\n");
 	}
 	// ft_strchr()
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 		printf("--- TEST for ft_strchr() ---\n");
 		{
@@ -1158,7 +1158,7 @@ int main(void)
 	}
 
 	// ft_strmapi()
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 		printf("--- TEST for ft_strmapi() ---\n");
 		{
