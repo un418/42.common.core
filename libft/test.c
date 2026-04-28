@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 10:47:26 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 17:53:27 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	*ft_test_lstmap(void *content)
 int main(void)
 {
 	int test_all = 0;
+	int debug = 0;
 
 	// ft_isalpha()
 	if (0 || test_all)
@@ -80,15 +81,32 @@ int main(void)
 	}
 
 	// ft_isalnum()
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 		printf("--- TEST for ft_isalnum() ---\n");
 		char *str = "ajQT09 #/=@-\\~";
-		while (*str)
+		int i = 0;
+		int failed = 0;
+		while (str[i])
 		{
-			printf("%c : %d\n",*str,ft_isalnum(*str));
-			str++;
+			if ((ft_isalnum(str[i]) > 0) == (isalnum(str[i]) > 0))
+				printf("TEST #%d : OK\n", i);
+			else
+			{
+				printf("TEST #%d : FAILED\n", i);
+				failed++;
+			}
+			if (debug)
+			{
+				printf("ft_isalnum - %c : %d\n",str[i],ft_isalnum(str[i]));
+				printf("   isalnum - %c : %d\n",str[i],isalnum(str[i]));
+			}
+			i++;
 		}
+		if (!failed)
+			printf("ALL TEST PASSED\n");
+		else
+			printf("ERROR: Failed %d times\n", failed);
 		printf("---------\n");
 	}
 
@@ -699,7 +717,7 @@ int main(void)
 	}
 	 */
 	//ft_calloc
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 		{
 			printf("-- Test1 --\n");
@@ -707,13 +725,18 @@ int main(void)
 			printf("calloc   :%p\n",calloc(50, sizeof(int)));
 			printf("ft_calloc:%p\n",ft_calloc(10, sizeof(size_t)));
 			printf("ft_calloc:%p\n",ft_calloc(10, sizeof(char)));
+			printf("\n");
 			printf("ft_calloc:%p\n",ft_calloc((size_t)-1, sizeof(char)));
+			printf("ft_calloc:%p\n",calloc((size_t)-1, sizeof(char)));
+			printf("\n");
+			printf("ft_calloc:%p\n",calloc((size_t)-1, (size_t)-1));
+			printf("ft_calloc:%p\n",ft_calloc((size_t)-1, (size_t)-1));
 		}
 	}
 	//ft_atoi
-	if (1 || test_all)
+	if (0 || test_all)
 	{
-		if (1 || test_all)
+		if (0 || test_all)
 		{
 			// Replicate isspace
 			printf("-- Test Helper ft_isspace --\n");
@@ -729,7 +752,7 @@ int main(void)
 			}
 
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test1 --\n");
 			printf("ft_atoi(\"   +1234-+\"):%d\n",ft_atoi("   +1234-+"));
@@ -965,10 +988,10 @@ int main(void)
 	}
 
 	// ft_strplit()
-	if (0|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strsplit() ---\n");
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test1--\n");
 			char **split;
@@ -984,7 +1007,7 @@ int main(void)
 			free(p);
 			printf("---------\n");
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test2 --\n");
 			char **split;
@@ -1000,7 +1023,7 @@ int main(void)
 			free(p);
 			printf("---------\n");
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test3 --\n");
 			char **split;
@@ -1016,7 +1039,7 @@ int main(void)
 			free(p);
 			printf("---------\n");
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test4--\n");
 			char **split;
@@ -1032,7 +1055,7 @@ int main(void)
 			free(p);
 			printf("---------\n");
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test5--\n");
 			char **split;
@@ -1048,7 +1071,7 @@ int main(void)
 			free(p);
 			printf("---------\n");
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test6 --\n");
 			char **split;
@@ -1064,7 +1087,7 @@ int main(void)
 			free(p);
 			printf("---------\n");
 		}
-		if (1 || test_all)
+		if (1)
 		{
 			printf("-- Test7 --\n");
 			char **split;
@@ -1083,7 +1106,7 @@ int main(void)
 		printf("----------------------------\n");
 	}
 	// ft_itoa()
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_itoa() ---\n");
 		{
@@ -1135,7 +1158,7 @@ int main(void)
 	}
 
 	// ft_strmapi()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_strmapi() ---\n");
 		{
@@ -1150,7 +1173,7 @@ int main(void)
 	}
 
 	// ft_striteri()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_striteri() ---\n");
 		{
@@ -1163,7 +1186,7 @@ int main(void)
 	}
 
 	// ft_lstnew()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstnew() ---\n");
 		{
@@ -1181,7 +1204,7 @@ int main(void)
 	}
 
 	// ft_lstadd_front()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstadd_front() ---\n");
 		{
@@ -1207,7 +1230,7 @@ int main(void)
 	}
 
 	// ft_lstsize()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstsize() ---\n");
 		{
@@ -1249,7 +1272,7 @@ int main(void)
 		printf("----------------------------\n");
 	}
 	// ft_lstlast()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstlast() ---\n");
 		{
@@ -1300,7 +1323,7 @@ int main(void)
 	}
 
 	// ft_lstadd_back()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstadd_back() ---\n");
 		{
@@ -1327,7 +1350,7 @@ int main(void)
 	}
 
 	// ft_lstclear()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstclear() ---\n");
 		{
@@ -1350,7 +1373,7 @@ int main(void)
 	}
 
 	// ft_lstiter()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstiter() ---\n");
 		{
@@ -1374,7 +1397,7 @@ int main(void)
 	}
 
 	// ft_lstmap()
-	if (1|| test_all)
+	if (0 || test_all)
 	{
 		printf("--- TEST for ft_lstmap() ---\n");
 		{
