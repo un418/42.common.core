@@ -6,21 +6,27 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:21:37 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/14 14:52:41 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 18:49:04 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_isalpha() :
-checks  for an alphabetic character;
-in the standard "C" locale, it is equivalent to (isupper(c) || islower(c)).
-In some locales, there may be  additional characters for which isalpha()
-is true—letters which are neither uppercase nor lowercase.
-*/
+NAME
+ ft_isalpha() - Checks for an alphabetic character
 
-// Deliberatly choose to not call ft_islower and ft_isupper and duplicate code
-// Because I want my libft efficient
-// and avoid the overhead cost of calling two external fonction.
+DESCRIPTION
+ Checks for an alphanumeric character.
+ It is equivalent to (isupper(c) || islower(c))
+
+IMPLEMENTATION NOTES
+ Deliberatly choose to not call ft_isupper and ft_islower and duplicate code
+ Because I want my libft efficient
+  and avoid the overhead cost of calling two external fonction at every test.
+
+RETURN VALUE
+ - 0 if test fail
+ - non-zero if test pass
+*/
 
 #include "libft.h"
 
