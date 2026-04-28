@@ -6,39 +6,32 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:00:41 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/21 19:46:07 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 11:01:10 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
-atoi – convert ASCII string to integer
-
-SYNOPSIS
-int atoi(const char *str);
+ ft_atoi – convert ASCII string to integer
 
 DESCRIPTION
-The atoi() function converts the initial portion of the string
-pointed by str to int representation.
-
-It is equivalent to:
-(int)strtol(str, (char **)NULL, 10);
+ The ft_atoi() function converts the initial portion of the string
+ pointed by str to int representation.
 
 IMPLEMENTATION NOTES
-The atoi() and atoi_l() functions are thread-safe and async-cancel-safe.
+ - The string may begin with an arbitrary amount of white space 
+  (as determined by isspace(3)) followed by a single optional ‘+’ or ‘-’ sign,
+  stopping at the first character which is not a valid digit in the given base.
+  - If the value cannot be represented as int (OVERFLOW),
+    the behavior is UNDEFINED.
 
-strtol() - DESCRIPTION
-The strtol() function converts the string in str to a long value.
-The string may begin with an arbitrary amount of white space 
-(as determined by isspace(3)) followed by a single optional ‘+’ or ‘-’ sign.
-The remainder of the string is converted to a long, long long, intmax_t
-or quad_t value in the obvious manner, stopping at the first character which
-is not a valid digit in the given base.
+RETURN VALUE
+ - Interger representation of the ASSCI string in input
 */
 
 #include "libft.h"
 
-// int	ft_isspace(char c)  // for testing
+// helper boolean function to check if the current caracter is a space
 static int	ft_isspace(char c)
 {
 	if (c == 32 || (9 <= c && c <= 13))

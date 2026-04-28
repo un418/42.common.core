@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 13:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 19:48:51 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 10:47:26 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -711,7 +711,7 @@ int main(void)
 		}
 	}
 	//ft_atoi
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 		if (1 || test_all)
 		{
@@ -766,6 +766,12 @@ int main(void)
 
 			printf("ft_atoi(\"-2147483648\"):%d\n",ft_atoi("-2147483648"));
 			printf("   atoi(\"-2147483648\"):%d\n",atoi("-2147483648"));
+
+			printf("ft_atoi(\"-2147483680\"):%d\n",ft_atoi("-2147483680"));
+			printf("   atoi(\"-2147483680\"):%d\n",atoi("-2147483680"));
+
+			printf("ft_atoi(\"2147483680\"):%d\n",ft_atoi("2147483680"));
+			printf("   atoi(\"2147483680\"):%d\n",atoi("2147483680"));
 		}
 	}
 	// ft_strlcat()
