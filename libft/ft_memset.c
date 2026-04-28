@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 14:07:19 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 01:10:17 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 01:11:04 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ RETURN VALUE
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	char	*ptr;
+	unsigned char	*ptr;
 
 	ptr = s;
 	while (n --)

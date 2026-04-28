@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:16:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 00:55:08 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 01:11:31 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ RETURN VALUE
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char	*ptr;
+	unsigned char	*ptr;
 
 	ptr = dest;
 	while (n--)

@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 12:57:51 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 01:01:50 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/28 01:13:09 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ RETURN VALUE
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*p_dest;
-	char	*p_src;
+	unsigned char	*p_dest;
+	unsigned char	*p_src;
 
-	p_dest = (char *)dest;
-	p_src = (char *)src;
+	p_dest = (unsigned char *)dest;
+	p_src = (unsigned char *)src;
 	if (dest == src)
 		return (dest);
 	else if (src > dest)
