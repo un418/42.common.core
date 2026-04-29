@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 01:37:56 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/29 11:38:27 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:39:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*next;
 
-	if (!lst)
-		return ;
 	while (*lst)
 	{
 		next = (*lst)->next;
