@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 17:41:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 22:37:14 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 16:14:15 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char	**ft_split(char const *s, char c)
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (NULL);
 	split = ft_calloc(ft_split_count(s, c) + 1, sizeof(char *));
 	if (!split)
 		return (NULL);
