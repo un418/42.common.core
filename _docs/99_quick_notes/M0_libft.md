@@ -260,9 +260,17 @@ int main() {
 
 
 
+### Documentation
 
+Cool pattern of documentation via comment to put in header file ...h
+It is well interpreted by the IDE and prompt the info when pass mouse on function
 
-## Point of Attention
-
-* `size_t` type and `const char *s1` constant definition in function prototype : 
-	*  Check prototype conform to man : to add in libftTester
+```
+/*
+** @brief Trim prefix and suffix characters from a string.
+** @param s1 The string to be trimmed.
+** @param set The string containing the set of characters to be removed.
+** @return The trimmed string, or NULL if allocation fails.
+*/
+char    *ft_strtrim(char const *s1, char const *set);
+```
