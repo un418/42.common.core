@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:26:51 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 21:41:29 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:44:00 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 NAME
- ft_tolower - convert to lowercase
+ ft_tolower() - convert to lowercase
 
 DESCRIPTION
  This function convert uppercase letters to lowercase.

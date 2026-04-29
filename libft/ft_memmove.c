@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 12:57:51 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 23:06:39 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:37:37 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_memmove - copy memory area
+ ft_memmove() - copy memory area
 
 DESCRIPTION
  The ft_memmove() function copies n bytes from memory area src

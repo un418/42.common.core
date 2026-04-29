@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 17:20:27 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 01:13:48 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:35:22 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- memchr - scan memory for a character
+ ft_memchr() - scan memory for a character
 
 DESCRIPTION
  The memchr() function locates the first occurrence 

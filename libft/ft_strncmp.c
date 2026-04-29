@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:15:27 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 21:29:03 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:41:06 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_strncmp - compare two strings
+ ft_strncmp() - compare two strings
 
 DESCRIPTION
  The ft_strncmp() function compares only the first n bytes of s1 and s2.

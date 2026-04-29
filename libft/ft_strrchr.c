@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 19:44:16 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 21:56:48 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:43:50 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_strrchr - locate last occurrence of the character in string
+ ft_strrchr() - locate last occurrence of the character in string
 
 DESCRIPTION
  The ft_strrchr() function locates the first occurrence of c

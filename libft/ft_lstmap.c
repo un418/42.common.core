@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:37:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 18:36:49 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:38:04 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
-ft_lstmap - Create a new list resulting resulting of 
+ ft_lstmap() - Create a new list resulting resulting of 
   f function to the content of a node and it's successors
 
 DESCRIPTION

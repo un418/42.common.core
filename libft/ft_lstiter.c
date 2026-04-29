@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:22:00 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 18:38:59 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:38:18 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_lstiter - Applies f function to the content of a node and it's successors
+ ft_lstiter() - Applies f function to the content of a node and it's successors
 
 DESCRIPTION
  Iterates through the list ’lst’ and applies the function ’f’ 

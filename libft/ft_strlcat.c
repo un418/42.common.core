@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 19:50:50 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 20:59:41 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:39:34 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_strlcat – size-bounded string concatenation
+ ft_strlcat() – size-bounded string concatenation
 
 DESCRIPTION
 The ft_strlcat() functions concatenate strings.

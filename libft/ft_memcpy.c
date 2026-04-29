@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/15 11:16:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 23:03:28 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:37:41 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_memcpy - copy memory area
+ ft_memcpy() - copy memory area
 
 DESCRIPTION
  The ft_memcpy() function copies n bytes from memory area src

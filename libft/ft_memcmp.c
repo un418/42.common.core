@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 18:30:02 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 01:19:51 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:37:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- memcmp - compare memory areas
+ ft_memcmp() - compare memory areas
 
 DESCRIPTION
  The memcmp() function compares the first n bytes

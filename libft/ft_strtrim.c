@@ -6,12 +6,17 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:53:44 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/23 17:34:01 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:46:41 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_strtrim() - trim prefix and suffix characters from a string.
+NAME
+ ft_strtrim() - trim prefix and suffix characters from a string.
+
+DESCRIPTION
+  Allocates memory (using malloc(3)) and returns a copy of ’s1’
+  with characters from ’set’ removed  from the beginning and the end.
 
 PARAMETERS
 - s1: The string to be trimmed.
@@ -21,9 +26,6 @@ RETURN VALUE
 - The trimmed string.
 - NULL if the allocation fails.
 
-DESCRIPTION
-Allocates memory (using malloc(3)) and returns a copy of ’s1’
- with characters from ’set’ removed  from the beginning and the end.
 */
 
 #include "libft.h"

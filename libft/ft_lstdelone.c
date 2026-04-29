@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 01:24:32 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 18:39:07 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:38:23 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_lstdelone - delete properly ONE node and his content
+ ft_lstdelone() - delete properly ONE node and his content
 
 DESCRIPTION 
  Takes a node as parameter and frees its content using the function ’del’.

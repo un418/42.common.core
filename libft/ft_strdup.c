@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 16:22:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 20:27:44 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:39:26 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_strdup - save a copy of a string
+ ft_strdup() - save a copy of a string
 
 DESCRIPTION
  The ft_strdup() function allocates sufficient memory for a copy

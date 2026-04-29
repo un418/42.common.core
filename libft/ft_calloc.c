@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 16:40:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 23:16:52 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:38:45 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_calloc - allocate dynamic memory init to zero
+ ft_calloc() - allocate dynamic memory init to zero
 
 DESCRIPTION
  The calloc() function allocates memory for an array of nmemb elements

@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 01:37:56 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 18:39:15 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:38:27 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_lstclear - delete properly a node and it's successors from a t_list
+ ft_lstclear() - delete properly a node and it's successors from a t_list
 
 DESCRIPTION 
  Deletes and frees the given node and all its successors,

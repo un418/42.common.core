@@ -6,20 +6,20 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 17:53:21 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 18:22:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:35:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-ft_putchar_fd() - Output char to file descriptor
+NAME
+ ft_putchar_fd() - Output char to file descriptor
 
 DESCRIPTION
-Outputs the character ’c’ to the specified file
-descriptor.
+ Outputs the character ’c’ to the specified file descriptor.
 
 PARAMETERS
-- c: The character to output.
-- fd: The file descriptor on which to write
+ - c: The character to output.
+ - fd: The file descriptor on which to write
 */
 
 #include "libft.h"

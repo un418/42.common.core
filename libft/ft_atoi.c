@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 17:00:41 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 11:01:10 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:39:10 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_atoi – convert ASCII string to integer
+ ft_atoi() – convert ASCII string to integer
 
 DESCRIPTION
  The ft_atoi() function converts the initial portion of the string

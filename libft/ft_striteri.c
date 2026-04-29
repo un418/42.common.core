@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 14:31:37 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 20:30:39 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:46:09 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 NAME
  ft_striteri() - Applies function to each character of a string
 
-DESCRITPTION
+DESCRIPTION
  Applies the function ’f’ to each character of the string passed as argument,
   passing its index as the first argument.
  Each character is passed by address to ’f’ so it can be modified if necessary.

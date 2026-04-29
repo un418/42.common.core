@@ -6,27 +6,29 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:35:07 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 21:04:34 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:40:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_strlcpy — size-bounded string copying
+ ft_strlcpy() — size-bounded string copying
 
 DESCRIPTION
-The ft_strlcpy()functions copy strings.
-Designed to be safer, more consistent,
-and less error prone replacements for strncpy(3).
-Unlike this functions, ft_strlcpy() take the full size of the buffer
-(not just the length) and guarantee to
-NUL-terminate the result (as long as size is larger than 0.
-Note that a byte for the NUL should be included in size.
-Also note that ft_strlcpy() only operate on true “C” strings.
-This means that src must be NUL-terminated.
+ The ft_strlcpy()functions copy strings.
 
-The ft_strlcpy() function copies up to size - 1 characters
-from the NUL-terminated string src to dst, NUL-terminating the result.
+ Designed to be safer, more consistent,
+  and less error prone replacements for strncpy(3).
+ Unlike this functions, ft_strlcpy() take the full size of the buffer
+  (not just the length) and guarantee to
+  NUL-terminate the result (as long as size is larger than 0.
+
+ Note that a byte for the NUL should be included in size.
+ Also note that ft_strlcpy() only operate on true “C” strings.
+ This means that src must be NUL-terminated.
+
+ The ft_strlcpy() function copies up to size - 1 characters
+  from the NUL-terminated string src to dst, NUL-terminating the result.
 
 RETURN VALUES
  - Return the total length of the string it tried to create. (length of src)

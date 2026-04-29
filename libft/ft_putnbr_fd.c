@@ -6,20 +6,20 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 18:23:44 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/22 19:51:56 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:36:39 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
-ft_putnbr_fd() - Output number(s) to file descriptor
+NAME
+ ft_putnbr_fd() - Output number(s) to file descriptor
 
 DESCRIPTION
-Outputs the integer ’n’ to the specified file
-descriptor.
+ Outputs the integer ’n’ to the specified file descriptor.
 
 PARAMETERS
-- n: The integer to output.
-- fd: The file descriptor on which to write
+ - n: The integer to output.
+ - fd: The file descriptor on which to write
 */
 
 #include "libft.h"

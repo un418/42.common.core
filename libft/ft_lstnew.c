@@ -6,13 +6,13 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 15:44:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 18:38:55 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:37:59 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* 
 NAME
- ft_lstnew - create a new node of struct s_list (alias t_list)
+ ft_lstnew() - create a new node of struct s_list (alias t_list)
 
 DESCRIPTION
  Allocates memory (using malloc(3)) and returns a new node.
