@@ -8,7 +8,7 @@ The **Libft** project is about creating a custom C library.
 
 The goal of the project is to **build and package** a library into a `libft.a` file, which is meant to be reused in future projects.
 
-It includes reimplementations of standard C library (`libc`) functions, as well as additional useful functions to manipulate strings and linked lists.
+It includes **reimplementations of standard C library (`libc`) functions**, as well as additional useful functions to manipulate **strings** and **linked lists**.
 
 
 ## Instructions
@@ -49,37 +49,36 @@ cc main.c -Ilibft -Llibft -lft -o my_program
 
 ## Technical choices
 
-### Don't protect NULL pointer deferencing
+#### Don't protect NULL pointer deferencement inside lib function
 According to the C Standard, dereferencing a NULL pointer is Undefined Behavior, which typically results in a segmentation fault.  
 I have deliberately chosen not to implement NULL-checks within these functions, leaving the responsibility of pointer validation to the caller.
 
+_Linked List functions are an exception_  
+_They are designed to handle NULL pointers by default to ensure safe operations on empty or uninitialized lists._
 Commit related :
 * https://github.com/un418/42.common.core/commit/a3e4d4cd26df6cfe2ebeb269d30a77a4fd90970c
 
-> [!IMPORTANT]  
-> **Linked List functions are an exception**  
-> They are designed to handle NULL pointers by default to ensure safe operations on empty or uninitialized lists.
 
 ## Resources
 
-* **Manual Pages (`man`):** The primary reference for understanding standard libc functions and system calls.
-* **[GeeksforGeeks](https://www.geeksforgeeks.org):** Used to simplify complex concepts; their diagrams were especially helpful for building mental models of memory and data structures.
+* Manual Pages (`man`): The primary reference for understanding standard libc functions.
+* [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagram to building mental models of memory and data structures.
+* [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here](https://github.com/un418/42.common.core/blob/master/_docs/99_quick_notes/M0_libft.md)
 
-**[All my notes and related links for this project can be found here](https://github.com/un418/42.common.core/tree/master/_docs)**
+### AI Usage
 
-### AI Disclosure
-I used Large Language Models (LLMs) (mostly Gemini) as learning assistants throughout this project.
-
+I used Large Language Models (LLMs) as learning assistants throughout this project.  
 My usage focused on the following areas:
-* **Concept Clarification:** Bridging gaps in my understanding of low-level C concepts (e.g., memory alignment, pointer arithmetic, and Undefined Behavior).
-* **Best Practices:** Gathering information on industry-standard coding patterns and identifying common anti-patterns to write cleaner, more efficient code.
-* **Documentation:** Refining the English descriptions and structure of this README to ensure clarity for other developers.
+* **Concept Clarification:**
+	* Bridging gaps in my understanding of low-level C concepts (e.g., memory alignment, pointer arithmetic, and Undefined Behavior).
+* **Best Practices:**
+	* Gathering information on industry-standard coding patterns and identifying common anti-patterns to write cleaner, efficient code and safer code.
+* **Documentation:**
+	* Refining the English descriptions and structure of this README to ensure clarity for other developers.
+	* Writing short note to integate in [my Obsidian](https://github.com/un418/42.common.core/tree/master/_docs)
 
-**[You can find the definition of my Gemini Gem here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md)**
+You can find the definition of my Gemini Gem [here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md)
 
-> [!NOTE]  
-> All code logic was implemented manually.  
-> AI was used as a pedagogical tool to deepen my understanding, not as a replacement for problem-solving.
 
 ---
 
@@ -88,7 +87,7 @@ My usage focused on the following areas:
 A quick reference to help you find the functions you need.
 
 | Function | Description |
-| :--- | :--- |
+| --- | --- |
 | **Memory** | |
 | `ft_memset` | Fill a block of memory with a specific byte |
 | `ft_bzero` | Set a block of memory to zero |
