@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/23 11:13:04 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/28 20:34:47 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/29 01:09:11 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!p_join)
 		return (NULL);
 	ft_strlcpy(p_join, s1, len_s1 + 1);
-	ft_strlcat(p_join, s2, len_s1 + len_s2 +1);
+	ft_strlcat(p_join, s2, len_s1 + len_s2 + 1);
 	return (p_join);
 }
