@@ -61,6 +61,7 @@ Commit related :
 ## Resources
 
 * Manual Pages (`man`): The primary reference for understanding standard libc functions.
+* Book : [C Programming. A Modern Approach. by K. N. King(Georgia State University)](http://knking.com/books/c2/)
 * [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagram to building mental models of memory and data structures.
 * [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here](https://github.com/un418/42.common.core/blob/master/_docs/99_quick_notes/M0_libft.md)
 
@@ -68,10 +69,10 @@ Commit related :
 
 I used Large Language Models (LLMs) as learning assistants throughout this project.  
 My usage focused on the following areas:
-*  Demystifying  & clarify new concept : Q&A to validate that I understood
-* Coding Best Practices: How to to write clean, efficient and safe code.
+* Demystifying  & clarify concepts
+* Coding Best Practices: _How to to write clean, efficient and safe code._
 * Documentation:
 	* Writing short note to integate in [my Obsidian](https://github.com/un418/42.common.core/tree/master/_docs)
 	* Refining the English descriptions and structure of this README to ensure clarity for other developers.
 
-You can find the definition of my Gemini Gem [here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md)
+You can find the definition of my Gemini Gem [here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md), it will give you a clear vision of how I use AI to learn.
