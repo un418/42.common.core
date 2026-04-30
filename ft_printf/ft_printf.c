@@ -6,11 +6,11 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/30 19:59:22 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/30 20:16:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_printf(const char *, ...)
 {
-	
+	return (0);
 }

@@ -6,7 +6,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 HEADER		= ft_printf.h
 
-SRCS		= 
+SRCS		= ft_printf.c
 
 OBJS		= $(SRCS:.c=.o)
 
