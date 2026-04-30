@@ -64,7 +64,7 @@ Commit related :
 * Book : [C Programming. A Modern Approach. by K. N. King(Georgia State University)](http://knking.com/books/c2/)
 * [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagram to building mental models of memory and data structures.
 * [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here](https://github.com/un418/42.common.core/blob/master/_docs/99_quick_notes/M0_libft.md)
-
+* [libfTester by Tripouille](https://github.com/Tripouille/libftTester) ; Doesn't mean I didn't test by myself, find mine [here](https://github.com/un418/42.common.core/blob/master/libft/test/test.c) (~1500 lines)
 ### AI Usage
 
 I used Large Language Models (LLMs) as learning assistants throughout this project.  
