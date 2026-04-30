@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 18:23:44 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/29 11:36:39 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/30 13:21:02 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ PARAMETERS
 */
 
 #include "libft.h"
-#include <stdio.h>
 
 static void	ft_putnbr_fd_recurse(unsigned int un, int fd)
 {

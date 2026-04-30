@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 15:37:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/29 11:38:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/30 13:20:08 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ RETURN VALUE
  - NULL if the allocation fails.
 */
 
-#include "libft.h" 
+#include "libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
