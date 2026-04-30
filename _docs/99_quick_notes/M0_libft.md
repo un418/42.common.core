@@ -65,54 +65,53 @@ Find a way to test the code via a main function that call the library
 
 ## ft_isalnum
 
-* Why the official isalnum return 8 instead of one when there is match ? 
+#### Why the official isalnum return 8 instead of one when there is match ? 
 
-> [!NOTE] `isalnum` & Lookup Table (Optimization)
-> 
-> The `ctype.h` functions use a **lookup table** (a pre-calculated 256-entry array) for maximum performance. Each ASCII character is assigned a **bitmask** representing its properties:
-> - The return value is the result of a bitwise `&` operation: `return (table[c] & _IS_ALNUM_BIT);`.
-> - You often get values like `8`, `1024`, or `2048` because it returns the specific bit assigned to that category.
-> 
-> **Golden Rule:** In C, "true" is any non-zero value. Never check `if (isalnum(c) == 1)`; always use `if (isalnum(c))`.
+The `ctype.h` functions use a **lookup table** (a pre-calculated 256-entry array) for maximum performance. 
+Each ASCII character is assigned a **bitmask** representing its properties:
+- The return value is the result of a bitwise `&` operation: `return (table[c] & _IS_ALNUM_BIT);`.
+- You often get values like `8`, `1024`, or `2048` because it returns the specific bit assigned to that category.
+**Golden Rule:** 
+* In C, "true" is any non-zero value. 
+* Never check `if (isalnum(c) == 1)`; always use `if (isalnum(c))`.
 
 ## ft_strlen
 
-> [!INFO] 📏 The `size_t` Type
-> `size_t` is an **unsigned integer type** defined in `<stddef.h>` (and inherited by `<stdlib.h>` or `<stdio.h>`). It is the dedicated type for representing the size of any object in memory.
-> 
-> ---
-> ### 🚀 Key Features
-> - **Portability**: Its actual size is architecture-dependent. It is **32-bit** on 32-bit systems and **64-bit** on 64-bit systems. This ensures it can always address the maximum theoretical limit of your RAM.
-> - **Safety**: Being **unsigned**, it inherently prevents negative lengths. It is the perfect fit for array indexing and loop counters.
-> - **Standard Usage**: It is the mandatory type for core functions like `malloc()`, `strlen()`, `memcpy()`, and `memset()`.
-> 
-> ---
-> ### ⚠️ Risks & Gotchas
-> - **Underflow**: Since it cannot be negative, executing `0 - 1` on a `size_t` will cause it to "wrap around" to its maximum possible value (a massive number), often leading to infinite loops.
-> - **Comparison**: Avoid comparing `int` and `size_t` directly. You will trigger **signed/unsigned comparison warnings** because the compiler struggles to decide how to handle the sign bit.
-> 
-> > [!TIP] Best Practice
-> > Always use `size_t` for any variable that stores a **count**, a **length**, or an **index**. It makes your code future-proof and 64-bit compatible.
+#### The `size_t` Type
 
-> [!ABSTRACT] 🛡️ The `const` Qualifier in Pointers
-> In function prototypes like `strcmp(const char *s1, ...)`, the `const` keyword before the pointer type defines **Pointer to Constant Data**.
-> 
-> ---
-> ### 🔑 Key Implications
-> - **Immutability**: The function treats the memory pointed to by `s1` as **read-only**. Any attempt to modify the characters (e.g., `s1[i] = 'x'`) will trigger a **compiler error**.
-> - **Contract of Trust**: It informs the developer that the function is safe to use with data that *must not* change (like string literals stored in the read-only data segment).
-> - **Compatibility**: You can pass a non-const variable to a `const char *` parameter, but you **cannot** pass a `const char *` to a function expecting a regular `char *` without a warning/error.
-> 
-> ---
-> ### ⚙️ Memory Layout
-> | Syntax | Meaning | Can change data? | Can change pointer address? |
-> | :--- | :--- | :--- | :--- |
-> | `const char *s` | Pointer to constant | **No** | Yes |
-> | `char * const s` | Constant pointer | Yes | **No** |
-> 
-> > [!TIP] Best Practice
-> > Always use `const` for any function parameter that only needs to **read** data. 
-> > It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
+`size_t` is an **unsigned integer type** defined in `<stddef.h>` (and inherited by `<stdlib.h>` or `<stdio.h>`). It is the dedicated type for representing the size of any object in memory.
+
+🚀 Key Features
+- **Portability**: Its actual size is architecture-dependent. It is **32-bit** on 32-bit systems and **64-bit** on 64-bit systems. This ensures it can always address the maximum theoretical limit of your RAM.
+- **Safety**: Being **unsigned**, it inherently prevents negative lengths. It is the perfect fit for array indexing and loop counters.
+- **Standard Usage**: It is the mandatory type for core functions like `malloc()`, `strlen()`, `memcpy()`, and `memset()`.
+
+⚠️ Risks & Gotchas
+- **Underflow**: Since it cannot be negative, executing `0 - 1` on a `size_t` will cause it to "wrap around" to its maximum possible value (a massive number), often leading to infinite loops.
+- **Comparison**: Avoid comparing `int` and `size_t` directly. You will trigger **signed/unsigned comparison warnings** because the compiler struggles to decide how to handle the sign bit.
+
+Best Practice
+Always use `size_t` for any variable that stores a **count**, a **length**, or an **index**. 
+It makes your code future-proof and 64-bit compatible.
+
+#### 🛡️ The `const` Qualifier in Pointers
+In function prototypes like `strcmp(const char *s1, ...)`, the `const` keyword before the pointer type defines **Pointer to Constant Data**.
+ 
+🔑 Key Implications
+ - **Immutability**: The function treats the memory pointed to by `s1` as **read-only**.
+   Any attempt to modify the characters (e.g., `s1[i] = 'x'`) will trigger a **compiler error**.
+- **Contract of Trust**: It informs the developer that the function is safe to use with data that *must not* change (like string literals stored in the read-only data segment).
+- **Compatibility**: You can pass a non-const variable to a `const char *` parameter, but you **cannot** pass a `const char *` to a function expecting a regular `char *` without a warning/error.
+
+⚙️ Memory Layout
+ | Syntax | Meaning | Can change data? | Can change pointer address? |
+ | --- | --- | --- | --- |
+ | `const char *s` | Pointer to constant | **No** | Yes |
+ | `char * const s` | Constant pointer | Yes | **No** |
+
+Best Practice
+Always use `const` for any function parameter that only needs to **read** data. 
+It makes your code more robust and prevents accidental bugs where a value is unintentionally overwritten.
 
 
 ## memove
@@ -130,7 +129,6 @@ A standard `memcpy` often copies from left to right. If it copies one byte at 
 1. Copy `src[0]` ('A') to `dst[0]` (index 1). Array is now `[A, A, C, D, E]`.
 2. Copy `src[1]` to `dst[1]`. **Problem**: `src[1]` was originally 'B', but it was just overwritten by 'A'!
 3. The result becomes `[A, A, A, A, E]` instead of `[A, A, B, C, E]`.
-
 
 ## memcmp
 
