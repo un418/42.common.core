@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 12:22:22 by adaferna          #+#    #+#             */
-/*   Updated: 2026/04/27 16:49:33 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/04/30 13:35:31 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <stddef.h>
+# include <limits.h>
 
 typedef struct s_list
 {
