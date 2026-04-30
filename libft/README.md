@@ -1,10 +1,9 @@
 _This project has been created as part of the 42 curriculum by adaferna_
 
 # Libft
-My very own C library.
 
 ## Description
-The **Libft** project is about creating a custom C library.
+**Libft** -. My very own C library
 
 The goal of the project is to **build and package** a library into a `libft.a` file, which is meant to be reused in future projects.
 
@@ -24,8 +23,6 @@ make re         # delete `*.o` and `libft.a` files, then rebuild the library
 
 To use **Libft** in your own project, follow these steps.
 
-For this example, we assume your project is located in `/home/user/project1` and you have copied the `libft` folder into `/home/user/project1/libft`.
-
 #### 1. Include the Header
 Add the library header to any source files that call Libft functions:
 
@@ -33,8 +30,9 @@ Add the library header to any source files that call Libft functions:
 #include "libft.h"
 ```
 #### 2. Compile and Link
-You must tell the compiler where to find both the header files and the compiled library.
+For this example, we assume your project is located in `/home/user/project1` and you have copied the `libft` folder into `/home/user/project1/libft`.  
 
+Now you must tell the compiler where to find both the header files and the compiled library.  
 ```bash 
 cd /home/user/project1
 # Build the library by triggering its Makefile
@@ -54,7 +52,8 @@ According to the C Standard, dereferencing a NULL pointer is Undefined Behavior,
 I have deliberately chosen not to implement NULL-checks within these functions, leaving the responsibility of pointer validation to the caller.
 
 _Linked List functions are an exception_  
-_They are designed to handle NULL pointers by default to ensure safe operations on empty or uninitialized lists._
+_They are designed to handle NULL pointers by default to ensure safe operations on empty or uninitialized lists._.
+
 Commit related :
 * https://github.com/un418/42.common.core/commit/a3e4d4cd26df6cfe2ebeb269d30a77a4fd90970c
 
@@ -69,16 +68,13 @@ Commit related :
 
 I used Large Language Models (LLMs) as learning assistants throughout this project.  
 My usage focused on the following areas:
-* **Concept Clarification:**
-	* Bridging gaps in my understanding of low-level C concepts (e.g., memory alignment, pointer arithmetic, and Undefined Behavior).
-* **Best Practices:**
-	* Gathering information on industry-standard coding patterns and identifying common anti-patterns to write cleaner, efficient code and safer code.
-* **Documentation:**
-	* Refining the English descriptions and structure of this README to ensure clarity for other developers.
+*  Demystifying  & clarify new concept : Q&A to validate that I understood
+* Coding Best Practices: How to to write clean, efficient and safe code.
+* Documentation:
 	* Writing short note to integate in [my Obsidian](https://github.com/un418/42.common.core/tree/master/_docs)
+	* Refining the English descriptions and structure of this README to ensure clarity for other developers.
 
 You can find the definition of my Gemini Gem [here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md)
-
 
 ---
 
