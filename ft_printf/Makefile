@@ -4,26 +4,59 @@ NAME		= libftprintf.a
 
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
-HEADER		= ft_printf.h
+HEADER		= $(INC_DIR)/ft_printf.h
 
-SRCS		= ft_printf.c
+INC_DIR     = inc
+SRC_DIR     = src
+OBJ_DIR     = obj
 
-OBJS		= $(SRCS:.c=.o)
+SRC_FILES	= ft_printf.c
+# OBJS		= $(SRCS:.c=.o)
 
-all: $(NAME)
+SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+
+
+## Libft
+LIBFT_DIR	= ../libft
+LIBFT		= $(LIBFT_DIR)/libft.a
+
+## Tests
+TEST_DIR	= test
+TEST_PROG	= test_suite
+TEST_FILE	= test.c
+
+INCS		= -I$(INC_DIR) -I$(LIBFT_DIR)
+LIBS		= -L. -lftprintf -L$(LIBFT_DIR) -lft
+
+all: $(NAME) $(LIBFT)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
 
-fclean: clean
+fclean: clean tclean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+#####################
+
+$(LIBFT):
+	make -C $(LIBFT_DIR)
+
+test: CFLAGS += -g3 -fsanitize=address
+test: $(NAME)
+	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
+	./$(TEST_DIR)/$(TEST_PROG) | cat -e
+
+tclean:
+	rm -f $(TEST_DIR)/$(TEST_PROG)
+
+.PHONY: all clean fclean re test tclean
