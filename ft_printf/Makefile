@@ -35,7 +35,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
 clean:
@@ -52,11 +52,20 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 test: CFLAGS += -g3 -fsanitize=address
-test: $(NAME)
+test: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
 	./$(TEST_DIR)/$(TEST_PROG) | cat -e
 
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)
+
+
+memtest: re
+	@$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/mem_check
+	@valgrind	--leak-check=full \
+				--show-leak-kinds=all \
+				--track-origins=yes \
+				./test/mem_check > /dev/null
+	@rm  -f ./test/mem_check
 
 .PHONY: all clean fclean re test tclean
