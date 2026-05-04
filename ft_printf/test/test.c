@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/04 21:21:41 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/04 21:34:39 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int main(void)
 			c = '\0';
 			strcpy(err_msg, "TEST char = \'\\0\'");
 			fail += ft_check(ft_printf("02 -%c\n", c) == 6, itest++, err_msg);
-			// int ret = printf("%c\n", c);
-			// printf ("%d\n",ret);
 
 			// TEST empty string
 			strcpy(err_msg, "test input with empty string");
@@ -102,24 +100,25 @@ int main(void)
 		itest = 0; // reset counter
 		if (0 || test_all)
 		{
-		printf("----- ft_printf: TESTING POINTER -------\n");
-		{
-			// playground to understand pointer behavior
-			void *p;
-			char c;
-			unsigned long n;
+			printf("----- ft_printf: TESTING POINTER -------\n");
+			if(0)
+			{
+				// playground to understand pointer behavior
+				void *p;
+				char c;
+				unsigned long n;
 
-			p = &c;
-			n = (unsigned long)p;
-			printf("%ld\n",n);
-			printf("%lu\n",n);
-			printf("%lx\n",n);
-			printf("%p\n",p);
-			printf("sizeof(void*)=%lu\n",sizeof(void*));
-			printf("sizeof(long)=%lu\n",sizeof(long));
-			// Conclusion:
-			// - Memory adress is store as unsigned long
-			// - Need to implement numbers and hexadecimal formating before printing pointer adress
-		}
+				p = &c;
+				n = (unsigned long)p;
+				printf("%ld\n",n);
+				printf("%lu\n",n);
+				printf("%lx\n",n);
+				printf("%p\n",p);
+				printf("sizeof(void*)=%lu\n",sizeof(void*));
+				printf("sizeof(long)=%lu\n",sizeof(long));
+				// Conclusion:
+				// - Memory adress is store as unsigned long
+				// - Need to implement numbers and hexadecimal formating before printing pointer adress
+			}
 	}
 }
