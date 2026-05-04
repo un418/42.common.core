@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/04 19:57:22 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:59:59 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int main(void)
 			char c = 'A';
 			// test char at EOL
 			strcpy(err_msg, "test char at EOL");
-			fail += ft_check(ft_printf("test char : %c", c) == 13, itest++, err_msg);
+			fail += ft_check(ft_printf("01 - test char : %c\n", c) == 19, itest++, err_msg);
 			// int ret = printf("test char : %c", c);
 			// printf ("%d\n",ret);
 
 			// TEST char = '\0'
 			c = '\0';
-			strcpy(err_msg, "TEST char = \'\0\'");
-			fail += ft_check(ft_printf("%c\n", c) == 2, itest++, err_msg);
+			strcpy(err_msg, "TEST char = \'\\0\'");
+			fail += ft_check(ft_printf("02 -%c\n", c) == 6, itest++, err_msg);
 			// int ret = printf("%c\n", c);
 			// printf ("%d\n",ret);
 
@@ -59,5 +59,43 @@ int main(void)
 			strcpy(err_msg, "test input with empty string");
 			fail += ft_check(ft_printf("") == 0, itest++, err_msg);
 			printf("");
+
+			// TEST %%
+			strcpy(err_msg, "test \%%");
+			fail += ft_check(ft_printf("04 - test %%\n") == 12, itest++, err_msg);
+			printf("");
 	}
+
+
+	//test str
+	itest = 0; // reset counter
+	if (1 || test_all)
+	{
+		printf("----- ft_printf: TESTING STRING -------\n");
+		{
+			char *str = "05 - test string alone";
+			// test string alone
+			strcpy(err_msg, "test string alone");
+			fail += ft_check(ft_printf("%s\n", str) == 23, itest++, err_msg);
+		}
+		{
+			char *str = "";
+			// test empty string
+			strcpy(err_msg, "test empty string");
+			fail += ft_check(ft_printf("07 - %s\n", str) == 6, itest++, err_msg);
+		}
+		{
+			char *str = "";
+			// test empty string in middle of input
+			strcpy(err_msg, "test empty string in middle of input");
+			fail += ft_check(ft_printf("08 - A %s A\n", str) == 10, itest++, err_msg);
+		}
+		{
+			char *str = "begin";
+			// test empty string in middle of input
+			strcpy(err_msg, "test empty string in middle of input");
+			fail += ft_check(ft_printf("%s 08 - end\n", str) == 15, itest++, err_msg);
+		}
+	}
+
 }
