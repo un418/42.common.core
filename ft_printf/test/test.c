@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 16:08:42 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:25:34 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,17 +102,22 @@ int main(void)
 	{
 		printf("----- ft_printf: TESTING DECIMAL/INTEGER -------\n");
 		{
-			int n = 123456;
-			// test print regulal decimal n = 123456
-			strcpy(err_msg, "test print regulal decimal n = 123456");
+			int n = 1234567890;
+			// test print n = 1234567890
+			strcpy(err_msg, "test print regulal decimal n = 1234567890");
+			fail += ft_check(ft_printf("09 - %d\n", n) == 16, itest++, err_msg);
+		}
+		{
+			int n = 10;
+			// test print n = 10 - base limit
+			strcpy(err_msg, "test print regulal decimal n = 10");
 			fail += ft_check(ft_printf("09 - %d\n", n) == 12, itest++, err_msg);
-			printf("test dec=%d\n",ft_printf("%d\n", 123456));
 		}
 		{
 			int n = INT_MAX;
 			// test print INT_MAX
 			strcpy(err_msg, "test print INT_MAX");
-			fail += ft_check(ft_printf("10 - %d\n", n) == 16, itest++, err_msg);
+			fail += ft_check(ft_printf("10 - %d\n", n) == 8, itest++, err_msg);
 		}
 		{
 			int n = INT_MIN;
@@ -121,12 +126,77 @@ int main(void)
 			fail += ft_check(ft_printf("11 - %d\n", n) == 17, itest++, err_msg);
 		}
 		{
-			long n = INT_MAX;
+			int n = INT_MAX;
 			// test print INT_MAX overflow
 			strcpy(err_msg, "test print INT_MAX overflow");
 			fail += ft_check(ft_printf("12 - %d\n", n + 2) == 17, itest++, err_msg);
 			// printf("printf: %d", (int)n + 2);
 		}
+	}
+
+	//test hexa
+	// itest = 0; // reset counter
+	if (1 || test_all)
+	{
+		printf("----- ft_printf: TESTING HEXA-------\n");
+		{
+			int n = 10;
+			// test print n = 10
+			strcpy(err_msg, "10hex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :10hex=%x\n", n) == printf("printf    :10hex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = 16;
+			// test print n = 16 - base limit
+			strcpy(err_msg, "16hex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :16hex=%x\n", n) == printf("printf    :16hex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = 100;
+			// test print n = 100
+			strcpy(err_msg, "100hex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :100hex=%x\n", n) == printf("printf    :100hex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = 1000;
+			// test print n = 1000
+			strcpy(err_msg, "1000hex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :1000hex=%x\n", n) == printf("printf    :1000hex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = INT_MAX - 1;
+			// test print n = INT_MAX
+			strcpy(err_msg, "INT_MAXhex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :INT_MAXhex=%x\n", n) == printf("printf    :INT_MAXhex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = INT_MIN;
+			// test print n = INT_MIN
+			strcpy(err_msg, "INT_MINhex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :INT_MINhex=%x\n", n) == printf("printf    :INT_MINhex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = -10;
+			// test print negative decimal n = -10
+			strcpy(err_msg, "-10hex=%x\n");
+			fail += ft_check(ft_printf("ft_printf :-10hex=%x\n", n) == printf("printf    :-10hex=%x\n",n), itest++, err_msg);
+		}
+		
+		/* 
+		{
+			// Playground understand hex negative;
+			int n = -10;
+			printf("%u\n", n);
+			printf("%x\n", n);
+			printf("%x\n", INT_MIN);
+			printf("%x\n", INT_MAX);
+
+			// ffffffff = 4294967295
+			printf("LONG_MAX=%ld\n", LONG_MAX);
+			printf("UINT_MAX=%u\n", UINT_MAX);
+			// need to use unsigned int
+		}
+		 */
 	}
 
 	//test pointer

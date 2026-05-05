@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 16:04:44 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:26:15 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static size_t	ft_writeunbr_fd_recurse(unsigned long ul, int fd)
 	counter = 0;
 	if (ul > 9)
 		counter += ft_writeunbr_fd_recurse(ul / 10, fd);
-	counter += write(fd, &"0123456789"[ul % 10] , 1);
+	counter += write(fd, &"0123456789"[ul % 10] , fd);
 	return(counter);
 
 }
@@ -73,12 +73,22 @@ static size_t ft_printf_int(va_list args)
 	return (counter);
 }
 
+static size_t	ft_writehex_fd_recurse(unsigned int un, int fd)
+{
+	size_t counter;
+
+	counter = 0;
+	if (un > 15)
+		counter += ft_writehex_fd_recurse(un / 16, fd);
+	counter += write(fd, &"0123456789abcdef"[un % 16] , fd);
+	return(counter);
+}
+
 static size_t ft_printf_switch(va_list args, const char *str)
 {
 	size_t	counter;
 
 	counter = 0;
-	
 	if (*str == 'c')
 		return(ft_printf_char(args));
 	else if (*str == '%')
@@ -87,6 +97,8 @@ static size_t ft_printf_switch(va_list args, const char *str)
 		return(ft_printf_str(args));
 	else if ( *str == 'd' || *str == 'i')
 		return(ft_printf_int(args));
+	else if (*str == 'x' || *str == 'X')
+		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1));
 	else
 		return (counter);
 }
@@ -94,14 +106,12 @@ static size_t ft_printf_switch(va_list args, const char *str)
 
 int	ft_printf(const char *str, ...)
 {
-
 	size_t count;
 
 	count = 0;
 	va_list args;
 	va_start(args, str);
 
-	// read until %
 	while (*str)
 	{
 		if (*str == '%')
@@ -115,7 +125,6 @@ int	ft_printf(const char *str, ...)
 		count++;
 		str++;
 	}
-	// ft_putchar_fd('\n', 1);
 	va_end(args);
 	return (count);
 }
