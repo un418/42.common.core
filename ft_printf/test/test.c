@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 20:05:07 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 20:46:09 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(void)
 	// int debug = 1;
 
 	//test char
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 			printf("----- ft_printf: TESTING CHAR -------\n");
 			char c = 'A';
@@ -67,7 +67,7 @@ int main(void)
 
 	//test str
 	// itest = 0; // reset counter
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("----- ft_printf: TESTING STRING -------\n");
 		{
@@ -98,7 +98,7 @@ int main(void)
 
 	//test decimal
 	// itest = 0; // reset counter
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("----- ft_printf: TESTING DECIMAL/INTEGER -------\n");
 		{
@@ -136,7 +136,7 @@ int main(void)
 
 	//test unsigned decimal
 	// itest = 0; // reset counter
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("----- ft_printf: TESTING UNSIGNED DECIMAL -------\n");
 		{
@@ -161,7 +161,7 @@ int main(void)
 
 	//test hexa
 	// itest = 0; // reset counter
-	if (1 || test_all)
+	if (0 || test_all)
 	{
 		printf("----- ft_printf: TESTING HEXA-------\n");
 		{
@@ -232,27 +232,40 @@ int main(void)
 
 	//test pointer
 	// itest = 0; // reset counter
-	if (0 || test_all)
+	if (1 || test_all)
 	{
 			printf("----- ft_printf: TESTING POINTER -------\n");
-			if(0)
-			{
-				// playground to understand pointer behavior
-				void *p;
-				char c;
-				unsigned long n;
+		{
+			int n = 0;
+			int *pn = &n ;
+			// test regular pointer
+			strcpy(err_msg, "test regular pointer\n");
+			fail += ft_check(ft_printf("ft_printf : %%p : %p\n", pn) == printf("printf    : %%p : %p\n", pn), itest++, err_msg);
+		}
+		{
+			int *pn = NULL ;
+			// test null pointer
+			strcpy(err_msg, "test null pointer\n");
+			fail += ft_check(ft_printf("ft_printf : %%p : NULL=%p\n", pn) == printf("printf    : %%p : NULL=%p\n", pn), itest++, err_msg);
+		}
+		if(0)
+		{
+			// playground to understand pointer behavior
+			void *p;
+			char c;
+			unsigned long n;
 
-				p = &c;
-				n = (unsigned long)p;
-				printf("%ld\n",n);
-				printf("%lu\n",n);
-				printf("%lx\n",n);
-				printf("%p\n",p);
-				printf("sizeof(void*)=%lu\n",sizeof(void*));
-				printf("sizeof(long)=%lu\n",sizeof(long));
-				// Conclusion:
-				// - Memory adress is store as unsigned long
-				// - Need to implement numbers and hexadecimal formating before printing pointer adress
-			}
+			p = &c;
+			n = (unsigned long)p;
+			printf("%ld\n",n);
+			printf("%lu\n",n);
+			printf("%lx\n",n);
+			printf("%p\n",p);
+			printf("sizeof(void*)=%lu\n",sizeof(void*));
+			printf("sizeof(long)=%lu\n",sizeof(long));
+			// Conclusion:
+			// - Memory adress is store as unsigned long
+			// - Need to implement numbers and hexadecimal formating before printing pointer adress
+		}
 	}
 }

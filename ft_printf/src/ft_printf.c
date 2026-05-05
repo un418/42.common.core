@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 19:49:43 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 20:47:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,33 @@ static size_t ft_printf_int(va_list args)
 	return (counter);
 }
 
-static size_t	ft_writehex_fd_recurse(unsigned int un, int fd, int upper)
+
+static size_t	ft_writehex_fd_recurse(unsigned long un, int fd, int upper)
 {
 	size_t counter;
 	char *base16;
-
+	
 	counter = 0;
 	if (upper)
-		base16 = "0123456789ABCDEF";
+	base16 = "0123456789ABCDEF";
 	else
-		base16 = "0123456789abcdef";
+	base16 = "0123456789abcdef";
 	if (un > 15)
-		counter += ft_writehex_fd_recurse(un / 16, fd, upper);
+	counter += ft_writehex_fd_recurse(un / 16, fd, upper);
 	counter += write(fd, &base16[un % 16] , fd);
 	return(counter);
+}
+
+static size_t ft_printf_pointer(void *p)
+{
+	size_t	counter;
+
+	counter = 0;
+	if (p == NULL)
+		return(write(1, "(nil)", 5));
+	counter += write(1, "0x", 2);
+	counter += ft_writehex_fd_recurse((unsigned long)p, 1, 0);
+	return (counter);
 }
 
 static size_t ft_printf_switch(va_list args, const char *str)
@@ -108,6 +121,8 @@ static size_t ft_printf_switch(va_list args, const char *str)
 		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1, 0));
 	else if (*str == 'X')
 		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1, 1));
+	else if (*str == 'p')
+		return(ft_printf_pointer(va_arg(args,void *)));
 	else
 		return (counter);
 }
