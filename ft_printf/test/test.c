@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/04 21:34:39 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:08:42 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int ft_check(int check, int i, char *err_msg)
 
 int main(void)
 {
+	setvbuf(stdout, NULL, _IONBF, 0); // disable printf buffer
 	int test_all = 0;
 	int itest = 1;
 	int fail = 0;
@@ -61,12 +62,11 @@ int main(void)
 			// TEST %%
 			strcpy(err_msg, "test \%%");
 			fail += ft_check(ft_printf("04 - test %%\n") == 12, itest++, err_msg);
-			printf("");
 	}
 
 
 	//test str
-	itest = 0; // reset counter
+	// itest = 0; // reset counter
 	if (1 || test_all)
 	{
 		printf("----- ft_printf: TESTING STRING -------\n");
@@ -80,13 +80,13 @@ int main(void)
 			char *str = "";
 			// test empty string
 			strcpy(err_msg, "test empty string");
-			fail += ft_check(ft_printf("07 - %s\n", str) == 6, itest++, err_msg);
+			fail += ft_check(ft_printf("06 - %s\n", str) == 6, itest++, err_msg);
 		}
 		{
 			char *str = "";
 			// test empty string in middle of input
 			strcpy(err_msg, "test empty string in middle of input");
-			fail += ft_check(ft_printf("08 - A %s A\n", str) == 10, itest++, err_msg);
+			fail += ft_check(ft_printf("07 - A %s A\n", str) == 10, itest++, err_msg);
 		}
 		{
 			char *str = "begin";
@@ -96,10 +96,43 @@ int main(void)
 		}
 	}
 
-		//test pointer
-		itest = 0; // reset counter
-		if (0 || test_all)
+	//test decimal
+	// itest = 0; // reset counter
+	if (1 || test_all)
+	{
+		printf("----- ft_printf: TESTING DECIMAL/INTEGER -------\n");
 		{
+			int n = 123456;
+			// test print regulal decimal n = 123456
+			strcpy(err_msg, "test print regulal decimal n = 123456");
+			fail += ft_check(ft_printf("09 - %d\n", n) == 12, itest++, err_msg);
+			printf("test dec=%d\n",ft_printf("%d\n", 123456));
+		}
+		{
+			int n = INT_MAX;
+			// test print INT_MAX
+			strcpy(err_msg, "test print INT_MAX");
+			fail += ft_check(ft_printf("10 - %d\n", n) == 16, itest++, err_msg);
+		}
+		{
+			int n = INT_MIN;
+			// test print INT_MIN
+			strcpy(err_msg, "test print INT_MIN");
+			fail += ft_check(ft_printf("11 - %d\n", n) == 17, itest++, err_msg);
+		}
+		{
+			long n = INT_MAX;
+			// test print INT_MAX overflow
+			strcpy(err_msg, "test print INT_MAX overflow");
+			fail += ft_check(ft_printf("12 - %d\n", n + 2) == 17, itest++, err_msg);
+			// printf("printf: %d", (int)n + 2);
+		}
+	}
+
+	//test pointer
+	// itest = 0; // reset counter
+	if (0 || test_all)
+	{
 			printf("----- ft_printf: TESTING POINTER -------\n");
 			if(0)
 			{

@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/04 20:51:01 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 16:04:44 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static size_t ft_printf_char(va_list args)
 	c = va_arg(args, int);
 	return (write(1, &c, 1));
 }
+
 
 static size_t ft_printf_str(va_list args)
 {
@@ -35,6 +36,43 @@ static size_t ft_printf_str(va_list args)
 	return (counter);
 }
 
+static size_t	ft_writeunbr_fd_recurse(unsigned long ul, int fd)
+{
+	size_t counter;
+
+	counter = 0;
+	if (ul > 9)
+		counter += ft_writeunbr_fd_recurse(ul / 10, fd);
+	counter += write(fd, &"0123456789"[ul % 10] , 1);
+	return(counter);
+
+}
+
+static size_t	ft_writenbr_fd(long n, int fd)
+{
+	size_t counter;
+
+	counter = 0;
+	if (n < 0)
+	{
+		counter += write(fd, "-", 1);
+		n = -n;
+	}
+	counter += ft_writeunbr_fd_recurse(n, fd);
+	return (counter);
+}
+
+static size_t ft_printf_int(va_list args)
+{
+	int	n;
+	size_t	counter;
+
+	counter = 0;
+	n = va_arg(args, int);
+	counter += ft_writenbr_fd(n,1);
+	return (counter);
+}
+
 static size_t ft_printf_switch(va_list args, const char *str)
 {
 	size_t	counter;
@@ -47,6 +85,8 @@ static size_t ft_printf_switch(va_list args, const char *str)
 		return (write(1, "%", 1));
 	else if ( *str == 's')
 		return(ft_printf_str(args));
+	else if ( *str == 'd' || *str == 'i')
+		return(ft_printf_int(args));
 	else
 		return (counter);
 }
