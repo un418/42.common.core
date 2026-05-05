@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 19:25:34 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:43:16 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,12 @@ int main(void)
 			// test print negative decimal n = -10
 			strcpy(err_msg, "-10hex=%x\n");
 			fail += ft_check(ft_printf("ft_printf :-10hex=%x\n", n) == printf("printf    :-10hex=%x\n",n), itest++, err_msg);
+		}
+		{
+			int n = -10;
+			// test upper n = -10
+			strcpy(err_msg, "-10hex=%X\n");
+			fail += ft_check(ft_printf("ft_printf :-10hex=%X\n", n) == printf("printf    :-10hex=%X\n",n), itest++, err_msg);
 		}
 		
 		/* 

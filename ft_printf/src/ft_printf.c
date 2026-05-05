@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 19:26:15 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:44:35 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,19 @@ static size_t ft_printf_int(va_list args)
 	return (counter);
 }
 
-static size_t	ft_writehex_fd_recurse(unsigned int un, int fd)
+static size_t	ft_writehex_fd_recurse(unsigned int un, int fd, int upper)
 {
 	size_t counter;
+	char *base16;
 
 	counter = 0;
+	if (upper)
+		base16 = "0123456789ABCDEF";
+	else
+		base16 = "0123456789abcdef";
 	if (un > 15)
-		counter += ft_writehex_fd_recurse(un / 16, fd);
-	counter += write(fd, &"0123456789abcdef"[un % 16] , fd);
+		counter += ft_writehex_fd_recurse(un / 16, fd, upper);
+	counter += write(fd, &base16[un % 16] , fd);
 	return(counter);
 }
 
@@ -97,8 +102,10 @@ static size_t ft_printf_switch(va_list args, const char *str)
 		return(ft_printf_str(args));
 	else if ( *str == 'd' || *str == 'i')
 		return(ft_printf_int(args));
-	else if (*str == 'x' || *str == 'X')
-		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1));
+	else if (*str == 'x')
+		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1, 0));
+	else if (*str == 'X')
+		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1, 1));
 	else
 		return (counter);
 }
