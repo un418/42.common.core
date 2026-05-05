@@ -19,6 +19,24 @@
             "detail": "Build via Makefile in debug mode"
         },
         {
+            "label": "build ft_printf debug",
+            "command": "make",
+            "args": [
+                "test"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/ft_printf"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build via Makefile in debug mode"
+        },
+        {
             "type": "cppbuild",
             "label": "C/C++: clang build active file",
             "command": "/usr/bin/clang",
