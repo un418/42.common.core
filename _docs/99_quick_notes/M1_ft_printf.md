@@ -29,4 +29,29 @@ test.c:28:30: error: format specifies type 'int' but the argument has type 'char
 Result : 
 * We **don't need** to manage this kind of error in the project
 * Just try to cast and let the compiler return error when casing wrong type
-	
+
+## Variadic Function
+
+### It is store in a struct ? 
+
+
+## Static Variable
+
+Variable that retain value across function call
+- can be used in recursion to manage recursion depth and avoid infinite recursion loop
+- can be used for printf to mange the counter of character written.
+
+https://www.geeksforgeeks.org/c/static-variables-in-c/
+
+## Lookup table
+
+- https://stackoverflow.com/questions/3408504/whats-the-best-way-to-do-a-lookup-table-in-c
+
+
+```c
+char *displayDigitInletter[] = {
+  "zero", "one", "two", "three", "four", "five", "..."
+};
+printf("%s",displayDigitInletter[4]);
+```
+
