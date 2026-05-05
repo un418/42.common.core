@@ -1,3 +1,11 @@
+
+# Todo
+
+- [ ]  Improve counter by using one function to write a char and a static variable
+- [ ] Improve logic when writing number by using a base wrinting function ( avoid code repetion for hexa upper and lower and unsigned int )
+- [ ] Add color to test
+- [ ] automate test by comparing the output from my function and the official one
+- [ ] add file descriptor management for my printf
 # Q&A
 ### What is a variadic function ?
 
@@ -47,11 +55,20 @@ https://www.geeksforgeeks.org/c/static-variables-in-c/
 
 - https://stackoverflow.com/questions/3408504/whats-the-best-way-to-do-a-lookup-table-in-c
 
-
 ```c
+// Usefull when we need to translate data
 char *displayDigitInletter[] = {
   "zero", "one", "two", "three", "four", "five", "..."
 };
 printf("%s",displayDigitInletter[4]);
 ```
 
+Trick used for base print and translation
+```c
+// Here we use also a lookup table
+write(fd, &"0123456789abcdef"[un % 16] , fd);
+// Let's understand the tricks via this example
+char base16[] = "0123456789abcdef";
+"0123456789abcdef"[un % 16] == base16[un % 16];
+// It allow to avoid the need of array declaration
+```
