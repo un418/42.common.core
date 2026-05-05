@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 19:43:16 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/05 20:05:07 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,31 @@ int main(void)
 			strcpy(err_msg, "test print INT_MAX overflow");
 			fail += ft_check(ft_printf("12 - %d\n", n + 2) == 17, itest++, err_msg);
 			// printf("printf: %d", (int)n + 2);
+		}
+	}
+
+	//test unsigned decimal
+	// itest = 0; // reset counter
+	if (1 || test_all)
+	{
+		printf("----- ft_printf: TESTING UNSIGNED DECIMAL -------\n");
+		{
+			unsigned int un = 1234567890;
+			// test print un = 1234567890
+			strcpy(err_msg, "test print unsigned decimal un = 1234567890");
+			fail += ft_check(ft_printf("ft_printf : %%u :1234567890=%u\n", un) == printf("printf    : %%u :1234567890=%u\n", un), itest++, err_msg);
+		}
+		{
+			unsigned int un = UINT_MAX;
+			// test print un = UINT_MAX
+			strcpy(err_msg, "test print un = UINT_MAX");
+			fail += ft_check(ft_printf("ft_printf : %%u :UINT_MAX=%u\n", un) == printf("printf    : %%u :UINT_MAX=%u\n", un), itest++, err_msg);
+		}
+		{
+			unsigned int un = UINT_MAX+1;
+			// test print un = UINT_MAX - Unsigned Wrap Around
+			strcpy(err_msg, "test print un = UINT_MAX");
+			fail += ft_check(ft_printf("ft_printf : %%u :UINT_MAX+1=%u\n", un) == printf("printf    : %%u :UINT_MAX+1=%u\n", un), itest++, err_msg);
 		}
 	}
 
