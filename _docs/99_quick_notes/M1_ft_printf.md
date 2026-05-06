@@ -7,6 +7,7 @@
 - [x] automate test by comparing the output from my function and the official one
 - [x] add file descriptor management for my printf
 - [x] add test prefix in diff output file and move them to test folder
+- [ ] Go Deeper inside the EDGE CASE
 - [ ] Finish readme
 - [ ] Clean MakeFile
 - [ ] Do deeper final tests 
