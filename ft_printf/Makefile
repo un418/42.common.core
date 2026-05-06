@@ -54,7 +54,8 @@ $(LIBFT):
 test: CFLAGS += -g3 -fsanitize=address
 test: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
-	./$(TEST_DIR)/$(TEST_PROG) | cat -e
+	./$(TEST_DIR)/$(TEST_PROG)
+#	./$(TEST_DIR)/$(TEST_PROG) | cat -e
 
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)

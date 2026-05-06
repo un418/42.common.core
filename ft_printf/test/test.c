@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 20:46:09 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 11:58:27 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@ int ft_check(int check, int i, char *err_msg)
 {
 	if (check)
 	{
-		printf("TEST #%d PASS\n", i);
+		printf("TEST #%d PASS\n\n\n", i);
 		return (0);
 	}
 	else
 	{
-		printf("TEST #%d FAILED: %s\n", i, err_msg);
+		printf("TEST #%d FAILED: %s\n\n\n", i, err_msg);
 		return (1);
 	}
+
 }
 
 
 int main(void)
 {
 	setvbuf(stdout, NULL, _IONBF, 0); // disable printf buffer
-	int test_all = 0;
+	int test_all = 1;
 	int itest = 1;
 	int fail = 0;
 	char err_msg[100]; 
@@ -41,176 +42,176 @@ int main(void)
 	//test char
 	if (0 || test_all)
 	{
-			printf("----- ft_printf: TESTING CHAR -------\n");
-			char c = 'A';
+		ft_printf("----- ft_printf: TESTING CHAR -------\n\n\n");
+		{
 			// test char at EOL
+			char c = 'A';
 			strcpy(err_msg, "test char at EOL");
-			fail += ft_check(ft_printf("01 - test char : %c\n", c) == 19, itest++, err_msg);
-			// int ret = printf("test char : %c", c);
-			// printf ("%d\n",ret);
-
-			// TEST char = '\0'
-			c = '\0';
+			fail += ft_check((ft_printf("ft_printf : %%c : c=%c", c)+ft_printf("\n")) == (ft_printf("printf    : %%c : c=%c", c)+printf("\n")), itest++, err_msg);
+		}
+		{
+			// test char c = '\0'
+			char c = '\0';
 			strcpy(err_msg, "TEST char = \'\\0\'");
-			fail += ft_check(ft_printf("02 -%c\n", c) == 6, itest++, err_msg);
-
-			// TEST empty string
+			fail += ft_check(ft_printf("ft_printf : %%c : c=%c\n", c) == printf("printf    : %%c : c=%c\n", c), itest++, err_msg);
+		}
+		{
+			// test empty input
 			strcpy(err_msg, "test input with empty string");
-			fail += ft_check(ft_printf("") == 0, itest++, err_msg);
-			printf("");
+			fail += ft_check(ft_printf("") == printf(""), itest++, err_msg);
+			ft_printf("\n");
 
-			// TEST %%
+		}
+		{
+			// test %%
 			strcpy(err_msg, "test \%%");
-			fail += ft_check(ft_printf("04 - test %%\n") == 12, itest++, err_msg);
+			fail += ft_check(ft_printf("ft_printf : %%%% : %%%%=%%\n") == printf("printf    : %%%% : %%%%=%%\n"), itest++, err_msg);
+		}
 	}
 
-
 	//test str
-	// itest = 0; // reset counter
 	if (0 || test_all)
 	{
-		printf("----- ft_printf: TESTING STRING -------\n");
+		printf("----- ft_printf: TESTING STRING -------\n\n\n");
 		{
-			char *str = "05 - test string alone";
+			char *str = "test string alone";
 			// test string alone
 			strcpy(err_msg, "test string alone");
-			fail += ft_check(ft_printf("%s\n", str) == 23, itest++, err_msg);
+			fail += ft_check((ft_printf("%s", str)+ft_printf("\n")) == (printf("%s", str)+ft_printf("\n")), itest++, err_msg);
 		}
 		{
 			char *str = "";
-			// test empty string
+			// test string empty alone
 			strcpy(err_msg, "test empty string");
-			fail += ft_check(ft_printf("06 - %s\n", str) == 6, itest++, err_msg);
+			fail += ft_check(ft_printf("%s", str) == printf("%s", str), itest++, err_msg);
 		}
 		{
 			char *str = "";
 			// test empty string in middle of input
 			strcpy(err_msg, "test empty string in middle of input");
-			fail += ft_check(ft_printf("07 - A %s A\n", str) == 10, itest++, err_msg);
+			fail += ft_check(ft_printf("ft_printf : %%s : ""=%s\n", str) == printf("printf    : %%s : ""=%s\n", str), itest++, err_msg);
+
 		}
 		{
 			char *str = "begin";
-			// test empty string in middle of input
-			strcpy(err_msg, "test empty string in middle of input");
-			fail += ft_check(ft_printf("%s 08 - end\n", str) == 15, itest++, err_msg);
+			// test string in the beginning of the input
+			strcpy(err_msg, "test string in the beginning of the input");
+			fail += ft_check(ft_printf("%s ft_printf : %%s :\n", str) == printf("%s printf    : %%s :\n", str), itest++, err_msg);
+
 		}
 	}
 
 	//test decimal
-	// itest = 0; // reset counter
 	if (0 || test_all)
 	{
-		printf("----- ft_printf: TESTING DECIMAL/INTEGER -------\n");
+		printf("----- ft_printf: TESTING DECIMAL/INTEGER -------\n\n\n");
 		{
 			int n = 1234567890;
-			// test print n = 1234567890
-			strcpy(err_msg, "test print regulal decimal n = 1234567890");
-			fail += ft_check(ft_printf("09 - %d\n", n) == 16, itest++, err_msg);
+			// test decimal n = 1234567890
+			strcpy(err_msg, "test decimal n = 1234567890");
+			fail += ft_check(ft_printf("ft_printf : %%d : 1234567890=%d\n", n) == printf("printf    : %%d : 1234567890=%d\n", n), itest++, err_msg);
 		}
 		{
 			int n = 10;
-			// test print n = 10 - base limit
-			strcpy(err_msg, "test print regulal decimal n = 10");
-			fail += ft_check(ft_printf("09 - %d\n", n) == 12, itest++, err_msg);
+			// test decimal base limit - n = 10
+			strcpy(err_msg, "test decimal base limit - n = 10");
+			fail += ft_check(ft_printf("ft_printf : %%d : 10=%d\n", n) == printf("printf    : %%d : 10=%d\n", n), itest++, err_msg);
 		}
 		{
 			int n = INT_MAX;
-			// test print INT_MAX
-			strcpy(err_msg, "test print INT_MAX");
-			fail += ft_check(ft_printf("10 - %d\n", n) == 8, itest++, err_msg);
+			// test decimal INT_MAX
+			strcpy(err_msg, "test decimal INT_MAX");
+			fail += ft_check(ft_printf("ft_printf : %%d : INT_MAX=%d\n", n) == printf("printf    : %%d : INT_MAX=%d\n", n), itest++, err_msg);
 		}
 		{
 			int n = INT_MIN;
-			// test print INT_MIN
-			strcpy(err_msg, "test print INT_MIN");
-			fail += ft_check(ft_printf("11 - %d\n", n) == 17, itest++, err_msg);
+			// test decimal INT_MIN
+			strcpy(err_msg, "test decimal INT_MIN");
+			fail += ft_check(ft_printf("ft_printf : %%d : INT_MIN=%d\n", n) == printf("printf    : %%d : INT_MIN=%d\n", n), itest++, err_msg);
 		}
 		{
 			int n = INT_MAX;
-			// test print INT_MAX overflow
-			strcpy(err_msg, "test print INT_MAX overflow");
-			fail += ft_check(ft_printf("12 - %d\n", n + 2) == 17, itest++, err_msg);
-			// printf("printf: %d", (int)n + 2);
+			// test decimal INT_MAX overflow
+			strcpy(err_msg, "test decimal INT_MAX overflow");
+			fail += ft_check(ft_printf("ft_printf : %%d : INT_MAX+2=%d\n", n + 2) == printf("printf    : %%d : INT_MAX+2=%d\n", n + 2), itest++, err_msg);
 		}
 	}
 
 	//test unsigned decimal
-	// itest = 0; // reset counter
 	if (0 || test_all)
 	{
-		printf("----- ft_printf: TESTING UNSIGNED DECIMAL -------\n");
+		printf("----- ft_printf: TESTING UNSIGNED DECIMAL -------\n\n\n");
 		{
 			unsigned int un = 1234567890;
-			// test print un = 1234567890
+			// test unsigned decimal un = 1234567890
 			strcpy(err_msg, "test print unsigned decimal un = 1234567890");
-			fail += ft_check(ft_printf("ft_printf : %%u :1234567890=%u\n", un) == printf("printf    : %%u :1234567890=%u\n", un), itest++, err_msg);
+			fail += ft_check(ft_printf("ft_printf : %%u : 1234567890=%u\n", un) == printf("printf    : %%u : 1234567890=%u\n", un), itest++, err_msg);
 		}
 		{
 			unsigned int un = UINT_MAX;
-			// test print un = UINT_MAX
+			// test unsigned decimal un = UINT_MAX
 			strcpy(err_msg, "test print un = UINT_MAX");
-			fail += ft_check(ft_printf("ft_printf : %%u :UINT_MAX=%u\n", un) == printf("printf    : %%u :UINT_MAX=%u\n", un), itest++, err_msg);
+			fail += ft_check(ft_printf("ft_printf : %%u : UINT_MAX=%u\n", un) == printf("printf    : %%u : UINT_MAX=%u\n", un), itest++, err_msg);
 		}
 		{
 			unsigned int un = UINT_MAX+1;
-			// test print un = UINT_MAX - Unsigned Wrap Around
+			// test unsigned decimal un = UINT_MAX - Unsigned Wrap Around
 			strcpy(err_msg, "test print un = UINT_MAX");
-			fail += ft_check(ft_printf("ft_printf : %%u :UINT_MAX+1=%u\n", un) == printf("printf    : %%u :UINT_MAX+1=%u\n", un), itest++, err_msg);
+			fail += ft_check(ft_printf("ft_printf : %%u : UINT_MAX+1=%u\n", un) == printf("printf    : %%u : UINT_MAX+1=%u\n", un), itest++, err_msg);
 		}
 	}
 
 	//test hexa
-	// itest = 0; // reset counter
 	if (0 || test_all)
 	{
-		printf("----- ft_printf: TESTING HEXA-------\n");
+		printf("----- ft_printf: TESTING HEXADECIMAL-------\n\n\n");
 		{
 			int n = 10;
-			// test print n = 10
-			strcpy(err_msg, "10hex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :10hex=%x\n", n) == printf("printf    :10hex=%x\n",n), itest++, err_msg);
+			// test hex n = 10
+			strcpy(err_msg, "test hex n = 10\n");
+			fail += ft_check(ft_printf("ft_printf : %%x : 10=%x\n", n) == printf("printf    : %%x : 10=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = 16;
-			// test print n = 16 - base limit
-			strcpy(err_msg, "16hex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :16hex=%x\n", n) == printf("printf    :16hex=%x\n",n), itest++, err_msg);
+			// test hex base limit - n = 16 
+			strcpy(err_msg, "test hex base limit - n = 16 \n");
+			fail += ft_check(ft_printf("ft_printf : %%x : 16=%x\n", n) == printf("printf    : %%x : 16=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = 100;
-			// test print n = 100
-			strcpy(err_msg, "100hex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :100hex=%x\n", n) == printf("printf    :100hex=%x\n",n), itest++, err_msg);
+			// test hex n = 100
+			strcpy(err_msg, "test hex n = 100\n");
+			fail += ft_check(ft_printf("ft_printf : %%x : 100=%x\n", n) == printf("printf    : %%x : 100=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = 1000;
-			// test print n = 1000
-			strcpy(err_msg, "1000hex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :1000hex=%x\n", n) == printf("printf    :1000hex=%x\n",n), itest++, err_msg);
+			// test hex n = 1000
+			strcpy(err_msg, "test hex n = 1000\n");
+			fail += ft_check(ft_printf("ft_printf : %%x : 1000=%x\n", n) == printf("printf    : %%x : 1000=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = INT_MAX - 1;
-			// test print n = INT_MAX
-			strcpy(err_msg, "INT_MAXhex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :INT_MAXhex=%x\n", n) == printf("printf    :INT_MAXhex=%x\n",n), itest++, err_msg);
+			// test hex n = INT_MAX
+			strcpy(err_msg, "test hex n = INT_MAX\n");
+			fail += ft_check(ft_printf("ft_printf : %%x : INT_MAX=%x\n", n) == printf("printf    : %%x : INT_MAX=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = INT_MIN;
-			// test print n = INT_MIN
-			strcpy(err_msg, "INT_MINhex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :INT_MINhex=%x\n", n) == printf("printf    :INT_MINhex=%x\n",n), itest++, err_msg);
+			// test hex print n = INT_MIN
+			strcpy(err_msg, "test hex print n = INT_MIN\n");
+			fail += ft_check(ft_printf("ft_printf : %%x : INT_MIN=%x\n", n) == printf("printf    : %%x : INT_MIN=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = -10;
-			// test print negative decimal n = -10
-			strcpy(err_msg, "-10hex=%x\n");
-			fail += ft_check(ft_printf("ft_printf :-10hex=%x\n", n) == printf("printf    :-10hex=%x\n",n), itest++, err_msg);
+			// test hex negative  n = -10
+			strcpy(err_msg, "test hex negative  n = -10\n");
+			fail += ft_check(ft_printf("ft_printf : %%x : -10=%x\n", n) == printf("printf    : %%x : -10=%x\n",n), itest++, err_msg);
 		}
 		{
 			int n = -10;
-			// test upper n = -10
-			strcpy(err_msg, "-10hex=%X\n");
-			fail += ft_check(ft_printf("ft_printf :-10hex=%X\n", n) == printf("printf    :-10hex=%X\n",n), itest++, err_msg);
+			// test hex upper n = -10
+			strcpy(err_msg, "test hex upper n = -10/n");
+			fail += ft_check(ft_printf("ft_printf : %%X : -10=%X\n", n) == printf("printf    : %%X : -10=%X\n",n), itest++, err_msg);
 		}
 		
 		/* 
@@ -231,10 +232,9 @@ int main(void)
 	}
 
 	//test pointer
-	// itest = 0; // reset counter
 	if (1 || test_all)
 	{
-			printf("----- ft_printf: TESTING POINTER -------\n");
+			printf("----- ft_printf: TESTING POINTER -------\n\n\n");
 		{
 			int n = 0;
 			int *pn = &n ;
@@ -248,7 +248,7 @@ int main(void)
 			strcpy(err_msg, "test null pointer\n");
 			fail += ft_check(ft_printf("ft_printf : %%p : NULL=%p\n", pn) == printf("printf    : %%p : NULL=%p\n", pn), itest++, err_msg);
 		}
-		if(0)
+		/* 
 		{
 			// playground to understand pointer behavior
 			void *p;
@@ -267,5 +267,7 @@ int main(void)
 			// - Memory adress is store as unsigned long
 			// - Need to implement numbers and hexadecimal formating before printing pointer adress
 		}
+		 */
 	}
+	ft_printf("------- NOTE = %d/%d -------", (itest - fail), itest);
 }
