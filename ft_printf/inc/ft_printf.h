@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:46:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 14:56:44 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:04:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "libft.h"
+# include "../libft/libft.h"
 
 int		ft_printf(const char *str, ...);
 
