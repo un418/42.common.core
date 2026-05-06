@@ -14,15 +14,12 @@ SRC_FILES	=	ft_printf.c \
 				ft_printf_ascii.c \
 				ft_printf_num.c
 
-
-# OBJS		= $(SRCS:.c=.o)
-
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 
 ## Libft
-LIBFT_DIR	= ../libft
+LIBFT_DIR	= libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 
 ## Tests
