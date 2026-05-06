@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 16:55:12 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 17:23:21 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,26 @@
 #include <stdio.h>
 #include <string.h>
 
+/* Standard Colors */
+#define RED     "\033[0;31m"
+#define GREEN   "\033[0;32m"
+#define YELLOW  "\033[0;33m"
+#define RESET   "\033[0m"
+
 int ft_check(int check, int i, char *err_msg)
 {
 	if (check)
 	{
-		printf("TEST #%d PASS\n\n\n", i);
+		printf(GREEN); printf("TEST #%d PASS", i); printf(RESET);
+		printf("\n\n\n");
 		return (0);
 	}
 	else
 	{
-		printf("TEST #%d FAILED: %s\n\n\n", i, err_msg);
+		printf(RED);
+		printf("TEST #%d FAILED: ", i);
+		printf(RESET);
+		printf("%s\n\n\n", err_msg);
 		return (1);
 	}
 }
