@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 15:41:33 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 16:55:12 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int ft_check(int check, int i, char *err_msg)
 		printf("TEST #%d FAILED: %s\n\n\n", i, err_msg);
 		return (1);
 	}
-
 }
 
 
@@ -99,7 +98,7 @@ int main(void)
 		}
 		{
 			char *str = NULL;
-			printf("printf    : %%s :%s\n", str);
+			// printf("printf    : %%s :%s\n", str); // printf print (null) if we input null pointer
 			// test string in the beginning of the input
 			strcpy(err_msg, "test string is NULL pointer");
 			fail += ft_check(ft_printf("ft_printf : %%s :%s\n", str) == printf("printf    : %%s :%s\n", str), itest++, err_msg);
@@ -285,8 +284,9 @@ int main(void)
 				int *pn = &n ;
 				// test regular pointer
 				strcpy(err_msg, "test regular pointer\n");
-				// fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
-				fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1,pn, pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
+				fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
+				// Pass for me because my ft_writehex... have ul int input arg
+				// fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1,pn, pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
 			}
 		}
 
