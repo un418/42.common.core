@@ -68,6 +68,8 @@ tester: re
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)
 	rm -f $(TEST_DIR)/tester
+	rm -f $(TEST_DIR)/difftest_ft_printf.txt
+	rm -f $(TEST_DIR)/difftest_printf.txt
 
 
 memtest: re

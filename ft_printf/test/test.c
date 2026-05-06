@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 13:16:57 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:52:09 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,10 +269,11 @@ int main(void)
 		}
 		 */
 	}
+	
 	char *final_msg;
 	if (fail)
 		final_msg = "FAILURE";
 	else
 		final_msg = "SUCESS";
-	ft_printf("#--#---- %s = %d/%d ----#--#\n\n", final_msg, (itest - fail), itest);
+	ft_printf("#-# %s = %d/%d #-#\n\n", final_msg, (itest - fail), itest);
 }
