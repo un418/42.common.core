@@ -55,10 +55,15 @@ test: CFLAGS += -g3 -fsanitize=address
 test: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
 	./$(TEST_DIR)/$(TEST_PROG)
-#	./$(TEST_DIR)/$(TEST_PROG) | cat -e
+
+tester: re
+	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/tester
+	./$(TEST_DIR)/tester > tester.log 
+	./$(TEST_DIR)/tester.sh
 
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)
+	rm -f $(TEST_DIR)/tester
 
 
 memtest: re
