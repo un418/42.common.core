@@ -18,19 +18,16 @@ SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 
-## Libft
-LIBFT_DIR	= libft
-LIBFT		= $(LIBFT_DIR)/libft.a
 
 ## Tests
 TEST_DIR	= test
 TEST_PROG	= test_suite
 TEST_FILE	= test.c
 
-INCS		= -I$(INC_DIR) -I$(LIBFT_DIR)
-LIBS		= -L. -lftprintf -L$(LIBFT_DIR) -lft
+INCS		= -I$(INC_DIR)
+LIBS		= -L. -lftprintf
 
-all: $(NAME) $(LIBFT)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
@@ -48,9 +45,6 @@ fclean: clean tclean
 re: fclean all
 
 #####################
-
-$(LIBFT):
-	make -C $(LIBFT_DIR)
 
 test: CFLAGS += -g3 -fsanitize=address
 test: re
@@ -78,4 +72,4 @@ memtest: re
 				./test/mem_check > /dev/null
 	@rm  -f ./test/mem_check
 
-.PHONY: all clean fclean re test tclean
+.PHONY: all clean fclean re test tclean memtest
