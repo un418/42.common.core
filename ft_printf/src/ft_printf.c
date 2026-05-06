@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 14:56:07 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:11:51 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ int	ft_printf(const char *str, ...)
 			str++;
 			continue ;
 		}
-		ft_putchar_fd(*str, 1);
-		count++;
+		count += ft_write_fd_char(*str, 1);
 		str++;
 	}
 	va_end(args);
