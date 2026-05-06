@@ -6,46 +6,44 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 13:35:12 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 13:57:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t ft_printf_switch(va_list args, const char *str)
+static size_t	ft_printf_switch(va_list args, const char *str)
 {
 	size_t	counter;
 
 	counter = 0;
 	if (*str == 'c')
-		return(ft_write_char(args));
+		return (ft_write_fd_char(va_arg(args, int), 1));
 	else if (*str == '%')
-		return (write(1, "%", 1));
-	else if ( *str == 's')
-		return(ft_write_str(args));
-	else if ( *str == 'd' || *str == 'i')
-		return(ft_printf_int(args));
-	else if ( *str == 'u')
-		return(ft_writeunbr_fd_recurse(va_arg(args, unsigned int), 1));
+		return (ft_write_fd_char('%', 1));
+	else if (*str == 's')
+		return (ft_write_str(args));
+	else if (*str == 'd' || *str == 'i')
+		return (ft_printf_int(args));
+	else if (*str == 'u')
+		return (ft_writeunbr_fd_recurse(va_arg(args, unsigned int), 1));
 	else if (*str == 'x')
-		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1, 0));
+		return (ft_writehex_fd_recurse(va_arg(args, unsigned int), 1, 0));
 	else if (*str == 'X')
-		return(ft_writehex_fd_recurse(va_arg(args,unsigned int), 1, 1));
+		return (ft_writehex_fd_recurse(va_arg(args, unsigned int), 1, 1));
 	else if (*str == 'p')
-		return(ft_printf_pointer(va_arg(args,void *)));
+		return (ft_printf_pointer(va_arg(args, void *)));
 	else
 		return (counter);
 }
 
-
 int	ft_printf(const char *str, ...)
 {
-	size_t count;
+	size_t	count;
+	va_list	args;
 
 	count = 0;
-	va_list args;
 	va_start(args, str);
-
 	while (*str)
 	{
 		if (*str == '%')
@@ -53,7 +51,7 @@ int	ft_printf(const char *str, ...)
 			str++;
 			count += ft_printf_switch(args, str);
 			str++;
-			continue;
+			continue ;
 		}
 		ft_putchar_fd(*str, 1);
 		count++;
