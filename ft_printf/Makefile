@@ -11,7 +11,8 @@ SRC_DIR     = src
 OBJ_DIR     = obj
 
 SRC_FILES	=	ft_printf.c \
-				ft_printf_ascii.c
+				ft_printf_ascii.c \
+				ft_printf_num.c
 
 
 # OBJS		= $(SRCS:.c=.o)
