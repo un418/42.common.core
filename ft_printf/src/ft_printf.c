@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 13:57:49 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:56:07 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	ft_printf_switch(va_list args, const char *str)
 	else if (*str == '%')
 		return (ft_write_fd_char('%', 1));
 	else if (*str == 's')
-		return (ft_write_str(args));
+		return (ft_write_fd_str(va_arg(args, char *), 1));
 	else if (*str == 'd' || *str == 'i')
 		return (ft_printf_int(args));
 	else if (*str == 'u')

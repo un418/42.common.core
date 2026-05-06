@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 13:26:16 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 13:57:42 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 14:56:26 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ size_t	ft_write_fd_char(int c, int fd)
 	return (write(fd, &c, 1));
 }
 
-size_t	ft_write_str(va_list args)
+size_t	ft_write_fd_str(char *s, int fd)
 {
-	char	*str;
 	size_t	counter;
 
 	counter = 0;
-	str = va_arg(args, char *);
-	while (*str)
+	while (*s)
 	{
-		write(1, &*str++, 1);
+		write(fd, &*s++, 1);
 		counter++;
 	}
 	return (counter);
