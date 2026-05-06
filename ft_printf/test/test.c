@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 14:52:09 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 15:41:33 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,19 @@ int main(void)
 			// test empty string in middle of input
 			strcpy(err_msg, "test empty string in middle of input");
 			fail += ft_check(ft_printf("ft_printf : %%s : ""=%s\n", str) == printf("printf    : %%s : ""=%s\n", str), itest++, err_msg);
-
 		}
 		{
 			char *str = "begin";
 			// test string in the beginning of the input
 			strcpy(err_msg, "test string in the beginning of the input");
 			fail += ft_check(ft_printf("%s ft_printf : %%s :\n", str) == printf("%s printf    : %%s :\n", str), itest++, err_msg);
-
+		}
+		{
+			char *str = NULL;
+			printf("printf    : %%s :%s\n", str);
+			// test string in the beginning of the input
+			strcpy(err_msg, "test string is NULL pointer");
+			fail += ft_check(ft_printf("ft_printf : %%s :%s\n", str) == printf("printf    : %%s :%s\n", str), itest++, err_msg);
 		}
 	}
 
@@ -270,6 +275,21 @@ int main(void)
 		 */
 	}
 	
+		//test combination
+		if (1 || test_all)
+		{
+				printf("----- ft_printf: TESTING COMBI -------\n\n\n");
+			{
+				char *nstr = NULL;
+				int n = 0;
+				int *pn = &n ;
+				// test regular pointer
+				strcpy(err_msg, "test regular pointer\n");
+				// fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
+				fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1,pn, pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
+			}
+		}
+
 	char *final_msg;
 	if (fail)
 		final_msg = "FAILURE";
