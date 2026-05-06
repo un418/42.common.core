@@ -1,11 +1,16 @@
 
 # Todo
 
-- [ ]  Improve counter by using one function to write a char and a static variable
-- [ ] Improve logic when writing number by using a base wrinting function ( avoid code repetion for hexa upper and lower and unsigned int )
-- [ ] Add color to test
-- [ ] automate test by comparing the output from my function and the official one
-- [ ] add file descriptor management for my printf
+- [x]  NOT DONE Improve counter by using one function to write a char and a static variable
+- [x] Improve logic when writing number by using a base wrinting function ( avoid code repetion for hexa upper and lower )
+- [x] Add color to test
+- [x] automate test by comparing the output from my function and the official one
+- [x] add file descriptor management for my printf
+- [x] add test prefix in diff output file and move them to test folder
+- [ ] Finish readme
+- [ ] Clean MakeFile
+- [ ] Do deeper final tests 
+- [ ] Last subject Reading
 # Q&A
 ### What is a variadic function ?
 
@@ -40,8 +45,7 @@ Result :
 
 ## Variadic Function
 
-### It is store in a struct ? 
-
+#todo
 
 ## Static Variable
 
