@@ -6,35 +6,11 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/05 20:47:56 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/06 13:31:58 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static size_t ft_printf_char(va_list args)
-{
-	char	c;
-
-	c = va_arg(args, int);
-	return (write(1, &c, 1));
-}
-
-
-static size_t ft_printf_str(va_list args)
-{
-	char	*str;
-	size_t	counter;
-
-	counter = 0;
-	str = va_arg(args, char *);
-	while (*str)
-	{
-		write(1, &*str++, 1);
-		counter++;
-	}
-	return (counter);
-}
 
 static size_t	ft_writeunbr_fd_recurse(unsigned long ul, int fd)
 {
@@ -108,11 +84,11 @@ static size_t ft_printf_switch(va_list args, const char *str)
 
 	counter = 0;
 	if (*str == 'c')
-		return(ft_printf_char(args));
+		return(ft_write_char(args));
 	else if (*str == '%')
 		return (write(1, "%", 1));
 	else if ( *str == 's')
-		return(ft_printf_str(args));
+		return(ft_write_str(args));
 	else if ( *str == 'd' || *str == 'i')
 		return(ft_printf_int(args));
 	else if ( *str == 'u')

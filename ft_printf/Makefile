@@ -10,7 +10,10 @@ INC_DIR     = inc
 SRC_DIR     = src
 OBJ_DIR     = obj
 
-SRC_FILES	= ft_printf.c
+SRC_FILES	=	ft_printf.c \
+				ft_printf_ascii.c
+
+
 # OBJS		= $(SRCS:.c=.o)
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
