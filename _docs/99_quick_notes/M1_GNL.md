@@ -63,3 +63,12 @@ https://en.wikipedia.org/wiki/Static_variable
 - Empty file
 - Malformated or Binary Files
 
+
+
+# Testing
+
+## How to open a file
+
+```c
+
+```

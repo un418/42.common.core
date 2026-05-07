@@ -77,3 +77,4 @@ char base16[] = "0123456789abcdef";
 "0123456789abcdef"[un % 16] == base16[un % 16];
 // It allow to avoid the need of array declaration
 ```
+
