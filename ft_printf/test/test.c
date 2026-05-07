@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 19:46:03 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:31:26 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int main(void)
 			strcpy(err_msg, "test \%%");
 			fail += ft_check(ft_printf("ft_printf : %%%% : %%%%=%%\n") == printf("printf    : %%%% : %%%%=%%\n"), itest++, err_msg);
 		}
+
+		if (0)
 		{
 			// /!\ Edge Case Alert 
 			// test % alone
@@ -84,17 +86,18 @@ int main(void)
 			From the man of printf:
 				"If a conversion specification is invalid, the behavior is undefined."
 			*/
-			strcpy(err_msg, "test % alone");
-			fail += ft_check(ft_printf("ft_printf : %%%% :%A E\n") == 0, itest++, err_msg);
+			// strcpy(err_msg, "test % alone");
+			// fail += ft_check(ft_printf("ft_printf : %%%% :%A E\n") == 0, itest++, err_msg);
 			// official printf make compilation error in this case
-			fail += ft_check(ft_printf("ft_printf : %%%% :% E\n", "") == printf("ft_printf    : %%%% :%  E\n", ""), itest++, err_msg);
+			// fail += ft_check(ft_printf("ft_printf : %%%% :% E\n", "") == printf("ft_printf    : %%%% :%  E\n", ""), itest++, err_msg);
 			/* 
 			test/test.c:92:35: error: invalid conversion specifier ' ' [-Werror,-Wformat-invalid-specifier]
                         printf("ft_printf    : %%%% :%z %y  E\n", "");
                                                      ~~^
 			*/
-			printf("ft_printf    : %%%% :%z %y  E\n", "");
+			// printf("ft_printf    : %%%% :%z %y  E\n", "");
 		}
+
 	}
 
 	//test str
