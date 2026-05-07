@@ -13,6 +13,7 @@ OBJ_DIR     = obj
 SRC_FILES	=	get_next_line.c \
 				get_next_line_utils.c
 
+
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -24,30 +25,30 @@ TEST_PROG	= gnl_test_suite
 TEST_FILE	= test.c
 
 
-all: $(NAME)
-
-$(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $(INCS) -o $(NAME)
-
+all: test
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
+$(TEST_PROG): $(OBJS) $(TEST_FILE)
+	$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o $@
+
+test: CFLAGS += -g3 -fsanitize=address
+test: $(TEST_PROG)
+	./$(TEST_PROG)
+
+debug: CFLAGS += -g3 
+debug: $(TEST_PROG)
+
 clean:
 	rm -f $(OBJS)
 
 fclean: clean tclean
-	rm -f $(NAME)
 
 re: fclean all
 
 #####################
-
-test: CFLAGS += -g3 -fsanitize=address
-test: re
-	$(CC) $(CFLAGS) $(TEST_FILE) $(INCS) -o $(TEST_PROG)
-	./$(TEST_PROG)
 
 # tester: re
 # 	$(CC) $(CFLAGS) $(TEST_FILE) $(INCS) -o tester
@@ -62,8 +63,8 @@ tclean:
 # 	rm -f difftest_printf.txt
 
 
-memtest: re
-	@$(CC) $(CFLAGS) $(TEST_FILE) $(INCS) -o mem_check
+memtest: fclean
+	@$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o mem_check
 	@valgrind	--leak-check=full \
 				--show-leak-kinds=all \
 				--track-origins=yes \

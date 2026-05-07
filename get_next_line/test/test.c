@@ -6,12 +6,23 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:51:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/07 15:53:09 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/07 19:30:35 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+// for printf
 #include <stdio.h>
+// for stings but not used
+// #include <string.h>
+
+// for open()
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+// To get better error return
+#include <errno.h>
 #include <string.h>
 
 /* Standard Colors */
@@ -42,9 +53,33 @@ int ft_check(int check, int i, char *err_msg)
 int main(void)
 {
 	setvbuf(stdout, NULL, _IONBF, 0); // disable printf buffer
-	int test_all = 1;
-	int itest = 1;
-	int fail = 0;
-	char err_msg[100]; 
+	// int test_all = 1;
+	// int itest = 1;
+	// int fail = 0;
+	// char err_msg[100]; 
 	// int debug = 1;
+
+	printf("______GET_NEXT_LINE_TEST______\n\n");
+	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
+	
+
+	int fd0;
+	char *file0="test0.txt";
+	fd0 = open(file0, O_RDONLY);
+	if (fd0 < 0)
+		{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno ); return (1); }
+
+	char *line;
+	while (1)
+	{
+		line = get_next_line(fd0);
+		if (!line)
+			break ;
+		printf("%s", line);
+	}
+	free(line);
+	
+
+	return (0);
+
 }
