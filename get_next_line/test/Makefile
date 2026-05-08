@@ -2,7 +2,7 @@
 
 SHELL		= /bin/sh
 
-TEST_PROG	= gnl_test_suite
+TEST_PROG	= test_suite
 
 ############  Compiler Config  ############
 
@@ -44,7 +44,8 @@ test: fclean $(TEST_PROG)
 	./$(TEST_PROG)
 
 debug: CFLAGS += -g3 
-debug: fclean $(TEST_PROG)
+debug: fclean $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o test_suite_debug
 
 # tester: fclean
 # 	$(CC) $(CFLAGS) $(TEST_FILE) $(INCS) -o tester
@@ -69,6 +70,7 @@ re: fclean all
 
 tclean:
 	rm -f $(TEST_PROG)
+	rm -f $(TEST_PROG)_debug
 # 	rm -f tester
 # 	rm -f difftester.log 
 # 	rm -f difftest_ft_printf.txt
