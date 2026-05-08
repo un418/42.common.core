@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:51:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/07 19:30:35 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/07 20:06:31 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int main(void)
 	// char err_msg[100]; 
 	// int debug = 1;
 
-	printf("______GET_NEXT_LINE_TEST______\n\n");
-	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
+	printf("\n______GET_NEXT_LINE_TEST______\n\n");
+	printf("BUFFER_SIZE = %d\n\n", BUFFER_SIZE);
 	
 
 	int fd0;
