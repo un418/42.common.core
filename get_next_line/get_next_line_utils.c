@@ -6,20 +6,20 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:53 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/07 19:26:49 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/09 01:17:43 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_strnchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*p_s;
 
 	p_s = s;
 	while (n--)
 	{
-		if (*p_s == (unsigned char)c)
+		if ( !*p_s || *p_s == (unsigned char)c)
 			return ((void *)p_s);
 		p_s++;
 	}
@@ -94,12 +94,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 }
 
 //create substring from delimiter to the end of the buffer
-//
 char	*ft_gnl_substr(char const *s, char delimiter, size_t buf_size)
 {
 	char	*p_sub;
 
-	while (*s != delimiter)
+	// go to delimiter
+	while ( *s && *s != delimiter)
 	{
 		s++;
 		buf_size--;
@@ -115,4 +115,37 @@ char	*ft_gnl_substr(char const *s, char delimiter, size_t buf_size)
 	ft_strlcpy(p_sub, s, buf_size + 1);
 
 	return (p_sub);
+}
+
+// return size to delimiter or to '\0' if delimiter not found
+size_t	ft_dstrlen(const char *s, char delimiter)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] && s[i] != delimiter)
+		i++;
+	return (i);
+}
+
+//create substring from start to delimiter
+char	*ft_line_from_stash(char const *s, char delimiter)
+{
+	char	*p_sub;
+	char	*p_start;
+
+	// get size for malloc
+	p_start = malloc(ft_dstrlen(s, delimiter) + 2);
+	p_sub = p_start;
+	if (!p_start)
+		return (NULL);
+	// Copy untill delimeter
+	while (*s && *s != delimiter)
+	{
+		*p_sub++ = *s++;
+	}
+	*p_sub++ = *s; //last = delimiter or '\0'
+	*p_sub = '\0'; // Hope Double Null will no trigger valgrind ...
+
+	return (p_start);
 }

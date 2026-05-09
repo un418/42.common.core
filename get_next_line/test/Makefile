@@ -41,7 +41,7 @@ all: test
 
 test: CFLAGS += -g3 -fsanitize=address
 test: fclean $(TEST_PROG)
-	./$(TEST_PROG)
+	./$(TEST_PROG) | cat -e
 
 debug: CFLAGS += -g3 
 debug: fclean $(OBJS)
@@ -52,13 +52,18 @@ debug: fclean $(OBJS)
 # 	./tester > difftester.log 
 # 	./tester.sh
 
-memtest: fclean
+memtest: fclean $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o mem_check
 	@valgrind	--leak-check=full \
 				--show-leak-kinds=all \
 				--track-origins=yes \
 				./test/mem_check > /dev/null
 	@rm  -f ./test/mem_check
+
+memtestmac: fclean $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o mem_check
+	leaks --atExit -- ./mem_check
+	@rm  -f ./mem_check
 
 ############  Cleaning  ############
 clean:
