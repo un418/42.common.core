@@ -56,9 +56,10 @@ memtest: fclean $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o mem_check
 	@valgrind	--leak-check=full \
 				--show-leak-kinds=all \
+				--track-fds=yes \
 				--track-origins=yes \
-				./test/mem_check > /dev/null
-	@rm  -f ./test/mem_check
+				./mem_check > /dev/null
+	@rm  -f ./mem_check
 
 memtestmac: fclean $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o mem_check
