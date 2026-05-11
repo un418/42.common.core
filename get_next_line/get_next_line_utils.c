@@ -6,24 +6,29 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:53 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/09 01:17:43 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/09 22:28:13 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_strnchr(const void *s, int c, size_t n)
+void	*ft_strnchr(const void *s, int c, size_t n, int file_end)
 {
 	const unsigned char	*p_s;
 
 	p_s = s;
+	if (!s)
+		return (NULL);
 	while (n--)
 	{
 		if ( !*p_s || *p_s == (unsigned char)c)
 			return ((void *)p_s);
 		p_s++;
 	}
-	return (NULL);
+	if (file_end)
+		return ((void *)p_s);
+	else
+		return (NULL);
 }
 
 char	*ft_strdup(const char *s)
@@ -94,7 +99,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 }
 
 //create substring from delimiter to the end of the buffer
-char	*ft_gnl_substr(char const *s, char delimiter, size_t buf_size)
+char	*ft_gnl_substr(char const *s, char delimiter, size_t len)
 {
 	char	*p_sub;
 
@@ -102,17 +107,20 @@ char	*ft_gnl_substr(char const *s, char delimiter, size_t buf_size)
 	while ( *s && *s != delimiter)
 	{
 		s++;
-		buf_size--;
+		len--;
 	}
 	// pass the delimiter
-	s++;
-	buf_size--;
+	if (*s && *s == delimiter)
+	{
+		s++;
+		len--;
+	}
 	// alloc substr
-	p_sub = malloc(buf_size + 1);
+	p_sub = malloc(len + 1);
 	if (!p_sub)
 		return (NULL);
 	// copy in new allocated str
-	ft_strlcpy(p_sub, s, buf_size + 1);
+	ft_strlcpy(p_sub, s, len + 1);
 
 	return (p_sub);
 }
