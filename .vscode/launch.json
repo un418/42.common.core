@@ -83,7 +83,7 @@
 			"name": "GNL Debug- Linux (gdb)",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/get_next_line/test_suite_debug",
+			"program": "${workspaceFolder}/get_next_line/test/test_suite_debug",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
