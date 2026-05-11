@@ -6,154 +6,101 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:53 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/09 22:28:13 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/12 00:54:25 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_strnchr(const void *s, int c, size_t n, int file_end)
+char	*ft_strchr(char *s, int c)
 {
-	const unsigned char	*p_s;
-
-	p_s = s;
 	if (!s)
 		return (NULL);
-	while (n--)
+	while (1)
 	{
-		if ( !*p_s || *p_s == (unsigned char)c)
-			return ((void *)p_s);
-		p_s++;
+		if (!*s || *s == c)
+			return (s);
+		s++;
 	}
-	if (file_end)
-		return ((void *)p_s);
-	else
-		return (NULL);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*p_dup;
-	size_t	len_s;
+	char	*join;
+	char	*ptr;
+	size_t	i1;
+	size_t	i2;
 
-	len_s = ft_strlen(s);
-	p_dup = malloc((len_s + 1) * sizeof(char));
-	if (!p_dup)
-		return (NULL);
-	ft_strlcpy(p_dup, s, len_s + 1);
-	return (p_dup);
+	i1 = 0;
+	i2 = 0;
+	while (s1[i1])
+		i1++;
+	while (s2[i2])
+		i2++;
+	join = malloc(i1 + i2 + 1);
+	ptr = join;
+	if (!join)
+		return (free(s1), NULL);
+	while (*s1)
+		*join++ = *s1++;
+	while (*s2)
+		*join++ = *s2++;
+	*join = '\0';
+	return (ptr);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+// clean stash after line processed
+//create substring from delimiter to the end of the string
+// eq. remove the begining of the string untill the delimitor
+char	*ft_clean_stash(char *s, char delimiter)
 {
-	char	*p_join;
-	size_t	len_s1;
-	size_t	len_s2;
-
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	p_join = malloc((len_s1 + len_s2 + 1) * sizeof(char));
-	if (!p_join)
-		return (NULL);
-	ft_strlcpy(p_join, s1, len_s1 + 1);
-	ft_strlcat(p_join, s2, len_s1 + len_s2 + 1);
-	return (p_join);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
+	char	*substr;
+	char	*ps;
+	char	*psub;
+	size_t	i;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	const char	*p_src;
-
-	p_src = src;
-	if (size != 0)
-	{
-		while (--size && *src)
-			*dst++ = *src++;
-		*dst = '\0';
-	}
-	return (ft_strlen(p_src));
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	len_dst;
-
-	len_dst = ft_strlen(dst);
-	if (len_dst >= size)
-		return (size + ft_strlen(src));
-	else
-	{
-		ft_strlcpy(dst + len_dst, src, size - len_dst);
-		return (len_dst + ft_strlen(src));
-	}
-}
-
-//create substring from delimiter to the end of the buffer
-char	*ft_gnl_substr(char const *s, char delimiter, size_t len)
-{
-	char	*p_sub;
-
-	// go to delimiter
-	while ( *s && *s != delimiter)
-	{
+	ps = s;
+	while (*s && *s != delimiter)
 		s++;
-		len--;
-	}
-	// pass the delimiter
-	if (*s && *s == delimiter)
-	{
+	if (*s == delimiter)
 		s++;
-		len--;
-	}
-	// alloc substr
-	p_sub = malloc(len + 1);
-	if (!p_sub)
-		return (NULL);
-	// copy in new allocated str
-	ft_strlcpy(p_sub, s, len + 1);
-
-	return (p_sub);
-}
-
-// return size to delimiter or to '\0' if delimiter not found
-size_t	ft_dstrlen(const char *s, char delimiter)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != delimiter)
+	psub = s;
+	while (*psub)
+	{
+		psub++;
 		i++;
-	return (i);
+	}
+	substr = malloc(i + 1);
+	if (!substr)
+		return (free(s), NULL);
+	psub = substr;
+	while (*s)
+		*substr++ = *s++;
+	*substr = '\0';
+	return (free(ps), psub);
 }
 
 //create substring from start to delimiter
 char	*ft_line_from_stash(char const *s, char delimiter)
 {
-	char	*p_sub;
-	char	*p_start;
+	char	*substr;
+	char	*p;
+	size_t	i;
 
-	// get size for malloc
-	p_start = malloc(ft_dstrlen(s, delimiter) + 2);
-	p_sub = p_start;
-	if (!p_start)
+	i = 0;
+	while (s[i] && s[i] != delimiter)
+		i++;
+	if (s[i] == delimiter)
+		i++;
+	substr = malloc(i + 1);
+	if (!substr)
 		return (NULL);
-	// Copy untill delimeter
+	p = substr;
 	while (*s && *s != delimiter)
-	{
-		*p_sub++ = *s++;
-	}
-	*p_sub++ = *s; //last = delimiter or '\0'
-	*p_sub = '\0'; // Hope Double Null will no trigger valgrind ...
-
-	return (p_start);
+		*substr++ = *s++;
+	if (*s == delimiter)
+		*substr++ = *s;
+	*substr = '\0';
+	return (p);
 }

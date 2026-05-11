@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:51:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/09 21:17:57 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/12 00:50:56 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,13 @@ int main(void)
 		printf("%s", line);
 		free(line);
 	}
+	close(fd0);
 	
-
+/* 
+	line = get_next_line(fd0);
+	printf("%s", line);
+	free(line);
+ */
 	return (0);
 
 }
