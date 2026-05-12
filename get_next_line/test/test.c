@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:51:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/12 00:50:56 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/12 03:04:25 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,60 @@ int main(void)
 	printf("BUFFER_SIZE = %d\n\n", BUFFER_SIZE);
 	
 
-	int fd0;
-	char *file0="test0.txt";
-	fd0 = open(file0, O_RDONLY);
-	if (fd0 < 0)
-		{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno ); return (1); }
-
-	char *line;
-	while (1)
+	if (0)
 	{
+		int fd0;
+		char *file0="test0.txt";
+		fd0 = open(file0, O_RDONLY);
+		if (fd0 < 0)
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno ); return (1); }
+	
+		char *line;
+		while (1)
+		{
+			line = get_next_line(fd0);
+			if (!line)
+				break ;
+			printf("%s", line);
+			free(line);
+		}
+		close(fd0);
+		printf("\n");
+	}
+	if (1)
+	{
+		int fd0;
+		char *file0="test0.txt";
+		fd0 = open(file0, O_RDONLY);
+		if (fd0 < 0)
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno ); return (1); }
+		char *line;
 		line = get_next_line(fd0);
-		if (!line)
-			break ;
 		printf("%s", line);
 		free(line);
+		close(fd0);
+		printf("\n");
 	}
-	close(fd0);
-	
-/* 
-	line = get_next_line(fd0);
-	printf("%s", line);
-	free(line);
- */
+
+	if (1)
+	{
+		int fd1;
+		char *file1="test1.txt";
+		fd1 = open(file1, O_RDONLY);
+		if (fd1 < 0)
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno ); return (1); }
+		char *line;
+		while (1)
+		{
+			line = get_next_line(fd1);
+			if (!line)
+				break ;
+			printf("%s", line);
+			free(line);
+		}
+		close(fd1);
+		printf("\n");
+	}
 	return (0);
 
 }
