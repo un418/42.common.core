@@ -6,11 +6,37 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:53 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/12 03:59:49 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/12 04:07:05 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*buf_to_stash(int fd, char *stash)
+{
+	char		buf[BUFFER_SIZE + 1];
+	ssize_t		n_read;
+	char		*newstash;
+
+	while (!ft_strchr(stash, DELIMITER))
+	{
+		n_read = read(fd, buf, BUFFER_SIZE);
+		if (n_read < 0)
+			return (free(stash), stash = NULL, NULL);
+		buf[n_read] = '\0';
+		if (n_read == 0)
+			return (stash);
+		if (n_read > 0)
+		{
+			if (!stash)
+				stash = ft_strjoin("", "");
+			newstash = ft_strjoin(stash, buf);
+			free (stash);
+			stash = newstash;
+		}
+	}
+	return (stash);
+}
 
 char	*ft_strchr(char *s, int c)
 {
@@ -50,6 +76,29 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (ptr);
 }
 
+char	*ft_line_from_stash(char const *s, char delimiter)
+{
+	char	*substr;
+	char	*p;
+	size_t	i;
+
+	i = 0;
+	while (s[i] && s[i] != delimiter)
+		i++;
+	if (s[i] == delimiter)
+		i++;
+	substr = malloc(i + 1);
+	if (!substr)
+		return (NULL);
+	p = substr;
+	while (*s && *s != delimiter)
+		*substr++ = *s++;
+	if (*s == delimiter)
+		*substr++ = *s;
+	*substr = '\0';
+	return (p);
+}
+
 char	*ft_clean_stash(char *s, char delimiter)
 {
 	char	*substr;
@@ -77,27 +126,4 @@ char	*ft_clean_stash(char *s, char delimiter)
 		*substr++ = *s++;
 	*substr = '\0';
 	return (free(ps), psub);
-}
-
-char	*ft_line_from_stash(char const *s, char delimiter)
-{
-	char	*substr;
-	char	*p;
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != delimiter)
-		i++;
-	if (s[i] == delimiter)
-		i++;
-	substr = malloc(i + 1);
-	if (!substr)
-		return (NULL);
-	p = substr;
-	while (*s && *s != delimiter)
-		*substr++ = *s++;
-	if (*s == delimiter)
-		*substr++ = *s;
-	*substr = '\0';
-	return (p);
 }
