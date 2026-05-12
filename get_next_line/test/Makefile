@@ -44,11 +44,21 @@ test: fclean $(TEST_PROG)
 	./$(TEST_PROG) | cat -e
 
 debug: CFLAGS += -g3 
-debug: fclean $(OBJS)
+debug: fclean $(OBJS) $(TEST_FILE)
 	$(CC) $(CFLAGS) $(OBJS) $(TEST_FILE) $(INCS) -o test_suite_debug
 
-# tester: fclean
-# 	$(CC) $(CFLAGS) $(TEST_FILE) $(INCS) -o tester
+tester: fclean  $(OBJS) $(TEST_FILE)
+	@echo "-- TESTER - BUFFER_SIZE=1"
+	@$(CC) $(CFLAGS) -D BUFFER_SIZE=1 $(OBJS) $(TEST_FILE) $(INCS) -o tester-buf1
+	@./tester-buf1
+	@echo "-- TESTER - BUFFER_SIZE=5"
+	@$(CC) $(CFLAGS) -D BUFFER_SIZE=5 $(OBJS) $(TEST_FILE) $(INCS) -o tester-buf5
+	@./tester-buf5
+	@echo "-- TESTER - BUFFER_SIZE=100"
+	@$(CC) $(CFLAGS) -D BUFFER_SIZE=100 $(OBJS) $(TEST_FILE) $(INCS) -o tester-buf100
+	@./tester-buf100
+	#@echo "-- TESTER - BUFFER_SIZE=1000000"
+	#$(CC) $(CFLAGS) -D BUFFER_SIZE=1000000 $(OBJS) $(TEST_FILE) $(INCS) -o tester-buf1000000
 # 	./tester > difftester.log 
 # 	./tester.sh
 
@@ -69,6 +79,8 @@ memtestmac: fclean $(OBJS)
 ############  Cleaning  ############
 clean:
 	rm -f $(OBJS)
+	rm -f *.output
+	rm -f tester-buf*
 
 fclean: clean tclean
 
