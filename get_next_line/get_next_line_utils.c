@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:53 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/12 00:54:25 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/12 03:59:49 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ char	*ft_strchr(char *s, int c)
 {
 	if (!s)
 		return (NULL);
-	while (1)
+	while (*s)
 	{
-		if (!*s || *s == c)
+		if (*s == c)
 			return (s);
 		s++;
 	}
+	return (NULL);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -49,9 +50,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (ptr);
 }
 
-// clean stash after line processed
-//create substring from delimiter to the end of the string
-// eq. remove the begining of the string untill the delimitor
 char	*ft_clean_stash(char *s, char delimiter)
 {
 	char	*substr;
@@ -81,7 +79,6 @@ char	*ft_clean_stash(char *s, char delimiter)
 	return (free(ps), psub);
 }
 
-//create substring from start to delimiter
 char	*ft_line_from_stash(char const *s, char delimiter)
 {
 	char	*substr;
