@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 15:51:35 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/12 20:58:37 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/14 16:53:36 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,7 @@ int main(void)
 		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error // Print & Don't exit on error // Print & Don't exit on error
-
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
 		char *line;
 		while (1)
 		{
@@ -214,7 +213,7 @@ int main(void)
 			free(line);
 		}
 		if (fd < 0)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error // Print & Don't exit on error
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error 
 		close(fd); close(fd_out);
 		printf("\n\n");
 	}
@@ -232,7 +231,7 @@ int main(void)
 		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error // Print & Don't exit on error // Print & Don't exit on error
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
 
 		char *line;
 		while (1)
@@ -245,7 +244,7 @@ int main(void)
 		}
 
 		if (fd == -1)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error // Print & Don't exit on error // Print & Don't exit on error
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
 		close(fd); close(fd_out);
 		printf("\n\n");
 	}
