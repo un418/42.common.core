@@ -6,15 +6,15 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/14 17:20:09 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/19 18:21:00 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	ft_dprintf_switch(int fd, va_list args, const char *str)
+static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 {
-	size_t	counter;
+	ssize_t	counter;
 
 	counter = 0;
 	if (*str == 'c')
@@ -39,19 +39,27 @@ static size_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 
 static int	ft_dprintf(int fd, const char *str, va_list args)
 {
-	size_t	count;
+	ssize_t	count;
+	ssize_t	ret;
 
 	count = 0;
+	ret = 0;
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
-			count += ft_dprintf_switch(fd, args, str);
+			ret = ft_dprintf_switch(fd, args, str);
+			if (ret == -1)
+				return (-1);
+			count += ret;
 			str++;
 			continue ;
 		}
-		count += ft_write_fd_char(*str, fd);
+		ret += ft_write_fd_char(*str, fd);
+		if (ret == -1)
+			return (-1);
+		count += ret;
 		str++;
 	}
 	return (count);
@@ -59,7 +67,7 @@ static int	ft_dprintf(int fd, const char *str, va_list args)
 
 int	ft_printf(const char *str, ...)
 {
-	size_t	count;
+	ssize_t	count;
 	va_list	args;
 
 	count = 0;

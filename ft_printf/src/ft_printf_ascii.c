@@ -6,20 +6,20 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 13:26:16 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/06 15:23:16 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/19 18:11:02 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_write_fd_char(int c, int fd)
+ssize_t	ft_write_fd_char(int c, int fd)
 {
 	return (write(fd, &c, 1));
 }
 
-size_t	ft_write_fd_str(char *s, int fd)
+ssize_t	ft_write_fd_str(char *s, int fd)
 {
-	size_t	counter;
+	ssize_t	counter;
 
 	counter = 0;
 	if (!s)
