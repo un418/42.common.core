@@ -8,6 +8,9 @@
 - [x] add file descriptor management for my printf
 - [x] add test prefix in diff output file and move them to test folder
 - [ ] Go Deeper inside the EDGE CASE
+- [ ] Verify the check error compliance
+	- [ ] https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf
+	- [ ] How to test it ? 
 - [ ] Finish readme
 - [ ] Clean MakeFile
 - [ ] Do deeper final tests 
