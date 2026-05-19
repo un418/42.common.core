@@ -19,7 +19,7 @@ size_t	ft_writeunbr_fd_recurse(unsigned long ul, int fd)
 	counter = 0;
 	if (ul > 9)
 		counter += ft_writeunbr_fd_recurse(ul / 10, fd);
-	counter += write(fd, &"0123456789"[ul % 10], fd);
+	counter += write(fd, &"0123456789"[ul % 10], 1);
 	return (counter);
 }
 
@@ -49,7 +49,7 @@ size_t	ft_writehex_fd_recurse(unsigned long un, int fd, int upper)
 		base16 = "0123456789abcdef";
 	if (un > 15)
 		counter += ft_writehex_fd_recurse(un / 16, fd, upper);
-	counter += write(fd, &base16[un % 16], fd);
+	counter += write(fd, &base16[un % 16], 1);
 	return (counter);
 }
 
