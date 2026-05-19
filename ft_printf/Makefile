@@ -53,13 +53,13 @@ test: re
 
 tester: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/tester
-	./$(TEST_DIR)/tester > $(TEST_DIR)/difftester.log 
+	./$(TEST_DIR)/tester > $(TEST_DIR)/difftester.log
 	./$(TEST_DIR)/tester.sh
 
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)
 	rm -f $(TEST_DIR)/tester
-	rm -f $(TEST_DIR)/difftester.log 
+	rm -f $(TEST_DIR)/difftester.log
 	rm -f $(TEST_DIR)/difftest_ft_printf.txt
 	rm -f $(TEST_DIR)/difftest_printf.txt
 
