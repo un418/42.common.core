@@ -38,9 +38,8 @@ Add the library header to any source files that call Libft functions:
 #include "ft_printf.h"
 ```
 #### 2. Compile and Link
-For this example, we assume your project is located in `/home/user/project1` and you have copied the `ft_printf` folder into `/home/user/project1/ft_printf`.  
+_For this example, we assume your project is located in `/home/user/project1` and you have copied the `ft_printf` folder into `/home/user/project1/ft_printf`._  
 
-Now you must tell the compiler where to find both the header files and the compiled library.  
 ```bash 
 cd /home/user/project1
 # Build the library by triggering its Makefile
@@ -52,7 +51,10 @@ cc main.c -Ift_printf/inc -Lft_printf -lftprintf -o my_program
 ## Technical choices
 ### Usage of file descriptor
 Even if it was not asked.  
-I deliberatly choose to manage file descriptors in my implementation of **ft_printf** in order to be able to write information to **stderr** or any **log files** in my next 42 comming projects.
+I deliberatly choose to manage file descriptors in my implementation of **ft_printf** in order to be able to write informations to **stderr** or any **log files** in my next 42 comming projects.  
+Because I choosed to deal with files descriptors in order to write into files, I needed also a proper **error handling in case of writing error into them**.  
+That definitely **bloated my code** but allow me to understand why it can be a good idea to use / **implement a buffer inplace to use the write syscall** for every character.
+
 
 ## Resources
 
@@ -60,7 +62,8 @@ I deliberatly choose to manage file descriptors in my implementation of **ft_pri
 * Book : [C Programming. A Modern Approach. by K. N. King(Georgia State University)](http://knking.com/books/c2/)
 * [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagram to building mental models of memory and data structures.
 * [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here]()
-* Took inspiration on [Tribouille printfTester](https://github.com/Tripouille/printfTester) to write my very own little tester.
+* Took inspiration on [Tribouille printfTester](https://github.com/Tripouille/printfTester) to write my first own little tester.
+	* try `make tester` and `make test`
 
 ### AI Usage
 
