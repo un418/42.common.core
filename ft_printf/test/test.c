@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/20 00:40:28 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:15:20 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -327,12 +327,20 @@ int main(void)
 	{
 		printf("----- ft_printf: WRITE ERROR -------\n\n\n");
 		{
+			// backup fd
+			int fd_backup = dup(1);
 			strcpy(err_msg, "test ft_printf returns -1 when stdout is invalid");
 			close(1);
-			fail += ft_check(ft_printf("ft_printf : write_error : %d\n", 42) == ft_printf("printf    : write_error : %d\n", 42), itest++, err_msg);
+			fail += ft_check(ft_printf("ft_printf : write_error : %d\n", 42) == -1, itest++, err_msg);
+			dprintf(2,"ret = %d\n",ft_printf ("test"));
+			dprintf(2,"ret should eqal -1\n\n");
+			// restore fd
+			dup2(fd_backup, 1);
+			close(fd_backup);
 		}
 	}
 
+	printf("########## ft_printf: RESULT ##########\n\n");
 	char *final_msg;
 	if (fail)
 		final_msg = "FAILURE";
