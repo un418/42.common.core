@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/19 18:21:00 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/20 16:22:53 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 	else if (*str == 'p')
 		return (ft_write_fd_pointer(va_arg(args, void *), fd));
 	else
-		return (counter);
+		return (-1);
 }
 
 static int	ft_dprintf(int fd, const char *str, va_list args)
@@ -56,7 +56,7 @@ static int	ft_dprintf(int fd, const char *str, va_list args)
 			str++;
 			continue ;
 		}
-		ret += ft_write_fd_char(*str, fd);
+		ret = ft_write_fd_char(*str, fd);
 		if (ret == -1)
 			return (-1);
 		count += ret;

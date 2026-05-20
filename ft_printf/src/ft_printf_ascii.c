@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/06 13:26:16 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/19 18:11:02 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/20 15:43:11 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ ssize_t	ft_write_fd_char(int c, int fd)
 ssize_t	ft_write_fd_str(char *s, int fd)
 {
 	ssize_t	counter;
+	ssize_t	ret;
 
 	counter = 0;
 	if (!s)
 		return (ft_write_fd_str("(null)", fd));
 	while (*s)
 	{
-		write(fd, &*s++, 1);
+		ret = write(fd, &*s++, 1);
+		if (ret == -1)
+			return (-1);
 		counter++;
 	}
 	return (counter);
