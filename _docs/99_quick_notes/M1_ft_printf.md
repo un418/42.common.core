@@ -11,6 +11,8 @@
 - [x] Verify the check error compliance
 	- [x] https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf
 	- [x] How to test it ? 
+- [ ] Check about printf(NULL)
+	- https://42born2code.slack.com/archives/C033QK0NPQA/p1779456719311929
 - [ ] Finish readme
 - [ ] Clean MakeFile
 - [ ] Do deeper final tests 
