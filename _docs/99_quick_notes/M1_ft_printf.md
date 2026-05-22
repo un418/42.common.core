@@ -7,10 +7,10 @@
 - [x] automate test by comparing the output from my function and the official one
 - [x] add file descriptor management for my printf
 - [x] add test prefix in diff output file and move them to test folder
-- [ ] Go Deeper inside the EDGE CASE
-- [ ] Verify the check error compliance
-	- [ ] https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf
-	- [ ] How to test it ? 
+- [x] Go Deeper inside the EDGE CASE //return -1 like printf
+- [x] Verify the check error compliance
+	- [x] https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf
+	- [x] How to test it ? 
 - [ ] Finish readme
 - [ ] Clean MakeFile
 - [ ] Do deeper final tests 
