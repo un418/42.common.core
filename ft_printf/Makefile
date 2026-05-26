@@ -3,7 +3,7 @@ SHELL		= /bin/sh
 NAME		= libftprintf.a
 
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+#CFLAGS		= -Wall -Wextra -Werror
 HEADER		= $(INC_DIR)/ft_printf.h
 
 INC_DIR     = inc
