@@ -4,66 +4,120 @@ _This project has been created as part of the 42 curriculum by adaferna._
 
 Table of Contents
 * [Description](#description)
+* [Supported Specifiers](#supported-specifiers)
 * [Instructions](#instructions)
   * [Build](#build)
-  * [Using the Library in Another Project](#using-the-library-in-another-project)
-    * [1. Include the Header](#1-include-the-header)
-    * [2. Compile and Link](#2-compile-and-link)
-* [Technical choices](#technical-choices)
+  * [Integration](#integration)
+* [Implementation](#implementation)
+  * [Algorithm](#algorithm)
+  * [Data Structures](#data-structures)
+  * [File descriptor support](#file-descriptor-support)
+  * [Error propagation](#error-propagation)
+  * [Internal functions](#internal-functions)
 * [Resources](#resources)
   * [AI Usage](#ai-usage)
-* [Libft Functions List](#libft-functions-list)
 
 ## Description
 
 The goal of this project is to recode a light implementation of the famous `printf()` function from *libc*.
 
+`ft_printf` reimplements the standard `printf` interface for the `cspdiuxX%` specifiers. Output is unbuffered: every character is written directly through the `write` syscall.
+
+See [Supported Specifiers](#supported-specifiers) for the full list of supported conversions.
+
+## Supported Specifiers
+
+| Specifier | Description |
+| --- | --- |
+| `%c` | Prints a single character |
+| `%s` | Prints a string (`NULL` → `"(null)"`) |
+| `%d` | Prints a signed decimal integer |
+| `%i` | Prints a signed integer |
+| `%u` | Prints an unsigned decimal integer |
+| `%x` | Prints an unsigned integer in lowercase hexadecimal |
+| `%X` | Prints an unsigned integer in uppercase hexadecimal |
+| `%p` | Prints a pointer address in hex with `0x` prefix (`NULL` → `"(nil)"`) |
+| `%%` | Prints a literal `%` character |
+
 ## Instructions
 
+### Build
+
 ```bash
-make            # build the library
-make clean      # delete temporary object files `*.o`
-make fclean     # delete `*.o` and the final `libft.a` files
-make re         # delete `*.o` and `libft.a` files, then rebuild the library
+make        # build
+make re     # rebuild
+make clean  # remove objects
+make fclean # remove objects + libftprintf.a
 ```
 
-### Using the Library in Another Project
+### Integration
 
-To use **ft_printf** in your own project, follow these steps.
-
-#### 1. Include the Header
-Add the library header to any source files that call Libft functions:
-
-```c
-#include "ft_printf.h"
-```
-#### 2. Compile and Link
-_For this example, we assume your project is located in `/home/user/project1` and you have copied the `ft_printf` folder into `/home/user/project1/ft_printf`._  
-
-```bash 
-cd /home/user/project1
-# Build the library by triggering its Makefile
+#### 1 - Clone or copy ft_printf into your project as a subfolder
+```bash
 make -C ft_printf
-# Compile your project and link the library
 cc main.c -Ift_printf/inc -Lft_printf -lftprintf -o my_program
 ```
 
-## Technical choices
-### Usage of file descriptor
-Even if it was not asked.  
-I deliberatly choose to manage file descriptors in my implementation of **ft_printf** in order to be able to write informations to **stderr** or any **log files** in my next 42 comming projects.  
-Because I choosed to deal with files descriptors in order to write into files, I needed also a proper **error handling in case of writing error into them**.  
-That definitely **bloated my code** but allow me to understand why it can be a good idea to use / **implement a buffer inplace to use the write syscall** for every character.
+#### 2 - Add header file to every source file that calls ft_printf
+```c
+#include "ft_printf.h"
+```
 
+#### 3 - Call the function (see [Supported Specifiers](#supported-specifiers))
+```c
+ft_printf("Hello %s, answer is %d\n", "world", 42);
+```
+
+## Implementation
+
+### Algorithm
+
+`ft_printf` is built around a simple **dispatcher**:
+
+1. The format string is iterated character by character.
+2. On a `%`, the next character is read and used as a key in a dispatch chain (`if / else if` on the specifier).
+3. The matching handler consumes one argument from the `va_list` and writes its formatted output directly through `write`.
+4. The running count of bytes successfully written is returned, matching the behavior of the real `printf`.
+
+### Data Structures
+
+No dynamic memory is allocated.  
+The `va_list` is the only data structure needed, it is the standard C mechanism for accessing variadic arguments.
+
+### File descriptor support
+
+Although not required by the subject, output is routed through an internal file descriptor parameter rather than hard-coding `stdout`.  
+This makes the same helpers reusable to write to `stderr` or any log file in future 42 projects.  
+This decision to be able to write on files required consistent error handling across all write operations ; see [Error propagation](#error-propagation) below.
+
+### Error propagation
+
+All internal helpers return `ssize_t` and propagate `-1` on a `write` failure.  
+The main loop checks every return value and short-circuits immediately, mirroring the behaviour of the real `printf` on write errors.
+
+### Internal functions
+
+Only `ft_printf` is meant to be called from user code.  
+The helpers below are declared in `ft_printf.h` so they can be reused when integrating the library in larger projects (e.g. writing to a custom file descriptor).
+
+| Name | Prototype | Description |
+| --- | --- | --- |
+| `ft_printf` | `int ft_printf(const char *str, ...)` | Public entry point — parses the format string and dispatches to handlers |
+| `ft_write_fd_char` | `ssize_t ft_write_fd_char(int c, int fd)` | Writes a single character to a file descriptor |
+| `ft_write_fd_str` | `ssize_t ft_write_fd_str(char *s, int fd)` | Writes a string to a file descriptor (`NULL` prints `"(null)"`) |
+| `ft_writesnbr_fd` | `ssize_t ft_writesnbr_fd(long n, int fd)` | Writes a signed decimal integer to a file descriptor |
+| `ft_writeunbr_fd_recurse` | `ssize_t ft_writeunbr_fd_recurse(unsigned long ul, int fd)` | Writes an unsigned decimal integer recursively to a file descriptor |
+| `ft_writehex_fd_recurse` | `ssize_t ft_writehex_fd_recurse(unsigned long un, int fd, int upper)` | Writes an unsigned integer in hexadecimal recursively (`upper` selects case) |
+| `ft_write_fd_pointer` | `ssize_t ft_write_fd_pointer(void *p, int fd)` | Writes a pointer address with `0x` prefix (`NULL` prints `"(nil)"`) |
 
 ## Resources
 
 * Manual Pages (`man`): The primary reference for understanding standard libc functions.
 * Book : [C Programming. A Modern Approach. by K. N. King(Georgia State University)](http://knking.com/books/c2/)
 * [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagram to building mental models of memory and data structures.
-* [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here]()
+* [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here]().
 * Took inspiration on [Tribouille printfTester](https://github.com/Tripouille/printfTester) to write my first own little tester.
-	* try `make tester` and `make test`
+  * try `make tester` and `make test`
 
 ### AI Usage
 
@@ -72,11 +126,3 @@ That definitely **bloated my code** but allow me to understand why it can be a g
 * Refining the English descriptions and structure of this README to ensure clarity for other developers.
 
 You can find the definition of my Gemini Gem [here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md), it will give you a clear vision of how I use AI to learn.
-
-
-## ft_printf Library Functions List
-
-A quick reference to help you find the functions you need.
-
-| Function | Description |
-| --- | --- |
