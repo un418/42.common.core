@@ -39,7 +39,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 clean:
 	rm -f $(OBJS)
 
-fclean: clean tclean
+fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
@@ -55,17 +55,20 @@ test: CFLAGS += -g3 -fsanitize=address
 test: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
 	./$(TEST_DIR)/$(TEST_PROG)
+	@make tclean
 
 # -Werror removed to allow testing undefined behaviour
 test_ub: CFLAGS = -Wall -Wextra -g3
 test_ub: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/ub_test.c $(INCS) $(LIBS) -o $(TEST_DIR)/ub_test
 	./$(TEST_DIR)/ub_test
+	@make tclean
 
 tester: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/tester
 	./$(TEST_DIR)/tester > $(TEST_DIR)/difftester.log
 	./$(TEST_DIR)/tester.sh
+	@make tclean
 
 memtest: re
 	@$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/mem_check
@@ -73,7 +76,7 @@ memtest: re
 				--show-leak-kinds=all \
 				--track-origins=yes \
 				./test/mem_check > /dev/null
-	@rm -f ./test/mem_check
+	@make tclean
 
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)
@@ -82,7 +85,8 @@ tclean:
 	rm -f $(TEST_DIR)/difftest_ft_printf.txt
 	rm -f $(TEST_DIR)/difftest_printf.txt
 	rm -f $(TEST_DIR)/ub_test
+	rm -f ./test/mem_check
 
 # ─────────────────────────────────────────────────────────────────────────────
 
-.PHONY: all clean fclean re test tclean memtest
+.PHONY: all clean fclean re test test_ub tester memtest tclean
