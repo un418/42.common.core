@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:46:40 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/29 00:00:00 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 17:07:58 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdarg.h>
 
-# define FT_STDOUT    1
-# define FT_STDERR    2
+# define FT_STDOUT		1
+# define FT_STDERR		2
 
 int	ft_printf(const char *str, ...);
 int	ft_dprintf(int fd, const char *str, ...);

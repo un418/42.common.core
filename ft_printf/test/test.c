@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/29 11:38:20 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 17:08:34 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,7 +285,7 @@ int main(void)
 	//test combination
 	
 	// if (1 || test_all) // disable on mac 
-	if (0)
+	if (1 || test_all)
 	{
 			printf("----- ft_printf: TESTING COMBI -------\n\n\n");
 		{
