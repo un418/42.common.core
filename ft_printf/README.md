@@ -13,7 +13,10 @@ Table of Contents
   * [Data Structures](#data-structures)
   * [File descriptor support](#file-descriptor-support)
   * [Error propagation](#error-propagation)
-  * [Internal functions](#internal-functions)
+  * [Hexadecimal case handling](#hexadecimal-case-handling)
+  * [Headers](#headers)
+  * [Function reference](#function-reference)
+* [Testing](#testing)
 * [Resources](#resources)
   * [AI Usage](#ai-usage)
 
@@ -82,47 +85,88 @@ ft_printf("Hello %s, answer is %d\n", "world", 42);
 ### Data Structures
 
 No dynamic memory is allocated.  
-The `va_list` is the only data structure needed, it is the standard C mechanism for accessing variadic arguments.
+The `va_list` is the only data structure needed; it is the standard C mechanism for accessing variadic arguments.
 
 ### File descriptor support
 
 Although not required by the subject, output is routed through an internal file descriptor parameter rather than hard-coding `stdout`.  
 This makes the same helpers reusable to write to `stderr` or any log file in future 42 projects.  
-This decision to be able to write on files required consistent error handling across all write operations ; see [Error propagation](#error-propagation) below.
+Supporting writes to an arbitrary file descriptor required consistent error handling across all write operations; see [Error propagation](#error-propagation) below.
 
 ### Error propagation
 
 All internal helpers return `ssize_t` and propagate `-1` on a `write` failure.  
-The main loop checks every return value and short-circuits immediately, mirroring the behaviour of the real `printf` on write errors.
+The main loop checks every return value and short-circuits immediately, mirroring the behavior of the real `printf` on write errors.
 
-### Internal functions
+### Hexadecimal case handling
 
-Only `ft_printf` is meant to be called from user code.  
-The helpers below are declared in `ft_printf.h` so they can be reused when integrating the library in larger projects (e.g. writing to a custom file descriptor).
+`%x` and `%X` differ only by digit case (`a-f` vs `A-F`).  
+Instead of writing a dedicated function for each, `ft_writehex_fd_recurse` takes an `upper` flag that selects the digit alphabet (lowercase when `0`, uppercase when `1`).  
+See [`ft_writehex_fd_recurse`](https://github.com/un418/42.common.core/blob/master/ft_printf/src/ft_printf_num.c#L63-L66).
+
+### Headers
+
+Following common industry practice, the interface is split in two: 
+- `ft_printf.h` exposes the public API meant to be called from user code.
+- `ft_printf_private.h` holds the internal conversion helpers needed to build the library archive.
+
+### Function reference
+
+#### **Public API** - `ft_printf.h`
+- `ft_printf` covers the subject
+- `dprintf` / `vprintf` are not required for the subject, but I chose to implement them for use in my future projects (e.g. the push_swap bonus)
 
 | Name | Prototype | Description |
 | --- | --- | --- |
-| `ft_printf` | `int ft_printf(const char *str, ...)` | Public entry point — parses the format string and dispatches to handlers |
+| `ft_printf` | `int ft_printf(const char *str, ...)` | Subject entry point — formats to `stdout` |
+| `ft_dprintf` | `int ft_dprintf(int fd, const char *str, ...)` | Same as `ft_printf` but writes to an arbitrary file descriptor |
+| `ft_vprintf` | `int ft_vprintf(const char *str, va_list args)` | `ft_printf` variant taking an already-started `va_list` |
+| `ft_vdprintf` | `int ft_vdprintf(int fd, const char *str, va_list args)` | `ft_dprintf` variant taking an already-started `va_list` |
+
+#### **Internal helpers** - `ft_printf_private.h`
+Implementation details, not meant to be called directly.
+
+| Name | Prototype | Description |
+| --- | --- | --- |
 | `ft_write_fd_char` | `ssize_t ft_write_fd_char(int c, int fd)` | Writes a single character to a file descriptor |
 | `ft_write_fd_str` | `ssize_t ft_write_fd_str(char *s, int fd)` | Writes a string to a file descriptor (`NULL` prints `"(null)"`) |
 | `ft_writesnbr_fd` | `ssize_t ft_writesnbr_fd(long n, int fd)` | Writes a signed decimal integer to a file descriptor |
 | `ft_writeunbr_fd_recurse` | `ssize_t ft_writeunbr_fd_recurse(unsigned long ul, int fd)` | Writes an unsigned decimal integer recursively to a file descriptor |
-| `ft_writehex_fd_recurse` | `ssize_t ft_writehex_fd_recurse(unsigned long un, int fd, int upper)` | Writes an unsigned integer in hexadecimal recursively (`upper` selects case) |
+| `ft_writehex_fd_recurse` | `ssize_t ft_writehex_fd_recurse(unsigned long un, int fd, int upper)` | Writes an unsigned integer in hexadecimal recursively (`upper` selects case — see [Hexadecimal case handling](#hexadecimal-case-handling)) |
 | `ft_write_fd_pointer` | `ssize_t ft_write_fd_pointer(void *p, int fd)` | Writes a pointer address with `0x` prefix (`NULL` prints `"(nil)"`) |
+
+## Testing
+
+Building my own tests was honestly one of the fun parts of this project — it was my first time writing a tester, even a very basic one, and it taught me as much about `printf` as coding `ft_printf` itself.
+
+The approach is simple: run the same format strings through `ft_printf` and the real `printf`, then compare both the **output** and the **return value**.  
+
+Three complementary tools:
+- **Functional suite** ([`test/test.c`](https://github.com/un418/42.common.core/blob/master/ft_printf/test/test.c)) — `make test`  
+Built with AddressSanitizer (`-fsanitize=address`), it checks every specifier against the system `printf`.
+- **Undefined-behavior suite** ([`test/ub_test.c`](https://github.com/un418/42.common.core/blob/master/ft_printf/test/ub_test.c)) — `make test_ub` (compiled without `-Werror`)  
+Covers the messy edge cases: unknown specifiers, a lone `%`, a `NULL` format, and write errors on a closed `stdout`. It lets me reproduce the behavior of `printf` as closely as possible in these edge cases.
+- **Stdout comparison** ([`test/tester.sh`](https://github.com/un418/42.common.core/blob/master/ft_printf/test/tester.sh)) — `make tester`  
+A small bash script that `diff`s `ft_printf` output against `printf` line by line.
+
+A `make memtest` target also runs the suite under Valgrind to confirm there are no leaks.
 
 ## Resources
 
 * Manual Pages (`man`): The primary reference for understanding standard libc functions.
-* Book : [C Programming. A Modern Approach. by K. N. King(Georgia State University)](http://knking.com/books/c2/)
-* [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagram to building mental models of memory and data structures.
-* [Obsidian.md](https://obsidian.md/) to take note when working on this project you can find them [here]().
-* Took inspiration on [Tribouille printfTester](https://github.com/Tripouille/printfTester) to write my first own little tester.
+* Book: [C Programming. A Modern Approach. by K. N. King (Georgia State University)](http://knking.com/books/c2/)
+* [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagrams for building mental models of memory and data structures.
+* [Obsidian.md](https://obsidian.md/) to take notes while working on this project — you can find them [here](https://github.com/un418/42.common.core/blob/master/_docs/99_quick_notes/M1_ft_printf.md).
+* Took inspiration from [Tripouille's printfTester](https://github.com/Tripouille/printfTester) to write my own first little tester.
   * try `make tester` and `make test`
+* Took inspiration from [aleksify](https://github.com/aleksify)'s [ft_printf implementation](https://github.com/42lx/ft_printf/blob/main/include/ft_printf.h) for:
+  * Going beyond the subject's requirements and implementing [File descriptor support](#file-descriptor-support)
+  * Splitting the headers between public and private — see [Headers](#headers)
 
 ### AI Usage
 
 * Clarifying concepts
-* Advices on coding best practices
+* Advice on coding best practices
 * Refining the English descriptions and structure of this README to ensure clarity for other developers.
 
 You can find the definition of my Gemini Gem [here](https://github.com/un418/42.common.core/blob/master/_docs/42/AI%20-%20LLM.md), it will give you a clear vision of how I use AI to learn.
