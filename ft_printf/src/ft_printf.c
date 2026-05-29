@@ -12,24 +12,24 @@
 
 #include "ft_printf_private.h"
 
-static ssize_t	ft_dprintf_switch(int fd, va_list *args, const char *str)
+static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 {
 	if (*str == 'c')
-		return (ft_write_fd_char(va_arg(*args, int), fd));
+		return (ft_write_fd_char(va_arg(args, int), fd));
 	else if (*str == '%')
 		return (ft_write_fd_char('%', fd));
 	else if (*str == 's')
-		return (ft_write_fd_str(va_arg(*args, char *), fd));
+		return (ft_write_fd_str(va_arg(args, char *), fd));
 	else if (*str == 'd' || *str == 'i')
-		return (ft_writesnbr_fd(va_arg(*args, int), fd));
+		return (ft_writesnbr_fd(va_arg(args, int), fd));
 	else if (*str == 'u')
-		return (ft_writeunbr_fd_recurse(va_arg(*args, unsigned int), fd));
+		return (ft_writeunbr_fd_recurse(va_arg(args, unsigned int), fd));
 	else if (*str == 'x')
-		return (ft_writehex_fd_recurse(va_arg(*args, unsigned int), fd, 0));
+		return (ft_writehex_fd_recurse(va_arg(args, unsigned int), fd, 0));
 	else if (*str == 'X')
-		return (ft_writehex_fd_recurse(va_arg(*args, unsigned int), fd, 1));
+		return (ft_writehex_fd_recurse(va_arg(args, unsigned int), fd, 1));
 	else if (*str == 'p')
-		return (ft_write_fd_pointer(va_arg(*args, void *), fd));
+		return (ft_write_fd_pointer(va_arg(args, void *), fd));
 	else
 		return (-1);
 }
@@ -46,7 +46,7 @@ int	ft_vdprintf(int fd, const char *str, va_list args)
 		if (*str == '%')
 		{
 			str++;
-			ret = ft_dprintf_switch(fd, &args, str);
+			ret = ft_dprintf_switch(fd, args, str);
 			if (ret == -1)
 				return (-1);
 			count += ret;
