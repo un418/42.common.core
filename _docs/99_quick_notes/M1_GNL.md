@@ -1,5 +1,13 @@
 ## TODO
 
+
+- [ ] From eval sheet , to add to my test
+
+> [!WARNING]
+> Carry out AT LEAST the following tests to try to stress the error management.  
+> - Pass an arbitrary, invalid file descriptor (e.g., 42) to get_next_line. The function must return NULL.
+> - Check the error returns for read and malloc. If there is an error, the evaluation stops here. You can keep going and discuss the implementation of the code, but the assignment will not be graded.
+
 - [ ] Add diff tester
 	- Compare .txt with .output manage specific case for no exists files
 	- Try to reproduce the tests where there is a func call with bad fd and next call with good fd

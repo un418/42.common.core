@@ -15,6 +15,8 @@
 	- https://42born2code.slack.com/archives/C033QK0NPQA/p1779456719311929
 - [ ] Finish readme
 - [ ] Clean MakeFile
+- [ ]  Refactor headers : split `ft_printf.h` (public, only `ft_printf`) and `ft_printf_private.h` (internal helpers)
+- [ ] finir implem vprintf + dprintf
 - [ ] Do deeper final tests 
 - [ ] Last subject Reading
 # Q&A

@@ -7,4 +7,3 @@ Ressources:
 Video
 * Oceano : https://www.youtube.com/watch?v=OaG81sDEpVk&t=2945s&pp=ygUYZXhwbGljYXRpb24gcHVzaCBzd2FwIDQy
 * Thuggonaut : https://www.youtube.com/watch?v=wRvipSG4Mmk&pp=ygUMcHVzaCBzd2FwIDQy
-* 
