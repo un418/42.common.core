@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:58:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/29 15:22:42 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 19:21:11 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,37 +56,36 @@ int main(void)
 	{
 		printf("----- ft_printf: TESTING INVALID SPECIFIER -------\n\n\n");
 		{	
-			//   - ft_printf stops at the unknown specifier and returns -1
-			//   - on macOS prints the character literally and keeps going, to test on linux glibc
+			//   unknown specifier and print string litteraly
 			int ret;
 			int ref;
 			strcpy(err_msg, "test unknown specifier %k returns -1");
 			ret = ft_printf("ft_printf : unknown %k spec"); ft_printf("\n");
 			ref = printf("printf    : unknown %k spec"); printf("\n");
 			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
-			fail += ft_check(ret == -1, itest++, err_msg);
+			fail += ft_check(ret == ref, itest++, err_msg);
 		}
 		{
-			// lone % at the end of the string is undefined: ft_printf returns -1
-			// to test with official printf
+			// lone % at the end of the string is undefined
 			int ret;
 			int ref;
-			strcpy(err_msg, "test lone %% at end returns -1");
+			strcpy(err_msg, "test lone % at end returns -1");
 			ret = ft_printf("ft_printf : %%%% :%"); ft_printf("\n");
 			ref = printf("printf    : %%%% :%"); printf("\n");
 			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
-			fail += ft_check(ret == -1, itest++, err_msg);
+			fail += ft_check(ret == ref, itest++, err_msg);
 		}
 		{
-			// percent-space "% " is an incomplete specifier: ft_printf returns -1
-			// to test with official printf
+			// percent-space "% " is an incomplete specifier
 			int ret;
 			int ref;
 			strcpy(err_msg, "test percent-space returns -1");
 			ret = ft_printf("ft_printf : %%%% : % "); ft_printf("\n");
 			ref = printf("printf    : %%%% : % "); printf("\n");
 			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
-			fail += ft_check(ret == -1, itest++, err_msg);
+			fail += ft_check(ret == 19, itest++, err_msg);
+			
+			// Decision : Don't reproduce the behavior of printf here because it is related to the bonus that I will not do.
 		}
 		{
 			// valid specifier glued to text: %d keeps printing "enis"
@@ -98,6 +97,23 @@ int main(void)
 			ref = printf("printf    : %denis\n", n);
 			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
 			fail += ft_check(ret == ref, itest++, err_msg);
+		}
+
+		if (0)
+		{
+			// null pointer instead on string
+			int n = 1;
+			int ret;
+			int ref;
+			strcpy(err_msg, "null pointer instead on string");
+			ret = ft_printf(NULL);
+			ref = printf(NULL);
+			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
+			fail += ft_check(ret == ref, itest++, err_msg);
+
+			// Decision: NULL format = UB, usually a segfault. Left as-is on purpose:
+			// matches glibc and exposes the caller's bug rather than hiding it.
+
 		}
 	}
 
