@@ -6,17 +6,17 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 15:58:06 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/29 11:26:28 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:22:42 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Test printf with undefinied behavior */
-
-/* The test must be complile without -Werror  */
+/* Test ft_printf against undefined behavior  */
+/* /!\ Must be compiled WITHOUT -Werror (use `make test_ub`) */
 
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "ft_printf.h"
 
@@ -45,100 +45,90 @@ int ft_check(int check, int i, char *err_msg)
 
 int main(void)
 {
+	setvbuf(stdout, NULL, _IONBF, 0); // disable printf buffer
+	int test_all = 1;
+	int itest = 1;
+	int fail = 0;
+	char err_msg[100];
 
-
-
-	int ret = printf("test %z");
-	printf("ret = %d", ret);
-
-
-	//test error management
-	if (1 || test_all)
+	//test invalid conversion specifier
+	if (0 || test_all)
 	{
-		printf("----- ft_printf: WRITE ERROR -------\n\n\n");
-		{
-			printf("-------------\n");
-			ft_printf("test\n");
-			int ret = ft_printf(" % ");
-			ft_printf("ret = %d\n", ret);
-			ft_printf("test\n");
-		}
-		{
-			printf("------here-------\n");
-			printf("test\n");
-			int ret = printf("toto %   \n");
-			printf("ret = %d\n", ret);
-			printf("test\n");
-		}
-		{
-			printf("-------------\n");
-			printf("test\n");
-			int ret = printf("%");
-			printf("ret = %d\n", ret);
-			printf("test\n");
-		}
-		{
-			printf("--------here-----\n");
-			printf("test\n");
-			int ret = printf("printf    : %%%% : % ");
-			printf("ret = %d\n", ret);
-			printf("test\n");
-		}
-		{
-			printf("-------------\n");
+		printf("----- ft_printf: TESTING INVALID SPECIFIER -------\n\n\n");
+		{	
+			//   - ft_printf stops at the unknown specifier and returns -1
+			//   - on macOS prints the character literally and keeps going, to test on linux glibc
 			int ret;
-			ret = ft_printf("%denis\n",1);
-			ft_printf("ret = %d\n", ret);
-			ret = ft_printf("%denis\n");
-			ft_printf("ret = %d\n", ret);
-			ret = printf("%denis\n");
-			printf("ret = %d\n", ret);
+			int ref;
+			strcpy(err_msg, "test unknown specifier %k returns -1");
+			ret = ft_printf("ft_printf : unknown %k spec"); ft_printf("\n");
+			ref = printf("printf    : unknown %k spec"); printf("\n");
+			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
+			fail += ft_check(ret == -1, itest++, err_msg);
 		}
 		{
-			// /!\ Edge Case Alert 
-			// test % alone
-			// If the carac after % is not managed it is just not printed 
-			// Should I output an error ? 
-
-			// From the man of printf:
-			//	"If a conversion specification is invalid, the behavior is undefined."
-
-			strcpy(err_msg, "test error : % alone");
-			fail += ft_check(ft_printf("ft_printf : %%%% :%A E\n\n") == -1, itest++, err_msg);
-			// official printf make compilation error in this case (only with flag -Werror)
-			fail += ft_check(ft_printf("ft_printf : %%%% :%") == printf("printf    : %%%% :%"), itest++, err_msg);
-
-			// test/test.c:92:35: error: invalid conversion specifier ' ' [-Werror,-Wformat-invalid-specifier]
-            //            printf("ft_printf    : %%%% :%z %y  E\n", "");
-            //                                        ~~^
-
-			// printf("ft_printf    : %%%% :%z %y  E\n", "");
+			// lone % at the end of the string is undefined: ft_printf returns -1
+			// to test with official printf
+			int ret;
+			int ref;
+			strcpy(err_msg, "test lone %% at end returns -1");
+			ret = ft_printf("ft_printf : %%%% :%"); ft_printf("\n");
+			ref = printf("printf    : %%%% :%"); printf("\n");
+			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
+			fail += ft_check(ret == -1, itest++, err_msg);
 		}
-		
 		{
-			// backup fd
-			printf("------toto-------\n");
-			int fd_backup = dup(1);
-			strcpy(err_msg, "test ft_printf returns -1 when stdout is invalid");
-			close(1);
-			fail += ft_check(ft_printf("ft_printf : error % alone : %d\n", 42) == -1, itest++, err_msg);
-			printf("\n");
-			dprintf(2,"ret = %d\n",ft_printf ("test"));
-			dprintf(2,"ret should eqal -1\n\n");
-			dprintf(2,"ret = %d\n",printf ("test"));
-			dprintf(2,"ret should eqal -1\n\n");
-			// restore fd
-			dup2(fd_backup, 1);
+			// percent-space "% " is an incomplete specifier: ft_printf returns -1
+			// to test with official printf
+			int ret;
+			int ref;
+			strcpy(err_msg, "test percent-space returns -1");
+			ret = ft_printf("ft_printf : %%%% : % "); ft_printf("\n");
+			ref = printf("printf    : %%%% : % "); printf("\n");
+			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
+			fail += ft_check(ret == -1, itest++, err_msg);
+		}
+		{
+			// valid specifier glued to text: %d keeps printing "enis"
+			int n = 1;
+			int ret;
+			int ref;
+			strcpy(err_msg, "test %d glued to text");
+			ret = ft_printf("ft_printf : %denis\n", n);
+			ref = printf("printf    : %denis\n", n);
+			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
+			fail += ft_check(ret == ref, itest++, err_msg);
+		}
+	}
+
+	//test write error
+	if (0 || test_all)
+	{
+		printf("----- ft_printf: TESTING WRITE ERROR -------\n\n\n");
+		{
+			// when stdout is closed the write() fails: 
+			// both ft_printf and the system printf return -1
+			int fd_backup = dup(FT_STDOUT);
+			int ret;
+			int ref;
+
+			close(FT_STDOUT);
+			ret = ft_printf("ft_printf : write error : %d\n", 42);
+			ref = printf("printf    : write error : %d\n", 42);
+			dup2(fd_backup, FT_STDOUT);
 			close(fd_backup);
+			clearerr(stdout); // reset stdio error flag set by the failed printf
+			printf("ret: ft_printf = %d | printf = %d\n", ret, ref);
+			strcpy(err_msg, "test ft_printf returns -1 when stdout is invalid");
+			fail += ft_check(ret == -1, itest++, err_msg);
 		}
+	}
 
-
+	printf("########## ft_printf: RESULT ##########\n\n");
+	char *final_msg;
+	if (fail)
+		final_msg = "FAILURE";
+	else
+		final_msg = "SUCESS";
+	ft_printf("#-# %s = %d/%d #-#\n\n", final_msg, (itest - fail), itest);
 }
-
-/* 
-RESULT
-
-If we use an undefinied paramater:
-	1 - There is warning at compilation time
-	2 - Printf write nothing and returns -1
-*/
