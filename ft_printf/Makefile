@@ -11,8 +11,8 @@ CFLAGS		= -Wall -Wextra -Werror
 
 # ─── Directories ─────────────────────────────────────────────────────────────
 
-INC_DIR		= inc
 SRC_DIR		= src
+INC_DIR		= inc
 OBJ_DIR		= obj
 TEST_DIR	= test
 
@@ -22,7 +22,8 @@ SRC_FILES	=	ft_printf.c \
 				ft_printf_ascii.c \
 				ft_printf_num.c
 
-HEADERS		= $(INC_DIR)/ft_printf.h $(SRC_DIR)/ft_printf_private.h
+HEADERS		=	$(INC_DIR)/ft_printf.h \
+				$(SRC_DIR)/ft_printf_private.h
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 # ─── Build ────────────────────────────────────────────────────────────────────
@@ -34,7 +35,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(SRC_DIR) -I$(INC_DIR) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

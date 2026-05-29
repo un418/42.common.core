@@ -13,7 +13,6 @@
 #ifndef FT_PRINTF_PRIVATE_H
 # define FT_PRINTF_PRIVATE_H
 
-# include "ft_printf.h"
 # include <unistd.h>
 
 ssize_t	ft_write_fd_char(int c, int fd);

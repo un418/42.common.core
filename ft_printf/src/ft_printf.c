@@ -6,11 +6,12 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/29 19:09:42 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 20:59:27 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_private.h"
+#include "ft_printf.h"
 
 static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 {
