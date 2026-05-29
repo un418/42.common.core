@@ -56,20 +56,20 @@ test: CFLAGS += -g3 -fsanitize=address
 test: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
 	./$(TEST_DIR)/$(TEST_PROG)
-	@make tclean
+	@$(MAKE) --no-print-directory -s tclean
 
 # -Werror removed to allow testing undefined behaviour
 test_ub: CFLAGS = -Wall -Wextra -g3
 test_ub: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/ub_test.c $(INCS) $(LIBS) -o $(TEST_DIR)/ub_test
 	./$(TEST_DIR)/ub_test
-	@make tclean
+	@$(MAKE) --no-print-directory -s tclean
 
 tester: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/tester
 	./$(TEST_DIR)/tester > $(TEST_DIR)/difftester.log
 	./$(TEST_DIR)/tester.sh
-	@make tclean
+	@$(MAKE) --no-print-directory -s tclean
 
 memtest: re
 	@$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/mem_check
@@ -77,7 +77,7 @@ memtest: re
 				--show-leak-kinds=all \
 				--track-origins=yes \
 				./test/mem_check > /dev/null
-	@make tclean
+	@$(MAKE) --no-print-directory -s tclean
 
 tclean:
 	rm -f $(TEST_DIR)/$(TEST_PROG)
