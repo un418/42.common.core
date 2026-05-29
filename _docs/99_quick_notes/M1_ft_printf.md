@@ -11,14 +11,16 @@
 - [x] Verify the check error compliance
 	- [x] https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf
 	- [x] How to test it ? 
-- [ ] Check about printf(NULL)
+- [x] Check about printf(NULL)
 	- https://42born2code.slack.com/archives/C033QK0NPQA/p1779456719311929
-- [ ] Finish readme
-- [ ] Clean MakeFile
-- [ ]  Refactor headers : split `ft_printf.h` (public, only `ft_printf`) and `ft_printf_private.h` (internal helpers)
-- [ ] finir implem vprintf + dprintf
-- [ ] Do deeper final tests 
-- [ ] Last subject Reading
+	- It is undefined behavior to dereference a NULL pointer , basic undefined behavior
+	
+- [x] Finish readme
+- [x] Clean MakeFile
+- [x]  Refactor headers : split `ft_printf.h` (public, only `ft_printf`) and `ft_printf_private.h` (internal helpers)
+- [x] finir implem vprintf + dprintf
+- [x] Do deeper final tests 
+- [x] Last subject Reading
 # Q&A
 ### What is a variadic function ?
 
