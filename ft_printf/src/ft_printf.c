@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_private.h"
 
 static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 {

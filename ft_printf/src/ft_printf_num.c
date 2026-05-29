@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_private.h"
 
 ssize_t	ft_writeunbr_fd_recurse(unsigned long ul, int fd)
 {

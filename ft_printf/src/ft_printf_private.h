@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_private.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 19:46:40 by adaferna          #+#    #+#             */
+/*   Created: 2026/05/29 00:00:00 by adaferna          #+#    #+#             */
 /*   Updated: 2026/05/29 00:00:00 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_PRIVATE_H
+# define FT_PRINTF_PRIVATE_H
 
-# include <stdarg.h>
+# include "ft_printf.h"
+# include <unistd.h>
 
-int	ft_printf(const char *str, ...);
-int	ft_dprintf(int fd, const char *str, ...);
-int	ft_vprintf(const char *str, va_list args);
-int	ft_vdprintf(int fd, const char *str, va_list args);
+ssize_t	ft_write_fd_char(int c, int fd);
+ssize_t	ft_write_fd_str(char *s, int fd);
+ssize_t	ft_writesnbr_fd(long n, int fd);
+ssize_t	ft_writeunbr_fd_recurse(unsigned long ul, int fd);
+ssize_t	ft_writehex_fd_recurse(unsigned long un, int fd, int upper);
+ssize_t	ft_write_fd_pointer(void *p, int fd);
 
 #endif

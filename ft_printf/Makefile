@@ -22,7 +22,7 @@ SRC_FILES	=	ft_printf.c \
 				ft_printf_ascii.c \
 				ft_printf_num.c
 
-HEADER		= $(INC_DIR)/ft_printf.h
+HEADERS		= $(INC_DIR)/ft_printf.h $(SRC_DIR)/ft_printf_private.h
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 # ─── Build ────────────────────────────────────────────────────────────────────
@@ -32,7 +32,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
