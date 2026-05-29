@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:56:29 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/20 16:22:53 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:19:14 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 {
-	ssize_t	counter;
-
-	counter = 0;
 	if (*str == 'c')
 		return (ft_write_fd_char(va_arg(args, int), fd));
 	else if (*str == '%')
@@ -37,7 +34,7 @@ static ssize_t	ft_dprintf_switch(int fd, va_list args, const char *str)
 		return (-1);
 }
 
-static int	ft_dprintf(int fd, const char *str, va_list args)
+int	ft_vdprintf(int fd, const char *str, va_list args)
 {
 	ssize_t	count;
 	ssize_t	ret;
@@ -65,6 +62,23 @@ static int	ft_dprintf(int fd, const char *str, va_list args)
 	return (count);
 }
 
+int	ft_vprintf(const char *str, va_list args)
+{
+	return (ft_vdprintf(1, str, args));
+}
+
+int	ft_dprintf(int fd, const char *str, ...)
+{
+	ssize_t	count;
+	va_list	args;
+
+	count = 0;
+	va_start(args, str);
+	count = ft_vdprintf(fd, str, args);
+	va_end(args);
+	return (count);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	ssize_t	count;
@@ -72,7 +86,7 @@ int	ft_printf(const char *str, ...)
 
 	count = 0;
 	va_start(args, str);
-	count = ft_dprintf(1, str, args);
+	count = ft_vprintf(str, args);
 	va_end(args);
 	return (count);
 }
