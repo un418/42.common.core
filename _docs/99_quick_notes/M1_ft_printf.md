@@ -21,8 +21,8 @@
 - [x] finir implem vprintf + dprintf
 - [x] Do deeper final tests 
 - [x] Last subject Reading
-- [ ] isolated test from evaluated part
-- [ ] improve header isolation logic
+- [x] isolated test from evaluated part
+- [x] improve header isolation logic
 # Q&A
 ### What is a variadic function ?
 
