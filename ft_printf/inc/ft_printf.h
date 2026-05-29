@@ -15,6 +15,9 @@
 
 # include <stdarg.h>
 
+# define FT_STDOUT    1
+# define FT_STDERR    2
+
 int	ft_printf(const char *str, ...);
 int	ft_dprintf(int fd, const char *str, ...);
 int	ft_vprintf(const char *str, va_list args);

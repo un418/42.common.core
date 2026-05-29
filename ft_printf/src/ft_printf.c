@@ -64,7 +64,7 @@ int	ft_vdprintf(int fd, const char *str, va_list args)
 
 int	ft_vprintf(const char *str, va_list args)
 {
-	return (ft_vdprintf(1, str, args));
+	return (ft_vdprintf(FT_STDOUT, str, args));
 }
 
 int	ft_dprintf(int fd, const char *str, ...)
