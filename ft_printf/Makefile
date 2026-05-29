@@ -51,6 +51,12 @@ test: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/$(TEST_PROG)
 	./$(TEST_DIR)/$(TEST_PROG)
 
+# Need to compile without -Werror to test weird things on printf
+test_ub: CFLAGS = -Wall -Wextra -g3 
+test_ub: re
+	$(CC) $(CFLAGS) $(TEST_DIR)/ub_test.c $(INCS) $(LIBS) -o $(TEST_DIR)/ub_test
+	./$(TEST_DIR)/ub_test
+
 tester: re
 	$(CC) $(CFLAGS) $(TEST_DIR)/$(TEST_FILE) $(INCS) $(LIBS) -o $(TEST_DIR)/tester
 	./$(TEST_DIR)/tester > $(TEST_DIR)/difftester.log

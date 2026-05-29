@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 19:59:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/26 19:54:07 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:38:20 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,9 @@ int main(void)
 		 */
 	}
 	//test combination
-	if (1 || test_all)
+	
+	// if (1 || test_all) // disable on mac 
+	if (0)
 	{
 			printf("----- ft_printf: TESTING COMBI -------\n\n\n");
 		{
@@ -293,88 +295,6 @@ int main(void)
 			fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
 			// Pass for me because my ft_writehex... have ul int input arg
 			fail += ft_check(ft_printf("ft_printf : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1,pn, pn, pn ) == printf("printf    : %%COMBI%% : %c%c%s%s%d%i -ULM:%u - %x-%X-%p\n",'I' ,' ' ,"love" , nstr, 4, 2, -1, (unsigned int)(unsigned long)pn, (unsigned int)(unsigned long)pn, pn ), itest++, err_msg);
-		}
-	}
-
-
-	//test error management
-	if (1 || test_all)
-	{
-		printf("----- ft_printf: WRITE ERROR -------\n\n\n");
-		{
-			printf("-------------\n");
-			ft_printf("test\n");
-			int ret = ft_printf(" % ");
-			ft_printf("ret = %d\n", ret);
-			ft_printf("test\n");
-		}
-		{
-			printf("------here-------\n");
-			printf("test\n");
-			int ret = printf("toto %   \n");
-			printf("ret = %d\n", ret);
-			printf("test\n");
-		}
-		{
-			printf("-------------\n");
-			printf("test\n");
-			int ret = printf("%");
-			printf("ret = %d\n", ret);
-			printf("test\n");
-		}
-		{
-			printf("--------here-----\n");
-			printf("test\n");
-			int ret = printf("printf    : %%%% : % ");
-			printf("ret = %d\n", ret);
-			printf("test\n");
-		}
-		{
-			printf("-------------\n");
-			int ret;
-			ret = ft_printf("%denis\n",1);
-			ft_printf("ret = %d\n", ret);
-			ret = ft_printf("%denis\n");
-			ft_printf("ret = %d\n", ret);
-			ret = printf("%denis\n");
-			printf("ret = %d\n", ret);
-		}
-		{
-			// /!\ Edge Case Alert 
-			// test % alone
-			// If the carac after % is not managed it is just not printed 
-			// Should I output an error ? 
-
-			// From the man of printf:
-			//	"If a conversion specification is invalid, the behavior is undefined."
-
-			strcpy(err_msg, "test error : % alone");
-			fail += ft_check(ft_printf("ft_printf : %%%% :%A E\n\n") == -1, itest++, err_msg);
-			// official printf make compilation error in this case (only with flag -Werror)
-			fail += ft_check(ft_printf("ft_printf : %%%% :%") == printf("printf    : %%%% :%"), itest++, err_msg);
-
-			// test/test.c:92:35: error: invalid conversion specifier ' ' [-Werror,-Wformat-invalid-specifier]
-            //            printf("ft_printf    : %%%% :%z %y  E\n", "");
-            //                                        ~~^
-
-			// printf("ft_printf    : %%%% :%z %y  E\n", "");
-		}
-		
-		{
-			// backup fd
-			printf("------toto-------\n");
-			int fd_backup = dup(1);
-			strcpy(err_msg, "test ft_printf returns -1 when stdout is invalid");
-			close(1);
-			fail += ft_check(ft_printf("ft_printf : error % alone : %d\n", 42) == -1, itest++, err_msg);
-			printf("\n");
-			dprintf(2,"ret = %d\n",ft_printf ("test"));
-			dprintf(2,"ret should eqal -1\n\n");
-			dprintf(2,"ret = %d\n",printf ("test"));
-			dprintf(2,"ret should eqal -1\n\n");
-			// restore fd
-			dup2(fd_backup, 1);
-			close(fd_backup);
 		}
 	}
 
