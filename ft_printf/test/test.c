@@ -306,5 +306,5 @@ int main(void)
 		final_msg = "FAILURE";
 	else
 		final_msg = "SUCESS";
-	ft_printf("#-# %s = %d/%d #-#\n\n", final_msg, (itest - fail), itest);
+	ft_printf("#-# %s = %d/%d #-#\n\n", final_msg, (itest - 1 - fail), itest - 1);
 }
