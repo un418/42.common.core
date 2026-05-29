@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <limits.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "ft_printf.h"
 
 /* Standard Colors */
 #define RED     "\033[0;31m"
