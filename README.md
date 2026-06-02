@@ -14,13 +14,17 @@ My 42 common core projects, all in one repo.
 At 42 each project is turned in on its own repo. Keeping them together here is
 a choice I made on purpose, for three reasons:
 
-1. **Get better at Git.** Working with many projects in one repo pushes me
+1. **Get better at Git.**  
+Working with many projects in one repo pushes me
    further than the usual `add / commit / push`: `git subtree`, history
    rewrite, commit conventions, etc.
-2. **All my code in one place.** One clone, one history, and my notes
+2. **All my code in one place.**  
+   One clone, one history, and my notes
    (`_docs/`) live next to the code.
-3. **Follow my work day by day.** The single commit history shows my progress
-   live, project after project. It also lets someone from outside see what I
+3. **Follow my work day by day.**  
+The single commit history shows my progress
+   live, project after project.  
+   It also lets someone from outside see what I
    am working on day to day.
 
 ### Turn in to 42
