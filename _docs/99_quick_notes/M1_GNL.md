@@ -1,6 +1,8 @@
 ## TODO
 
 
+
+- [ ] Init Readme
 - [ ] From eval sheet , to add to my test
 
 > [!WARNING]
@@ -15,7 +17,10 @@
 	Only a fixed size array of pointer to store FD `stash[4096]` 
 		justification:
 			- fd number are provides by process , it is unlikely that the moulinette or any other programs need to deal with 4096 files in the same run
-			- 
+			- what is the max number of fd by process ?
+			  - How to find this number via a linux command ?
+	
+- [ ] Test with stdin (fd 0)
 ## First reading
 
 ### Buffer Managememnt
@@ -44,12 +49,12 @@ https://en.wikipedia.org/wiki/Static_variable
 ##### What is a Static Variable ?
 - Static variable are stored in the Data Segment (not in stack)  and **persist between different function call in the same program runs.**
 
-|Local Variable|Static Variable|
-|---|---|
-|Local to the function or block|Local to the function or block|
-|Exists only during function execution|Exists throughout the program execution|
-|Reinitialized each time function is called|Initialized only once|
-|Stored in the stack|Stored in the data segment|
+| Local Variable                             | Static Variable                         |
+| ------------------------------------------ | --------------------------------------- |
+| Local to the function or block             | Local to the function or block          |
+| Exists only during function execution      | Exists throughout the program execution |
+| Reinitialized each time function is called | Initialized only once                   |
+| Stored in the stack                        | Stored in the data segment              |
 
 ##### What are the **GOOD** use case of static Variable ? 
 * Counter to protect from infinite loop (recursion ...)
@@ -91,11 +96,7 @@ https://en.wikipedia.org/wiki/Static_variable
 - Empty file
 - Malformated or Binary Files
 
-
-
 ## Testing
-
-
 
 ## How to open a file
 
