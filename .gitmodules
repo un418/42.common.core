@@ -1,0 +1,3 @@
+[submodule "push_swap"]
+	path = push_swap
+	url = https://github.com/un418/push_swap.git
