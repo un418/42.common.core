@@ -42,7 +42,7 @@ https://www.geeksforgeeks.org/c/macros-and-its-types-in-c-cpp/
 https://en.wikipedia.org/wiki/Static_variable
 
 ##### What is a Static Variable ?
-- Static variable are stored in the Data Segment (not in stack)  and p**ersist between different function call in the same program runs.**
+- Static variable are stored in the Data Segment (not in stack)  and **persist between different function call in the same program runs.**
 
 |Local Variable|Static Variable|
 |---|---|
