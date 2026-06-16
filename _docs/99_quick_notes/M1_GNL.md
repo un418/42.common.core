@@ -2,7 +2,7 @@
 
 
 
-- [ ] Init Readme
+- [ ] Write Readme
 - [ ] From eval sheet , to add to my test
 
 > [!WARNING]
