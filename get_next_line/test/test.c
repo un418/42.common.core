@@ -34,7 +34,7 @@
 #define STR_HELPER(x) #x
 #define STR(x) STR_HELPER(x)
 
-// function to compare to result and pretty print the result to tdout
+// function to compare to result and pretty print the result to stdout
 int ft_check(int check, int i, char *err_msg)
 {
 	if (check)
@@ -81,7 +81,7 @@ int main(void)
 	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
 	printf("DELIMITER = %c\n\n", DELIMITER);
 	
-
+	// test0.txt
 	if (1)
 	{
 		// Define input file
@@ -101,7 +101,7 @@ int main(void)
 		{
 			line = get_next_line(fd);
 			if (!line)
-			break ;
+				break ;
 			teeprintf(fd_out,"%s", line);
 			free(line);
 		}
@@ -110,7 +110,9 @@ int main(void)
 		close(fd); close(fd_out);
 		printf("\n\n");
 	}
-	if (0)
+
+	// test_empty_file.txt
+	if (1)
 	{
 		// Define input file
 		char *file="test_empty_file.txt";
@@ -133,6 +135,7 @@ int main(void)
 		close(fd); close(fd_out);
 		printf("\n\n");	}
 
+	// test_file_dont_exist.txt
 	if (1)
 	{
 		// Define input file
@@ -151,16 +154,54 @@ int main(void)
 		while (1)
 		{
 			line = get_next_line(fd);
+			printf("line=%p\n",line);
 			if (!line)
-			break ;
+				break ;
 			teeprintf(fd_out,"%s", line);
 			free(line);
 		}
 		if (fd < 0)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
 		close(fd); close(fd_out);
-		printf("\n\n");	}
+		printf("\n\n");
+	}
 
+	// test_no_access_file.txt
+
+	// file need to delete if we run paco
+	// echo "test_no_access_file.txt" > test_no_access_file.txt && chmod 000 test_no_access_file.txt
+	// rm chmod 000 test_no_access_file.txt
+	if (1)
+	{
+		// Define input file
+		char *file="test_no_access_file.txt";
+		printf("-- Test : %s\n\n", file);
+		int fd = open(file, O_RDONLY);
+		printf("fd = %d\n",fd);
+
+		// Create output file
+		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (fd_out == -1)
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error 
+
+		char *line;
+		while (1)
+		{
+			line = get_next_line(fd);
+			printf("line=%p\n",line);
+			if (!line)
+				break ;
+			teeprintf(fd_out,"%s", line);
+			free(line);
+		}
+		if (fd < 0)
+			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
+		close(fd); close(fd_out);
+		printf("\n\n");
+	}
+
+	// test_empty_file.txt
 	if (1)
 	{
 		// Define input file
@@ -180,7 +221,7 @@ int main(void)
 		{
 			line = get_next_line(fd);
 			if (!line)
-			break ;
+				break ;
 			teeprintf(fd_out,"%s", line);
 			free(line);
 		}
@@ -190,6 +231,7 @@ int main(void)
 		printf("\n\n");
 	}
 
+	// test_one_line.txt
 	if (1)
 	{
 		// Define input file
@@ -208,7 +250,7 @@ int main(void)
 		{
 			line = get_next_line(fd);
 			if (!line)
-			break ;
+				break ;
 			teeprintf(fd_out,"%s", line);
 			free(line);
 		}
@@ -218,6 +260,7 @@ int main(void)
 		printf("\n\n");
 	}
 	
+	// test_only_nl.txt
 	if (1)
 	{
 
@@ -238,7 +281,7 @@ int main(void)
 		{
 			line = get_next_line(fd);
 			if (!line)
-			break ;
+				break ;
 			teeprintf(fd_out,"%s", line);
 			free(line);
 		}
