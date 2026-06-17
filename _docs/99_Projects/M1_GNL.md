@@ -2,7 +2,8 @@
 
 
 
-- [ ] Write Readme
+- [x] Write Readme
+	- [ ] Finalize Readme
 - [ ] From eval sheet , to add to my test
 
 > [!WARNING]
@@ -13,6 +14,8 @@
 - [ ] Add diff tester
 	- Compare .txt with .output manage specific case for no exists files
 	- Try to reproduce the tests where there is a func call with bad fd and next call with good fd
+- [ ] Test with stdin (fd 0)
+
 - [ ] Do Bonus
 	Only a fixed size array of pointer to store FD `stash[4096]` 
 		justification:
@@ -20,7 +23,7 @@
 			- what is the max number of fd by process ?
 			  - How to find this number via a linux command ?
 	
-- [ ] Test with stdin (fd 0)
+
 ## First reading
 
 ### Buffer Managememnt
