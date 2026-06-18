@@ -34,6 +34,11 @@
 #define STR_HELPER(x) #x
 #define STR(x) STR_HELPER(x)
 
+// Folder where the generated .output files are written (overridden by -D in the Makefile)
+#ifndef OUTPUT_DIR
+# define OUTPUT_DIR "output"
+#endif
+
 // function to compare to result and pretty print the result to stdout
 int ft_check(int check, int i, char *err_msg)
 {
@@ -71,6 +76,7 @@ void teeprintf(int fd, const char *format, ...)
 int main(void)
 {
 	setvbuf(stdout, NULL, _IONBF, 0); // disable printf buffer
+	mkdir(OUTPUT_DIR, 0755); // make sure the output folder exists (ignored if already there)
 	// int test_all = 1;
 	// int itest = 1;
 	// int fail = 0;
@@ -91,7 +97,7 @@ int main(void)
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
@@ -121,7 +127,7 @@ int main(void)
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error 
@@ -135,72 +141,6 @@ int main(void)
 		close(fd); close(fd_out);
 		printf("\n\n");	}
 
-	// test_file_dont_exist.txt
-	if (1)
-	{
-		// Define input file
-		char *file="test_file_dont_exist.txt";
-		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
-		printf("fd = %d\n",fd);
-
-		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
-		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (fd_out == -1)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error 
-
-		char *line;
-		while (1)
-		{
-			line = get_next_line(fd);
-			printf("line=%p\n",line);
-			if (!line)
-				break ;
-			teeprintf(fd_out,"%s", line);
-			free(line);
-		}
-		if (fd < 0)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
-		close(fd); close(fd_out);
-		printf("\n\n");
-	}
-
-	// test_no_access_file.txt
-
-	// file need to delete if we run paco
-	// echo "test_no_access_file.txt" > test_no_access_file.txt && chmod 000 test_no_access_file.txt
-	// rm chmod 000 test_no_access_file.txt
-	if (1)
-	{
-		// Define input file
-		char *file="test_no_access_file.txt";
-		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
-		printf("fd = %d\n",fd);
-
-		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
-		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		if (fd_out == -1)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error 
-
-		char *line;
-		while (1)
-		{
-			line = get_next_line(fd);
-			printf("line=%p\n",line);
-			if (!line)
-				break ;
-			teeprintf(fd_out,"%s", line);
-			free(line);
-		}
-		if (fd < 0)
-			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
-		close(fd); close(fd_out);
-		printf("\n\n");
-	}
-
 	// test_empty_file.txt
 	if (1)
 	{
@@ -211,7 +151,7 @@ int main(void)
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
@@ -241,7 +181,7 @@ int main(void)
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
@@ -271,7 +211,7 @@ int main(void)
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[60]; strcpy(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
