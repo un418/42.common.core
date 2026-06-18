@@ -11,9 +11,8 @@
 > - Pass an arbitrary, invalid file descriptor (e.g., 42) to get_next_line. The function must return NULL.
 > - Check the error returns for read and malloc. If there is an error, the evaluation stops here. You can keep going and discuss the implementation of the code, but the assignment will not be graded.
 
-- [ ] Add diff tester
-	- Compare .txt with .output manage specific case for no exists files
-	- Try to reproduce the tests where there is a func call with bad fd and next call with good fd
+- [x] Add diff tester - Compare .txt with .output manage specific case for no exists files
+- [x] Try to reproduce the tests where there is a func call with bad fd and next call with good fd
 - [ ] Test with stdin (fd 0)
 
 - [ ] Do Bonus
