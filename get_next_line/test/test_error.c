@@ -6,13 +6,11 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 00:00:00 by adaferna          #+#    #+#             */
-/*   Updated: 2026/06/18 00:00:00 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/06/19 17:22:29 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Error-path tests for get_next_line: invalid / unreadable file descriptors.
-   Kept apart from the nominal tests because they produce no comparable output
-   (no reference file for diff_test.sh) and they print expected errno messages. */
+/* Error-path tests for get_next_line: invalid / unreadable file descriptors.  */
 
 #include "get_next_line.h"
 
@@ -99,7 +97,7 @@ int main(void)
 	// error in the middle of a read, then recover on the SAME fd
 	if (1)
 	{
-		char *file="test0.txt";
+		char *file="inputs/test0.txt";
 		printf("-- Test : error mid-read then recover on the same fd (%s)\n\n", file);
 		int fd = open(file, O_RDONLY);
 		printf("fd = %d\n", fd);

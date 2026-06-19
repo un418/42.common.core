@@ -15,6 +15,9 @@
 // for printf
 #include <stdio.h>
 
+// for the teeprintf variadic helper (va_list / va_start / va_end)
+#include <stdarg.h>
+
 // for open()
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -29,15 +32,6 @@
 #define GREEN   "\033[0;32m"
 #define YELLOW  "\033[0;33m"
 #define RESET   "\033[0m"
-
-//to convert MACRO INT TO STR
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x)
-
-// Folder where the generated .output files are written (overridden by -D in the Makefile)
-#ifndef OUTPUT_DIR
-# define OUTPUT_DIR "output"
-#endif
 
 // function to compare to result and pretty print the result to stdout
 int ft_check(int check, int i, char *err_msg)
@@ -76,7 +70,7 @@ void teeprintf(int fd, const char *format, ...)
 int main(void)
 {
 	setvbuf(stdout, NULL, _IONBF, 0); // disable printf buffer
-	mkdir(OUTPUT_DIR, 0755); // make sure the output folder exists (ignored if already there)
+	mkdir("output", 0755); // make sure the output folder exists (ignored if already there)
 	// int test_all = 1;
 	// int itest = 1;
 	// int fail = 0;
@@ -93,11 +87,12 @@ int main(void)
 		// Define input file
 		char *file="test0.txt";
 		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
+		char in_path[256]; snprintf(in_path, sizeof(in_path), "inputs/%s", file);
+		int fd = open(in_path, O_RDONLY);
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[256]; snprintf(output_file, sizeof(output_file), "output/%s.%d.output", file, BUFFER_SIZE);
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
@@ -123,11 +118,12 @@ int main(void)
 		// Define input file
 		char *file="test_empty_file.txt";
 		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
+		char in_path[256]; snprintf(in_path, sizeof(in_path), "inputs/%s", file);
+		int fd = open(in_path, O_RDONLY);
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[256]; snprintf(output_file, sizeof(output_file), "output/%s.%d.output", file, BUFFER_SIZE);
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error 
@@ -147,11 +143,12 @@ int main(void)
 		// Define input file
 		char *file="test_empty_file.txt";
 		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
+		char in_path[256]; snprintf(in_path, sizeof(in_path), "inputs/%s", file);
+		int fd = open(in_path, O_RDONLY);
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[256]; snprintf(output_file, sizeof(output_file), "output/%s.%d.output", file, BUFFER_SIZE);
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
@@ -177,11 +174,12 @@ int main(void)
 		// Define input file
 		char *file="test_one_line.txt";
 		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
+		char in_path[256]; snprintf(in_path, sizeof(in_path), "inputs/%s", file);
+		int fd = open(in_path, O_RDONLY);
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[256]; snprintf(output_file, sizeof(output_file), "output/%s.%d.output", file, BUFFER_SIZE);
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
@@ -207,11 +205,12 @@ int main(void)
 		// Define input file
 		char *file="test_only_nl.txt";
 		printf("-- Test : %s\n\n", file);
-		int fd = open(file, O_RDONLY);
+		char in_path[256]; snprintf(in_path, sizeof(in_path), "inputs/%s", file);
+		int fd = open(in_path, O_RDONLY);
 		printf("fd = %d\n",fd);
 
 		// Create output file
-		char output_file[100]; strcpy(output_file, OUTPUT_DIR "/"); strcat(output_file, file); strcat(output_file, "."); strcat(output_file, STR(BUFFER_SIZE)); strcat(output_file, ".output");
+		char output_file[256]; snprintf(output_file, sizeof(output_file), "output/%s.%d.output", file, BUFFER_SIZE);
 		int fd_out = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd_out == -1)
 			{ fprintf( stderr, "Error is %s (errno=%d)\n", strerror( errno ), errno );} // Print & Don't exit on error
