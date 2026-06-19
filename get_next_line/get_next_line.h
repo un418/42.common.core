@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:58 by adaferna          #+#    #+#             */
-/*   Updated: 2026/06/19 12:04:04 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/06/19 17:37:10 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_strchr(char *s, int c);
 /// @note s1 and s2 must be non-NULL. On allocation failure, s1 is freed.
 char	*ft_strjoin(char *s1, char *s2);
 
-/// @brief Cleans the stash by extracting the remaining part after the delimiter.
+/// @brief Clean stash by extracting the remaining part after the delimiter.
 /// @param s The stash string.
 /// @param delimiter The delimiter character.
 /// @return The remaining part of the stash after the delimiter,
@@ -59,7 +59,7 @@ char	*ft_clean_stash(char *s, char delimiter);
 ///			or NULL if allocation fails.
 char	*ft_line_from_stash(char const *s, char delimiter);
 
-/// @brief Reads from file descriptor into stash until delimiter is found or EOF.
+/// @brief Reads from file descriptor into stash until delimiter or EOF.
 /// @param fd The file descriptor to read from.
 /// @param stash The current stash string.
 /// @return The updated stash, or NULL on error.
