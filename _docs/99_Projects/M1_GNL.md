@@ -4,7 +4,7 @@
 
 - [x] Write Readme
 	- [ ] Finalize Readme
-- [ ] From eval sheet , to add to my test
+- [x] From eval sheet , to add to my test
 
 > [!WARNING]
 > Carry out AT LEAST the following tests to try to stress the error management.  
@@ -13,7 +13,8 @@
 
 - [x] Add diff tester - Compare .txt with .output manage specific case for no exists files
 - [x] Try to reproduce the tests where there is a func call with bad fd and next call with good fd
-- [ ] Test with stdin (fd 0)
+- [x] Test with stdin (fd 0)
+- [x] Add main in comment for my test (or validate the one from readme)
 
 - [ ] Do Bonus
 	Only a fixed size array of pointer to store FD `stash[4096]` 
