@@ -6,7 +6,7 @@
 /*   By: adaferna <adaferna@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 16:05:56 by adaferna          #+#    #+#             */
-/*   Updated: 2026/05/12 18:14:31 by adaferna         ###   ########.fr       */
+/*   Updated: 2026/06/19 17:35:55 by adaferna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,20 @@ char	*get_next_line(int fd)
 	stash = ft_clean_stash(stash, DELIMITER);
 	return (line);
 }
+/* 
+#include <fcntl.h>
+#include <stdio.h>
+int main(void)
+{
+    int   fd = open("file.txt", O_RDONLY);
+    char *line;
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line);
+        free(line);
+    }
+    close(fd);
+    return (0);
+}
+ */
