@@ -48,7 +48,7 @@ into your project (e.g. as a `get_next_line/` subfolder).
 
 #### 3 - Compile
 ```bash
-cc main.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \ -Iget_next_line -o my_program
+cc main.c get_next_line.c get_next_line_utils.c -I. -o my_program
 ```
 
 You can tune two compile-time options with `-D` (both have defaults, so this is optional):
@@ -109,10 +109,12 @@ int main(void)
 ## Testing
 
 Building my own tests was honestly one of the fun parts of this project.
-All targets live in [`test/`](test/) (`cd test`):
+All targets live in [`test/`](test/):
 
-- `make test` — runs the suite under AddressSanitizer, piped through `cat -e`. Covers the tricky inputs: empty file, no trailing newline, single line, only `\n`, and an invalid fd.
-- `make tester` — reruns it at `BUFFER_SIZE=1`, `5`, `100`; output must be identical whatever the buffer size.
+- `make test` — runs the suite under AddressSanitizer (`BUFFER_SIZE=10`), piped through `cat -e`. Covers the tricky inputs: empty file, no trailing newline, single line, only `\n`.
+- `make tester` — reruns it at `BUFFER_SIZE=1`, `5`, `100`, each under Valgrind, then `diff_test.sh` checks the generated output against the source files byte for byte. The result must be identical whatever the buffer size.
+- `make errtest` — the error paths: an invalid fd, a file that doesn't exist, and an unreadable file (`chmod 000`, created on the fly). `get_next_line` must return `NULL` every time, with no leaks.
+- `make stdin` — interactive read from stdin (`BUFFER_SIZE=42`, `Ctrl-D` to quit).
 - `make memtest` — Valgrind with `--leak-check=full --track-fds=yes` (no memory **or** fd leaks).
 
 ## Resources
