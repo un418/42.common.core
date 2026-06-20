@@ -9,8 +9,8 @@ Table of Contents
   * [Usage](#usage)
 * [Implementation](#implementation)
   * [Algorithm](#algorithm)
-  * [Error management](#error-management)
   * [Function reference](#function-reference)
+* [Bonus](#bonus)
 * [Testing](#testing)
 * [Resources](#resources)
   * [AI Usage](#ai-usage)
@@ -25,12 +25,12 @@ It also introduces the concept of static variables in C: the function must remem
 ## Constraints
 
 The tricky part is the limitation around the number of files and from that the number of functions we can use in this project:
-> _Add all the helper functions you need in the get_next_line_utils.c file._
-> _You are not allowed to use your libft in this project._
+> - _Add all the helper functions you need in the get_next_line_utils.c file._
+> - _You are not allowed to use your libft in this project._
 
 These two instructions in the subject mean that we are limited to 6 functions maximum according to the _42 Norm_.
 - 1 in `get_next_line.c`
-- 5 helpers maximum in `get_next_line_utils.c`
+- 5 helpers in `get_next_line_utils.c`
 
 
 ## Instructions
@@ -48,7 +48,7 @@ into your project (e.g. as a `get_next_line/` subfolder).
 
 #### 3 - Compile
 ```bash
-cc main.c get_next_line.c get_next_line_utils.c -I. -o my_program
+cc -Wall -Wextra -Werror main.c get_next_line.c get_next_line_utils.c -I. -o my_program
 ```
 
 You can tune two compile-time options with `-D` (both have defaults, so this is optional):
@@ -89,11 +89,21 @@ int main(void)
 ## Implementation
 
 ### Algorithm
-### Error management
+
+Each call to `get_next_line` runs three steps:
+
+| Step | Helper | What it does |
+| --- | --- | --- |
+| **Fill** | `buf_to_stash` | Reads `BUFFER_SIZE` bytes at a time into a temporary buffer and appends them to `stash`, looping only until a `\n` appears (or EOF). |
+| **Extract** | `ft_line_from_stash` | Copies `stash` up to and including the first `\n`: that copy is the returned line. At EOF with no trailing `\n`, the whole remaining `stash` is returned instead. |
+| **Clean** | `ft_clean_stash` | Keeps everything after that `\n` in `stash` for the next call. |
+
+Because `stash` is `static`, it survives between calls: if a read overshoots into the next line,
+the extra bytes stay in `stash` and are reused on the next call, with no extra `read()`.
 
 ### Function reference
 
-`get_next_line` is the only public entry point; the rest are internal helpers living in
+`get_next_line` is the only public entry point. The rest are internal helpers living in
 `get_next_line_utils.c`.
 
 | Name | Prototype | Description |
@@ -106,23 +116,58 @@ int main(void)
 | `buf_to_stash` | `char *buf_to_stash(int fd, char *stash)` | Reads from `fd` into the stash until `delimiter` is found or EOF |
 
 
+## Bonus
+
+The bonus adds **multiple file descriptors** support: `get_next_line` can be called in turn on several
+`fd`s without ever mixing their reading states.  
+Each `fd` keeps its own stash, so an unfinished
+line on one file is never lost or appended to another.
+
+This is done by replacing the single `static char *stash` with an array indexed by the file
+descriptor:
+
+```c
+static char *stash[1048576];
+```
+
+The size **1048576** matches the maximum per-process file-descriptor limit (`ulimit -n` hard
+limit) on this system, so `stash[fd]` stays a valid index for any `fd` the process can open.  
+
+
+
+
+Compilation is identical, only the file names change:
+
+```bash
+cc -Wall -Wextra -Werror main.c get_next_line_bonus.c get_next_line_utils_bonus.c -I. -o my_program
+```
+
 ## Testing
 
 Building my own tests was honestly one of the fun parts of this project.
 All targets live in [`test/`](test/):
 
-- `make test` — runs the suite under AddressSanitizer (`BUFFER_SIZE=10`), piped through `cat -e`. Covers the tricky inputs: empty file, no trailing newline, single line, only `\n`.
-- `make tester` — reruns it at `BUFFER_SIZE=1`, `5`, `100`, each under Valgrind, then `diff_test.sh` checks the generated output against the source files byte for byte. The result must be identical whatever the buffer size.
-- `make errtest` — the error paths: an invalid fd, a file that doesn't exist, and an unreadable file (`chmod 000`, created on the fly). `get_next_line` must return `NULL` every time, with no leaks.
-- `make stdin` — interactive read from stdin (`BUFFER_SIZE=42`, `Ctrl-D` to quit).
-- `make memtest` — Valgrind with `--leak-check=full --track-fds=yes` (no memory **or** fd leaks).
+- `make test`: runs the suite under AddressSanitizer (`BUFFER_SIZE=10`), piped through `cat -e`. Covers the tricky inputs: empty file, no trailing newline, single line, only `\n`.
+- `make tester`: reruns it at `BUFFER_SIZE=1`, `5`, `100`, each under Valgrind, then `diff_test.sh` checks the generated output against the source files byte for byte. The result must be identical whatever the buffer size.
+- `make errtest`: the error paths: an invalid fd, a file that doesn't exist, and an unreadable file (`chmod 000`, created on the fly). `get_next_line` must return `NULL` every time, with no leaks.
+- `make stdin`: interactive read from stdin (`BUFFER_SIZE=42`, `Ctrl-D` to quit).
+- `make memtest`: Valgrind with `--leak-check=full --track-fds=yes` (no memory **or** fd leaks).
+
+#### Recovering the test suite
+
+The `test/` folder is removed in the final submission commit, so the repository ships only the
+files the subject requires. It stays one commit back in the history. To get it back:
+
+```bash
+git reset --hard HEAD~1
+```
 
 ## Resources
 
 * Manual Pages (`man`): The primary reference for understanding standard libc functions.
 * Book: [C Programming. A Modern Approach. by K. N. King (Georgia State University)](http://knking.com/books/c2/)
 * [GeeksforGeeks](https://www.geeksforgeeks.org): I liked their diagrams for building mental models of memory and data structures.
-* [Obsidian.md](https://obsidian.md/) to take notes while working on this project — you can find them [here](https://github.com/un418/42.common.core/blob/master/_docs/99_quick_notes/M1_GNL.md).
+* [Obsidian.md](https://obsidian.md/) to take notes while working on this project. You can find them [here](https://github.com/un418/42.common.core/blob/master/_docs/99_Projects/M1_GNL.md).
 
 ### AI Usage
 
