@@ -16,4 +16,11 @@ https://www.geeksforgeeks.org/python/python-functions/
 - https://www.w3schools.com/python/ref_func_range.asp
 - https://www.w3schools.com/python/python_recursion.asp
 - https://www.geeksforgeeks.org/python/explicitly-define-datatype-in-a-python-function/
-- 
+
+## ex1
+
+- `print('a:', str)` a space by default when passing a variable to print
+
+## ToDo
+
+- [ ] use fstring instead of print() default sep to be more idiomatic/ pythonic

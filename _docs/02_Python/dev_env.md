@@ -38,6 +38,22 @@ alias venv='python3 -m venv .venv && source .venv/bin/activate'
 alias act='source .venv/bin/activate'
 ```
 
+# Shell completion (flake8 / mypy)
+
+flake8 and mypy ship **no argument completion**: no `completion` subcommand, no
+`PYTHON_ARGCOMPLETE_OK` marker in their `~/.local/bin` scripts. `argcomplete` only
+works on tools that opt in, so even a global activation gives nothing for these two.
+`pip completion --zsh` completes `pip` itself only, never the packages it installs.
+
+Options, lightest first:
+
+1. **Do nothing** (recommended): both are used with few flags, TAB just falls back to
+   file completion.
+2. **Hand-written completion**: a `_mypy` / `_flake8` file in `$fpath`. Works, but the
+   option list is maintained by hand; nothing official exists for these two.
+3. **Global argcomplete**: only useful for other tools that carry the marker, useless
+   for mypy/flake8.
+
 # VS Code
 
 ## Extensions
