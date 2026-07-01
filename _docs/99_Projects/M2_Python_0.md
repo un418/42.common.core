@@ -21,6 +21,13 @@ https://www.geeksforgeeks.org/python/python-functions/
 
 - `print('a:', str)` a space by default when passing a variable to print
 
+## ex7
+
+- https://www.geeksforgeeks.org/python/python-string-methods/
+- https://www.geeksforgeeks.org/python/python-dictionary/
+- https://www.geeksforgeeks.org/python/formatted-string-literals-f-strings-python/
+- 
+
 ## ToDo
 
 - [ ] use fstring instead of print() default sep to be more idiomatic/ pythonic
