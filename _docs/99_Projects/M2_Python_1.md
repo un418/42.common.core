@@ -116,6 +116,9 @@ module 02 — what you write here is a pedagogical step, not the destination.
 > anyway a property setter cannot return anything — an assignment is a statement, so it
 > can only raise. With plain methods I return a bool and let the caller decide.
 
+## ex5
+- https://www.geeksforgeeks.org/python/inheritance-in-python/
+
 # ToDo
 
 - [ ] ex1 & ex2 : Try to use \_\_str\_\_() instead of show()
