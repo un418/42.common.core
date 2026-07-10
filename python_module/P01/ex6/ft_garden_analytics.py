@@ -64,9 +64,9 @@ class Plant:
             }
 
         def report(self) -> None:
-            print(f"Stats: {self._count.get('grow')} grow,"
-                  f" {self._count.get('age')} age, "
-                  f"{self._count.get('show')} show")
+            print(f"Stats: {self._count['grow']} grow,"
+                  f" {self._count['age']} age, "
+                  f"{self._count['show']} show")
 
 
 class Flower(Plant):
@@ -113,7 +113,7 @@ class Tree(Plant):
 
         def report(self) -> None:
             super().report()
-            print(f" {self._count.get('shade')} shade")
+            print(f" {self._count['shade']} shade")
 
 
 class Seed(Flower):
@@ -123,11 +123,11 @@ class Seed(Flower):
 
     def bloom(self) -> None:
         super().bloom()
-        self._seed = int((self.get_age() + self.get_height()) * 0.24)
+        self._seed = round((self.get_age() + self.get_height()) * 0.24)
 
     def show(self) -> None:
         super().show()
-        print(f"Seeds: {self._seed}")
+        print(f" Seeds: {self._seed}")
 
 
 def print_stats(plant: Plant) -> None:
@@ -135,7 +135,7 @@ def print_stats(plant: Plant) -> None:
 
 
 def main() -> None:
-    print("=== Garden statistics  ===")
+    print("=== Garden statistics ===")
     print("=== Check year-old")
     print("Is 30 days more than a year? ->", Plant.is_older_1y(30))
     print("Is 400 days more than a year? ->", Plant.is_older_1y(400))
@@ -146,7 +146,7 @@ def main() -> None:
     rose.show()
     print("[statistics for Rose]")
     print_stats(rose)
-    print("[asking the rose to bloom]")
+    print("[asking the rose to grow and bloom]")
     rose.grow(8.0)
     rose.bloom()
     rose.show()
