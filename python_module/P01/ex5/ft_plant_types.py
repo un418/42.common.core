@@ -83,20 +83,20 @@ class Vegetable(Plant):
                  age: int,  harvest_season: str) -> None:
         super().__init__(name, height, age)
         self.harvest_season = harvest_season
-        self.nutritional_value = 0.0
+        self._nutritional_value = 0.0
 
     def show(self) -> None:
         super().show()
         print(f" Harvest season: {self.harvest_season}")
-        print(f" Nutritional value: {self.nutritional_value:.0f}")
+        print(f" Nutritional value: {self._nutritional_value:.0f}")
 
     def age(self, days: int = 1) -> None:
         super().age(days)
-        self.nutritional_value += 0.5 * days
+        self._nutritional_value += 0.5 * days
 
     def grow(self, amount: float) -> None:
         super().grow(amount)
-        self.nutritional_value += 0.5
+        self._nutritional_value += 0.5
 
 
 def main() -> None:
