@@ -268,12 +268,12 @@ This exercise combines five concepts. The eval sheet says the evaluator will ask
 
 ### 7.1 Instance methods vs class methods vs static methods vs functions
 
-| Kind | First param | Receives | Typical use | Called as |
-|---|---|---|---|---|
-| **Instance method** | `self` | the instance | read/change *this object's* state (`grow()`) | `obj.method()` |
-| **Class method** | `cls` | the class itself | **alternative constructors** / behavior about the class as a whole | `Class.method()` or `obj.method()` |
-| **Static method** | none | nothing implicit | utility logically tied to the class but needing neither instance nor class state | `Class.method()` |
-| **Non-member function** | — | nothing | operations that don't belong to any class, or that operate *across* several classes | `func(obj)` |
+| Kind                    | First param | Receives         | Typical use                                                                         | Called as                          |
+| ----------------------- | ----------- | ---------------- | ----------------------------------------------------------------------------------- | ---------------------------------- |
+| **Instance method**     | `self`      | the instance     | read/change *this object's* state (`grow()`)                                        | `obj.method()`                     |
+| **Class method**        | `cls`       | the class itself | **alternative constructors** / behavior about the class as a whole                  | `Class.method()` or `obj.method()` |
+| **Static method**       | none        | nothing implicit | utility logically tied to the class but needing neither instance nor class state    | `Class.method()`                   |
+| **Non-member function** | —           | nothing          | operations that don't belong to any class, or that operate *across* several classes | `func(obj)`                        |
 
 ```python
 class Plant:
@@ -301,6 +301,62 @@ answer):
   discoverability.
 - Works generically on objects from the outside, spans multiple classes, or is a
   program-level utility → **plain function**.
+
+### 7.1b What the decorators actually do (technical / performance)
+
+**No compilation effect.** A decorator is runtime syntactic sugar, executed **once**
+when the class block is defined:
+
+```python
+class Fruit:
+    @classmethod
+    def from_string(cls, raw): ...
+
+# strictly equivalent to:
+class Fruit:
+    def from_string(cls, raw): ...
+    from_string = classmethod(from_string)
+```
+
+`classmethod` and `staticmethod` are built-in classes that **wrap the function in a
+wrapper object** stored in the class dict (`Fruit.__dict__`). The function's body and
+bytecode are untouched — only the *type of the stored object* changes.
+
+**The real mechanism: the descriptor protocol.** The difference plays out at
+**attribute access** (`obj.method`). If the object found on the class defines
+`__get__`, Python calls it to produce what you actually get back:
+
+- plain function → `__get__` returns a **bound method** (remembers the instance,
+  injects `self`);
+- `classmethod` → `__get__` binds to the **class** (injects `cls`, whether accessed
+  via the instance or the class);
+- `staticmethod` → `__get__` returns the **raw function**, no binding, nothing
+  injected.
+
+Visible in the REPL:
+
+```python
+>>> Fruit.__dict__["from_string"]
+<classmethod object at 0x...>            # wrapper object in the class dict
+>>> f.describe
+<bound method Fruit.describe of ...>     # result of __get__ on a plain function
+>>> f.is_valid_name
+<function Fruit.is_valid_name at 0x...>  # staticmethod → raw function, not bound
+```
+
+**Performance**: negligible.
+
+- The decorator itself costs one call at class definition — zero cost per call.
+- At call time the only difference is the binding step; a staticmethod skips bound
+  method creation (nanoseconds), and CPython optimizes `obj.method()` aggressively
+  anyway (specialized opcodes since 3.7, improved in 3.11+).
+
+So the choice is **never** about performance — it expresses intent to the reader and
+to mypy: which implicit first argument the method receives (`self`, `cls`, or none).
+
+One-sentence defense answer: *the decorators wrap the function in an object whose
+`__get__` changes what gets auto-injected as first argument at attribute access —
+they don't modify the function itself, and the cost is paid once at class definition.*
 
 ### 7.2 Nested classes (class within a class)
 
@@ -360,6 +416,60 @@ plant**:
   (a Tree's stats also show shade calls).
 
 This is the "non-member function" checkbox *and* the polymorphism proof in one.
+
+### 7.5 Forward references — why `-> "Plant"` has quotes
+
+The classmethod in 7.1 annotates its return type as the class it lives in. Written
+without quotes, it crashes at import time:
+
+```python
+class Plant:
+    @classmethod
+    def anonymous(cls) -> Plant:      # NameError: name 'Plant' is not defined
+        ...
+```
+
+**Why**: Python executes a `class` block line by line and binds the name `Plant` only
+**after the whole block finishes**. But annotations in a `def` signature are ordinary
+expressions, **evaluated immediately at definition time** — so line by line, `Plant`
+doesn't exist yet when the annotation is evaluated. A class can't name itself in its
+own annotations (naively).
+
+**The fix — a forward reference (PEP 484)**: write the annotation as a **string**
+containing the type name:
+
+```python
+    @classmethod
+    def anonymous(cls) -> "Plant":    # string → never evaluated at runtime
+        ...
+```
+
+Who reads that string:
+
+- **mypy** parses it as code — `"Plant"` and `Plant` are strictly equivalent to the
+  type checker, no checking is lost.
+- **The runtime** stores it as-is in `__annotations__` and never evaluates it
+  spontaneously (tools that need the real type later use `typing.get_type_hints()`,
+  which resolves strings once the class exists).
+- **flake8** knows the pattern — no more F821.
+
+**Trap this teaches**: mypy said `Success` on the unquoted version while the program
+crashed on launch — mypy analyzes statically without executing anything. *mypy clean ≠
+code that runs.*
+
+Typical use cases: a class referencing itself (this one), two mutually-referencing
+classes, referencing a class defined further down the file.
+
+Alternatives to know:
+
+- `from __future__ import annotations` (PEP 563) at the top of the file makes **all**
+  annotations lazy strings automatically — same effect, file-wide instead of local.
+- `typing.Self` is purpose-built for "returns an instance of the current class" but is
+  **Python 3.11+** — grading targets 3.10, so stick to the string form.
+
+One-sentence defense answer: *annotations are evaluated at definition time, but the
+class binds to its name only at the end of its `class` block, so we defer evaluation by
+using a string that mypy knows how to read.*
 
 ---
 

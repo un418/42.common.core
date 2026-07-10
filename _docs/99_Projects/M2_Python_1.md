@@ -125,3 +125,4 @@ module 02 — what you write here is a pedagogical step, not the destination.
 - [ ] Redo the [quizz](https://www.geeksforgeeks.org/python/python-classes-and-objects/) 
 - [ ] Uniformize usage of :1.f with print
 - [ ] Uniformize naming between exercices
+- [ ] ex6 - implem encapsulation for stats
