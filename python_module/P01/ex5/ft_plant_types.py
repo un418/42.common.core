@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
 
 class Plant:
-    def __init__(self, name: str, height: float,
-                 age: int, grow_factor: float = 0.8) -> None:
+    def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
         self._height = 0.0
         self._age = 0
-        self.grow_factor = grow_factor
 
         self.set_height(height)
         self.set_age(age)
@@ -14,11 +12,11 @@ class Plant:
     def show(self) -> None:
         print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
 
-    def grow(self) -> None:
-        self._height = round(self._height + self.grow_factor, 1)
+    def grow(self, amount: float) -> None:
+        self._height = round(self._height + amount, 1)
 
-    def age(self) -> None:
-        self._age += 1
+    def age(self, days: int = 1) -> None:
+        self._age += days
 
     def get_height(self) -> float:
         return self._height
@@ -45,9 +43,8 @@ class Plant:
 
 class Flower(Plant):
     def __init__(self, name: str, height: float,
-                 age: int, color: str,
-                 grow_factor: float = 0.8) -> None:
-        super().__init__(name, height, age, grow_factor)
+                 age: int, color: str) -> None:
+        super().__init__(name, height, age)
         self.color = color
         self._bloomed = False
 
@@ -68,9 +65,8 @@ class Flower(Plant):
 
 class Tree(Plant):
     def __init__(self, name: str, height: float,
-                 age: int,  trunk_diameter: float,
-                 grow_factor: float = 0.8) -> None:
-        super().__init__(name, height, age, grow_factor)
+                 age: int,  trunk_diameter: float) -> None:
+        super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
 
     def show(self) -> None:
@@ -84,9 +80,8 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(self, name: str, height: float,
-                 age: int,  harvest_season: str,
-                 grow_factor: float = 0.8) -> None:
-        super().__init__(name, height, age, grow_factor)
+                 age: int,  harvest_season: str) -> None:
+        super().__init__(name, height, age)
         self.harvest_season = harvest_season
         self.nutritional_value = 0.0
 
@@ -95,12 +90,12 @@ class Vegetable(Plant):
         print(f" Harvest season: {self.harvest_season}")
         print(f" Nutritional value: {self.nutritional_value:.0f}")
 
-    def age(self) -> None:
-        super().age()
-        self.nutritional_value += 0.5
+    def age(self, days: int = 1) -> None:
+        super().age(days)
+        self.nutritional_value += 0.5 * days
 
-    def grow(self) -> None:
-        super().grow()
+    def grow(self, amount: float) -> None:
+        super().grow(amount)
         self.nutritional_value += 0.5
 
 
@@ -123,12 +118,12 @@ def main() -> None:
     print()
 
     print("=== Vegetable")
-    tomato = Vegetable("Tomato", 5.0, 10, "April", grow_factor=2.1)
+    tomato = Vegetable("Tomato", 5.0, 10, "April")
     tomato.show()
     print("[make tomato grow and age for 20 days]")
     for _ in range(20):
         tomato.age()
-        tomato.grow()
+        tomato.grow(2.1)
     tomato.show()
 
 
