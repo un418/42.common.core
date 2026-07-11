@@ -1,8 +1,8 @@
-## Class 
+## Class
 
 A class is a user-defined **template** for creating objects.
-It bundles data and functions together, making it easier to manage and use them. 
-When we create a new class, we define a new type of object. 
+It bundles data and functions together, making it easier to manage and use them.
+When we create a new class, we define a new type of object.
 We can then **create multiple instances** of this object type.
 
 - https://docs.python.org/3/tutorial/classes.html
@@ -11,12 +11,12 @@ We can then **create multiple instances** of this object type.
 
 ## Object
 
-An object is a specific **instance** of a class. 
+An object is a specific **instance** of a class.
 It holds its own set of data (instance variables) and can invoke methods defined by its class. Multiple objects can be created from same class, each with its own unique attributes.
 
 ## Initiate Object with __init__()
 
-[__init__()](https://www.geeksforgeeks.org/python/__init__-in-python/) method acts as a constructor and is automatically executed when an object is created. 
+[__init__()](https://www.geeksforgeeks.org/python/__init__-in-python/) method acts as a constructor and is automatically executed when an object is created.
 It is used to initialize the attributes of the object with the values provided at the time of object creation.
 
 ```python
@@ -30,14 +30,14 @@ class Dog:
 # Creating an object of the Dog class
 dog1 = Dog("Buddy", 3)
 
-print(dog1.name)  
+print(dog1.name)
 print(dog1.species)
 
 ```
 
 ## Increment / Decrement in Python
 
-- 
+-
 - https://www.geeksforgeeks.org/python/g-fact-21-increment-and-decrement-operators-in-python/
 
 ```python
@@ -60,7 +60,7 @@ i=i-1
 
 **It is not authorized.** `property` is not a Python keyword (`'property' in keyword.kwlist`
 is `False`), it is a builtin. The subject only exempts "fundamental language keywords such
-as `class` and `def`". 
+as `class` and `def`".
 Proof that builtin decorators must be listed: ex6 explicitly authorizes `staticmethod()` and `classmethod()`, which are the same kind of object. ex4 authorizes `print()`, `range()`, `round()` only.
 
 **It also cannot produce the expected output.** In Python an assignment is a *statement*,
@@ -79,7 +79,7 @@ old-fashioned, it is matching the behaviour it asks for.
 ### The pythonic version, for reference
 
 Real-world Python starts with a plain public attribute and only converts it to a property
-once validation is needed. 
+once validation is needed.
 Thanks to the *uniform access principle*, `dog.age = 3` keeps
 working, so no calling code breaks — this is why Java-style `get_x()`/`set_x()` written
 "just in case" is an anti-pattern in Python.
@@ -122,7 +122,8 @@ module 02 — what you write here is a pedagogical step, not the destination.
 # ToDo
 
 - [ ] ex1 & ex2 : Try to use \_\_str\_\_() instead of show()
-- [ ] Redo the [quizz](https://www.geeksforgeeks.org/python/python-classes-and-objects/) 
-- [ ] Uniformize usage of :1.f with print
-- [ ] Uniformize naming between exercices
+- [ ] Redo the [quizz](https://www.geeksforgeeks.org/python/python-classes-and-objects/)
+- [x] Uniformize usage of :1.f with print
+- [x] Uniformize naming between exercices
+- [x] Rewiew grow() implementation
 - [ ] ex6 - implem encapsulation for stats

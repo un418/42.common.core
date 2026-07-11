@@ -475,15 +475,15 @@ using a string that mypy knows how to read.*
 
 ## 8. Concept cheat-sheet (uppercase words from the eval sheet)
 
-| Eval keyword | One-sentence definition to say out loud |
-|---|---|
-| **CLASS** | A blueprint describing the attributes and behaviors shared by all objects of one kind. |
-| **METHODS** | Functions defined in a class that act on an instance through `self`, changing or reading its state. |
-| **`__init__` / INITIALIZATION** | The method Python calls automatically at instantiation so every object starts complete and valid. |
-| **ENCAPSULATION** | Keeping data internal (`_attr` convention) and forcing access through methods that validate, so invalid states can't happen. |
-| **INHERITANCE** | A child class reuses a parent's attributes/methods and adds or overrides only what's special — code reuse plus specialization. |
-| **ADVANCED OOP** | Nested classes, A→B→C chains, `@classmethod`/`@staticmethod` vs instance methods vs plain functions, and overriding nested classes through inheritance. |
-| **super()** | Proxy to the parent class, used to run the parent's version of a method (esp. `__init__`, `show()`) from the child. |
-| **Polymorphism** | Code written against the base type (`Plant`) works with any subclass; each object responds with its own overridden behavior. |
+| Eval keyword                    | One-sentence definition to say out loud                                                                                                                 |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **CLASS**                       | A blueprint describing the attributes and behaviors shared by all objects of one kind.                                                                  |
+| **METHODS**                     | Functions defined in a class that act on an instance through `self`, changing or reading its state.                                                     |
+| **`__init__` / INITIALIZATION** | The method Python calls automatically at instantiation so every object starts complete and valid.                                                       |
+| **ENCAPSULATION**               | Keeping data internal (`_attr` convention) and forcing access through methods that validate, so invalid states can't happen.                            |
+| **INHERITANCE**                 | A child class reuses a parent's attributes/methods and adds or overrides only what's special — code reuse plus specialization.                          |
+| **ADVANCED OOP**                | Nested classes, A→B→C chains, `@classmethod`/`@staticmethod` vs instance methods vs plain functions, and overriding nested classes through inheritance. |
+| **super()**                     | Proxy to the parent class, used to run the parent's version of a method (esp. `__init__`, `show()`) from the child.                                     |
+| **Polymorphism**                | Code written against the base type (`Plant`) works with any subclass; each object responds with its own overridden behavior.                            |
 
 ---
