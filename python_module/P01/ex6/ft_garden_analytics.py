@@ -46,9 +46,8 @@ class Plant:
 
     @staticmethod
     def is_older_1y(days: int) -> bool:
-        if days > 360:
-            return True
-        return False
+        return days > 365
+
 
     @classmethod
     # mypy forward reference -PEP484
@@ -93,7 +92,7 @@ class Flower(Plant):
 
 class Tree(Plant):
     def __init__(self, name: str, height: float,
-                 age: int,  trunk_diameter: float) -> None:
+                 age: int, trunk_diameter: float) -> None:
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
 
