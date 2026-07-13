@@ -8,19 +8,19 @@ class Plant:
 
         self.set_height(height)
         self.set_age(age)
-        self.stats = self.Statistics()
+        self._stats = self.Statistics()
 
     def show(self) -> None:
         print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
-        self.stats._count["show"] += 1
+        self._stats.record("show")
 
     def grow(self, amount: float) -> None:
         self._height = round(self._height + amount, 1)
-        self.stats._count["grow"] += 1
+        self._stats.record("grow")
 
     def age(self, days: int = 1) -> None:
         self._age += days
-        self.stats._count["age"] += 1
+        self._stats.record("age")
 
     def get_height(self) -> float:
         return self._height
@@ -44,6 +44,9 @@ class Plant:
             self._age = age
             return True
 
+    def get_stats(self) -> Plant.Statistics:
+        return self._stats
+
     @staticmethod
     def is_older_1y(days: int) -> bool:
         return days > 365
@@ -61,6 +64,12 @@ class Plant:
                 "age": 0,
                 "show": 0
             }
+
+        def record(self, key: str) -> None:
+            self._count[key] += 1
+
+        def get(self, key: str) -> int:
+            return self._count[key]
 
         def report(self) -> None:
             print(f"Stats: {self._count['grow']} grow,"
@@ -103,7 +112,7 @@ class Tree(Plant):
     def produce_shade(self) -> None:
         print(f"Tree {self.name} now produces a shade of {self.get_height()}cm"
               f" long and {self.trunk_diameter}cm wide.")
-        self.stats._count["shade"] += 1
+        self._stats.record("shade")
 
     class Statistics(Plant.Statistics):
         def __init__(self) -> None:
@@ -130,7 +139,7 @@ class Seed(Flower):
 
 
 def print_stats(plant: Plant) -> None:
-    plant.stats.report()
+    plant.get_stats().report()
 
 
 def main() -> None:
