@@ -1,6 +1,25 @@
 #!/usr/bin/env python3
 
 class Plant:
+    class Statistics:
+        def __init__(self) -> None:
+            self._count = {
+                "grow": 0,
+                "age": 0,
+                "show": 0
+            }
+
+        def record(self, key: str) -> None:
+            self._count[key] += 1
+
+        def get(self, key: str) -> int:
+            return self._count[key]
+
+        def report(self) -> None:
+            print(f"Stats: {self._count['grow']} grow,"
+                  f" {self._count['age']} age, "
+                  f"{self._count['show']} show")
+
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
         self._height = 0.0
@@ -44,37 +63,16 @@ class Plant:
             self._age = age
             return True
 
-    def get_stats(self) -> Plant.Statistics:
+    def get_stats(self) -> Statistics:
         return self._stats
 
     @staticmethod
     def is_older_1y(days: int) -> bool:
         return days > 365
 
-
     @classmethod
-    # mypy forward reference -PEP484
     def anonymous(cls) -> "Plant":
         return cls("Unknown plant", 0.0, 0)
-
-    class Statistics:
-        def __init__(self) -> None:
-            self._count = {
-                "grow": 0,
-                "age": 0,
-                "show": 0
-            }
-
-        def record(self, key: str) -> None:
-            self._count[key] += 1
-
-        def get(self, key: str) -> int:
-            return self._count[key]
-
-        def report(self) -> None:
-            print(f"Stats: {self._count['grow']} grow,"
-                  f" {self._count['age']} age, "
-                  f"{self._count['show']} show")
 
 
 class Flower(Plant):

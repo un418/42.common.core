@@ -57,7 +57,7 @@ def update_plant_age(plant: Plant, age: int) -> None:
 
 def main() -> None:
     print("=== Garden Security System ===")
-    # intstantiate & init rose Plant
+    # instantiate & init rose Plant
     rose = Plant("Rose", 15.0, 10)
     # rose = Plant("Rose", -1, -2) # invalid value create obj with def val
     print("Plant created: ", end="")
