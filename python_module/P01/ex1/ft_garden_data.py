@@ -6,8 +6,11 @@ class Plant:
         self.height = height
         self.age = age
 
+    def __str__(self) -> str:
+        return f"{self.name}: {self.height}cm, {self.age} days old"
+
     def show(self) -> None:
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+        print(self)
 
 
 if __name__ == "__main__":

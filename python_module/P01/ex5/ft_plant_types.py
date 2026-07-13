@@ -9,8 +9,11 @@ class Plant:
         self.set_height(height)
         self.set_age(age)
 
+    def __str__(self) -> str:
+        return f"{self.name}: {self._height:.1f}cm, {self._age} days old"
+
     def show(self) -> None:
-        print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
+        print(self)
 
     def grow(self, amount: float) -> None:
         self._height = round(self._height + amount, 1)
@@ -48,16 +51,15 @@ class Flower(Plant):
         self.color = color
         self._bloomed = False
 
-    def show(self) -> None:
-        super().show()
-        print(f" Color: {self.color}")
-        self.print_bloom()
+    def __str__(self) -> str:
+        return (f"{super().__str__()}\n"
+                f" Color: {self.color}\n"
+                f"{self.bloom_status()}")
 
-    def print_bloom(self) -> None:
+    def bloom_status(self) -> str:
         if self._bloomed:
-            print(f" {self.name} is blooming beautifully!")
-        else:
-            print(f" {self.name} has not bloomed yet")
+            return f" {self.name} is blooming beautifully!"
+        return f" {self.name} has not bloomed yet"
 
     def bloom(self) -> None:
         self._bloomed = True
@@ -69,9 +71,9 @@ class Tree(Plant):
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
 
-    def show(self) -> None:
-        super().show()
-        print(f" Trunk diameter: {self.trunk_diameter}cm")
+    def __str__(self) -> str:
+        return (f"{super().__str__()}\n"
+                f" Trunk diameter: {self.trunk_diameter}cm")
 
     def produce_shade(self) -> None:
         print(f"Tree {self.name} now produces a shade of {self.get_height()}cm"
@@ -85,10 +87,10 @@ class Vegetable(Plant):
         self.harvest_season = harvest_season
         self._nutritional_value = 0.0
 
-    def show(self) -> None:
-        super().show()
-        print(f" Harvest season: {self.harvest_season}")
-        print(f" Nutritional value: {self._nutritional_value:.0f}")
+    def __str__(self) -> str:
+        return (f"{super().__str__()}\n"
+                f" Harvest season: {self.harvest_season}\n"
+                f" Nutritional value: {self._nutritional_value:.0f}")
 
     def age(self, days: int = 1) -> None:
         super().age(days)

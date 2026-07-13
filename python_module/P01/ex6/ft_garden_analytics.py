@@ -29,8 +29,11 @@ class Plant:
         self.set_age(age)
         self._stats = self.Statistics()
 
+    def __str__(self) -> str:
+        return f"{self.name}: {self._height:.1f}cm, {self._age} days old"
+
     def show(self) -> None:
-        print(f"{self.name}: {self._height:.1f}cm, {self._age} days old")
+        print(self)
         self._stats.record("show")
 
     def grow(self, amount: float) -> None:
@@ -82,16 +85,15 @@ class Flower(Plant):
         self.color = color
         self._bloomed = False
 
-    def show(self) -> None:
-        super().show()
-        print(f" Color: {self.color}")
-        self.print_bloom()
+    def __str__(self) -> str:
+        return (f"{super().__str__()}\n"
+                f" Color: {self.color}\n"
+                f"{self.bloom_status()}")
 
-    def print_bloom(self) -> None:
+    def bloom_status(self) -> str:
         if self._bloomed:
-            print(f" {self.name} is blooming beautifully!")
-        else:
-            print(f" {self.name} has not bloomed yet")
+            return f" {self.name} is blooming beautifully!"
+        return f" {self.name} has not bloomed yet"
 
     def bloom(self) -> None:
         self._bloomed = True
@@ -103,9 +105,9 @@ class Tree(Plant):
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
 
-    def show(self) -> None:
-        super().show()
-        print(f" Trunk diameter: {self.trunk_diameter}cm")
+    def __str__(self) -> str:
+        return (f"{super().__str__()}\n"
+                f" Trunk diameter: {self.trunk_diameter}cm")
 
     def produce_shade(self) -> None:
         print(f"Tree {self.name} now produces a shade of {self.get_height()}cm"
@@ -131,9 +133,9 @@ class Seed(Flower):
         super().bloom()
         self._seed = round((self.get_age() + self.get_height()) * 0.24)
 
-    def show(self) -> None:
-        super().show()
-        print(f" Seeds: {self._seed}")
+    def __str__(self) -> str:
+        return (f"{super().__str__()}\n"
+                f" Seeds: {self._seed}")
 
 
 def print_stats(plant: Plant) -> None:

@@ -6,8 +6,11 @@ class Plant:
         self.height = height
         self.days = days
 
+    def __str__(self) -> str:
+        return f"{self.name}: {self.height}cm, {self.days} days old"
+
     def show(self) -> None:
-        print(f"{self.name}: {self.height}cm, {self.days} days old")
+        print(self)
 
     def grow(self, amount: float) -> None:
         self.height = round(self.height + amount, 1)
