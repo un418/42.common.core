@@ -7,6 +7,7 @@ Execption
 - https://www.geeksforgeeks.org/python/user-defined-exceptions-python-examples/
 - https://docs.python.org/3.12/library/exceptions.html#exception-hierarchy
 - https://www.geeksforgeeks.org/python/python-raise-keyword/
+- https://www.geeksforgeeks.org/python/what-does-the-if-__name__-__main__-do/
 
 ## Best Practices
 #### `main()` vs code directly in `if __name__ == "__main__":`
