@@ -19,3 +19,20 @@ Putting code directly under the `if` works, but defining a `main()` function is 
 - **Readability**: an `if __name__` reduced to two lines immediately signals that the file is executable and that the entry point is `main()`.
 
 Rule of thumb: one or two trivial lines under the `if` = acceptable; any logic = `main()` function.
+#### Ignore a mypy error on a single line
+
+When an error is intentional (e.g. ex2 requires keeping faulty code that raises a TypeError), silence mypy on that line only, with the specific error code:
+
+```python
+_ = "abc" + 5  # type: ignore[operator]
+```
+
+- The error code is the one mypy prints between brackets at the end of the message (`[operator]`, `[assignment]`, ...).
+- Targeted form `# type: ignore[code]` > bare `# type: ignore`: only that error code is ignored, anything else on the line is still checked.
+- The comment must be on the faulty line itself (not above), two spaces before `#` for flake8, and it counts toward the line-length limit (E501).
+- Runtime is unchanged: it is just a comment for the type checker, the exception still fires.
+- Wider tools exist (`# mypy: ignore-errors` at top of file, per-module config overrides) but the line-level ignore is the right calibre for a single deliberate error.
+
+# ex2
+
+- https://www.geeksforgeeks.org/python/conditional-statements-in-python/
