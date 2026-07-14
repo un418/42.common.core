@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-
 def input_temperature(temp_str: str) -> int:
     temp = int(temp_str)
     if temp < 0:
@@ -12,7 +11,7 @@ def input_temperature(temp_str: str) -> int:
 
 
 def test_temperature() -> None:
-    data = ['25', 'abc', "100", "-50"]
+    data = ["25", "abc", "100", "-50"]
 
     for input in data:
         print(f"Input data is '{input}'")

@@ -5,7 +5,7 @@ def input_temperature(temp_str: str) -> int:
 
 
 def test_temperature() -> None:
-    data = ['25', 'abc']
+    data = ["25", "abc"]
 
     for input in data:
         print(f"Input data is '{input}'")
