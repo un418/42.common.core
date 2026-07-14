@@ -171,11 +171,11 @@ impossible to reach through the public interface.
 
 The subject explicitly requires the **"protected" convention, not mangling**:
 
-| Prefix | Meaning | Enforced? |
-|---|---|---|
-| `name` | public | — |
-| `_name` | **protected by convention**: "internal, don't touch from outside" | No — it's a social contract between developers |
-| `__name` | **name mangling**: Python renames it to `_ClassName__name` | Sort of — makes accidental access/override harder. **Not what's asked here** |
+| Prefix   | Meaning                                                           | Enforced?                                                                    |
+| -------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `name`   | public                                                            | —                                                                            |
+| `_name`  | **protected by convention**: "internal, don't touch from outside" | No — it's a social contract between developers                               |
+| `__name` | **name mangling**: Python renames it to `_ClassName__name`        | Sort of — makes accidental access/override harder. **Not what's asked here** |
 
 Be ready to say it out loud: *Python has no real `private`. The single underscore is a
 convention that signals "access this only through the class's methods". It still works

@@ -121,9 +121,9 @@ module 02 — what you write here is a pedagogical step, not the destination.
 
 # ToDo
 
-- [ ] ex1 & ex2 : Try to use \_\_str\_\_() instead of show()
-- [ ] Redo the [quizz](https://www.geeksforgeeks.org/python/python-classes-and-objects/)
+- [x] ex1 & ex2 : Try to use \_\_str\_\_() instead of show()
+- [x] Redo the [quizz](https://www.geeksforgeeks.org/python/python-classes-and-objects/)
 - [x] Uniformize usage of :1.f with print
 - [x] Uniformize naming between exercices
 - [x] Rewiew grow() implementation
-- [ ] ex6 - implem encapsulation for stats
+- [x] ex6 - implem encapsulation for stats
