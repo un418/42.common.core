@@ -15,7 +15,7 @@ def garden_operations(operation_number: int) -> None:
 
 
 def test_error_types() -> None:
-    for op in range(5):
+    for op in (0, 1, 2, 3, 4):
         print(f"Testing operation {op}...")
         try:
             garden_operations(op)
