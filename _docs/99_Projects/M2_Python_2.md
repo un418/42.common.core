@@ -20,6 +20,7 @@ Putting code directly under the `if` works, but defining a `main()` function is 
 - **Readability**: an `if __name__` reduced to two lines immediately signals that the file is executable and that the entry point is `main()`.
 
 Rule of thumb: one or two trivial lines under the `if` = acceptable; any logic = `main()` function.
+
 #### Ignore a mypy error on a single line
 
 When an error is intentional (e.g. ex2 requires keeping faulty code that raises a TypeError), silence mypy on that line only, with the specific error code:
@@ -37,3 +38,20 @@ _ = "abc" + 5  # type: ignore[operator]
 # ex2
 
 - https://www.geeksforgeeks.org/python/conditional-statements-in-python/
+- https://www.geeksforgeeks.org/python/python-docstrings/
+
+### Q&A:
+
+Why does Python have different types of errors?
+
+How can you catch  multiple types of errors with a single try: only?
+
+Note that you  can’t use type()
+
+# ex3
+
+### Q&A:
+
+When should you create your own error types instead of using Python’s  built-in ones?
+
+How does inheritance help organize different types of  errors?
