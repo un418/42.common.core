@@ -55,3 +55,11 @@ Note that you  can’t use type()
 When should you create your own error types instead of using Python’s  built-in ones?
 
 How does inheritance help organize different types of  errors?
+
+# ex4
+
+### Q&A:
+
+Why is it important to clean up resources even when errors happen?  
+
+How does the finally block help ensure cleanup always occurs?  
