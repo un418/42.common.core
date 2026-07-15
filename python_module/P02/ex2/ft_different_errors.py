@@ -9,7 +9,7 @@ def garden_operations(operation_number: int) -> None:
         case 2:
             _ = open("/non/existent/file")
         case 3:
-            _ = "abc" + 5  # type: ignore[operator]
+            _ = "abc" + 5
         case _:
             return
 
