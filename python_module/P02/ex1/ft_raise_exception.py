@@ -25,7 +25,7 @@ def test_temperature() -> None:
 
 
 def main() -> None:
-    print("=== Garden Temperature ===\n")
+    print("=== Garden Temperature Checker ===\n")
     test_temperature()
     print("All tests completed - program didn't crash!")
 
