@@ -50,6 +50,9 @@ Note that you  can’t use type()
 
 # ex3
 
+- https://www.geeksforgeeks.org/python/python-difference-between-list-and-tuple/
+-  https://peps.python.org/pep-0257/#multi-line-docstrings
+
 ### Q&A:
 
 When should you create your own error types instead of using Python’s  built-in ones?
