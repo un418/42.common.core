@@ -4,6 +4,18 @@
 Tooling setup for the 42 Python modules. 
 The subject enforces **flake8** and **mypy**, so most of this revolves around running those two before every commit.
 
+# Tool family & real-world equivalents
+
+Both are **static analysis** tools: they inspect code without running it.
+
+| Role                | At 42  | In industry                              |
+| ------------------- | ------ | ---------------------------------------- |
+| Linter (style/bugs) | flake8 | **Ruff** (also replaces Black as formatter) |
+| Static type checker | mypy   | **mypy** or **Pyright** (Pylance's engine)  |
+
+In a real team these run automatically via **pre-commit** hooks and in **CI**
+on every PR. Same concepts as here, faster tools.
+
 # Shell aliases (zsh)
 
 ```zsh
