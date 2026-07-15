@@ -20,8 +20,7 @@ def test_temperature() -> None:
             print(f"Temperature is now {output}°C")
         except ValueError as e:
             print(f"Caught input_temperature error: {e}")
-        finally:
-            print()
+        print()
 
 
 def main() -> None:
