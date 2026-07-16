@@ -10,6 +10,7 @@ def print_arg_list_slice() -> None:
         i += 1
 
 
+"""
 # Not pythonic -> C-Like
 def print_arg_list_while() -> None:
     i = 1
@@ -28,6 +29,7 @@ def print_arg_list_range() -> None:
 def print_arg_list_enumerate() -> None:
     for i, arg in enumerate(sys.argv[1:], start=1):
         print(f"Argument {i}: {arg}")
+ """
 
 
 def main() -> None:
