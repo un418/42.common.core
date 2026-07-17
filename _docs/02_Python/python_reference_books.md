@@ -36,3 +36,8 @@ Reading order relative to where I am in the 42 Python modules (module 02 as of
 
 Also: the [official docs](https://docs.python.org/3/) are unusually good — the tutorial
 and the HOWTOs are worth as much as some books.
+
+# Other reading
+
+- [The Hitchhiker’s Guide to Python](https://docs.python-guide.org/)
+	- To Read - Section about project files/folder org

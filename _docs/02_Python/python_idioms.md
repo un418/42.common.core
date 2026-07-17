@@ -96,6 +96,47 @@ Section "Naming Conventions". The rules that matter daily:
 
 ---
 
+## Mutable default arguments — the instance-sharing trap
+
+- https://docs.python-guide.org/writing/gotchas/#default-args
+
+A default value in a function/method signature is evaluated **once**, at
+*definition* time — not on every call. If that default is a **mutable**
+object (`set()`, `[]`, `{}`), every call that omits the argument shares
+**the same object**:
+
+```python
+class Player:
+    def __init__(self, name: str, achievements: set[str] = set()):
+        self.name = name
+        self.achievements = achievements
+
+p1 = Player("Alice")
+p2 = Player("Bob")
+p1.achievements.add("first_blood")
+p2.achievements                     # {'first_blood'} — leaked from p1
+p1.achievements is p2.achievements  # True — literally the same set
+```
+
+**The idiom**: default to `None` (immutable, so safe to share), build the
+mutable object *inside* the body — that line reruns on every call:
+
+```python
+def __init__(self, name: str, achievements: set[str] | None = None):
+    self.name = name
+    self.achievements = achievements if achievements is not None else set()
+```
+
+`is not None` (not a truthiness check) matters here: an explicitly-passed
+*empty* set must still be respected, not silently treated as "nothing was
+given".
+
+Same underlying mechanism as **aliasing** (two names, one object) — see
+[python_module03_concepts.md](python_module03_concepts.md) ex5, where a
+generator mutates the caller's list in place instead of a copy.
+
+---
+
 ## Other idioms in the "philosophy" category
 
 - **Pythonic** — the umbrella adjective: code that uses the language's intended
