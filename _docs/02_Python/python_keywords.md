@@ -59,6 +59,9 @@ if key in my_dict:   # not: if key in my_dict.keys()
 if 0 <= x < 10:      # chained comparison, not: x >= 0 and x < 10
 ```
 
+See [python_collections.md](python_collections.md) for what `in` actually tests on
+a dict.
+
 ## Conditionals
 
 | Keyword | Meaning |

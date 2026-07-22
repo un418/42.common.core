@@ -15,12 +15,12 @@ performance decision.
 
 ### The four collections at a glance
 
-| Type      | Ordered?             | Mutable?               | Duplicates?     | Access by             | Typical use                        |
-| --------- | -------------------- | ---------------------- | --------------- | --------------------- | ---------------------------------- |
-| **list**  | yes (insertion)      | yes                    | yes             | index `lst[0]`        | ordered, growable sequence         |
-| **tuple** | yes (insertion)      | **no** (immutable)     | yes             | index `t[0]`          | fixed record — meaning by position |
-| **set**   | **no** (hash order)  | yes                    | **no** (unique) | membership `x in s`   | uniqueness + set algebra           |
-| **dict**  | yes (insertion, 3.7+) | yes                   | unique **keys** | key `d["k"]`          | key → value association            |
+| Type      | Ordered?              | Mutable?           | Duplicates?     | Access by           | Typical use                        |
+| --------- | --------------------- | ------------------ | --------------- | ------------------- | ---------------------------------- |
+| **list**  | yes (insertion)       | yes                | yes             | index `lst[0]`      | ordered, growable sequence         |
+| **tuple** | yes (insertion)       | **no** (immutable) | yes             | index `t[0]`        | fixed record — meaning by position |
+| **set**   | **no** (hash order)   | yes                | **no** (unique) | membership `x in s` | uniqueness + set algebra           |
+| **dict**  | yes (insertion, 3.7+) | yes                | unique **keys** | key `d["k"]`        | key → value association            |
 
 ### Complexity you should be able to quote
 
@@ -206,12 +206,12 @@ constructor form. (`{1, 2}` is a set literal; `{}` will always be a dict.)
 
 ### Set algebra — map each subject requirement to an operation
 
-| Requirement                                | Operation                                  |
-| ------------------------------------------ | ------------------------------------------ |
-| unique achievements among all players      | **union** of all sets (`\|` / `.union()`)  |
-| achievements shared by all players         | **intersection** (`&` / `.intersection()`) |
-| achievements only player X has             | **difference**: X minus the union of everyone else (`-` / `.difference()`) |
-| achievements X is missing                  | **difference**: full catalog minus X       |
+| Requirement                           | Operation                                                                  |
+| ------------------------------------- | -------------------------------------------------------------------------- |
+| unique achievements among all players | **union** of all sets (`\|` / `.union()`)                                  |
+| achievements shared by all players    | **intersection** (`&` / `.intersection()`)                                 |
+| achievements only player X has        | **difference**: X minus the union of everyone else (`-` / `.difference()`) |
+| achievements X is missing             | **difference**: full catalog minus X                                       |
 
 Both the operator (`|`, `&`, `-`) and method (`union`, `intersection`,
 `difference`) spellings exist; methods are what the authorized list names.

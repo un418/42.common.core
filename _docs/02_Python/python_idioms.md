@@ -80,7 +80,9 @@ When LBYL still wins: the check is trivial and cheap, the exception is ambiguous
 
 ## PEP 8 — naming, the part evaluators actually check
 
-Section "Naming Conventions". The rules that matter daily:
+Section "Naming Conventions". The rules that matter daily (mechanics —
+for the judgment layer: role vs. type, verb/noun contracts, compound-name
+head placement, see [python_naming.md](python_naming.md)):
 
 - Functions and variables: `snake_case`, lowercase — `calc_3D_dist` violates it
   (uppercase `D`); `calc_dist_3d` doesn't.
@@ -132,7 +134,7 @@ def __init__(self, name: str, achievements: set[str] | None = None):
 given".
 
 Same underlying mechanism as **aliasing** (two names, one object) — see
-[python_module03_concepts.md](python_module03_concepts.md) ex5, where a
+[python_module03_concepts.md](M2_Python_3_concepts.md) ex5, where a
 generator mutates the caller's list in place instead of a copy.
 
 ---
@@ -155,6 +157,7 @@ generator mutates the caller's list in place instead of a copy.
 
 ---
 
-See also: [python_module03_concepts.md](python_module03_concepts.md) (module 03
+See also: [python_naming.md](python_naming.md) (naming, the judgment layer),
+[python_module03_concepts.md](M2_Python_3_concepts.md) (module 03
 exercise-by-exercise), [python_main_guard.md](python_main_guard.md) (the guard
 pattern — itself a PEP 8-endorsed idiom), [python_custom_exceptions.md](python_custom_exceptions.md).

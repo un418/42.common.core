@@ -111,5 +111,5 @@ if __name__ == "__main__":
 > separates reusable definitions from script code, so importing the file gives me the
 > classes without running my tests.
 
-See also: [python_module01_concepts.md](python_module01_concepts.md) §2 (ex0) for the
+See also: [python_module01_concepts.md](M2_Python_1_concepts.md) §2 (ex0) for the
 shebang and the exact questions asked at defense.
