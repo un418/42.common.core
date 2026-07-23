@@ -20,7 +20,17 @@
 - https://www.geeksforgeeks.org/maths/set-operations/
 	- super graphical example
 - https://www.w3schools.com/python/ref_set_union.asp
-
+## ex4
+- https://www.geeksforgeeks.org/python/python-dictionary/
+- https://www.w3schools.com/python/python_dictionaries.asp
+- https://www.w3schools.com/python/python_dictionaries_methods.asp
+- https://stackoverflow.com/questions/1602934/check-if-a-given-key-already-exists-in-a-dictionary
+## ex5
+- https://www.geeksforgeeks.org/python/generators-in-python/
+- https://www.geeksforgeeks.org/python/iterators-in-python/
+- https://peps.python.org/pep-0484/#annotating-generator-functions-and-coroutines
+- https://www.geeksforgeeks.org/python/python-dict-or/
+- https://www.geeksforgeeks.org/python/zip-in-python/
 ## Q&A
  - Does a set raise an error if you try to add an element that's already in it?
 	- A: No, `.add()` (or a `{...}` literal) on an element that's already present is a silent no-op, the set's size doesn't change.
