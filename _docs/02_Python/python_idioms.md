@@ -137,6 +137,9 @@ Same underlying mechanism as **aliasing** (two names, one object) — see
 [python_module03_concepts.md](M2_Python_3_concepts.md) ex5, where a
 generator mutates the caller's list in place instead of a copy.
 
+The full picture on optional parameters (defaults, keyword-only `*`, sentinels)
+is in [python_functions.md](python_functions.md#optional-parameters).
+
 ---
 
 ## Other idioms in the "philosophy" category

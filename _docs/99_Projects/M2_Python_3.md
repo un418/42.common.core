@@ -31,6 +31,12 @@
 - https://peps.python.org/pep-0484/#annotating-generator-functions-and-coroutines
 - https://www.geeksforgeeks.org/python/python-dict-or/
 - https://www.geeksforgeeks.org/python/zip-in-python/
+
+## ex6
+- https://www.geeksforgeeks.org/python/python-string-istitle-method/
+- https://www.geeksforgeeks.org/python/python-dictionary-comprehension/
+- https://stackoverflow.com/questions/1747817/create-a-dictionary-with-comprehension
+- https://www.w3schools.com/python/module_random.asp
 ## Q&A
  - Does a set raise an error if you try to add an element that's already in it?
 	- A: No, `.add()` (or a `{...}` literal) on an element that's already present is a silent no-op, the set's size doesn't change.
