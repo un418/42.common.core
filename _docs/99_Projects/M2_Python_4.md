@@ -22,3 +22,6 @@
 - https://stackoverflow.com/questions/275018/how-can-i-remove-a-trailing-newline
 - https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html#filename-safety
 	- Better to `strip` than `rstrip` only
+- https://www.geeksforgeeks.org/python/python-match-case-statement/
+	- 
+	

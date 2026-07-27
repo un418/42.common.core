@@ -77,3 +77,27 @@ merged = d | {"c": 3}         # new dict, d itself untouched (update() has no no
 
 `d.update({"b": 20})` is functionally equivalent to `d["b"] = 20` for a single key —
 `.update()` is really `[key] = val` generalized to many keys in one call.
+
+## Comprehensions
+
+The brackets pick the type:
+
+| Syntax                  | Builds                                             |
+| ----------------------- | -------------------------------------------------- |
+| `[x for x in it]`       | `list`                                             |
+| `{x for x in it}`       | `set`                                              |
+| `{k: v for k, v in it}` | `dict`                                             |
+| `(x for x in it)`       | **generator** — not a tuple, and nothing is built  |
+| `tuple(x for x in it)`  | `tuple` — a wrapped generator, not a comprehension |
+
+No tuple comprehension exists: `( ... )` is already the generator syntax, so a
+tuple is obtained by wrapping one and letting `tuple()` consume it.
+
+The odd one out matters. The three bracket forms are **eager** (whole collection
+allocated on the spot); the parenthesised form is **lazy** (values produced one
+at a time, consumable only once). That's what makes it the right argument to
+feed to `all()`, `any()`, `sum()` or `max()`, which iterate a single time and
+can stop early.
+
+Full treatment — anatomy, `all()`/`any()` semantics, short-circuit, empty-iterable
+traps: [python_comprehensions.md](python_comprehensions.md).
