@@ -58,6 +58,20 @@ Both are official [Python glossary](https://docs.python.org/3/glossary.html) ent
 - **EAFP — "Easier to Ask Forgiveness than Permission"**: act directly, handle the
   failure if it comes. `try: float(item) / except ValueError:`.
 
+Side by side, on a dict lookup — same task, two philosophies:
+
+```python
+# LBYL — check first, then act
+if "fertilizer" in tank:
+    dose = tank["fertilizer"]
+
+# EAFP — act, then catch the exact exception
+try:
+    dose = tank["fertilizer"]
+except KeyError:
+    ...
+```
+
 Python culture leans **EAFP**. Why:
 
 1. **No double work** — the conversion *is* the validation; LBYL often re-implements
@@ -163,4 +177,4 @@ is in [python_functions.md](python_functions.md#optional-parameters).
 See also: [python_naming.md](python_naming.md) (naming, the judgment layer),
 [python_module03_concepts.md](M2_Python_3_concepts.md) (module 03
 exercise-by-exercise), [python_main_guard.md](python_main_guard.md) (the guard
-pattern — itself a PEP 8-endorsed idiom), [python_custom_exceptions.md](python_custom_exceptions.md).
+pattern — itself a PEP 8-endorsed idiom), [python_custom_exceptions.md](python_custom_exceptions.md), [python_exception.md](python_exception.md).
