@@ -30,9 +30,8 @@ class NumericProcessor(DataProcessor):
 
     def validate(self, data: Any) -> bool:
         if isinstance(data, list) and len(data) > 0:
-            # combo all() + generator
-            return all(self._is_valid_type(d) for d in data)
-        return self._is_valid_type(data)
+            return all(self._is_valid(d) for d in data)
+        return self._is_valid(data)
 
     def ingest(self, data: int | float | list[int] | list[int | float]
                ) -> None:
@@ -45,7 +44,7 @@ class NumericProcessor(DataProcessor):
             self._counter += 1
 
     @staticmethod
-    def _is_valid_type(data: Any) -> bool:
+    def _is_valid(data: Any) -> bool:
         return (isinstance(data, (int, float))
                 and not isinstance(data, bool))
 
@@ -55,16 +54,20 @@ class TextProcessor(DataProcessor):
 
     def validate(self, data: Any) -> bool:
         if isinstance(data, list) and len(data) > 0:
-            return all(isinstance(d, str) for d in data)
-        return isinstance(data, str)
+            return all(self._is_valid(d) for d in data)
+        return self._is_valid(data)
 
     def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             raise TypeError(self.ERR_MSG)
         items = data if isinstance(data, list) else [data]
         for item in items:
-            self._queue.append((self._counter, item))
+            self._queue.append((self._counter, str(item)))
             self._counter += 1
+
+    @staticmethod
+    def _is_valid(data: Any) -> bool:
+        return isinstance(data, str)
 
 
 class LogProcessor(DataProcessor):
@@ -72,9 +75,8 @@ class LogProcessor(DataProcessor):
 
     def validate(self, data: Any) -> bool:
         if isinstance(data, list) and len(data) > 0:
-            # combo all() + generator
-            return (all(self._is_valid_schema(d) for d in data))
-        return self._is_valid_schema(data)
+            return all(self._is_valid(d) for d in data)
+        return self._is_valid(data)
 
     def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
@@ -86,7 +88,7 @@ class LogProcessor(DataProcessor):
             self._counter += 1
 
     @staticmethod
-    def _is_valid_schema(data: Any) -> bool:
+    def _is_valid(data: Any) -> bool:
         req_keys = {"log_level", "log_message"}
         return (
             isinstance(data, dict)
