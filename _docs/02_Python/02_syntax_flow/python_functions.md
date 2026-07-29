@@ -42,6 +42,8 @@ flake8 enforces both (E252 / E251).
 
 ### 2. The `None` sentinel — for everything mutable or computed
 
+- https://docs.python-guide.org/writing/gotchas/#default-args
+
 The default expression is evaluated **once, at definition time**, so a mutable default
 is shared by every call that omits it:
 
@@ -67,8 +69,37 @@ freezes the import time forever.
 | computed at call time (`now()`, `uuid4()`) | `= None`, compute in the body |
 
 `if items is None` and **not** `if not items`: an explicitly-passed empty list means
-"the caller gave me a list" and must be respected, not silently replaced. Full version
-of the trap in [python_idioms.md](python_idioms.md#mutable-default-arguments--the-instance-sharing-trap).
+"the caller gave me a list" and must be respected, not silently replaced.
+
+#### On a method: the same trap becomes instance sharing
+
+`__init__` is where it bites hardest — the shared object is not just reused across
+calls, it becomes shared *state* between objects that should be independent:
+
+```python
+class Player:
+    def __init__(self, name: str, achievements: set[str] = set()):
+        self.name = name
+        self.achievements = achievements
+
+p1 = Player("Alice")
+p2 = Player("Bob")
+p1.achievements.add("first_blood")
+p2.achievements                     # {'first_blood'} — leaked from p1
+p1.achievements is p2.achievements  # True — literally the same set
+```
+
+Same fix, in the body:
+
+```python
+def __init__(self, name: str, achievements: set[str] | None = None):
+    self.name = name
+    self.achievements = achievements if achievements is not None else set()
+```
+
+Same underlying mechanism as **aliasing** (two names, one object) — see
+[python_module03_concepts.md](../../99_Projects/M2_Python_3_concepts.md) ex5, where a
+generator mutates the caller's list in place instead of a copy.
 
 ### 3. Keyword-only parameters
 
@@ -135,6 +166,6 @@ mypy will not let you write `def f(x: list[int] = None)`: the annotation must be
 
 ---
 
-See also: [python_idioms.md](python_idioms.md) (the mutable-default trap in depth),
+See also: [python_idioms.md](../05_style/python_idioms.md) (the mutable-default trap in depth),
 [python_conditions.md](python_conditions.md) (`is` vs `==`, guard clauses),
-[python_naming.md](python_naming.md).
+[python_naming.md](../05_style/python_naming.md).

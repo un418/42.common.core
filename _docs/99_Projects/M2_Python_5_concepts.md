@@ -346,7 +346,7 @@ subject's own example).
   `ex1/`, `ex2/`. Copy forward, don't import across directories.
 - **Every file is runnable**: `python3 data_processor.py` must print the demo
   scenario, so each exercise needs its own test scenario under a main guard (see
-  [python_main_guard.md](../02_Python/python_main_guard.md)).
+  [python_main_guard.md](../02_Python/02_syntax_flow/python_main_guard.md)).
 - **Output text is yours**, structure is the subject's: keep the sections,
   statistics lines and error lines recognizable.
 - Defense warning from the subject: you may be asked to **extend the system live**

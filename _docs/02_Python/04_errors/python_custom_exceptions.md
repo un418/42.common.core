@@ -44,6 +44,30 @@ Consequence: a "default message" is nothing more than making sure
 `super().__init__()` receives that message when the caller did not provide one.
 Everything (`str`, `repr`, traceback display, pickling/copying) then works for free.
 
+### Built-ins that give `args` a special meaning
+
+I first read `raise MyError("...")` as "pass a string to override the default message".
+It is more than that: the string is just the common case of a general mechanism, and
+some built-ins use the tuple structurally.
+
+> Some built-in exceptions (like `OSError`) expect a certain number of arguments and
+> assign a special meaning to the elements of this tuple, while others are usually
+> called only with a single string giving an error message.
+> — [docs, `BaseException.args`](https://docs.python.org/3/library/exceptions.html#BaseException.args)
+
+`UnicodeDecodeError` is the clearest example: it takes **5** arguments
+`(encoding, object, start, end, reason)` and defines a `__str__` that assembles them
+into a readable sentence:
+
+```python
+>>> b"\x80abc".decode("utf-8")
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte
+```
+
+So the rule of thumb: forward to `super().__init__()` the values that *define* the
+error, and let `__str__` do the sentence (_cf._
+[`__str__` vs `__repr__`](https://www.geeksforgeeks.org/python/str-vs-repr-in-python/)).
+
 ## Extra attributes: forward them too
 
 When an error carries context, keep the contract by passing the same data positionally

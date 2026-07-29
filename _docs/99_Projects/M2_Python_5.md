@@ -86,7 +86,7 @@ Read-only `Sequence` has no write op, hence is covariant. Only `list[int]` actua
 
 ### __len__ magic method
 - https://www.geeksforgeeks.org/python/python-__len__-magic-method/
-- Fiche : [Truthiness — what `if obj:` really asks](../02_Python/python_truthiness.md)
+- Fiche : [Truthiness — what `if obj:` really asks](../02_Python/02_syntax_flow/python_truthiness.md)
   — `bool()` → `__bool__` sinon `__len__ != 0` sinon `True` ; d'où `if not lst:` sur un
   conteneur vide, et le piège de la classe sans aucun des deux (toujours truthy).
 ### __bool__ magic method

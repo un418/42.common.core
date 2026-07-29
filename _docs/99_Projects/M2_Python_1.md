@@ -54,7 +54,7 @@ i=i-1
 - https://www.geeksforgeeks.org/python/input-validation-in-python/
 - https://www.geeksforgeeks.org/python/encapsulation-in-python/
 - https://www.geeksforgeeks.org/python/python-property-decorator-property/
-- [Floats in Python](../02_Python/python_floats.md) — `round()` vs `:.1f` vs type promotion
+- [Floats in Python](../02_Python/03_data_types/python_floats.md) — `round()` vs `:.1f` vs type promotion
 
 ### Why not `@property`, even though it is the pythonic way
 

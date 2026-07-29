@@ -1,10 +1,9 @@
-
 # Python dev environment
 
 Tooling setup for the 42 Python modules. 
 The subject enforces **flake8** and **mypy**, so most of this revolves around running those two before every commit.
 
-# Tool family & real-world equivalents
+## Tool family & real-world equivalents
 
 Both are **static analysis** tools: they inspect code without running it.
 
@@ -16,7 +15,7 @@ Both are **static analysis** tools: they inspect code without running it.
 In a real team these run automatically via **pre-commit** hooks and in **CI**
 on every PR. Same concepts as here, faster tools.
 
-# Shell aliases (zsh)
+## Shell aliases (zsh)
 
 ```zsh
 # Base
@@ -50,7 +49,7 @@ alias venv='python3 -m venv .venv && source .venv/bin/activate'
 alias act='source .venv/bin/activate'
 ```
 
-# Shell completion (flake8 / mypy)
+## Shell completion (flake8 / mypy)
 
 flake8 and mypy ship **no argument completion**: no `completion` subcommand, no
 `PYTHON_ARGCOMPLETE_OK` marker in their `~/.local/bin` scripts. `argcomplete` only
@@ -66,9 +65,9 @@ Options, lightest first:
 3. **Global argcomplete**: only useful for other tools that carry the marker, useless
    for mypy/flake8.
 
-# VS Code
+## VS Code
 
-## Extensions
+### Extensions
 
 | Extension         | ID                            | Purpose                                 |
 | ----------------- | ----------------------------- | --------------------------------------- |
@@ -77,7 +76,7 @@ Options, lightest first:
 | Flake8            | `ms-python.flake8`            | Inline lint, matches the subject        |
 | Mypy Type Checker | `ms-python.mypy-type-checker` | Typing errors underlined in the editor  |
 
-## Settings (`settings.json`)
+### Settings (`settings.json`)
 
 ```jsonc
 {
@@ -93,7 +92,7 @@ Options, lightest first:
 The ruler at 79 plus trim/final-newline alone remove the most common flake8
 errors.
 
-## Keyboard shortcuts
+### Keyboard shortcuts
 
 Native ones are enough to start with:
 

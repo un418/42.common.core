@@ -1,5 +1,6 @@
+# Exceptions — the error model
+
 - https://docs.python.org/3/tutorial/errors.html
-# Basics
 
 ## Exception Hierarchy
 - https://docs.python.org/3/library/exceptions.html#exception-hierarchy
@@ -114,7 +115,7 @@ Caught ZeroDivisionError: division by zero
 ```
 `ArithmeticError` catches `ZeroDivisionError` and `OverflowError` ; `LookupError` catches `IndexError` and `KeyError` the same way.
 
-Underlying philosophy (PEP 20, the Zen — _cf._ [python_idioms.md](python_idioms.md)) :
+Underlying philosophy (PEP 20, the Zen — _cf._ [python_idioms.md](../05_style/python_idioms.md)) :
 > - Errors should never pass silently.
 > - Explicit is better than implicit.
 
@@ -157,27 +158,13 @@ except FileNotFoundError as e:
 - _cf._ [Why I Prefer Exceptions to Error Values — CedarDB](https://cedardb.com/blog/exceptions_vs_errors/)
 - _cf._ [The History of Python — Python's Design Philosophy](http://python-history.blogspot.com/2009/01/pythons-design-philosophy.html)
 
-## EAFP vs LBYL (brief)
+## What typed exceptions make possible : EAFP
 
-Two error-handling styles. Python leans **EAFP** : I try the operation and catch the failure, instead of testing everything first (**LBYL**).
+Everything above pays off in one idiom : Python leans **EAFP** (act, then catch) rather than **LBYL** (check first, then act). That style only works *because* of the two properties on this page — exceptions are **typed**, so I catch exactly `KeyError` and nothing else, and they **propagate**, so the failure cannot be silently dropped. Without the hierarchy, EAFP would mean catching everything blindly.
 
-```python
-# LBYL — Look Before You Leap : check first, then act
-if "fertilizer" in tank:
-    dose = tank["fertilizer"]
+The two styles side by side, when LBYL still wins, and the defense one-liner : [python_idioms.md](../05_style/python_idioms.md).
 
-# EAFP — Easier to Ask Forgiveness than Permission : try, then catch
-try:
-    dose = tank["fertilizer"]
-except KeyError:
-    ...
-```
-
-Why EAFP : the access *is* the test (no double work), and there is no test/act gap where the state can change in between (race condition). It only works because exceptions are typed and propagate — so I catch exactly `KeyError` and nothing else.
-
-Full trade-off (when LBYL still wins, the defense one-liner) : [python_idioms.md](python_idioms.md).
-
-# How to print Error Type ? 
+## How to print the error type 
 
 ```python
         try:
@@ -190,30 +177,9 @@ Full trade-off (when LBYL still wins, the defense one-liner) : [python_idioms.md
 - `e.__class__.__name__` : Allow to print the type of error
 - `type(e).__name__` : Do the same via the type function
 
+## Where the message lives
 
-# Error args
-
-At the beginning I thought that an exception can have a string as parameter and that it allows to override the default error message.
-In reality it is more complex and powerful than that.
-```python
-print("Testing WaterError...")
-try:
-    raise WaterError("Not enough water in the tank!")
-except WaterError as e:
-    print(f"Caught {e.__class__.__name__}: {e}")
-print()
-```
-
-
-Exceptions are classes (that usually use inheritance)
-  The constructor of the top level [BaseException](https://docs.python.org/fr/3.14/library/exceptions.html#OSError) accepts `args` and it can be super useful to enrich the error message that they return. (_cf._ : [\__str__ dunder method concept ](https://www.geeksforgeeks.org/python/str-vs-repr-in-python/))
-
-
-- From :  https://docs.python.org/fr/3.14/library/exceptions.html#BaseException.args 
- >  Some built-in exceptions (like [`OSError`](https://docs.python.org/3/library/exceptions.html#OSError "OSError")) expect a certain number of arguments and assign a special meaning to the elements of this tuple, while others are usually called only with a single string giving an error message.
-  
-- Another good example with [`UnicodeDecodeError`](https://docs.python.org/3/library/exceptions.html#UnicodeError) that accepts
->  **5 arguments** : `(encoding, object, start, end, reason)`, and a  `__str__` that builds a more comprehensible sentence :
- >  ```
- >'utf-8' codec can't decode byte 0x80 in position 0: invalid start byte
- > ```
+An exception is a class, so `raise MyError("...")` is a constructor call : the string
+goes into `self.args`, and the inherited `__str__` reads it back. That contract (PEP 352),
+what happens when `args` holds zero or several values, and the built-ins that give the
+tuple a structural meaning : [python_custom_exceptions.md](python_custom_exceptions.md).

@@ -94,4 +94,4 @@ python3 -c "print([m for m in dir(list) if not m.startswith('_')])"
 ---
 
 See also: [dev_env.md](dev_env.md) (setup interpréteur / outils),
-[python_keywords.md](python_keywords.md).
+[python_keywords.md](../02_syntax_flow/python_keywords.md).

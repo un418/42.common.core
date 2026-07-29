@@ -259,5 +259,5 @@ step is exactly the `all()` + generator expression pattern above.
 ---
 
 See also: [python_collections.md](python_collections.md) (list/tuple/dict/set),
-[python_idioms.md](python_idioms.md) (why "pythonic" favours these forms),
-[python_keywords.md](python_keywords.md) (`in`, `for`).
+[python_idioms.md](../05_style/python_idioms.md) (why "pythonic" favours these forms),
+[python_keywords.md](../02_syntax_flow/python_keywords.md) (`in`, `for`).

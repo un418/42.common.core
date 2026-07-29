@@ -148,6 +148,6 @@ others = [p for p in players if p is not player]   # exclude the object itself
 > compares `id()`s — no class defines `__eq__` here, so equality falls back to
 > identity, but `is not` states the intent and can't be hijacked.
 
-See also: [python_custom_exceptions.md](python_custom_exceptions.md) for what `raise`
+See also: [python_custom_exceptions.md](../04_errors/python_custom_exceptions.md) for what `raise`
 does, [python_main_guard.md](python_main_guard.md) for file structure,
 [python_truthiness.md](python_truthiness.md) for what `if obj:` actually evaluates.

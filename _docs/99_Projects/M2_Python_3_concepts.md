@@ -240,7 +240,7 @@ explodes — pick numbers where all requested sets are *likely* non-empty.
   `TypeError: unhashable type: 'list'`.
 
 Watch for the classic **mutable default argument** trap on constructors that
-take a set/list/dict — see [python_idioms.md](python_idioms.md).
+take a set/list/dict — see [python_idioms.md](../02_Python/05_style/python_idioms.md).
 
 ---
 
@@ -446,6 +446,6 @@ Concepts you'll need around them:
 | **COMPREHENSION**  | A single expression that builds a list/dict/set from an iterable, combining a transform (map) and an optional filter.        |
 | **`sys.argv`**     | The list of command-line strings, program name at index 0 — Python's `argv`, with `len()` playing the role of `argc`.        |
 | **ALIASING**       | Two names referencing the same object — mutations through one are visible through the other; passing a list passes a reference, not a copy. |
-| **MUTABLE DEFAULT ARG** | A default value is built once at definition time; a mutable default (`set()`/`[]`/`{}`) is then shared across every call that omits it (see [python_idioms.md](python_idioms.md)). Fix: default to `None`, build fresh inside the body. |
+| **MUTABLE DEFAULT ARG** | A default value is built once at definition time; a mutable default (`set()`/`[]`/`{}`) is then shared across every call that omits it (see [python_idioms.md](../02_Python/05_style/python_idioms.md)). Fix: default to `None`, build fresh inside the body. |
 
 ---

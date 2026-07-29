@@ -112,50 +112,6 @@ head placement, see [python_naming.md](python_naming.md)):
 
 ---
 
-## Mutable default arguments — the instance-sharing trap
-
-- https://docs.python-guide.org/writing/gotchas/#default-args
-
-A default value in a function/method signature is evaluated **once**, at
-*definition* time — not on every call. If that default is a **mutable**
-object (`set()`, `[]`, `{}`), every call that omits the argument shares
-**the same object**:
-
-```python
-class Player:
-    def __init__(self, name: str, achievements: set[str] = set()):
-        self.name = name
-        self.achievements = achievements
-
-p1 = Player("Alice")
-p2 = Player("Bob")
-p1.achievements.add("first_blood")
-p2.achievements                     # {'first_blood'} — leaked from p1
-p1.achievements is p2.achievements  # True — literally the same set
-```
-
-**The idiom**: default to `None` (immutable, so safe to share), build the
-mutable object *inside* the body — that line reruns on every call:
-
-```python
-def __init__(self, name: str, achievements: set[str] | None = None):
-    self.name = name
-    self.achievements = achievements if achievements is not None else set()
-```
-
-`is not None` (not a truthiness check) matters here: an explicitly-passed
-*empty* set must still be respected, not silently treated as "nothing was
-given".
-
-Same underlying mechanism as **aliasing** (two names, one object) — see
-[python_module03_concepts.md](M2_Python_3_concepts.md) ex5, where a
-generator mutates the caller's list in place instead of a copy.
-
-The full picture on optional parameters (defaults, keyword-only `*`, sentinels)
-is in [python_functions.md](python_functions.md#optional-parameters).
-
----
-
 ## Other idioms in the "philosophy" category
 
 - **Pythonic** — the umbrella adjective: code that uses the language's intended
@@ -168,6 +124,11 @@ is in [python_functions.md](python_functions.md#optional-parameters).
   *preferring it* over index access is the idiom (names + implicit length check for
   free). Extended form `first, *rest = values` is PEP 3132. The idiomatic swap
   `a, b = b, a` is the same mechanism.
+- **`= None` rather than a mutable default** — a signature default is built once at
+  definition time, so `def f(x=[])` shares one list across every call. Defaulting to
+  `None` and building the object in the body is the idiom; the mechanics, the
+  instance-sharing variant on `__init__` and the `_MISSING` sentinel are in
+  [python_functions.md](../02_syntax_flow/python_functions.md#optional-parameters).
 - Language-agnostic principles that live in the same drawer: **DRY** (Don't Repeat
   Yourself), **KISS** (Keep It Simple, Stupid), **YAGNI** (You Aren't Gonna Need
   It).
@@ -175,6 +136,6 @@ is in [python_functions.md](python_functions.md#optional-parameters).
 ---
 
 See also: [python_naming.md](python_naming.md) (naming, the judgment layer),
-[python_module03_concepts.md](M2_Python_3_concepts.md) (module 03
-exercise-by-exercise), [python_main_guard.md](python_main_guard.md) (the guard
-pattern — itself a PEP 8-endorsed idiom), [python_custom_exceptions.md](python_custom_exceptions.md), [python_exception.md](python_exception.md).
+[python_module03_concepts.md](../../99_Projects/M2_Python_3_concepts.md) (module 03
+exercise-by-exercise), [python_main_guard.md](../02_syntax_flow/python_main_guard.md) (the guard
+pattern — itself a PEP 8-endorsed idiom), [python_custom_exceptions.md](../04_errors/python_custom_exceptions.md), [python_exception.md](../04_errors/python_exception.md).

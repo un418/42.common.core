@@ -117,5 +117,5 @@ optional argument, `not` for a "do I have work to do?" test.
 > `__len__ != 0`, then defaults to `True`. `list` has only `__len__`, so an empty
 > list is falsy by virtue of its length — no comparison to `False` involved.
 
-See also: [python_collections.md](python_collections.md) for the containers
-themselves, [python_idioms.md](python_idioms.md) for PEP 8 phrasing.
+See also: [python_collections.md](../03_data_types/python_collections.md) for the containers
+themselves, [python_idioms.md](../05_style/python_idioms.md) for PEP 8 phrasing.

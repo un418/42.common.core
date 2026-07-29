@@ -1,6 +1,6 @@
 # Classes — anatomy & layout
 
-> Naming judgment → [python_naming.md](python_naming.md) · PEP 8 mechanics → [python_idioms.md](python_idioms.md).
+> Naming judgment → [python_naming.md](../05_style/python_naming.md) · PEP 8 mechanics → [python_idioms.md](../05_style/python_idioms.md).
 > Here = **how a class body is organized**, and the two axes people confuse.
 
 ---
