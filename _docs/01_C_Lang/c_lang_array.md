@@ -1,5 +1,5 @@
 # Basics
-![image info](/zzz_notes/~assets/c-array-declaration.webp)
+![C array declaration](../_assets/c-array-declaration.webp)
 
 > [!Waning] 
 > Array Size = 5

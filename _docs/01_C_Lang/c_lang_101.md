@@ -1,7 +1,7 @@
 # Terminology
 
 
-![image info](/zzz_notes/~assets/c_lang_101_terminology.png)
+![C terminology overview](../_assets/c_lang_101_terminology.png)
 
 # Variables
 ## C Data Types: The Master Reference

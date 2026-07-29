@@ -4,7 +4,7 @@
 
 https://www.geeksforgeeks.org/python/python-functions/
 
-![[Pasted image 20260630112535.png]]
+![Anatomy of a Python function](../_assets/python_function_anatomy.png)
 
 - https://www.geeksforgeeks.org/python/type-hints-in-python/
 - https://www.geeksforgeeks.org/python/python-input-function/

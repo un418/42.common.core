@@ -1,3 +1,8 @@
+> [!note] #to-move
+> General theory — the `## Class`, `## Object` and `## Initiate Object with __init__()`
+> sections belong in `02_Python/02_syntax_flow/python_classes.md`, which explains how to
+> **organise** a class body but never says what a class **is**. Fills a real gap there.
+
 ## Class
 
 A class is a user-defined **template** for creating objects.

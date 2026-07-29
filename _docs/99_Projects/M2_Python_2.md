@@ -10,6 +10,12 @@ Execption
 - https://www.geeksforgeeks.org/python/what-does-the-if-__name__-__main__-do/
 
 ## Best Practices
+> [!note] #to-move
+> General theory — belongs in `02_Python/02_syntax_flow/python_main_guard.md`, which has
+> three of the four arguments below but **not** "readability", and **not** the rule of
+> thumb at the end (1-2 trivial lines under the `if` = fine, any logic = `main()`).
+> Merge those two in rather than duplicating the section.
+
 #### `main()` vs code directly in `if __name__ == "__main__":`
 
 Putting code directly under the `if` works, but defining a `main()` function is the good practice as soon as there is any logic (loops, try/except, variables):
@@ -20,6 +26,10 @@ Putting code directly under the `if` works, but defining a `main()` function is 
 - **Readability**: an `if __name__` reduced to two lines immediately signals that the file is executable and that the entry point is `main()`.
 
 Rule of thumb: one or two trivial lines under the `if` = acceptable; any logic = `main()` function.
+
+> [!note] #to-move
+> Tooling, not module-specific — belongs in `02_Python/01_tooling/dev_env.md` next to the
+> other mypy/flake8 material. The ex2 mention is just the example, keep it as such.
 
 #### Ignore a mypy error on a single line
 

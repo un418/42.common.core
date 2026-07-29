@@ -1,5 +1,10 @@
 # Concepts
 
+> [!note] #to-move
+> General theory, not module-specific — belongs in
+> `02_Python/02_syntax_flow/python_abstract_classes.md` (to create).
+> Covers the whole `# Concepts` block below. Move after the module 05 defense.
+
 ### Abstract Classes
 
 > https://www.geeksforgeeks.org/python/abstract-classes-in-python/
@@ -42,6 +47,11 @@ If not :
 
 # ex0
 
+> [!note] #to-move
+> General theory — belongs in `02_Python/03_data_types/python_comprehensions.md`,
+> which already states the rule and the list-vs-dict/set contrast but has **neither**
+> the turn-by-turn cursor table nor the three idioms below. Merge, don't overwrite.
+
 ### Common mistake : mutating a list while iterating over it
 
 The iterator keeps **its own cursor**, `pop(0)` shifts items underneath it → the two cross.
@@ -67,6 +77,11 @@ for item in list(queue):  # ✅ mutate while needing the items : iterate a copy
     queue.remove(item)
 ```
 
+> [!note] #to-move
+> **Theory only** — invariance/covariance belongs in `02_Python/02_syntax_flow/python_typing.md`
+> (to create). The verdict blockquote at the end is specific to `ingest` and the subject's
+> wording, so it stays here. Split, don't move wholesale.
+
 ### `list` is invariant — the `ingest` signature
 + https://hackmd.io/pNiqam53RIiUe4eMVBccaA
 + https://dev.to/daniel1in/python-type-hint-contravariant-covariant-invariant-15lj
@@ -83,6 +98,11 @@ Read-only `Sequence` has no write op, hence is covariant. Only `list[int]` actua
 > **Kept `list[...]`**: aligned with the runtime `isinstance(data, list)`, and the subject says
 > *"lists of both types"*. `Sequence` would silently accept tuples that validation rejects.
 
+
+> [!note] #to-move
+> `02_Python/02_syntax_flow/python_truthiness.md` **already covers both** dunders in full
+> (lookup chain, falsy set, which one to define). Only the two links below are not there.
+> Candidate for deletion rather than migration.
 
 ### __len__ magic method
 - https://www.geeksforgeeks.org/python/python-__len__-magic-method/

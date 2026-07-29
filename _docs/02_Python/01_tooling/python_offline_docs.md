@@ -1,75 +1,75 @@
 # Python docs offline — `pydoc`, `help()`, `dir()`
 
-> Le manuel Python en ligne de commande. Il lit les **docstrings** des modules et
-> objets réellement installés — donc la doc correspond *exactement* à la version de
-> l'interpréteur, sans réseau. Trois outils, trois usages : `pydoc`/`help()` pour
-> *comprendre*, `dir()` pour *inventorier*.
+> The Python manual from the command line. It reads the **docstrings** of the modules
+> and objects actually installed — so the doc matches *exactly* the version of the
+> interpreter, with no network. Three tools, two jobs: `pydoc`/`help()` to
+> *understand*, `dir()` to *inventory*.
 
 ---
 
-## `pydoc` — le manuel (façon `man`)
+## `pydoc` — the manual (`man`-style)
 
-Descriptions + signatures. C'est la doc lisible.
+Descriptions + signatures. This is the readable doc.
 
 ```bash
-# La doc complète du type list : toutes les méthodes, signatures et docstrings
+# Full doc of the list type: every method, signature and docstring
 python3 -m pydoc list
 
-# Une seule méthode
+# A single method
 python3 -m pydoc list.append
 
-# Dans un pager
+# Through a pager
 python3 -m pydoc list | less
 
-# Un module entier
+# A whole module
 python3 -m pydoc os
 python3 -m pydoc os.path.join
 ```
 
-Bonus — serveur web local avec toute la doc navigable :
+Bonus — a local web server with the whole doc browsable:
 
 ```bash
-python3 -m pydoc -p 8080        # puis http://localhost:8080
-python3 -m pydoc -b             # ouvre direct le navigateur
+python3 -m pydoc -p 8080        # then http://localhost:8080
+python3 -m pydoc -b             # opens the browser directly
 ```
 
-> Note : `pydoc list` marche aussi sans `-m` si le script `pydoc` est dans le PATH,
-> mais `python3 -m pydoc` est la forme fiable (utilise le bon interpréteur).
+> Note: `pydoc list` also works without `-m` if the `pydoc` script is on the PATH,
+> but `python3 -m pydoc` is the reliable form (it uses the right interpreter).
 
 ---
 
-## `help()` — le même manuel, en interactif
+## `help()` — the same manual, interactive
 
-Dans un `python3` (REPL), `help()` est l'équivalent exact de `pydoc` :
+Inside a `python3` REPL, `help()` is the exact equivalent of `pydoc`:
 
 ```python
->>> help(list)          # doc complète du type
->>> help(list.append)   # une méthode
+>>> help(list)          # full doc of the type
+>>> help(list.append)   # a single method
 >>> help(str)
->>> help()              # mode interactif, tape "list" puis Entrée, "q" pour sortir
+>>> help()              # interactive mode: type "list" then Enter, "q" to quit
 ```
 
-Même contenu que `pydoc` (les deux lisent les docstrings) — l'un depuis le shell,
-l'autre depuis le REPL.
+Same content as `pydoc` (both read the docstrings) — one from the shell, the other
+from the REPL.
 
 ---
 
-## `dir()` — l'inventaire brut des noms
+## `dir()` — the raw inventory of names
 
-Pas de description : juste **la liste des attributs/méthodes**. Idéal pour "quelles
-méthodes existent, vite".
+No description: just **the list of attributes/methods**. Ideal for "which methods
+exist, quickly".
 
 ```python
->>> dir(list)                                   # tout, dunder inclus
+>>> dir(list)                                   # everything, dunders included
 ['__add__', ..., 'append', 'clear', 'copy', 'count', 'extend', 'index',
  'insert', 'pop', 'remove', 'reverse', 'sort']
 
->>> [m for m in dir(list) if not m.startswith('_')]   # que le "public"
+>>> [m for m in dir(list) if not m.startswith('_')]   # the "public" ones only
 ['append', 'clear', 'copy', 'count', 'extend', 'index', 'insert',
  'pop', 'remove', 'reverse', 'sort']
 ```
 
-En one-liner depuis le shell :
+As a one-liner from the shell:
 
 ```bash
 python3 -c "print([m for m in dir(list) if not m.startswith('_')])"
@@ -77,21 +77,22 @@ python3 -c "print([m for m in dir(list) if not m.startswith('_')])"
 
 ---
 
-## Lequel choisir
+## Which one to pick
 
-| Besoin                                   | Outil                     |
+| Need                                     | Tool                      |
 | ---------------------------------------- | ------------------------- |
-| Comprendre ce que fait une méthode       | `pydoc` / `help()`        |
-| Voir la signature / les arguments        | `pydoc` / `help()`        |
-| Lister vite les méthodes disponibles     | `dir()`                   |
-| Naviguer toute la stdlib au calme        | `pydoc -b` (serveur web)  |
+| Understand what a method does            | `pydoc` / `help()`        |
+| See the signature / the arguments        | `pydoc` / `help()`        |
+| List the available methods, fast         | `dir()`                   |
+| Browse the whole stdlib at leisure       | `pydoc -b` (web server)   |
 
-**Défense en une ligne :**
-> `pydoc`/`help()` lisent les docstrings de la version installée : la doc est locale
-> et toujours à jour. `dir()` ne donne que les *noms*, sans description — pour
-> l'inventaire, pas la compréhension.
+## Defense-day one-liner
+
+> `pydoc`/`help()` read the docstrings of the installed version: the doc is local and
+> always up to date. `dir()` gives only the *names*, with no description — for the
+> inventory, not for understanding.
 
 ---
 
-See also: [dev_env.md](dev_env.md) (setup interpréteur / outils),
+See also: [dev_env.md](dev_env.md) (interpreter & tooling setup),
 [python_keywords.md](../02_syntax_flow/python_keywords.md).

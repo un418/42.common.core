@@ -65,7 +65,7 @@ else
 > [!TIP] 
 > **42 Header are not checked for the exam**
 > Don't waste time with them
-> But it's always good to know [how to put them](zzz_notes/42/42 Header)
+> But it's always good to know [how to put them](https://github.com/42Paris/42header)
 
 # Survival commands
 

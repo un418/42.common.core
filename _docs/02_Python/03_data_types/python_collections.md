@@ -1,5 +1,13 @@
 # Collections: list, tuple, dict, set
 
+## Lists
+
+> To write.
+
+## Tuples
+
+> To write.
+
 ## Dictionaries
 
 ### `in` tests keys only, never values
@@ -77,6 +85,10 @@ merged = d | {"c": 3}         # new dict, d itself untouched (update() has no no
 
 `d.update({"b": 20})` is functionally equivalent to `d["b"] = 20` for a single key —
 `.update()` is really `[key] = val` generalized to many keys in one call.
+
+## Sets
+
+> To write.
 
 ## Building these collections
 

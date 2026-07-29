@@ -1,4 +1,4 @@
-![[_assets/basic_git_diagram.png]]
+![Basic git workflow](../_assets/basic_git_diagram.png)
 
 # Basics
 
