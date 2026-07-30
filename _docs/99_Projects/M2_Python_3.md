@@ -6,6 +6,9 @@
 - https://www.w3schools.com/python/python_lists_methods.asp
 - https://www.w3schools.com/python/python_for_loops.asp
 	- else: to execute code at the end of a loop !
+- https://docs.python.org/3/library/sys.html#sys.argv
+	- https://docs.python.org/3/library/sys.html#sys.orig_argv
+	  To recover arg send to interpreter , `-c` for example
 
 ## ex2
 - https://www.geeksforgeeks.org/python/how-to-catch-a-keyboardinterrupt-in-python/
@@ -13,6 +16,7 @@
 	- use of sysexit to manage user exit would have been more idomatic
 - https://www.geeksforgeeks.org/python/packing-and-unpacking-arguments-in-python/
 	- Packing / Unpacking super usefull with collections
+	
 ## ex3
 - https://www.geeksforgeeks.org/python/python-random-module/
 - https://www.w3schools.com/python/module_random.asp

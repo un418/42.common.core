@@ -1,5 +1,10 @@
 Execption
 
+Concept notes for this module: [[python_exception]] (the model and the hierarchy),
+[[python_try_except_raise]] (the statement, `else`, `finally`, `raise`),
+[[python_custom_exceptions]] (own error classes), [[python_warnings]] (the non-fatal
+branch).
+
 - https://www.geeksforgeeks.org/python/python-try-except/
 - https://www.geeksforgeeks.org/python/python-exception-handling/
 - https://www.geeksforgeeks.org/python/errors-and-exceptions-in-python/
@@ -9,13 +14,14 @@ Execption
 - https://www.geeksforgeeks.org/python/python-raise-keyword/
 - https://www.geeksforgeeks.org/python/what-does-the-if-__name__-__main__-do/
 
-## Best Practices
+
 > [!note] #to-move
 > General theory — belongs in `02_Python/02_syntax_flow/python_main_guard.md`, which has
 > three of the four arguments below but **not** "readability", and **not** the rule of
 > thumb at the end (1-2 trivial lines under the `if` = fine, any logic = `main()`).
 > Merge those two in rather than duplicating the section.
 
+## Best Practices
 #### `main()` vs code directly in `if __name__ == "__main__":`
 
 Putting code directly under the `if` works, but defining a `main()` function is the good practice as soon as there is any logic (loops, try/except, variables):
@@ -52,6 +58,8 @@ _ = "abc" + 5  # type: ignore[operator]
 
 ### Q&A:
 
+_cf._ [[python_exception]], [[python_try_except_raise]] § Multiple Exceptions
+
 Why does Python have different types of errors?
 
 How can you catch  multiple types of errors with a single try: only?
@@ -65,6 +73,8 @@ Note that you  can’t use type()
 
 ### Q&A:
 
+_cf._ [[python_custom_exceptions]]
+
 When should you create your own error types instead of using Python’s  built-in ones?
 
 How does inheritance help organize different types of  errors?
@@ -72,6 +82,9 @@ How does inheritance help organize different types of  errors?
 # ex4
 
 ### Q&A:
+
+_cf._ [[python_try_except_raise]] § Finally Keyword (the two sub-sections: `finally`
+vs code placed after the try/except, and the order when `return` sits in the `except`)
 
 Why is it important to clean up resources even when errors happen?  
 

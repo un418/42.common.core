@@ -1,5 +1,8 @@
 # Exceptions — the error model
 
+Why the language has exceptions and how they are organized. The statement that
+catches and raises them is a separate note: [[python_try_except_raise]].
+
 - https://docs.python.org/3/tutorial/errors.html
 
 ## Exception Hierarchy
@@ -70,16 +73,16 @@ BaseException
            ├── ImportWarning
            ├── PendingDeprecationWarning
            ├── ResourceWarning
-           ├── RuntimeWarning 
+           ├── RuntimeWarning
            ├── SyntaxWarning
            ├── UnicodeWarning
            └── UserWarning
 ```
 
-## Q&A ? 
+## Q&A ?
 ### Why does Python have different types of errors?
 Firstly there are two types of errors:
-- **SyntaxError** : Detected **before the code runs** by the parser. The Python interpreter will not be able to transform the code into bytecode and will not run any line of the code.  
+- **SyntaxError** : Detected **before the code runs** by the parser. The Python interpreter will not be able to transform the code into bytecode and will not run any line of the code.
 ```python
 >>> while True print('Hello world')
   File "<stdin>", line 1
@@ -114,6 +117,9 @@ Three reasons it is worth it :
 Caught ZeroDivisionError: division by zero
 ```
 `ArithmeticError` catches `ZeroDivisionError` and `OverflowError` ; `LookupError` catches `IndexError` and `KeyError` the same way.
+
+Corollary on the ordering of the clauses, and the rest of the statement (`else`,
+`finally`, `raise`) : [[python_try_except_raise]].
 
 Underlying philosophy (PEP 20, the Zen — _cf._ [python_idioms.md](../05_style/python_idioms.md)) :
 > - Errors should never pass silently.
@@ -164,7 +170,7 @@ Everything above pays off in one idiom : Python leans **EAFP** (act, then catch)
 
 The two styles side by side, when LBYL still wins, and the defense one-liner : [python_idioms.md](../05_style/python_idioms.md).
 
-## How to print the error type 
+## How to print the error type
 
 ```python
         try:

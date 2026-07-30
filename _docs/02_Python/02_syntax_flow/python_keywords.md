@@ -171,6 +171,9 @@ finally:
 and catch the failure, rather than pre-checking every condition. Catch specific
 exceptions, never a bare `except:`.
 
+Full statement, including what `finally` guarantees that code placed after the
+try/except does not: [[python_try_except_raise]].
+
 ## Context managers
 
 | Keyword | Meaning |

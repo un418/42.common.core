@@ -111,8 +111,8 @@ targets whoever runs the program and must see it.
 ## When to pick which
 
 Raise an **exception** when the caller *must* react: the operation failed, the result
-does not exist. Emit a **warning** when the operation succeeded but something should be
-reported — without breaking anyone's code, and leaving the final severity decision to
+does not exist (the statement itself: [[python_try_except_raise]]). Emit a **warning**
+when the operation succeeded but something should be reported — without breaking anyone's code, and leaving the final severity decision to
 the person running it.
 
 ## Defense-day one-liner
