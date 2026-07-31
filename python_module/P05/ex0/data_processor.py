@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 
 class DataProcessor(ABC):
     def __init__(self) -> None:
-        super().__init__()
         self._queue: list[tuple[int, str]] = []
         self._counter: int = 0
 
