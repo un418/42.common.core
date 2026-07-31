@@ -1,16 +1,12 @@
 # Python Module 05 — Concepts Guide (Abstraction & Polymorphism)
 
-> Subject: *Code Nexus — Polymorphic Data Streams in the Digital Matrix* (`_subjects/en.python_mod5.subject.pdf`)
-> Python ≥ 3.10, flake8 + mypy clean, **comprehensive** type annotations, exception handling that "protects the streams from corruption".
-> Authorized imports: **`abc` and `typing` only** — plus all builtins and all standard types/collections.
+> Subject: *Code Nexus — Polymorphic Data Streams in the Digital Matrix* (`_subjects/en.python_mod5.subject.pdf`) Python ≥ 3.10, flake8 + mypy clean, **comprehensive** type annotations, exception handling that "protects the streams from corruption". Authorized imports: **`abc` and `typing` only** — plus all builtins and all standard types/collections.
 
 ---
 
 ## 0. The big picture — "one interface, many behaviours"
 
-Module 03 gave you containers, module 04 gave you streams of bytes. This module
-is about **one caller driving many different implementations without knowing
-which one it holds**. Three ideas stack on top of each other, one per exercise:
+Module 03 gave you containers, module 04 gave you streams of bytes. This module is about **one caller driving many different implementations without knowing which one it holds**. Three ideas stack on top of each other, one per exercise:
 
 | Ex  | Mechanism                     | Question it answers                                            |
 | --- | ----------------------------- | -------------------------------------------------------------- |
@@ -27,9 +23,7 @@ which one it holds**. Three ideas stack on top of each other, one per exercise:
 | Enforced | at **runtime** (instantiation fails) | at **type-check time** (mypy) |
 | Coupling | plugin must import & subclass your base | plugin knows nothing about you |
 
-Both give polymorphism. The subject deliberately makes you use **one of each** so
-you can compare them at defense — that comparison is the single most likely
-question of the whole module.
+Both give polymorphism. The subject deliberately makes you use **one of each** so you can compare them at defense — that comparison is the single most likely question of the whole module.
 
 ### The data flow to keep in your head
 
@@ -49,9 +43,7 @@ output_pipeline(nb, plugin) → plugin.process_output([(rank, str), ...])   ← 
 
 ### The concept
 
-An **abstract base class** is a class that exists to be inherited from, never
-instantiated. It declares *what* subclasses must provide (abstract methods) and
-may also provide *shared* working code (concrete methods) — here `output()`.
+An **abstract base class** is a class that exists to be inherited from, never instantiated. It declares *what* subclasses must provide (abstract methods) and may also provide *shared* working code (concrete methods) — here `output()`.
 
 ```python
 import abc
@@ -71,14 +63,9 @@ Shape()      # TypeError: Can't instantiate abstract class Shape
 
 The three facts to be able to state:
 
-1. **`ABC` is just a class with `ABCMeta` as metaclass** — inheriting it is what
-   activates the check. `@abstractmethod` alone on a plain class does nothing.
-2. **The check happens at instantiation, not at definition.** A subclass that
-   forgets one abstract method is a perfectly legal class object — it explodes
-   only when someone calls it. That is a runtime guarantee, not a static one.
-3. **An ABC can hold real code.** `output()` is written once in the base and
-   inherited by all three specialized classes — that is the *code reuse* half of
-   inheritance, while the abstract methods are the *specialization* half.
+1. **`ABC` is just a class with `ABCMeta` as metaclass** — inheriting it is what activates the check. `@abstractmethod` alone on a plain class does nothing.
+2. **The check happens at instantiation, not at definition.** A subclass that forgets one abstract method is a perfectly legal class object — it explodes only when someone calls it. That is a runtime guarantee, not a static one.
+3. **An ABC can hold real code.** `output()` is written once in the base and inherited by all three specialized classes — that is the *code reuse* half of inheritance, while the abstract methods are the *specialization* half.
 
 ### The class hierarchy the subject asks for
 
@@ -97,46 +84,24 @@ The three facts to be able to state:
 | `TextProcessor`     | `str`, and lists of `str`                                   | as-is, item by item          |
 | `LogProcessor`      | `dict[str, str]`, and lists of those                        | converted to `str`, item by item |
 
-"Keeping each item separated" is the key phrase: ingesting a 5-element list must
-leave **5 retrievable pieces**, not one blob — `output()` hands them back one at
-a time.
+"Keeping each item separated" is the key phrase: ingesting a 5-element list must leave **5 retrievable pieces**, not one blob — `output()` hands them back one at a time.
 
 ### OVERRIDING — and the signature question
 
-**Overriding** = a subclass defines a method with the same name as its parent;
-the subclass version wins for instances of that subclass. Python has **no
-overloading**: two `def`s with the same name in one class means the second
-silently replaces the first (`typing.overload` exists but only talks to the type
-checker, never changes runtime behaviour).
+**Overriding** = a subclass defines a method with the same name as its parent; the subclass version wins for instances of that subclass. Python has **no overloading**: two `def`s with the same name in one class means the second silently replaces the first (`typing.overload` exists but only talks to the type checker, never changes runtime behaviour).
 
 The subject splits the two abstract methods on purpose:
 
-- **`validate` keeps the base signature** (`data: Any`) in every subclass —
-  it must accept *anything* precisely because its job is to answer "is this mine?"
-  about data of unknown type.
-- **`ingest` narrows** to the types each subclass really handles, e.g.
-  `int | float | list[int | float]` (3.10 union syntax, no `typing.Union` needed).
+- **`validate` keeps the base signature** (`data: Any`) in every subclass — it must accept *anything* precisely because its job is to answer "is this mine?" about data of unknown type.
+- **`ingest` narrows** to the types each subclass really handles, e.g. `int | float | list[int | float]` (3.10 union syntax, no `typing.Union` needed).
 
-Narrowing a parameter type in a subclass normally **violates the Liskov
-Substitution Principle** and mypy flags it (`[override]`): a caller holding a
-`DataProcessor` could legally pass a `str`. It passes here **only because the base
-declares `Any`**, and mypy treats `Any` as compatible in both directions. Be able
-to say that out loud — "the base uses `Any`, which is why the narrowed override
-type-checks" — it is exactly the kind of thing a good evaluator digs into.
+Narrowing a parameter type in a subclass normally **violates the Liskov Substitution Principle** and mypy flags it (`[override]`): a caller holding a `DataProcessor` could legally pass a `str`. It passes here **only because the base declares `Any`**, and mypy treats `Any` as compatible in both directions. Be able to say that out loud — "the base uses `Any`, which is why the narrowed override type-checks" — it is exactly the kind of thing a good evaluator digs into.
 
 ### The deliberate mypy warning
 
-> *"Test at least one invalid data item with the `ingest` method without prior
-> validation, and check that it raises an exception. This will leave you with a
-> mypy warning, on purpose."*
+> *"Test at least one invalid data item with the `ingest` method without prior validation, and check that it raises an exception. This will leave you with a mypy warning, on purpose."*
 
-The warning is on the **call site**, not the class: passing `"foo"` to a
-`NumericProcessor.ingest` whose annotation says numbers is an `arg-type` error.
-It is wanted — it proves the annotations are doing their job. The lesson:
-**type hints are not runtime validation**. mypy complains; Python still runs the
-call; so `ingest` must defend itself with a `raise` (`Got exception: Improper
-numeric data` in the example). Do **not** silence it with `# type: ignore` unless
-you can justify why — the subject asks for the warning to exist.
+The warning is on the **call site**, not the class: passing `"foo"` to a `NumericProcessor.ingest` whose annotation says numbers is an `arg-type` error. It is wanted — it proves the annotations are doing their job. The lesson: **type hints are not runtime validation**. mypy complains; Python still runs the call; so `ingest` must defend itself with a `raise` (`Got exception: Improper numeric data` in the example). Do **not** silence it with `# type: ignore` unless you can justify why — the subject asks for the warning to exist.
 
 ### `output()` — a FIFO queue with a persistent rank
 
@@ -147,27 +112,15 @@ output(self) -> tuple[int, str]
 Two things come back in the tuple:
 
 - the **oldest** stored piece (First-In-First-Out), which is then **removed**;
-- its **processing rank** *within that processor* — assigned at ingest time,
-  starting at 0 and **never reset**.
+- its **processing rank** *within that processor* — assigned at ingest time, starting at 0 and **never reset**.
 
-Trace it from the ex2 example: after 4 numeric items (ranks 0-3) three are
-consumed; the next batch of 7 continues at rank 4; the JSON export then prints
-`item_3, item_4, item_5…`. So the rank travels **with** the piece of data and the
-counter is monotonic per processor — it doubles as the "total processed" figure
-in ex1's statistics. Design consequence: storing bare strings is not enough, the
-rank has to be recoverable when the item is popped.
+Trace it from the ex2 example: after 4 numeric items (ranks 0-3) three are consumed; the next batch of 7 continues at rank 4; the JSON export then prints `item_3, item_4, item_5…`. So the rank travels **with** the piece of data and the counter is monotonic per processor — it doubles as the "total processed" figure in ex1's statistics. Design consequence: storing bare strings is not enough, the rank has to be recoverable when the item is popped.
 
-Edge case to have an answer for: `output()` on an **empty** processor — return
-something, raise, or guard from the caller? Pick one and be consistent, the
-pipeline in ex2 hits it (asking for 5 items when only 4 remain).
+Edge case to have an answer for: `output()` on an **empty** processor — return something, raise, or guard from the caller? Pick one and be consistent, the pipeline in ex2 hits it (asking for 5 items when only 4 remain).
 
 ### Exceptions
 
-Only `abc` and `typing` may be imported, but **classes are free** — so a custom
-exception class (module 02 territory) is available if you want typed failures,
-and built-ins (`TypeError` for a wrong type, `ValueError` for a wrong value) are
-always allowed. Know why you chose yours. Whatever you raise, the caller must be
-able to catch it without catching everything else.
+Only `abc` and `typing` may be imported, but **classes are free** — so a custom exception class (module 02 territory) is available if you want typed failures, and built-ins (`TypeError` for a wrong type, `ValueError` for a wrong value) are always allowed. Know why you chose yours. Whatever you raise, the caller must be able to catch it without catching everything else.
 
 ---
 
@@ -175,11 +128,7 @@ able to catch it without catching everything else.
 
 ### The concept
 
-**Polymorphism** = the same call expression executes different code depending on
-the runtime type of the object. Python resolves `obj.method()` by looking through
-`type(obj).__mro__` **at call time** — nothing is decided at compile time, which
-is why `DataStream` can drive a processor class that did not exist when it was
-written.
+**Polymorphism** = the same call expression executes different code depending on the runtime type of the object. Python resolves `obj.method()` by looking through `type(obj).__mro__` **at call time** — nothing is decided at compile time, which is why `DataStream` can drive a processor class that did not exist when it was written.
 
 ```python
 for proc in self.processors:      # list[DataProcessor] — static type
@@ -187,9 +136,7 @@ for proc in self.processors:      # list[DataProcessor] — static type
         proc.ingest(element)
 ```
 
-That loop is the whole exercise's idea: `DataStream` only ever speaks the
-**`DataProcessor` interface** (`validate` / `ingest` / `output`), and the ABC of
-ex0 is what guarantees those three names exist on every registered object.
+That loop is the whole exercise's idea: `DataStream` only ever speaks the **`DataProcessor` interface** (`validate` / `ingest` / `output`), and the ABC of ex0 is what guarantees those three names exist on every registered object.
 
 ### The three methods to build
 
@@ -199,8 +146,7 @@ ex0 is what guarantees those three names exist on every registered object.
 | `process_stream(self, stream: list[typing.Any])` | route each element to a processor that validates it; print an error if none does |
 | `print_processors_stats(self)`                   | per-processor `total processed` + `remaining`, or the "no processor" line |
 
-`register_processor` annotating its parameter as `DataProcessor` (not a union of
-the three concrete classes) *is* the polymorphism, expressed in the type system.
+`register_processor` annotating its parameter as `DataProcessor` (not a union of the three concrete classes) *is* the polymorphism, expressed in the type system.
 
 ### Statistics — two different counters
 
@@ -208,43 +154,24 @@ the three concrete classes) *is* the polymorphism, expressed in the type system.
 Numeric Processor: total 8 items processed, remaining 5 on processor
 ```
 
-- **total** = cumulative, never decreases — the same counter that produces the
-  rank in ex0.
+- **total** = cumulative, never decreases — the same counter that produces the rank in ex0.
 - **remaining** = current queue length, drops as `output()` is consumed.
 
-The empty case has its own line (`No processor found, no data`), printed before
-any registration.
+The empty case has its own line (`No processor found, no data`), printed before any registration.
 
 ### Routing nuances worth anticipating
 
-- **First match wins.** Registration order matters as soon as two processors
-  could both accept an element. Deciding "first that validates" vs "check they
-  are mutually exclusive" is a design choice you should be able to defend.
-- **The empty list `[]`.** If validation is "every element is of my type", an
-  empty list passes for *all three* processors (`all([])` is `True`) and
-  contributes zero items. Decide whether that is acceptable.
-- **`isinstance(True, int)` is `True`.** `bool` is a subclass of `int`, so a
-  naive numeric check swallows `True`/`False`. Classic trap — know it even if you
-  choose to allow it.
-- **Nested structure.** The subject's stream contains lists *of* dicts and lists
-  *of* numbers, so validation has to look **inside** the container, not just at
-  its outer type.
-- **Unroutable elements** are reported, not crashed on:
-  `DataStream error - Can't process element in stream: <element>`.
+- **First match wins.** Registration order matters as soon as two processors could both accept an element. Deciding "first that validates" vs "check they are mutually exclusive" is a design choice you should be able to defend.
+- **The empty list `[]`.** If validation is "every element is of my type", an empty list passes for *all three* processors (`all([])` is `True`) and contributes zero items. Decide whether that is acceptable.
+- **`isinstance(True, int)` is `True`.** `bool` is a subclass of `int`, so a naive numeric check swallows `True`/`False`. Classic trap — know it even if you choose to allow it.
+- **Nested structure.** The subject's stream contains lists *of* dicts and lists *of* numbers, so validation has to look **inside** the container, not just at its outer type.
+- **Unroutable elements** are reported, not crashed on: `DataStream error - Can't process element in stream: <element>`.
 
 ### The subject's explicit question — know this cold
 
-> *"How does polymorphism allow the `DataStream` to handle different data types
-> in the stream without knowing their specific implementations? What are the
-> benefits of this design approach?"*
+> *"How does polymorphism allow the `DataStream` to handle different data types in the stream without knowing their specific implementations? What are the benefits of this design approach?"*
 
-The shape of a strong answer: `DataStream` depends on the **abstraction**, not the
-concretions — it calls `validate`/`ingest` and Python dispatches to the real
-class at runtime. Benefits to name: no `if isinstance(...)` chain to maintain;
-adding a fourth processor requires **zero** changes to `DataStream`
-(**Open/Closed Principle**); each processor's rules stay in one place (single
-responsibility); and each is independently testable. The contrast to draw is the
-type-switch version of the same loop, which grows with every new type.
+The shape of a strong answer: `DataStream` depends on the **abstraction**, not the concretions — it calls `validate`/`ingest` and Python dispatches to the real class at runtime. Benefits to name: no `if isinstance(...)` chain to maintain; adding a fourth processor requires **zero** changes to `DataStream` (**Open/Closed Principle**); each processor's rules stay in one place (single responsibility); and each is independently testable. The contrast to draw is the type-switch version of the same loop, which grows with every new type.
 
 ---
 
@@ -252,11 +179,7 @@ type-switch version of the same loop, which grows with every new type.
 
 ### The concept
 
-**Duck typing**: "if it walks like a duck and quacks like a duck, it's a duck" —
-Python only cares that the object *has* the method you call, never what it
-inherits from. A **`typing.Protocol`** is that idea made checkable: it declares a
-required shape, and any class with a matching method is a subtype **without
-inheriting anything** (*structural subtyping*, PEP 544).
+**Duck typing**: "if it walks like a duck and quacks like a duck, it's a duck" — Python only cares that the object *has* the method you call, never what it inherits from. A **`typing.Protocol`** is that idea made checkable: it declares a required shape, and any class with a matching method is a subtype **without inheriting anything** (*structural subtyping*, PEP 544).
 
 ```python
 import typing
@@ -275,18 +198,14 @@ def welcome(g: Greeter) -> None:  # mypy accepts Cowboy() here
     g.greet("Nexus")
 ```
 
-Contrast with ex0 in one line: **ABC = "prove your ancestry", Protocol = "show me
-your shape"**. That is the sentence to have ready.
+Contrast with ex0 in one line: **ABC = "prove your ancestry", Protocol = "show me your shape"**. That is the sentence to have ready.
 
 ### Protocol details that come up at defense
 
 - A Protocol body holds **signatures only** — `...` or a docstring as body.
-- `isinstance(x, Greeter)` raises `TypeError` **unless** the protocol is decorated
-  `@typing.runtime_checkable` — and even then it checks only *method names*, not
-  signatures. If you reach for `isinstance` here, know that limitation.
+- `isinstance(x, Greeter)` raises `TypeError` **unless** the protocol is decorated `@typing.runtime_checkable` — and even then it checks only *method names*, not signatures. If you reach for `isinstance` here, know that limitation.
 - Instantiating the protocol itself is meaningless; it is a static description.
-- Protocols are the reason a plugin author can write an exporter **without
-  importing your code at all** — the decoupling argument for a plugin system.
+- Protocols are the reason a plugin author can write an exporter **without importing your code at all** — the decoupling argument for a plugin system.
 
 ### The pipeline method
 
@@ -297,62 +216,36 @@ output_pipeline(self, nb: int, plugin: ExportPlugin) -> None
 Reading the subject's example carefully tells you the semantics:
 
 - called **after** `process_stream`;
-- consumes **up to** `nb` items from **each** registered processor via `output()`
-  (Text had only 4 left when 5 were asked → 4 exported, 0 remaining — so it
-  stops early instead of raising);
-- hands each processor's harvest to the plugin as **one** `list[tuple[int, str]]`
-  — the example prints one `CSV Output:` / `JSON Output:` block **per
-  processor**, so the plugin is called once per processor, not once per item;
-- the tuple type is exactly `DataProcessor.output`'s return type — that is why
-  the subject spells out "matches the return value of the `output` method".
+- consumes **up to** `nb` items from **each** registered processor via `output()` (Text had only 4 left when 5 were asked → 4 exported, 0 remaining — so it stops early instead of raising);
+- hands each processor's harvest to the plugin as **one** `list[tuple[int, str]]` — the example prints one `CSV Output:` / `JSON Output:` block **per processor**, so the plugin is called once per processor, not once per item;
+- the tuple type is exactly `DataProcessor.output`'s return type — that is why the subject spells out "matches the return value of the `output` method".
 
 ### The two export plugins
 
-Hand-built strings — **no `csv` / `json` import is authorized**, and the subject
-says so explicitly.
+Hand-built strings — **no `csv` / `json` import is authorized**, and the subject says so explicitly.
 
 | Plugin   | Uses the tuple's… | Shape from the example                                        |
 | -------- | ----------------- | -------------------------------------------------------------- |
 | **CSV**  | value only        | `3.14,-1,2.71` — values joined by `,` on one line               |
 | **JSON** | rank **and** value | `{"item_3": "42", "item_4": "21"}` — `item_<rank>` as key, values quoted |
 
-The rank is what makes the two formats differ in information content: CSV drops
-it, JSON promotes it to the key. Note that both plugins receive the *same* list —
-that is the point of a plugin system.
+The rank is what makes the two formats differ in information content: CSV drops it, JSON promotes it to the key. Note that both plugins receive the *same* list — that is the point of a plugin system.
 
-Two honest caveats to raise before an evaluator does: hand-rolled JSON is
-**fragile** (a value containing `"` or `\` produces invalid JSON — real code
-escapes, or uses the `json` module), and everything is a string by then because
-`output()` returns `str`, so JSON numbers come out quoted (`"42"`, as in the
-subject's own example).
+Two honest caveats to raise before an evaluator does: hand-rolled JSON is **fragile** (a value containing `"` or `\` produces invalid JSON — real code escapes, or uses the `json` module), and everything is a string by then because `output()` returns `str`, so JSON numbers come out quoted (`"42"`, as in the subject's own example).
 
 ---
 
 ## 4. Module-wide rules & traps
 
-- **Imports: `abc` and `typing` only.** No `json`, no `csv`, no `dataclasses`, no
-  `collections.deque` — the FIFO is built from a standard list.
-- **Python ≥ 3.10** → `int | float` unions, `list[str]` / `tuple[int, str]`
-  builtin generics. No `typing.List` / `typing.Union` needed.
-- **"Comprehensive type annotations", checked with mypy** — every parameter,
-  every return (`-> None` included), on methods as well as functions. The *only*
-  expected mypy complaint is the deliberate ex0 one.
+- **Imports: `abc` and `typing` only.** No `json`, no `csv`, no `dataclasses`, no `collections.deque` — the FIFO is built from a standard list.
+- **Python ≥ 3.10** → `int | float` unions, `list[str]` / `tuple[int, str]` builtin generics. No `typing.List` / `typing.Union` needed.
+- **"Comprehensive type annotations", checked with mypy** — every parameter, every return (`-> None` included), on methods as well as functions. The *only* expected mypy complaint is the deliberate ex0 one.
 - **flake8-clean**: 79 columns, blank-line rules around classes/methods.
-- **Exception handling protects the streams**: invalid data raises inside
-  `ingest`, unroutable elements are reported by `DataStream`, and nothing crashes
-  the script. Catch specific exceptions, never bare `except`.
-- **Each exercise builds on the previous file** — ex1 is ex0 + `DataStream`, ex2
-  is ex1 + protocol and plugins, each as its own self-contained file in `ex0/`,
-  `ex1/`, `ex2/`. Copy forward, don't import across directories.
-- **Every file is runnable**: `python3 data_processor.py` must print the demo
-  scenario, so each exercise needs its own test scenario under a main guard (see
-  [python_main_guard.md](../02_Python/02_syntax_flow/python_main_guard.md)).
-- **Output text is yours**, structure is the subject's: keep the sections,
-  statistics lines and error lines recognizable.
-- Defense warning from the subject: you may be asked to **extend the system live**
-  — "add a fourth processor type", "add an XML plugin". If your design is right
-  that is a new class and one `register_processor` call, with **no edit** to
-  `DataStream`. Rehearse it.
+- **Exception handling protects the streams**: invalid data raises inside `ingest`, unroutable elements are reported by `DataStream`, and nothing crashes the script. Catch specific exceptions, never bare `except`.
+- **Each exercise builds on the previous file** — ex1 is ex0 + `DataStream`, ex2 is ex1 + protocol and plugins, each as its own self-contained file in `ex0/`, `ex1/`, `ex2/`. Copy forward, don't import across directories.
+- **Every file is runnable**: `python3 data_processor.py` must print the demo scenario, so each exercise needs its own test scenario under a main guard (see [python_main_guard.md](../02_Python/02_syntax_flow/python_main_guard.md)).
+- **Output text is yours**, structure is the subject's: keep the sections, statistics lines and error lines recognizable.
+- Defense warning from the subject: you may be asked to **extend the system live** — "add a fourth processor type", "add an XML plugin". If your design is right that is a new class and one `register_processor` call, with **no edit** to `DataStream`. Rehearse it.
 
 ---
 

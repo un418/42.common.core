@@ -2,10 +2,7 @@
 
 ## What it is
 
-`Warning` is a subclass of `Exception`, but it is not meant to signal errors: it signals
-**non-blocking problems** through the `warnings` module. The operation *succeeded*, but
-something is worth reporting — "this still works but stop using it", "this behavior will
-change", "you probably forgot to close this file".
+`Warning` is a subclass of `Exception`, but it is not meant to signal errors: it signals **non-blocking problems** through the `warnings` module. The operation *succeeded*, but something is worth reporting — "this still works but stop using it", "this behavior will change", "you probably forgot to close this file".
 
 ```text
 BaseException
@@ -26,9 +23,7 @@ BaseException
 
 ## Warnings vs exceptions — the core difference
 
-An exception is **raised**: it interrupts control flow and unwinds the stack until caught
-(or crashes the program). A warning is **emitted** with `warnings.warn(...)`: the message
-goes to stderr and **execution continues normally**.
+An exception is **raised**: it interrupts control flow and unwinds the stack until caught (or crashes the program). A warning is **emitted** with `warnings.warn(...)`: the message goes to stderr and **execution continues normally**.
 
 ```python
 import warnings
@@ -52,18 +47,12 @@ x = old_function()  # prints the warning; x is still 42
 
 Two behaviors with no exception equivalent:
 
-- **User-filterable**: whoever runs the code decides what happens — ignore, print, or
-  escalate to a real error (`python -W error`, `warnings.simplefilter("error")`,
-  `PYTHONWARNINGS` env var).
-- **Hidden by default**: `DeprecationWarning` (outside `__main__`),
-  `PendingDeprecationWarning` and `ResourceWarning` are ignored unless configured — or
-  under dev mode, `python -X dev`.
+- **User-filterable**: whoever runs the code decides what happens — ignore, print, or escalate to a real error (`python -W error`, `warnings.simplefilter("error")`, `PYTHONWARNINGS` env var).
+- **Hidden by default**: `DeprecationWarning` (outside `__main__`), `PendingDeprecationWarning` and `ResourceWarning` are ignored unless configured — or under dev mode, `python -X dev`.
 
 ## Why is it an `Exception` subclass at all?
 
-Precisely so filters can **escalate warnings into errors**. With `simplefilter("error")`
-a `warnings.warn(...)` becomes a real `raise` — catchable with `try/except UserWarning`.
-Widely used in CI to force projects to deal with their deprecations before they break.
+Precisely so filters can **escalate warnings into errors**. With `simplefilter("error")` a `warnings.warn(...)` becomes a real `raise` — catchable with `try/except UserWarning`. Widely used in CI to force projects to deal with their deprecations before they break.
 
 ```python
 >>> import warnings
@@ -87,16 +76,12 @@ UserWarning: boom
 | `SyntaxWarning` | valid but dubious syntax (e.g. `is` with a literal) | yes |
 | `EncodingWarning` | `open()` without an explicit `encoding=` (3.10+) | no |
 
-The `DeprecationWarning` / `FutureWarning` split is about **audience**: the former targets
-the developer importing the library (hidden from end users running an app), the latter
-targets whoever runs the program and must see it.
+The `DeprecationWarning` / `FutureWarning` split is about **audience**: the former targets the developer importing the library (hidden from end users running an app), the latter targets whoever runs the program and must see it.
 
 ## Practical details
 
-- **`stacklevel=2`** makes the warning point at the *caller's* line instead of the
-  `warn()` line itself — far more useful for whoever has to fix the call site.
-- **Filter actions**: `"error"`, `"ignore"`, `"always"`, `"default"` (once per location),
-  `"once"` (once total), `"module"` (once per module).
+- **`stacklevel=2`** makes the warning point at the *caller's* line instead of the `warn()` line itself — far more useful for whoever has to fix the call site.
+- **Filter actions**: `"error"`, `"ignore"`, `"always"`, `"default"` (once per location), `"once"` (once total), `"module"` (once per module).
 - **Scoped filtering** for tests or noisy libraries:
 
   ```python
@@ -105,21 +90,15 @@ targets whoever runs the program and must see it.
       noisy_call()
   ```
 
-- **pytest** has `pytest.warns(DeprecationWarning)`, symmetric to `pytest.raises(...)`,
-  to assert a warning is emitted.
+- **pytest** has `pytest.warns(DeprecationWarning)`, symmetric to `pytest.raises(...)`, to assert a warning is emitted.
 
 ## When to pick which
 
-Raise an **exception** when the caller *must* react: the operation failed, the result
-does not exist (the statement itself: [[python_try_except_raise]]). Emit a **warning**
-when the operation succeeded but something should be reported — without breaking anyone's code, and leaving the final severity decision to
-the person running it.
+Raise an **exception** when the caller *must* react: the operation failed, the result does not exist (the statement itself: [[python_try_except_raise]]). Emit a **warning** when the operation succeeded but something should be reported — without breaking anyone's code, and leaving the final severity decision to the person running it.
 
 ## Defense-day one-liner
 
-> A `Warning` is an `Exception` subclass that is emitted, not raised: execution continues
-> and the runner chooses via filters whether to ignore it, print it, or turn it into a
-> real error.
+> A `Warning` is an `Exception` subclass that is emitted, not raised: execution continues and the runner chooses via filters whether to ignore it, print it, or turn it into a real error.
 
 ## Reference
 

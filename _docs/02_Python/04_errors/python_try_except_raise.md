@@ -1,8 +1,6 @@
 # Syntax
 
-The statement itself. Why the language has exceptions at all, and why they are typed:
-[[python_exception]]. Why reaching for them first (EAFP) rather than checking before
-(LBYL) is the Python default: [[python_idioms]].
+The statement itself. Why the language has exceptions at all, and why they are typed: [[python_exception]]. Why reaching for them first (EAFP) rather than checking before (LBYL) is the Python default: [[python_idioms]].
 
 ```python
 try:
@@ -18,8 +16,7 @@ finally:
     print("Execution complete.")
 ```
 
-**Explanation:**  
-**try block attempts** division, **except blocks catch** specific errors, **else** block executes** only if no errors** occur, while **finally block always runs**, signaling end of execution.
+**Explanation:** **try block attempts** division, **except blocks catch** specific errors, **else** block executes** only if no errors** occur, while **finally block always runs**, signaling end of execution.
 
 - **try**: Runs the risky code that might cause an error.
 - **except:** Catches and handles the error if one occurs.
@@ -40,9 +37,7 @@ except ZeroDivisionError:
     print("Zero has no inverse!")
 ```
 
-An `except C` matches if the exception is an instance of `C` **or of a subclass**, so
-which class I name decides the granularity, and the clauses must go from the most
-specific to the most general. The tree to pick from: [[python_exception]].
+An `except C` matches if the exception is an instance of `C` **or of a subclass**, so which class I name decides the granularity, and the clauses must go from the most specific to the most general. The tree to pick from: [[python_exception]].
 
 ### Multiple Exceptions
 
@@ -58,9 +53,7 @@ except IndexError:
     print("Index out of range.")
 ```
 
-`as e` binds the instance, so the handler can read what actually happened:
-`e` for the message, `e.__class__.__name__` for the type name (_cf._
-[[python_exception]]).
+`as e` binds the instance, so the handler can read what actually happened: `e` for the message, `e.__class__.__name__` for the type name (_cf._ [[python_exception]]).
 
 ## Raise an Exception
 
@@ -85,11 +78,8 @@ except ValueError as e:
 
 Two follow-ups on the choice of what to raise:
 
-- a built-in fits most cases (`ValueError` = right type, wrong value; `TypeError` =
-  wrong type of argument). Own class only for domain errors callers must catch
-  *separately*, and then the `super().__init__()` contract applies: [[python_custom_exceptions]].
-- when the operation actually succeeded and I only want to report something, the tool
-  is a warning, not a `raise`: [[python_warnings]].
+- a built-in fits most cases (`ValueError` = right type, wrong value; `TypeError` = wrong type of argument). Own class only for domain errors callers must catch *separately*, and then the `super().__init__()` contract applies: [[python_custom_exceptions]].
+- when the operation actually succeeded and I only want to report something, the tool is a warning, not a `raise`: [[python_warnings]].
 
 ## Else Clause
 
@@ -109,8 +99,7 @@ divide(10, 0)
 
 ## Finally Keyword
 
-finally block is always executed after the try and except blocks, whether an exception occurs or not. 
-It is commonly used for cleanup tasks such as closing files or releasing resources.
+finally block is always executed after the try and except blocks, whether an exception occurs or not. It is commonly used for cleanup tasks such as closing files or releasing resources.
 
 ```python
 try:
@@ -124,11 +113,9 @@ finally:
 
 ### `finally` vs code placed after the try/except
 
-This is the question I could not answer on defense day, and the block above is
-exactly why: here both constructs behave the same, so the difference is invisible.
+This is the question I could not answer on defense day, and the block above is exactly why: here both constructs behave the same, so the difference is invisible.
 
-One sentence: **`finally` runs on every exit path out of the `try`; code placed
-after the try/except only runs if the flow reaches it normally.**
+One sentence: **`finally` runs on every exit path out of the `try`; code placed after the try/except only runs if the flow reaches it normally.**
 
 | How the `try` is left | `finally` | code after the try/except |
 |---|---|---|
@@ -138,11 +125,7 @@ after the try/except only runs if the flow reaches it normally.**
 | **exception nobody catches** | **runs, before propagation resumes** | **never reached** |
 | `break` / `continue` inside a loop | runs | skipped |
 
-`finally` runs **while the exception is still propagating**, then the propagation
-resumes. 
-That is the whole point: cleanup is not something you hope to reach, it
-is something the language guarantees.
-A file handle left open, a lock never released or a valve left running are all the same bug, the cleanup line sitting on a path the flow abandoned.
+`finally` runs **while the exception is still propagating**, then the propagation resumes. That is the whole point: cleanup is not something you hope to reach, it is something the language guarantees. A file handle left open, a lock never released or a valve left running are all the same bug, the cleanup line sitting on a path the flow abandoned.
 
 ```python
 >>> def g():
@@ -163,8 +146,7 @@ ValueError: boom
 
 ### Order of execution when `return` sits in the `except`
 
-The trap is thinking the function returns and *then* the `finally` runs somehow
-afterwards. What actually happens:
+The trap is thinking the function returns and *then* the `finally` runs somehow afterwards. What actually happens:
 
 1. the return **value is evaluated** (right there, in the `except`);
 2. the `return` is put **on hold**;
@@ -192,15 +174,11 @@ finally
 'return value'
 ```
 
-`evaluating:` prints before `finally`, so the value is computed first; the
-function hands it back last. Consequence: a `finally` that mutates the object
-being returned still affects the caller, but rebinding the local variable does
-not, the value is already captured.
+`evaluating:` prints before `finally`, so the value is computed first; the function hands it back last. Consequence: a `finally` that mutates the object being returned still affects the caller, but rebinding the local variable does not, the value is already captured.
 
 ### Anti-pattern: `return` inside `finally`
 
-Because the pending `return` is only "on hold", a `return` written **in** the
-`finally` overwrites it, and it also **swallows an exception in flight**:
+Because the pending `return` is only "on hold", a `return` written **in** the `finally` overwrites it, and it also **swallows an exception in flight**:
 
 ```python
 >>> def swallow():
@@ -213,16 +191,11 @@ Because the pending `return` is only "on hold", a `return` written **in** the
 'swallowed'
 ```
 
-The `ValueError` is gone; no traceback, no trace of it anywhere. 
-Same story with `break` and `continue` inside a `finally`. Keep `finally` for cleanup only, never for control flow (flake8-bugbear flags this as B012).
+The `ValueError` is gone; no traceback, no trace of it anywhere. Same story with `break` and `continue` inside a `finally`. Keep `finally` for cleanup only, never for control flow (flake8-bugbear flags this as B012).
 
 ### Note: for files, `with` does this for me
 
-`finally` is the manual form of the guarantee. A context manager (`with`) is the same
-guarantee packaged into the object, which is why `with open(...)` never needs a
-`close()` in a `finally` (_cf._ [[python_keywords]], § Context managers). I still write
-`finally` by hand for anything that is not a context manager: a flag to reset, a valve
-to shut, a state to restore.
+`finally` is the manual form of the guarantee. A context manager (`with`) is the same guarantee packaged into the object, which is why `with open(...)` never needs a `close()` in a `finally` (_cf._ [[python_keywords]], § Context managers). I still write `finally` by hand for anything that is not a context manager: a flag to reset, a valve to shut, a state to restore.
 
 # Related notes
 
@@ -241,6 +214,5 @@ to shut, a state to restore.
 - https://www.geeksforgeeks.org/python/user-defined-exceptions-python-examples/
 - https://www.geeksforgeeks.org/python/python-raise-keyword/
 - https://docs.python.org/3.12/library/exceptions.html#exception-hierarchy
-- https://docs.python.org/3/reference/compound_stmts.html#the-try-statement — the
-  `finally` semantics: pending `return`/`break`/`continue` and discarded exceptions
+- https://docs.python.org/3/reference/compound_stmts.html#the-try-statement — the `finally` semantics: pending `return`/`break`/`continue` and discarded exceptions
 - https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions

@@ -1,11 +1,8 @@
 # Python keywords
 
-The fundamental language keywords mentioned in the module subjects ("Python keywords
-such as `class` and `def` are fundamental language keywords").
+The fundamental language keywords mentioned in the module subjects ("Python keywords such as `class` and `def` are fundamental language keywords").
 
-Source: `import keyword; keyword.kwlist` — **35 hard keywords** + **4 soft keywords**
-(Python 3.14). Hard keywords are reserved: they can never be used as variable, function
-or class names.
+Source: `import keyword; keyword.kwlist` — **35 hard keywords** + **4 soft keywords** (Python 3.14). Hard keywords are reserved: they can never be used as variable, function or class names.
 
 ```python
 import keyword
@@ -59,8 +56,7 @@ if key in my_dict:   # not: if key in my_dict.keys()
 if 0 <= x < 10:      # chained comparison, not: x >= 0 and x < 10
 ```
 
-See [python_collections.md](../03_data_types/python_collections.md) for what `in` actually tests on
-a dict.
+See [python_collections.md](../03_data_types/python_collections.md) for what `in` actually tests on a dict.
 
 ## Conditionals
 
@@ -116,8 +112,7 @@ def count_up(limit: int):
 sorted(words, key=lambda w: len(w))  # lambda as a sort key
 ```
 
-**Pythonic:** `global` is almost always a design smell — prefer parameters and
-return values.
+**Pythonic:** `global` is almost always a design smell — prefer parameters and return values.
 
 ## Classes
 
@@ -167,12 +162,9 @@ finally:
     print("done")
 ```
 
-**Pythonic:** EAFP ("Easier to Ask Forgiveness than Permission") — try the operation
-and catch the failure, rather than pre-checking every condition. Catch specific
-exceptions, never a bare `except:`.
+**Pythonic:** EAFP ("Easier to Ask Forgiveness than Permission") — try the operation and catch the failure, rather than pre-checking every condition. Catch specific exceptions, never a bare `except:`.
 
-Full statement, including what `finally` guarantees that code placed after the
-try/except does not: [[python_try_except_raise]].
+Full statement, including what `finally` guarantees that code placed after the try/except does not: [[python_try_except_raise]].
 
 ## Context managers
 
@@ -185,8 +177,7 @@ with open("garden.txt") as f:        # file is closed automatically
     data = f.read()
 ```
 
-**Pythonic:** always open files with `with` — no manual `close()`, no leak on
-exception.
+**Pythonic:** always open files with `with` — no manual `close()`, no leak on exception.
 
 ## Async
 

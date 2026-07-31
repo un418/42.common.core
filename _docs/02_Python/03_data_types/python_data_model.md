@@ -1,8 +1,6 @@
 # Data model: what "properties" a type can have
 
-> In Python a *property* of a type is not a label — it's a **protocol**: a set of dunder
-> methods the type implements. Duck typing, formalized. `collections.abc` and `numbers`
-> are just two specialized views on the one reference: the **Data Model**.
+> In Python a *property* of a type is not a label — it's a **protocol**: a set of dunder methods the type implements. Duck typing, formalized. `collections.abc` and `numbers` are just two specialized views on the one reference: the **Data Model**.
 
 ---
 
@@ -26,9 +24,7 @@
 
 ### The invariant that ties it all together
 
-> **Mutable ⇒ not hashable.** A hash must stay constant for the object's lifetime; a
-> container you can mutate cannot promise that. Hence: no `list`/`set`/`dict` as a dict
-> key or set element — use their frozen twin.
+> **Mutable ⇒ not hashable.** A hash must stay constant for the object's lifetime; a container you can mutate cannot promise that. Hence: no `list`/`set`/`dict` as a dict key or set element — use their frozen twin.
 
 | Mutable | Frozen twin | Consequence |
 | --- | --- | --- |
@@ -64,18 +60,13 @@
 | | Picklable | `__reduce__`, `__getstate__`/`__setstate__` | via `pickle` |
 | | Buffer | buffer protocol | bytes, bytearray, memoryview |
 
-**Reading rule** — no inheritance required. A class that defines `__len__` and
-`__getitem__` *is* a sequence for every practical purpose, even without subclassing
-anything. That's what "structural" means.
+**Reading rule** — no inheritance required. A class that defines `__len__` and `__getitem__` *is* a sequence for every practical purpose, even without subclassing anything. That's what "structural" means.
 
 ---
 
 ## `collections.abc` — the container properties, formalized
 
-> **ABC = Abstract Base Class**: a class that cannot be instantiated and defines a
-> *contract* (which methods a type must provide) instead of an implementation. Python's
-> ABCs are **structural**: thanks to `__subclasshook__`, `isinstance(x, Iterable)` is
-> `True` for anything defining `__iter__`, even with no inheritance link.
+> **ABC = Abstract Base Class**: a class that cannot be instantiated and defines a *contract* (which methods a type must provide) instead of an implementation. Python's ABCs are **structural**: thanks to `__subclasshook__`, `isinstance(x, Iterable)` is `True` for anything defining `__iter__`, even with no inheritance link.
 
 ```
 Hashable   Iterable   Sized   Container      Callable
@@ -99,9 +90,7 @@ Hashable   Iterable   Sized   Container      Callable
 | `Set` | `__contains__`, `__iter__`, `__len__` | `&` `\|` `-` `^`, `<` `<=` `>` `>=`, `isdisjoint` |
 | `Mapping` | `__getitem__`, `__iter__`, `__len__` | `get`, `keys`, `items`, `values`, `__eq__` |
 
-⚠ **There is no `Ordered` ABC.** Insertion order is a *documented guarantee* for list,
-tuple, str and dict (3.7+), not a runtime-testable protocol. Say "guaranteed by the
-language", not "it's an ABC".
+⚠ **There is no `Ordered` ABC.** Insertion order is a *documented guarantee* for list, tuple, str and dict (3.7+), not a runtime-testable protocol. Say "guaranteed by the language", not "it's an ABC".
 
 ---
 
@@ -122,21 +111,16 @@ Same protocol (`Set`), one differs only by mutability — and mutability costs t
 Shared traits worth stating out loud:
 
 - **No index, no slice, no `reversed()`** — a hash table has no positions to address.
-- **Iteration order is arbitrary and unstable across runs** for `str` elements: CPython
-  randomizes string hashing per process (`PYTHONHASHSEED`). Never rely on set order.
-- **Elements must be hashable** — a set of tuples is fine, a set of lists raises
-  `TypeError: unhashable type: 'list'`.
-- **Empty set prints `set()`, not `{}`** — `{}` was already the empty dict, and `repr`
-  must stay unambiguous.
-- **Operators vs methods**: `a & b` demands two sets; `a.intersection(b)` accepts any
-  iterable.
+- **Iteration order is arbitrary and unstable across runs** for `str` elements: CPython randomizes string hashing per process (`PYTHONHASHSEED`). Never rely on set order.
+- **Elements must be hashable** — a set of tuples is fine, a set of lists raises `TypeError: unhashable type: 'list'`.
+- **Empty set prints `set()`, not `{}`** — `{}` was already the empty dict, and `repr` must stay unambiguous.
+- **Operators vs methods**: `a & b` demands two sets; `a.intersection(b)` accepts any iterable.
 
 ---
 
 ## Checking a property at runtime
 
-`dir()` and `help()` will **not** tell you "list is Mutable". The ABCs use
-`__subclasshook__`, so they don't show up in the MRO — you have to *ask*:
+`dir()` and `help()` will **not** tell you "list is Mutable". The ABCs use `__subclasshook__`, so they don't show up in the MRO — you have to *ask*:
 
 ```python
 >>> import collections.abc as abc
@@ -153,8 +137,7 @@ Or probe the protocol directly — closer to how Python actually decides:
 >>> hasattr(set(), "__getitem__")  # False — that's why s[0] fails
 ```
 
-Offline manual for the whole hierarchy (see
-[python_offline_docs.md](../01_tooling/python_offline_docs.md)):
+Offline manual for the whole hierarchy (see [python_offline_docs.md](../01_tooling/python_offline_docs.md)):
 
 ```bash
 python3 -m pydoc collections.abc     # every ABC + its abstract methods
@@ -175,6 +158,4 @@ python3 -m pydoc set                 # a concrete type, method by method
 | [Glossary](https://docs.python.org/3/glossary.html) | short official definitions (hashable, iterable, sequence…) |
 | [PEP 544](https://peps.python.org/pep-0544/) | `typing.Protocol` — structural typing for mypy |
 
-See also: [python_collections.md](python_collections.md),
-[python_truthiness.md](../02_syntax_flow/python_truthiness.md),
-[python_comprehensions.md](python_comprehensions.md).
+See also: [python_collections.md](python_collections.md), [python_truthiness.md](../02_syntax_flow/python_truthiness.md), [python_comprehensions.md](python_comprehensions.md).

@@ -1,7 +1,6 @@
 # Exceptions — the error model
 
-Why the language has exceptions and how they are organized. The statement that
-catches and raises them is a separate note: [[python_try_except_raise]].
+Why the language has exceptions and how they are organized. The statement that catches and raises them is a separate note: [[python_try_except_raise]].
 
 - https://docs.python.org/3/tutorial/errors.html
 
@@ -118,8 +117,7 @@ Caught ZeroDivisionError: division by zero
 ```
 `ArithmeticError` catches `ZeroDivisionError` and `OverflowError` ; `LookupError` catches `IndexError` and `KeyError` the same way.
 
-Corollary on the ordering of the clauses, and the rest of the statement (`else`,
-`finally`, `raise`) : [[python_try_except_raise]].
+Corollary on the ordering of the clauses, and the rest of the statement (`else`, `finally`, `raise`) : [[python_try_except_raise]].
 
 Underlying philosophy (PEP 20, the Zen — _cf._ [python_idioms.md](../05_style/python_idioms.md)) :
 > - Errors should never pass silently.
@@ -185,7 +183,4 @@ The two styles side by side, when LBYL still wins, and the defense one-liner : [
 
 ## Where the message lives
 
-An exception is a class, so `raise MyError("...")` is a constructor call : the string
-goes into `self.args`, and the inherited `__str__` reads it back. That contract (PEP 352),
-what happens when `args` holds zero or several values, and the built-ins that give the
-tuple a structural meaning : [python_custom_exceptions.md](python_custom_exceptions.md).
+An exception is a class, so `raise MyError("...")` is a constructor call : the string goes into `self.args`, and the inherited `__str__` reads it back. That contract (PEP 352), what happens when `args` holds zero or several values, and the built-ins that give the tuple a structural meaning : [python_custom_exceptions.md](python_custom_exceptions.md).

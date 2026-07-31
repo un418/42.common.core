@@ -1,7 +1,6 @@
 # Python dev environment
 
-Tooling setup for the 42 Python modules. 
-The subject enforces **flake8** and **mypy**, so most of this revolves around running those two before every commit.
+Tooling setup for the 42 Python modules. The subject enforces **flake8** and **mypy**, so most of this revolves around running those two before every commit.
 
 ## Tool family & real-world equivalents
 
@@ -12,8 +11,7 @@ Both are **static analysis** tools: they inspect code without running it.
 | Linter (style/bugs) | flake8 | **Ruff** (also replaces Black as formatter) |
 | Static type checker | mypy   | **mypy** or **Pyright** (Pylance's engine)  |
 
-In a real team these run automatically via **pre-commit** hooks and in **CI**
-on every PR. Same concepts as here, faster tools.
+In a real team these run automatically via **pre-commit** hooks and in **CI** on every PR. Same concepts as here, faster tools.
 
 ## Shell aliases (zsh)
 
@@ -31,8 +29,7 @@ alias mpy='mypy --strict'
 alias runtest='python3 main.py'
 ```
 
-Combined check on a single file (flake8 + mypy in one shot), the main
-time saver before committing:
+Combined check on a single file (flake8 + mypy in one shot), the main time saver before committing:
 
 ```zsh
 # pycheck ft_plot_area.py  ->  flake8 + mypy at once
@@ -51,19 +48,13 @@ alias act='source .venv/bin/activate'
 
 ## Shell completion (flake8 / mypy)
 
-flake8 and mypy ship **no argument completion**: no `completion` subcommand, no
-`PYTHON_ARGCOMPLETE_OK` marker in their `~/.local/bin` scripts. `argcomplete` only
-works on tools that opt in, so even a global activation gives nothing for these two.
-`pip completion --zsh` completes `pip` itself only, never the packages it installs.
+flake8 and mypy ship **no argument completion**: no `completion` subcommand, no `PYTHON_ARGCOMPLETE_OK` marker in their `~/.local/bin` scripts. `argcomplete` only works on tools that opt in, so even a global activation gives nothing for these two. `pip completion --zsh` completes `pip` itself only, never the packages it installs.
 
 Options, lightest first:
 
-1. **Do nothing** (recommended): both are used with few flags, TAB just falls back to
-   file completion.
-2. **Hand-written completion**: a `_mypy` / `_flake8` file in `$fpath`. Works, but the
-   option list is maintained by hand; nothing official exists for these two.
-3. **Global argcomplete**: only useful for other tools that carry the marker, useless
-   for mypy/flake8.
+1. **Do nothing** (recommended): both are used with few flags, TAB just falls back to file completion.
+2. **Hand-written completion**: a `_mypy` / `_flake8` file in `$fpath`. Works, but the option list is maintained by hand; nothing official exists for these two.
+3. **Global argcomplete**: only useful for other tools that carry the marker, useless for mypy/flake8.
 
 ## VS Code
 
@@ -89,8 +80,7 @@ Options, lightest first:
 }
 ```
 
-The ruler at 79 plus trim/final-newline alone remove the most common flake8
-errors.
+The ruler at 79 plus trim/final-newline alone remove the most common flake8 errors.
 
 ### Keyboard shortcuts
 

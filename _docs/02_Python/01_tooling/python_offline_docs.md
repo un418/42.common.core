@@ -1,9 +1,6 @@
 # Python docs offline — `pydoc`, `help()`, `dir()`
 
-> The Python manual from the command line. It reads the **docstrings** of the modules
-> and objects actually installed — so the doc matches *exactly* the version of the
-> interpreter, with no network. Three tools, two jobs: `pydoc`/`help()` to
-> *understand*, `dir()` to *inventory*.
+> The Python manual from the command line. It reads the **docstrings** of the modules and objects actually installed — so the doc matches *exactly* the version of the interpreter, with no network. Three tools, two jobs: `pydoc`/`help()` to *understand*, `dir()` to *inventory*.
 
 ---
 
@@ -33,8 +30,7 @@ python3 -m pydoc -p 8080        # then http://localhost:8080
 python3 -m pydoc -b             # opens the browser directly
 ```
 
-> Note: `pydoc list` also works without `-m` if the `pydoc` script is on the PATH,
-> but `python3 -m pydoc` is the reliable form (it uses the right interpreter).
+> Note: `pydoc list` also works without `-m` if the `pydoc` script is on the PATH, but `python3 -m pydoc` is the reliable form (it uses the right interpreter).
 
 ---
 
@@ -49,15 +45,13 @@ Inside a `python3` REPL, `help()` is the exact equivalent of `pydoc`:
 >>> help()              # interactive mode: type "list" then Enter, "q" to quit
 ```
 
-Same content as `pydoc` (both read the docstrings) — one from the shell, the other
-from the REPL.
+Same content as `pydoc` (both read the docstrings) — one from the shell, the other from the REPL.
 
 ---
 
 ## `dir()` — the raw inventory of names
 
-No description: just **the list of attributes/methods**. Ideal for "which methods
-exist, quickly".
+No description: just **the list of attributes/methods**. Ideal for "which methods exist, quickly".
 
 ```python
 >>> dir(list)                                   # everything, dunders included
@@ -88,11 +82,8 @@ python3 -c "print([m for m in dir(list) if not m.startswith('_')])"
 
 ## Defense-day one-liner
 
-> `pydoc`/`help()` read the docstrings of the installed version: the doc is local and
-> always up to date. `dir()` gives only the *names*, with no description — for the
-> inventory, not for understanding.
+> `pydoc`/`help()` read the docstrings of the installed version: the doc is local and always up to date. `dir()` gives only the *names*, with no description — for the inventory, not for understanding.
 
 ---
 
-See also: [dev_env.md](dev_env.md) (interpreter & tooling setup),
-[python_keywords.md](../02_syntax_flow/python_keywords.md).
+See also: [dev_env.md](dev_env.md) (interpreter & tooling setup), [python_keywords.md](../02_syntax_flow/python_keywords.md).

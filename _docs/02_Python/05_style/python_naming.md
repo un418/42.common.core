@@ -1,7 +1,6 @@
 # Naming — judgment layer
 
-> PEP 8 = *mechanics* (`snake_case`, no builtin shadowing) → [python_idioms.md](python_idioms.md).
-> Here = *judgment*: the name is syntactically fine, but is it **good**?
+> PEP 8 = *mechanics* (`snake_case`, no builtin shadowing) → [python_idioms.md](python_idioms.md). Here = *judgment*: the name is syntactically fine, but is it **good**?
 
 ---
 
@@ -37,8 +36,7 @@
 
 ## F1 · Verb = does · Noun = is
 
-A function name is a **verb phrase**. A noun-only name promises a value and
-hides the action.
+A function name is a **verb phrase**. A noun-only name promises a value and hides the action.
 
 | ✗ Bad               | Reads as                     | ✓ Better                       |
 | ------------------- | ---------------------------- | ------------------------------ |
@@ -55,8 +53,7 @@ hides the action.
 | `print_…` / `display_…` | side-effecting output                          | `None`    |
 | `get_…` / `compute_…`   | pure lookup / computation                      | the value |
 
-> A function that validates **and** converts is misfiled as `validate_…` —
-> it returns a value, so it's a `parse_`.
+> A function that validates **and** converts is misfiled as `validate_…` — it returns a value, so it's a `parse_`.
 
 Goal: **the signature alone tells the contract**, no need to read the body.
 
@@ -65,13 +62,11 @@ command  →  does something    →  side effect     →  returns None
 query    →  answers something →  no side effect  →  returns a value
 ```
 
-Never both (Command-Query Separation). `check_` / `parse_` is exactly this
-split applied file-wide.
+Never both (Command-Query Separation). `check_` / `parse_` is exactly this split applied file-wide.
 
 ## F3 · The `is_` / `has_` trap
 
-`is_`/`has_` promises a **pure predicate**: `True`/`False`, no side effect,
-never raises for the "false" case.
+`is_`/`has_` promises a **pure predicate**: `True`/`False`, no side effect, never raises for the "false" case.
 
 ```python
 def is_duplicate(key: str, seen: dict[str, int]) -> bool:
@@ -80,8 +75,7 @@ def is_duplicate(key: str, seen: dict[str, int]) -> bool:
     return False                                 # ✗ only value ever returned
 ```
 
-→ callers write `if not is_duplicate(...)`, testing a boolean that **never
-varies**. A command pretending to be a query.
+→ callers write `if not is_duplicate(...)`, testing a boolean that **never varies**. A command pretending to be a query.
 
 | Fix | Shape |
 | --- | --- |
@@ -92,9 +86,7 @@ Never leave a `bool` function that returns only one of its two values.
 
 ## F4 · Behavior, not mechanism
 
-`str_to_int` promises a generic conversion. If the body also rejects
-negatives and builds a domain-specific error, the name **under-promises** →
-name it for what it guarantees, not for the operation it happens to use.
+`str_to_int` promises a generic conversion. If the body also rejects negatives and builds a domain-specific error, the name **under-promises** → name it for what it guarantees, not for the operation it happens to use.
 
 ---
 
@@ -109,11 +101,9 @@ name it for what it guarantees, not for the operation it happens to use.
 | `d`, `lst`, `obj` | names the container type | `scores`, `players` |
 | `tmp`, `val`, `data` | adds nothing the type hint didn't | what it *represents* |
 
-**Test** → *Could I drop this name into an unrelated file without it lying?*
-If no, it's named after the mechanism.
+**Test** → *Could I drop this name into an unrelated file without it lying?* If no, it's named after the mechanism.
 
-> Short names (`i`, `e`, `p1`) stay defensible in **short scopes**. The cost
-> of a terse name grows with the length of the scope it lives in.
+> Short names (`i`, `e`, `p1`) stay defensible in **short scopes**. The cost of a terse name grows with the length of the scope it lives in.
 
 ## V2 · Head noun last
 
@@ -125,21 +115,13 @@ English compounds put **what the thing is** at the end.
 | `count_items` | "count the items" — verb phrase | ✓ function, ✗ variable |
 | `total_price` | a *price* (that is total) | ✓ — `total` is an adjective, not a verb |
 
-**Test** → *Does the last word say what the value fundamentally is?*
-This is also what separates a variable from a function: same words, order
-flipped.
+**Test** → *Does the last word say what the value fundamentally is?* This is also what separates a variable from a function: same words, order flipped.
 
 ## V3 · Vocabulary already in the file
 
-Output strings and comments are free, already-correct vocabulary. A variable
-named `most` sitting two lines above `print("most abundant: ...")` is a
-signal to adopt the fuller name.
+Output strings and comments are free, already-correct vocabulary. A variable named `most` sitting two lines above `print("most abundant: ...")` is a signal to adopt the fuller name.
 
-> ⚠️ **Bulk-rename trap**: renaming a variable also rewrites the word inside
-> **string literals** when the old name is a normal English word.
-> `most` → `most_abundant` turns `"Item most abundant"` into
-> `"Item most_abundant abundant"`.
-> Type checkers can't see this — only diffing actual program output catches it.
+> ⚠️ **Bulk-rename trap**: renaming a variable also rewrites the word inside **string literals** when the old name is a normal English word. `most` → `most_abundant` turns `"Item most abundant"` into `"Item most_abundant abundant"`. Type checkers can't see this — only diffing actual program output catches it.
 
 ---
 
@@ -147,8 +129,7 @@ signal to adopt the fuller name.
 
 ## B1 · One concept, one name
 
-The costliest defect *and* the most invisible — the author holds the mapping
-in their head, the reader rebuilds it function by function.
+The costliest defect *and* the most invisible — the author holds the mapping in their head, the reader rebuilds it function by function.
 
 Check at every **call boundary**:
 
@@ -171,11 +152,9 @@ if score > table[best_candidate]:             # ✓ 1× + 1× ; no-op gone
 ```
 
 - A ternary repeating the name **triples** the cost of every character.
-- `x = a if cond else x` — the `else` branch is a self-assignment, i.e. "do
-  nothing" written as an assignment.
+- `x = a if cond else x` — the `else` branch is a self-assignment, i.e. "do nothing" written as an assignment.
 
-Shorten the name only as a **last resort**, and keep a pair symmetric
-(matching lengths) rather than trimming one side.
+Shorten the name only as a **last resort**, and keep a pair symmetric (matching lengths) rather than trimming one side.
 
 ---
 

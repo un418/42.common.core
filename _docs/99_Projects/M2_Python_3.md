@@ -7,8 +7,7 @@
 - https://www.w3schools.com/python/python_for_loops.asp
 	- else: to execute code at the end of a loop !
 - https://docs.python.org/3/library/sys.html#sys.argv
-	- https://docs.python.org/3/library/sys.html#sys.orig_argv
-	  To recover arg send to interpreter , `-c` for example
+	- https://docs.python.org/3/library/sys.html#sys.orig_argv To recover arg send to interpreter , `-c` for example
 
 ## ex2
 - https://www.geeksforgeeks.org/python/how-to-catch-a-keyboardinterrupt-in-python/

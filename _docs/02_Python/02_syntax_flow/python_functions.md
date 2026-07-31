@@ -2,9 +2,7 @@
 
 ## Optional parameters
 
-An "optional" parameter is one the caller may omit — i.e. one with a **default value**
-in the signature. Python has three levels of it, and picking the right one *is* the
-idiom.
+An "optional" parameter is one the caller may omit — i.e. one with a **default value** in the signature. Python has three levels of it, and picking the right one *is* the idiom.
 
 ### Signature anatomy
 
@@ -23,8 +21,7 @@ def f(pos_only, /, normal, normal_opt=1, *args, kw_only, kw_only_opt=2, **kwargs
 | `*args` | absorbs the extra positionals — also opens the keyword-only zone |
 | `**kwargs` | absorbs the extra keywords, always last |
 
-Default values are only allowed on parameters, never on `*args` / `**kwargs` (those
-default to `()` and `{}` on their own).
+Default values are only allowed on parameters, never on `*args` / `**kwargs` (those default to `()` and `{}` on their own).
 
 ### 1. Plain default value
 
@@ -33,19 +30,15 @@ def greet(name: str, greeting: str = "Hello") -> str:
     return f"{greeting}, {name}"
 ```
 
-Use it when the default is **immutable**: `int`, `float`, `str`, `bool`, `tuple`,
-`frozenset`, `None`. Nothing can mutate it, so sharing it between calls is harmless.
+Use it when the default is **immutable**: `int`, `float`, `str`, `bool`, `tuple`, `frozenset`, `None`. Nothing can mutate it, so sharing it between calls is harmless.
 
-PEP 8 note: no spaces around `=` for a default (`greeting="Hello"`)… **unless** the
-parameter is annotated, and then spaces are required (`greeting: str = "Hello"`).
-flake8 enforces both (E252 / E251).
+PEP 8 note: no spaces around `=` for a default (`greeting="Hello"`)… **unless** the parameter is annotated, and then spaces are required (`greeting: str = "Hello"`). flake8 enforces both (E252 / E251).
 
 ### 2. The `None` sentinel — for everything mutable or computed
 
 - https://docs.python-guide.org/writing/gotchas/#default-args
 
-The default expression is evaluated **once, at definition time**, so a mutable default
-is shared by every call that omits it:
+The default expression is evaluated **once, at definition time**, so a mutable default is shared by every call that omits it:
 
 ```python
 def bad(items: list[int] = []) -> list[int]:            # ✗ one list for all calls
@@ -59,8 +52,7 @@ def good(items: list[int] | None = None) -> list[int]:  # ✓ fresh list each ca
     return items
 ```
 
-Same for anything that must be *re-evaluated* per call: `datetime.now()` in a signature
-freezes the import time forever.
+Same for anything that must be *re-evaluated* per call: `datetime.now()` in a signature freezes the import time forever.
 
 | Default kind | Idiom |
 | --- | --- |
@@ -68,13 +60,11 @@ freezes the import time forever.
 | mutable (`[]`, `{}`, `set()`) | `= None`, rebuild in the body |
 | computed at call time (`now()`, `uuid4()`) | `= None`, compute in the body |
 
-`if items is None` and **not** `if not items`: an explicitly-passed empty list means
-"the caller gave me a list" and must be respected, not silently replaced.
+`if items is None` and **not** `if not items`: an explicitly-passed empty list means "the caller gave me a list" and must be respected, not silently replaced.
 
 #### On a method: the same trap becomes instance sharing
 
-`__init__` is where it bites hardest — the shared object is not just reused across
-calls, it becomes shared *state* between objects that should be independent:
+`__init__` is where it bites hardest — the shared object is not just reused across calls, it becomes shared *state* between objects that should be independent:
 
 ```python
 class Player:
@@ -97,9 +87,7 @@ def __init__(self, name: str, achievements: set[str] | None = None):
     self.achievements = achievements if achievements is not None else set()
 ```
 
-Same underlying mechanism as **aliasing** (two names, one object) — see
-[python_module03_concepts.md](../../99_Projects/M2_Python_3_concepts.md) ex5, where a
-generator mutates the caller's list in place instead of a copy.
+Same underlying mechanism as **aliasing** (two names, one object) — see [python_module03_concepts.md](../../99_Projects/M2_Python_3_concepts.md) ex5, where a generator mutates the caller's list in place instead of a copy.
 
 ### 3. Keyword-only parameters
 
@@ -112,15 +100,11 @@ connect("localhost", timeout=1.0)   # ✓
 connect("localhost", 1.0)           # ✗ TypeError: takes 1 positional argument
 ```
 
-Rule of thumb: **two or more optional parameters → make them keyword-only.** It kills
-unreadable call sites like `f(x, None, None, True)`, and it lets you add or reorder
-options later without breaking any caller. Straight from the Zen: *explicit is better
-than implicit*.
+Rule of thumb: **two or more optional parameters → make them keyword-only.** It kills unreadable call sites like `f(x, None, None, True)`, and it lets you add or reorder options later without breaking any caller. Straight from the Zen: *explicit is better than implicit*.
 
 ### When `None` is a legitimate value
 
-Rare, but then `None` can't double as "not given". The idiom is a private sentinel
-object — unique by identity, so no caller can ever pass it by accident:
+Rare, but then `None` can't double as "not given". The idiom is a private sentinel object — unique by identity, so no caller can ever pass it by accident:
 
 ```python
 _MISSING = object()
@@ -146,26 +130,19 @@ This is exactly how `dict.pop()` distinguishes "no default" from "default is `No
 
 ### Typing note
 
-`Optional[T]` (from `typing`) and `T | None` (PEP 604, Python ≥ 3.10) are strictly
-identical; `T | None` is the modern spelling. Careful: `Optional` means **"can be
-`None`"**, not **"has a default"** — the two are independent:
+`Optional[T]` (from `typing`) and `T | None` (PEP 604, Python ≥ 3.10) are strictly identical; `T | None` is the modern spelling. Careful: `Optional` means **"can be `None`"**, not **"has a default"** — the two are independent:
 
 ```python
 def f(a: int | None, b: int = 0) -> None: ...
 #      └ required, but may be None   └ optional, never None
 ```
 
-mypy will not let you write `def f(x: list[int] = None)`: the annotation must become
-`list[int] | None` for the `None` default to type-check.
+mypy will not let you write `def f(x: list[int] = None)`: the annotation must become `list[int] | None` for the `None` default to type-check.
 
 ### Defense-day one-liner
 
-> A default is evaluated once, at definition time — so a mutable default is shared by
-> every call. The idiom is `= None` plus building the object in the body; and past one
-> or two options, put them behind a bare `*` so they must be passed by name.
+> A default is evaluated once, at definition time — so a mutable default is shared by every call. The idiom is `= None` plus building the object in the body; and past one or two options, put them behind a bare `*` so they must be passed by name.
 
 ---
 
-See also: [python_idioms.md](../05_style/python_idioms.md) (the mutable-default trap in depth),
-[python_conditions.md](python_conditions.md) (`is` vs `==`, guard clauses),
-[python_naming.md](../05_style/python_naming.md).
+See also: [python_idioms.md](../05_style/python_idioms.md) (the mutable-default trap in depth), [python_conditions.md](python_conditions.md) (`is` vs `==`, guard clauses), [python_naming.md](../05_style/python_naming.md).

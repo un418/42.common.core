@@ -1,7 +1,6 @@
 # Comprehensions & generator expressions
 
-> Same syntax family, two very different behaviours: **build a collection now**
-> vs **produce values on demand**. The brackets are what decide.
+> Same syntax family, two very different behaviours: **build a collection now** vs **produce values on demand**. The brackets are what decide.
 
 ---
 
@@ -23,11 +22,7 @@
 tuple(x**2 for x in range(5))   # (0, 1, 4, 9, 16)
 ```
 
-The last row is the odd one: there is **no tuple comprehension**, because
-`( ... )` is already taken by the generator. A tuple is obtained by *wrapping*
-a generator expression — `tuple()` consumes it and freezes the result. Same
-mechanism as `list(...)`, `set(...)`, `sum(...)`: the genexp is the source, the
-call decides the container.
+The last row is the odd one: there is **no tuple comprehension**, because `( ... )` is already taken by the generator. A tuple is obtained by *wrapping* a generator expression — `tuple()` consumes it and freezes the result. Same mechanism as `list(...)`, `set(...)`, `sum(...)`: the genexp is the source, the call decides the container.
 
 ---
 
@@ -45,8 +40,7 @@ Read it in execution order: **`for` first, then `if`, then `expression`.**
 [n * 2 for n in numbers if n > 0]     # filter, then transform
 ```
 
-The `if` **after** the `for` filters. A conditional **inside the expression**
-(`if/else` ternary) transforms instead — it cannot skip items:
+The `if` **after** the `for` filters. A conditional **inside the expression** (`if/else` ternary) transforms instead — it cannot skip items:
 
 ```python
 [n if n > 0 else 0 for n in numbers]  # replaces, keeps every item
@@ -72,30 +66,23 @@ list(gen)   # [0, 1, 2]
 list(gen)   # []  <- exhausted, silently returns empty
 ```
 
-A generator does not "reset". If a second pass is needed, either build a list
-or rebuild the generator.
+A generator does not "reset". If a second pass is needed, either build a list or rebuild the generator.
 
 **Reach for a generator when:**
 
-- feeding a one-pass consumer — `all()`, `any()`, `sum()`, `max()`, `min()`,
-  `"".join(...)`, a `for` loop (no intermediate list built for nothing).
+- feeding a one-pass consumer — `all()`, `any()`, `sum()`, `max()`, `min()`, `"".join(...)`, a `for` loop (no intermediate list built for nothing).
 - the source is huge or infinite — a big file, a stream (constant memory).
 
 **Anti-patterns — all rooted in "lazy + one-shot":**
 
 - **Indexing / `len()`** it → `TypeError`, it's not a sequence.
 - **Iterating it twice** → the second pass is silently empty.
-- **Materialising then throwing away** — `list(x for x in it)` is just a worse
-  `[x for x in it]`; skip the wrapper.
-- **Storing it to use later** while the source keeps changing — the values are
-  computed at consumption, not at creation (see below).
+- **Materialising then throwing away** — `list(x for x in it)` is just a worse `[x for x in it]`; skip the wrapper.
+- **Storing it to use later** while the source keeps changing — the values are computed at consumption, not at creation (see below).
 
 ### What does it actually generate?
 
-Not a list — **values, one at a time**. Exactly the values the equivalent list
-comprehension would have stored, just never all present together. The generator
-object is an *iterator*, not a container: no `len()`, no indexing, nothing to
-look inside.
+Not a list — **values, one at a time**. Exactly the values the equivalent list comprehension would have stored, just never all present together. The generator object is an *iterator*, not a container: no `len()`, no indexing, nothing to look inside.
 
 The yielded value can be of **any type** — whatever the expression produces:
 
@@ -105,16 +92,13 @@ The yielded value can be of **any type** — whatever the expression produces:
 ((x, x**2) for x in it)         # yields tuples
 ```
 
-So "a generator of dicts" exists in that sense. What does **not** exist is a
-generator that *is* a dict — a lazy stream of `key: value` pairs:
+So "a generator of dicts" exists in that sense. What does **not** exist is a generator that *is* a dict — a lazy stream of `key: value` pairs:
 
 ```python
 (k: v for k, v in pairs)        # SyntaxError — one value per step, never a pair
 ```
 
-A generator yields a single object per iteration. Key/value comes back only by
-yielding 2-tuples, and turning them into a dict re-collapses everything into
-memory anyway:
+A generator yields a single object per iteration. Key/value comes back only by yielding 2-tuples, and turning them into a dict re-collapses everything into memory anyway:
 
 ```python
 dict((k, k**2) for k in range(3))   # {0: 0, 1: 1, 2: 4}
@@ -130,9 +114,7 @@ dict((k, k**2) for k in range(3))   # {0: 0, 1: 1, 2: 4}
 
 ### If the source changes before the generator is consumed
 
-A generator holds a **reference to the source object**, not a copy — so changes
-made before consumption leak in. 
-**In-place** mutation is seen; **rebinding** the name is not (the generator still points at the old object).
+A generator holds a **reference to the source object**, not a copy — so changes made before consumption leak in. **In-place** mutation is seen; **rebinding** the name is not (the generator still points at the old object).
 
 **Mutating while iterating** fails differently per container:
 
@@ -141,16 +123,13 @@ made before consumption leak in.
 | `list`         | **silent** — index-based, a delete shifts items and one gets skipped |
 | `dict` / `set` | **loud** — `RuntimeError: changed size during iteration`             |
 
-The list case is the trap — no error, just a wrong result. 
-**Rule: never mutatea collection while iterating it.** 
-Need both? `list(gen)` it first, or iterate a copy.
+The list case is the trap — no error, just a wrong result. **Rule: never mutatea collection while iterating it.** Need both? `list(gen)` it first, or iterate a copy.
 
 ---
 
 ## `all()` and `any()` — the natural consumers
 
-Both take an **iterable** and return a `bool`, testing the *truthiness* of each element.
-Both **short-circuit**: they stop at the first element that decides the answer.
+Both take an **iterable** and return a `bool`, testing the *truthiness* of each element. Both **short-circuit**: they stop at the first element that decides the answer.
 
 | Function | Returns `True` when | Stops at first | Empty iterable |
 | --- | --- | --- | --- |
@@ -167,9 +146,7 @@ any([False, False])        # False
 any([])                    # False  <- nothing found, because nothing was looked at
 ```
 
-The empty cases are a classic trap: `all([])` being `True` means "no element
-violates the rule". If an empty collection must be *rejected*, that has to be
-an explicit, separate check.
+The empty cases are a classic trap: `all([])` being `True` means "no element violates the rule". If an empty collection must be *rejected*, that has to be an explicit, separate check.
 
 **The idiomatic pairing** — a generator expression fed straight to `all()`:
 
@@ -177,9 +154,7 @@ an explicit, separate check.
 all(isinstance(item, (int, float)) for item in values)
 ```
 
-This is why the generator form matters here: `all()` consumes one value at a
-time and can bail out early, so building a whole intermediate list of booleans
-with `[...]` would be pure waste.
+This is why the generator form matters here: `all()` consumes one value at a time and can bail out early, so building a whole intermediate list of booleans with `[...]` would be pure waste.
 
 ### The `for` in there is not "a loop"
 
@@ -193,12 +168,9 @@ for item in values:
 result = all(isinstance(item, (int, float)) for item in values)   # idiomatic
 ```
 
-Both iterate. Only the first one *writes* the iteration: a flag to initialise,
-a `break` to place, an inverted condition to get right. The comprehension form
-delegates all three.
+Both iterate. Only the first one *writes* the iteration: a flag to initialise, a `break` to place, an inverted condition to get right. The comprehension form delegates all three.
 
-**Syntax detail** — when a generator expression is the *sole* argument of a
-call, its parentheses are redundant:
+**Syntax detail** — when a generator expression is the *sole* argument of a call, its parentheses are redundant:
 
 ```python
 all((isinstance(x, int) for x in values))   # extra pair, needless
@@ -221,8 +193,7 @@ for x in "ab":
         ...
 ```
 
-Do not confuse with **nested comprehensions**, where a comprehension is the
-*expression*:
+Do not confuse with **nested comprehensions**, where a comprehension is the *expression*:
 
 ```python
 [[y for y in row] for row in matrix]     # produces a list of lists
@@ -232,12 +203,9 @@ Do not confuse with **nested comprehensions**, where a comprehension is the
 
 ## When *not* to use one
 
-- The body needs a statement (`try`, assignment, `print`) — a comprehension
-  holds an **expression** only.
-- More than one `for` plus an `if` on a single line: readability wins, write
-  the loop.
-- The result is discarded — a comprehension whose only purpose is a side effect
-  builds a list of `None` for nothing. Use a plain `for`.
+- The body needs a statement (`try`, assignment, `print`) — a comprehension holds an **expression** only.
+- More than one `for` plus an `if` on a single line: readability wins, write the loop.
+- The result is discarded — a comprehension whose only purpose is a side effect builds a list of `None` for nothing. Use a plain `for`.
 
 ---
 
@@ -252,12 +220,8 @@ isinstance(x, list[int])       # TypeError — parameterised generics are for
 isinstance(True, int)          # True — bool IS a subclass of int
 ```
 
-Consequence of the second point: checking "a list of ints" is necessarily a
-**two-step** job — is it a list, then does every element qualify. That second
-step is exactly the `all()` + generator expression pattern above.
+Consequence of the second point: checking "a list of ints" is necessarily a **two-step** job — is it a list, then does every element qualify. That second step is exactly the `all()` + generator expression pattern above.
 
 ---
 
-See also: [python_collections.md](python_collections.md) (list/tuple/dict/set),
-[python_idioms.md](../05_style/python_idioms.md) (why "pythonic" favours these forms),
-[python_keywords.md](../02_syntax_flow/python_keywords.md) (`in`, `for`).
+See also: [python_collections.md](python_collections.md) (list/tuple/dict/set), [python_idioms.md](../05_style/python_idioms.md) (why "pythonic" favours these forms), [python_keywords.md](../02_syntax_flow/python_keywords.md) (`in`, `for`).

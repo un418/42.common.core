@@ -1,9 +1,6 @@
 Execption
 
-Concept notes for this module: [[python_exception]] (the model and the hierarchy),
-[[python_try_except_raise]] (the statement, `else`, `finally`, `raise`),
-[[python_custom_exceptions]] (own error classes), [[python_warnings]] (the non-fatal
-branch).
+Concept notes for this module: [[python_exception]] (the model and the hierarchy), [[python_try_except_raise]] (the statement, `else`, `finally`, `raise`), [[python_custom_exceptions]] (own error classes), [[python_warnings]] (the non-fatal branch).
 
 - https://www.geeksforgeeks.org/python/python-try-except/
 - https://www.geeksforgeeks.org/python/python-exception-handling/
@@ -16,10 +13,7 @@ branch).
 
 
 > [!note] #to-move
-> General theory — belongs in `02_Python/02_syntax_flow/python_main_guard.md`, which has
-> three of the four arguments below but **not** "readability", and **not** the rule of
-> thumb at the end (1-2 trivial lines under the `if` = fine, any logic = `main()`).
-> Merge those two in rather than duplicating the section.
+> General theory — belongs in `02_Python/02_syntax_flow/python_main_guard.md`, which has three of the four arguments below but **not** "readability", and **not** the rule of thumb at the end (1-2 trivial lines under the `if` = fine, any logic = `main()`). Merge those two in rather than duplicating the section.
 
 ## Best Practices
 #### `main()` vs code directly in `if __name__ == "__main__":`
@@ -34,8 +28,7 @@ Putting code directly under the `if` works, but defining a `main()` function is 
 Rule of thumb: one or two trivial lines under the `if` = acceptable; any logic = `main()` function.
 
 > [!note] #to-move
-> Tooling, not module-specific — belongs in `02_Python/01_tooling/dev_env.md` next to the
-> other mypy/flake8 material. The ex2 mention is just the example, keep it as such.
+> Tooling, not module-specific — belongs in `02_Python/01_tooling/dev_env.md` next to the other mypy/flake8 material. The ex2 mention is just the example, keep it as such.
 
 #### Ignore a mypy error on a single line
 
@@ -83,8 +76,7 @@ How does inheritance help organize different types of  errors?
 
 ### Q&A:
 
-_cf._ [[python_try_except_raise]] § Finally Keyword (the two sub-sections: `finally`
-vs code placed after the try/except, and the order when `return` sits in the `except`)
+_cf._ [[python_try_except_raise]] § Finally Keyword (the two sub-sections: `finally` vs code placed after the try/except, and the order when `return` sits in the `except`)
 
 Why is it important to clean up resources even when errors happen?  
 
