@@ -46,6 +46,15 @@ If not :
 - `TypeError: Can't instantiate abstract class NumericProcessor without an implementation for abstract method 'ingest'`
 
 # ex0
+- https://stackoverflow.com/questions/152580/whats-the-canonical-way-to-check-for-type-in-python
+	- https://www.geeksforgeeks.org/python/how-to-check-the-type-of-an-object-in-python/
+- https://fr.wikipedia.org/wiki/Principe_de_substitution_de_Liskov
+- https://www.geeksforgeeks.org/python/queue-in-python/
+- https://www.geeksforgeeks.org/python/data-abstraction-in-python/
+	- Good Schema
+- https://www.geeksforgeeks.org/python/method-overriding-in-python/
+- https://www.geeksforgeeks.org/python/python-__len__-magic-method/
+- https://www.geeksforgeeks.org/python/bool-in-python/
 
 > [!note] #to-move
 > General theory — belongs in `02_Python/03_data_types/python_comprehensions.md`,

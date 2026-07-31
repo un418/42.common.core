@@ -1,4 +1,4 @@
-## ToDo
+f## ToDo
 
 - [ ] Decide if we raise error on more that 1 arg or not - `if len(args) < 1:`
 
@@ -23,5 +23,8 @@
 - https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html#filename-safety
 	- Better to `strip` than `rstrip` only
 - https://www.geeksforgeeks.org/python/python-match-case-statement/
+- https://peps.python.org/pep-0343/
+- https://www.geeksforgeeks.org/python/with-statement-in-python/
+	- see: 3. Context Managers
 	- 
 	

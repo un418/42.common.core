@@ -1,3 +1,10 @@
+# Match / Case 
+#todo 
+- https://www.geeksforgeeks.org/python/python-match-case-statement/
+- https://python3.info/intermediate/match/pattern-capture.html
+
+
+- https://peps.python.org/pep-0622/#guards
 # Conditions: guard clauses vs `if/elif/else`
 
 ## The starting point

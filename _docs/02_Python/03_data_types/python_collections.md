@@ -1,5 +1,6 @@
 # Collections: list, tuple, dict, set
 
+- https://docs.python.org/3/library/stdtypes.html
 ## Lists
 
 > To write.
