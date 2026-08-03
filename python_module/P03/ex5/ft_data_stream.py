@@ -21,12 +21,13 @@ def consume_event(events: list[tuple[str, str]]
 
 def main() -> None:
     print("=== Game Data Stream Processor ===")
+    gen0 = gen_event()
     for i in range(1000):
-        name, action = next(gen_event())
+        name, action = next(gen0)
         print(f"Event {i}: Player {name} did action {action}")
     events = []
-    for i in range(10):
-        events.append(next(gen_event()))
+    for _ in range(10):
+        events.append(next(gen0))
     print(f"Built list of 10 events: {events}")
     for event in consume_event(events):
         print(f"Got event from list: {event}")
