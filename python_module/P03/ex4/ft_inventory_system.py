@@ -30,8 +30,9 @@ def print_analytics(inventory: dict[str, int]) -> None:
     item_count = len(inventory)
     total_qty = sum(inventory.values())
     print(f"Total quantity of the {item_count} items: {total_qty}")
-    most_abundant = list(inventory.keys())[0]
-    least_abundant = list(inventory.keys())[0]
+    first_key = list(inventory)[0]
+    most_abundant = first_key
+    least_abundant = first_key
     for item, qty in inventory.items():
         if total_qty == 0:
             percentage = 0.0
