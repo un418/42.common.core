@@ -94,7 +94,7 @@ class LogProcessor(DataProcessor):
             and all(isinstance(k, str)
                     and isinstance(v, str)
                     for k, v in data.items())
-            and not req_keys.difference(data.keys())
+            and req_keys == data.keys()
         )
 
 
