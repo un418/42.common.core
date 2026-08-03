@@ -7,7 +7,7 @@ Why the language has exceptions and how they are organized. The statement that c
 ## Exception Hierarchy
 - https://docs.python.org/3/library/exceptions.html#exception-hierarchy
 
-```python
+```
 BaseException
  ├── BaseExceptionGroup
  ├── GeneratorExit
