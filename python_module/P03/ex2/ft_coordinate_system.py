@@ -7,9 +7,11 @@ def get_player_pos() -> tuple[float, float, float] | None:
 
     def split_coordinates(raw: str) -> list[str]:
         fields = raw.split(",")
-        if len(fields) != 3:
+        try:
+            x, y, z = fields
+        except ValueError:
             raise ValueError("Invalid syntax")
-        return fields
+        return [x, y, z]
 
     def parse_coordinates(point: list[str]) -> list[float]:
         parsed_point: list[float] = []
