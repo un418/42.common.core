@@ -5,7 +5,7 @@ import sys
 
 def parse_arg(arg: str) -> tuple[str, str]:
     parsed_arg = tuple(arg.split(":"))
-    if len(parsed_arg) != 2:
+    if len(parsed_arg) != 2 or not parsed_arg[0] or not parsed_arg[1]:
         raise ValueError(f"Error - invalid parameter '{arg}'")
     return parsed_arg
 
