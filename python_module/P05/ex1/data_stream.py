@@ -4,12 +4,18 @@ from typing import Any
 from abc import ABC, abstractmethod
 
 
-def pascal_case_to_title(str: str) -> str:
-    uppercase_alphabet = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
-    print(uppercase_alphabet)
-    for letter in uppercase_alphabet:
-        str = str.replace(letter, " " + letter)
-    return str.strip()
+def pascal_to_title(pascal: str) -> str:
+    title = ""
+    for i in range(len(pascal)):
+        if (
+            pascal[i].isupper() and 0 < i
+            and (pascal[i - 1].islower()
+                 or (i < len(pascal) - 1 and pascal[i + 1].islower()))
+        ):
+            title += " " + pascal[i]
+        else:
+            title += pascal[i]
+    return title
 
 
 class DataProcessor(ABC):
@@ -33,9 +39,9 @@ class DataProcessor(ABC):
 
     def report_stats(self) -> str:
         remaining = len(self)
-        processed = self._counter - remaining
+        processed = self._counter
         return (
-            f"{pascal_case_to_title(type(self).__name__)}: "
+            f"{pascal_to_title(type(self).__name__)}: "
             f"total {processed} items processed, "
             f"remaining {remaining} on processor"
         )
@@ -111,33 +117,42 @@ class LogProcessor(DataProcessor):
             and all(isinstance(k, str)
                     and isinstance(v, str)
                     for k, v in data.items())
-            and not req_keys.difference(data.keys())
+            and req_keys == data.keys()
         )
 
 
-class DataStream():
+class DataStream:
 
     def __init__(self) -> None:
         # dict will ensure unicity via keys
         self._procs: dict[str, DataProcessor] = {}
 
     def register_processor(self, proc: DataProcessor) -> None:
-        if type(proc).__name__ in self._procs:
-            raise ValueError("Error: DataProcessor type already register in this Datastream")
-        self._procs[type(proc).__name__] = proc
+        proc_name = type(proc).__name__
+        if proc_name in self._procs:
+            raise ValueError(
+                f"DataProcessor of type '{proc_name}' "
+                "already registered in this DataStream"
+            )
+        self._procs[proc_name] = proc
 
     def process_stream(self, stream: list[Any]) -> None:
         for item in stream:
-            validated = False
             for proc in self._procs.values():
                 if proc.validate(item):
                     proc.ingest(item)
-                    validated = True
                     break
-            if not validated:
-                print("DataStream error - Can't process element in stream: Hello world")
+            else:
+                print(
+                    "DataStream error - Can't process element in stream: "
+                    f"{item}"
+                )
 
     def print_processors_stats(self) -> None:
+        print("== DataStream statistics ==")
+        if not self._procs:
+            print("No processor found, no data")
+            return
         for proc in self._procs.values():
             print(proc.report_stats())
 
@@ -154,7 +169,10 @@ def main() -> None:
     # Only one processor: the rest of the stream must be rejected
     print("Registering Numeric Processor")
     np0 = NumericProcessor()
-    ds0.register_processor(np0)
+    try:
+        ds0.register_processor(np0)
+    except ValueError as e:
+        print(f"{type(e).__name__}: {e}")
     print()
 
     batch: list[Any] = [
@@ -175,8 +193,13 @@ def main() -> None:
     print("Registering other data processors")
     tp0 = TextProcessor()
     lp0 = LogProcessor()
-    ds0.register_processor(tp0)
-    ds0.register_processor(lp0)
+    procs_2 = [tp0, lp0]
+    for proc in procs_2:
+        try:
+            ds0.register_processor(proc)
+        except ValueError as e:
+            print(f"{type(e).__name__}: {e}")
+
     print("Send the same batch again")
     ds0.process_stream(batch)
     ds0.print_processors_stats()
@@ -189,6 +212,15 @@ def main() -> None:
         for _ in range(nb):
             proc.output()
     ds0.print_processors_stats()
+
+    # Test error on duplicate processsors
+    print("\n== Registering duplicate processors ==")
+    tp1 = TextProcessor()
+    try:
+        ds0.register_processor(tp1)
+    except ValueError as e:
+        print(f"{type(e).__name__}: {e}")
+    print()
 
 
 if __name__ == "__main__":
