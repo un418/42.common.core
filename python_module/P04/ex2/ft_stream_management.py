@@ -29,7 +29,7 @@ def main() -> None:
         print("---\n")
         content = f.read()
         print(content)
-        print("\n---")
+        print("---")
     except OSError as e:
         print_err(f"Error reading file '{filename}': {e}")
         return
@@ -43,7 +43,7 @@ def main() -> None:
         archive_content += "#"
     print("---\n")
     print(archive_content)
-    print("\n---")
+    print("---")
 
     try:
         # with print()

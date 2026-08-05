@@ -25,7 +25,7 @@ def main() -> None:
         print("---\n")
         content = f.read()
         print(content)
-        print("\n---")
+        print("---")
     except OSError as e:
         print(f"Error reading file '{filename}': {e}")
         return
@@ -39,7 +39,7 @@ def main() -> None:
         archive_content += "#"
     print("---\n")
     print(archive_content)
-    print("\n---")
+    print("---")
 
     try:
         archive_filename = input("Enter new file name (or empty): ")
