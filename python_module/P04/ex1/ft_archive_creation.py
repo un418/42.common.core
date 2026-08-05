@@ -52,6 +52,7 @@ def main() -> None:
         return
 
     try:
+        print(f"Saving data to '{archive_filename}'")
         archive_f = open(archive_filename, "w")
     except OSError as e:
         print(f"Error opening file '{archive_filename}': {e}")
@@ -59,7 +60,6 @@ def main() -> None:
         return
 
     try:
-        print(f"Saving data to '{archive_filename}'")
         archive_f.write(archive_content)
     except OSError as e:
         print(f"Error writing in file '{archive_filename}': {e}")
