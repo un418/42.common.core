@@ -11,7 +11,7 @@ f## ToDo
 - https://www.geeksforgeeks.org/python/read-a-file-line-by-line-in-python/
 - https://www.w3schools.com/python/python_ref_string.asp
 - https://www.geeksforgeeks.org/python/python-string-methods/
-## ex2 
+## ex2
 - https://www.geeksforgeeks.org/python/readline-in-python/
 - https://stackoverflow.com/questions/9573244/how-to-check-if-the-string-is-empty-in-python
 - https://www.w3schools.com/python/python_file_write.asp
@@ -26,5 +26,6 @@ f## ToDo
 - https://peps.python.org/pep-0343/
 - https://www.geeksforgeeks.org/python/with-statement-in-python/
 	- see: 3. Context Managers
-	- 
-	
+		- https://www.geeksforgeeks.org/python/context-manager-in-python/
+- https://www.geeksforgeeks.org/python/check-a-file-is-opened-or-closed-in-python/
+	- `if f.closed == True:`
