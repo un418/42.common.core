@@ -6,7 +6,7 @@ import typing
 
 def main() -> None:
     args = sys.argv[1:]
-    if len(args) < 1:
+    if len(args) != 1:
         print("Usage: ft_ancient_text.py <file>")
         return
 

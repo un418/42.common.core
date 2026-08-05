@@ -10,7 +10,7 @@ def print_err(msg: str) -> None:
 
 def main() -> None:
     args = sys.argv[1:]
-    if len(args) < 1:
+    if len(args) != 1:
         print("Usage: ft_stream_management.py <file>")
         return
 
