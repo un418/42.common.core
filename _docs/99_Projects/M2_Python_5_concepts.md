@@ -249,7 +249,118 @@ Two honest caveats to raise before an evaluator does: hand-rolled JSON is **frag
 
 ---
 
-## 5. Concept cheat-sheet (one-sentence definitions)
+## 5. Terminology — every term of the module, defined
+
+Grouped by theme. Terms in **bold** are the ones an evaluator can legitimately ask you to define on the spot.
+
+### 5.1 Classes & abstraction
+
+| Term | Definition |
+| ---- | ---------- |
+| **Class** | A template describing state (attributes) and behaviour (methods); calling it produces an instance. |
+| **Instance / object** | One concrete value built from a class, with its own attribute values. |
+| **Instantiation** | The act of calling a class (`NumericProcessor()`) — the moment Python checks that no abstract method is left unimplemented. |
+| **Base class / superclass / parent** | The class being inherited from (`DataProcessor`). |
+| **Subclass / derived class / child** | The class that inherits (`TextProcessor`); it *is a* `DataProcessor`. |
+| **Inheritance** | Reusing a base class's attributes and concrete methods, while adding or replacing behaviour. |
+| **Composition** | The alternative to inheritance: holding another object as an attribute and delegating to it ("has a" instead of "is a"). |
+| **Abstract class (ABC)** | A class meant to be inherited, never instantiated; it declares an interface and may carry shared concrete code. |
+| **Abstract method** | A method declared with `@abc.abstractmethod` and no real body — a contract every concrete subclass must fulfil. |
+| **Concrete method** | A fully implemented method in the ABC, inherited as-is by subclasses (here `output()`). |
+| **`abc.ABC`** | The helper base class whose only job is to set `ABCMeta` as metaclass — inheriting it is what activates the enforcement. |
+| **`ABCMeta`** | The metaclass that performs the "are all abstract methods implemented?" check at instantiation time. |
+| **Metaclass** | The class of a class — it controls how classes are created and how their instances are built. |
+| **Interface** | The set of method names and signatures a caller relies on, independent of any implementation behind them. |
+| **Contract** | The promise attached to an interface: what the caller may pass, what it gets back, what may be raised. |
+| **Implementation** | The concrete code fulfilling a contract; several implementations can share one interface. |
+
+### 5.2 Polymorphism & method dispatch
+
+| Term | Definition |
+| ---- | ---------- |
+| **Polymorphism** | One call expression producing different behaviour depending on the object it acts on. |
+| **Subtype polymorphism** | The flavour used in ex1: any subtype of `DataProcessor` can stand in wherever the base type is expected. |
+| **Ad-hoc polymorphism** | Behaviour chosen by argument types (overloading in other languages) — absent at runtime in Python. |
+| **Parametric polymorphism** | Code written once for any element type (generics, `list[T]`) — what `list[typing.Any]` gestures at. |
+| **Dynamic dispatch / late binding** | Resolving `obj.method` at **call time** by walking `type(obj).__mro__` — the reason `DataStream` needs no knowledge of its processors. |
+| **MRO** | Method Resolution Order — the linearized list of classes Python searches for an attribute. |
+| **Overriding** | Redefining an inherited method in a subclass; the subclass version is the one dispatched. |
+| **Overloading** | Same name, several signatures — **does not exist** in Python at runtime: the last `def` wins. |
+| **`typing.overload`** | Declares several signatures for the type checker only; the runtime behaviour is unchanged. |
+| **`super()`** | Explicitly calls the next implementation in the MRO — how an override extends rather than replaces. |
+| **LSP (Liskov Substitution Principle)** | A subclass must be usable anywhere its base is; narrowing a parameter type breaks it. |
+| **Covariance / contravariance** | Return types may narrow (covariant), parameter types may only widen (contravariant) — the formal reason `ingest`'s narrowing is unsound, and why `Any` in the base is the escape hatch. |
+
+### 5.3 Typing — nominal vs structural
+
+| Term | Definition |
+| ---- | ---------- |
+| **Type annotation / type hint** | A declaration of the expected type; **never enforced at runtime**, only read by tools like mypy. |
+| **Static check** | Verification done before running (mypy) — catches contradictions in annotations. |
+| **Runtime check** | Verification done while running (`isinstance`, a `raise` inside `ingest`) — the only thing that actually protects the data. |
+| **Nominal subtyping** | "You are a `DataProcessor` **because you inherit from it**" — what the ABC of ex0 enforces. |
+| **Structural subtyping** | "You are an `ExportPlugin` **because you have the methods**" — what `typing.Protocol` describes (PEP 544). |
+| **Duck typing** | The dynamic version of the same idea: Python only cares that the attribute exists when you call it. |
+| **`typing.Protocol`** | A class declaring a required shape (signatures only); matching classes conform without inheriting anything. |
+| **`@typing.runtime_checkable`** | Decorator allowing `isinstance()` on a Protocol — it verifies **method names only**, never signatures. |
+| **`typing.Any`** | "Type unknown, checks off" — compatible with every type in both directions, which is what lets the overrides narrow. |
+| **Union type (`int \| float`)** | "One of these types"; 3.10 syntax replacing `typing.Union[int, float]`. |
+| **Builtin generics (`list[str]`, `tuple[int, str]`)** | Parameterized standard collections, usable directly since 3.9 — no `typing.List` needed. |
+| **`isinstance()`** | Runtime type test; remember `isinstance(True, int)` is `True` because `bool` subclasses `int`. |
+| **mypy** | The static type checker the subject requires you to run clean — except for the one deliberate ex0 warning. |
+| **`arg-type` / `override`** | The two mypy error codes of this module: passing a wrong argument type, and an override incompatible with its base. |
+| **`# type: ignore`** | Silences a mypy error on one line — to be justified, and *not* to be used on the deliberate warning. |
+| **flake8** | The style linter (79 columns, blank lines, unused names) that must also pass clean. |
+
+### 5.4 Design principles & architecture
+
+| Term | Definition |
+| ---- | ---------- |
+| **Open/Closed Principle** | Open for extension, closed for modification — a fourth processor must require zero edit to `DataStream`. |
+| **Single Responsibility Principle** | One class, one reason to change: each processor owns its own validation rules. |
+| **Dependency inversion / program to an interface** | High-level code depends on the abstraction (`DataProcessor`), not on the concrete classes. |
+| **Coupling / decoupling** | How much one component must know about another; a Protocol drops it to zero — the plugin never imports your code. |
+| **Plugin architecture** | Extending a system with components it never imports, by agreeing only on an interface. |
+| **Registration** | Handing an implementation to the system at runtime (`register_processor`) instead of hard-coding it. |
+| **Type switch / `isinstance` chain** | The anti-pattern polymorphism replaces: a growing `if isinstance(...)` cascade in the caller. |
+| **EAFP vs LBYL** | "Easier to Ask Forgiveness" (try/except) vs "Look Before You Leap" (`validate()` then `ingest()`) — this module uses LBYL for routing and EAFP as the safety net. |
+
+### 5.5 The module's own vocabulary
+
+| Term | Definition |
+| ---- | ---------- |
+| **Stream** | The `list[Any]` of heterogeneous elements handed to `process_stream`. |
+| **Element / item** | One entry of the stream; a list-shaped element yields several stored items. |
+| **Processor** | An object implementing the `DataProcessor` interface, owning one data type and one queue. |
+| **`validate`** | "Is this element mine?" — accepts `Any`, returns `bool`, never stores anything. |
+| **`ingest`** | Stores an element, item by item, and **raises** if the data is not the type it handles. |
+| **`output`** | Pops the oldest stored item and returns `(rank, value)`. |
+| **FIFO queue** | First-In-First-Out storage: the first item ingested is the first one returned. |
+| **Enqueue / dequeue** | Adding at the back (ingest) and removing from the front (output). |
+| **Processing rank** | The per-processor counter assigned at ingest, starting at 0, **never reset**, carried with the item. |
+| **Total processed** | The cumulative ingest count — the same counter as the rank, never decreasing. |
+| **Remaining** | The current queue length, which drops as `output()` is consumed. |
+| **Pipeline** | `output_pipeline`: harvest up to `nb` items from each processor and hand each harvest to the plugin. |
+| **Export plugin** | A class matching the `ExportPlugin` protocol, turning `list[tuple[int, str]]` into a formatted string. |
+| **Serialization** | Turning in-memory data into a textual format (CSV, JSON) that can be stored or transmitted. |
+| **CSV / JSON** | The two target formats, hand-built here — the `csv` and `json` modules are **not** authorized. |
+| **Escaping** | Protecting the format's special characters (`"`, `\`) in a value — the known weakness of hand-rolled JSON. |
+
+### 5.6 Errors & exceptions
+
+| Term | Definition |
+| ---- | ---------- |
+| **Exception** | An object signalling an abnormal situation, propagating up the call stack until caught. |
+| **`raise`** | Emits an exception — how `ingest` refuses invalid data. |
+| **`try` / `except`** | Catches a specific exception type; a bare `except:` swallows everything and is forbidden here. |
+| **Custom exception class** | A class inheriting `Exception`, giving the caller a precise type to catch. |
+| **Exception hierarchy** | Exceptions are classes, so `except Exception` catches all subclasses — precision matters. |
+| **`TypeError` / `ValueError`** | Wrong type vs right type but unusable value — the built-in pair to choose between. |
+| **Graceful degradation** | Reporting an unroutable element and carrying on, instead of crashing the whole stream. |
+
+---
+
+## 6. Concept cheat-sheet (one-sentence definitions)
 
 | Keyword | One-sentence definition to say out loud |
 | ------- | ---------------------------------------- |
