@@ -160,31 +160,26 @@ class DataStream:
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for proc in self._procs.values():
-            proc_outputs = []
-            for _ in range(nb):
-                if proc:
+            limit = min(nb, len(proc))
+            if limit > 0:
+                proc_outputs = []
+                for _ in range(limit):
                     proc_outputs.append(proc.output())
-            plugin.process_output(proc_outputs)
+                plugin.process_output(proc_outputs)
 
 
 class CSVPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("CSV Output:")
-        for d in data[:-1]:
-            print(d[1], end=",")
-        for d in data[-1:]:
-            print(d[1])
+        csv_body = ",".join([d[1] for d in data])
+        print(csv_body)
 
 
 class JSONPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("JSON Output:")
-        print("{", end="")
-        for d in data[:-1]:
-            print(f'"item_{d[0]}": "{d[1]}"', end=", ")
-        for d in data[-1:]:
-            print(f'"item_{d[0]}": "{d[1]}"', end="")
-        print("}")
+        json_body = ", ".join([f'"item_{d[0]}": "{d[1]}"' for d in data])
+        print(f"{{{json_body}}}")
 
 
 def main() -> None:
@@ -253,7 +248,6 @@ def main() -> None:
     ds0.output_pipeline(5, JSONPlugin())
     print()
     ds0.print_processors_stats()
-    print()
 
 
 if __name__ == "__main__":
