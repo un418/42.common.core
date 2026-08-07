@@ -204,7 +204,8 @@ def main() -> None:
           "Numeric 3, Text 2, Log 1")
     for proc, nb in ((np0, 3), (tp0, 2), (lp0, 1)):
         for _ in range(nb):
-            proc.output()
+            if proc:
+                proc.output()
     ds0.print_processors_stats()
 
     # Test error on duplicate processors
