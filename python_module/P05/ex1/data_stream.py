@@ -160,8 +160,7 @@ class DataStream:
 def main() -> None:
     print("=== Code Nexus - Data Stream ===\n")
 
-    # Empty stream: no processor registered yet
-    print("Initialize Data Stream...")
+    print("Initialize Data Stream... ")
     ds0 = DataStream()
     ds0.print_processors_stats()
     print()
@@ -175,7 +174,7 @@ def main() -> None:
         print(f"{type(e).__name__}: {e}")
     print()
 
-    batch: list[Any] = [
+    batch = [
         "Hello world",
         [3.14, -1, 2.71],
         [{"log_level": "WARNING",
@@ -189,7 +188,6 @@ def main() -> None:
     ds0.print_processors_stats()
     print()
 
-    # Same batch, full routing: every element finds its processor
     print("Registering other data processors")
     tp0 = TextProcessor()
     lp0 = LogProcessor()
@@ -205,7 +203,6 @@ def main() -> None:
     ds0.print_processors_stats()
     print()
 
-    # Consumption: total must not move, remaining must drop
     print("Consume some elements from the data processors: "
           "Numeric 3, Text 2, Log 1")
     for proc, nb in ((np0, 3), (tp0, 2), (lp0, 1)):
@@ -213,14 +210,13 @@ def main() -> None:
             proc.output()
     ds0.print_processors_stats()
 
-    # Test error on duplicate processsors
+    # Test error on duplicate processors
     print("\n== Registering duplicate processors ==")
     tp1 = TextProcessor()
     try:
         ds0.register_processor(tp1)
     except ValueError as e:
         print(f"{type(e).__name__}: {e}")
-    print()
 
 
 if __name__ == "__main__":
