@@ -160,12 +160,11 @@ class DataStream:
 def main() -> None:
     print("=== Code Nexus - Data Stream ===\n")
 
-    print("Initialize Data Stream... ")
+    print("Initialize Data Stream...")
     ds0 = DataStream()
     ds0.print_processors_stats()
     print()
 
-    # Only one processor: the rest of the stream must be rejected
     print("Registering Numeric Processor")
     np0 = NumericProcessor()
     try:
