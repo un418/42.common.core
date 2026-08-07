@@ -90,11 +90,9 @@ class LogProcessor(DataProcessor):
         req_keys = {"log_level", "log_message"}
         return (
             isinstance(data, dict)
-            and len(data) == 2
-            and all(isinstance(k, str)
-                    and isinstance(v, str)
-                    for k, v in data.items())
             and req_keys == data.keys()
+            and all(isinstance(v, str)
+                    for v in data.values())
         )
 
 
