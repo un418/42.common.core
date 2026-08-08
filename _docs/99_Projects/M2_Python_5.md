@@ -102,3 +102,10 @@ for item in list(queue):  # ✅ mutate while needing the items : iterate a copy
 - Fiche : [Truthiness — what `if obj:` really asks](../02_Python/02_syntax_flow/python_truthiness.md) — `bool()` → `__bool__` sinon `__len__ != 0` sinon `True` ; d'où `if not lst:` sur un conteneur vide, et le piège de la classe sans aucun des deux (toujours truthy).
 ### __bool__ magic method
 - https://www.geeksforgeeks.org/python/bool-in-python/
+
+
+# ex2
+
+- Escaping `{}`in string litteral:
+	- https://peps.python.org/pep-0498/#specification
+	- https://docs.python.org/3/reference/lexical_analysis.html#formatted-string-literals
