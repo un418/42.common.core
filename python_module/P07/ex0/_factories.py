@@ -1,5 +1,6 @@
 from ._base import Creature, CreatureFactory
-from ._creatures import Flameling, Pyrodon, Aquabub, Torragon
+from ._flame import Flameling, Pyrodon
+from ._aqua import Aquabub, Torragon
 
 
 class FlameFactory(CreatureFactory):
