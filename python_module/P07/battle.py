@@ -28,6 +28,17 @@ def battle(factory0: CreatureFactory, factory1: CreatureFactory) -> None:
         print(f"Error: {type(e).__name__} - {e}")
 
 
+def test_named_factory(factory: CreatureFactory) -> None:
+    try:
+        base = factory.create_base("BaseNamedCreature")
+        evo = factory.create_evolved("EvoNamedCreature")
+        for creature in base, evo:
+            print(creature.describe())
+            print(creature.attack())
+    except Exception as e:
+        print(f"Error: {type(e).__name__} - {e}")
+
+
 if __name__ == "__main__":
     print("Testing factory")
     test_factory(FlameFactory())
@@ -37,3 +48,7 @@ if __name__ == "__main__":
     print()
     print("Testing battle")
     battle(FlameFactory(), AquaFactory())
+    print()
+    print("** Bonus - Testing named factory **")
+    test_named_factory(FlameFactory())
+    print()

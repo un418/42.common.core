@@ -4,16 +4,16 @@ from ._aqua import Aquabub, Torragon
 
 
 class FlameFactory(CreatureFactory):
-    def create_base(self) -> Creature:
-        return Flameling()
+    def create_base(self, name: str | None = None) -> Creature:
+        return Flameling(name)
 
-    def create_evolved(self) -> Creature:
-        return Pyrodon()
+    def create_evolved(self, name: str | None = None) -> Creature:
+        return Pyrodon(name)
 
 
 class AquaFactory(CreatureFactory):
-    def create_base(self) -> Creature:
-        return Aquabub()
+    def create_base(self, name: str | None = None) -> Creature:
+        return Aquabub(name)
 
-    def create_evolved(self) -> Creature:
-        return Torragon()
+    def create_evolved(self, name: str | None = None) -> Creature:
+        return Torragon(name)
