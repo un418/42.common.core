@@ -31,9 +31,25 @@ def test_transform(factory: TransformCreatureFactory) -> None:
         print(f"Error: {type(e).__name__} - {e}")
 
 
+def test_healing_target(factory: HealingCreatureFactory) -> None:
+    try:
+        healer = factory.create_base()
+        target = factory.create_evolved("EvoTarget")
+        label = " base with target:"
+        print(label)
+        print(healer.describe())
+        print(healer.attack())
+        print(healer.heal(target))
+    except Exception as e:
+        print(f"Error: {type(e).__name__} - {e}")
+
+
 if __name__ == "__main__":
     print("Testing Creature with healing capability")
     test_healing(HealingCreatureFactory())
     print()
     print("Testing Creature with transform capability")
     test_transform(TransformCreatureFactory())
+    print()
+    print("** Bonus - Testing healing target  **")
+    test_healing_target(HealingCreatureFactory())
