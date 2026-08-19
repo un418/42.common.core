@@ -2,15 +2,15 @@
 
 from ex0 import CreatureFactory, FlameFactory, AquaFactory
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
-from ex2 import BattleStrategy
+from ex2 import BattleStrategy, StrategyError
 from ex2 import NormalStrategy, AggressiveStrategy, DefensiveStrategy
 
 
 def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
-    print("*** Tournament ***")
-    nb_oppo = len(opponents)
-    print(f"{nb_oppo} opponents involved")
     try:
+        print("*** Tournament ***")
+        nb_oppo = len(opponents)
+        print(f"{nb_oppo} opponents involved")
         for i, (factA, stratA) in enumerate(opponents):
             for factB, stratB in opponents[i + 1:]:
                 playerA = factA.create_base()
@@ -22,7 +22,8 @@ def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
                 print(" now fight!")
                 stratA.act(playerA)
                 stratB.act(playerB)
-    except Exception as e:
+    except (StrategyError, Exception) as e:
+        # others exception to filter later
         print(f"Battle error, aborting tournament: {e}")
 
 

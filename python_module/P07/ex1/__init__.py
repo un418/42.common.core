@@ -1,9 +1,10 @@
 from ._factories import HealingCreatureFactory, TransformCreatureFactory
-from ._capabilities import HealCapability, TransformCapability
+from ._grass_heal import HealingCreature
+from ._normal_transform import TransformCreature
 
 __all__ = [
     "HealingCreatureFactory",
     "TransformCreatureFactory",
-    "HealCapability",
-    "TransformCapability"
+    "HealingCreature",
+    "TransformCreature"
     ]
