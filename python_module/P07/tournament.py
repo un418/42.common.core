@@ -38,17 +38,19 @@ if __name__ == "__main__":
     def_strat = DefensiveStrategy()
 
     print("Tournament 0 (basic)")
-    print("[ (Flameling+Normal), (Healing+Defensive) ]")
+    print(" [ (Flameling+Normal), (Healing+Defensive) ]")
     t0 = [(flame_factory, norm_strat), (heal_factory, def_strat)]
     battle(t0)
+    print()
 
     print("Tournament 1 (error)")
-    print("(Flameling+Aggressive), (Healing+Defensive) ]")
+    print(" [ (Flameling+Aggressive), (Healing+Defensive) ]")
     t1 = [(flame_factory, aggr_strat), (heal_factory, def_strat)]
     battle(t1)
+    print()
 
     print("Tournament 2 (multiple)")
-    print("[ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ")
+    print(" [ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
     t2 = [(aqua_factory, norm_strat),
           (heal_factory, def_strat),
           (trans_factory, aggr_strat)]
