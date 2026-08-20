@@ -1,9 +1,13 @@
+from abc import abstractmethod
+
 from ex0 import Creature
 from ._capabilities import HealCapability
 
 
 class HealingCreature(Creature, HealCapability):
-    ...
+    @abstractmethod
+    def heal(self, target: Creature | None = None) -> str:
+        ...
 
 
 class Sproutling(HealingCreature):
