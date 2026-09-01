@@ -13,11 +13,13 @@
 # ToDo
 
 - [ ] Class Reorganization
-	- [ ] Module split
-		- [ ] One module per concept (maze, cell, logo, render) only when the boundaries are settled
+	- [x] Module split
+		- [x] One module per concept (maze, cell, logo, render) only when the boundaries are settled
 		- [x] Clean up the drafts (`_maze_gen copy.py`, `wip.py`) once the reorganization is done
-		- [ ] Set up import logic to be able to test rendering from test folder
-- [ ] PerfectMazeGenerator via DFS
+		- [x] Set up import logic to be able to test from root folder
+- [x] PerfectMazeGenerator via DFS
+- [x] Animate Genration Rendering
+	- [ ] Add Cursor to see backtracking
 - [ ] Add Logo and make DFSGenerator works with it
 	- [ ]  ( Bonus ) Add Logo Scaling Logic
 	
