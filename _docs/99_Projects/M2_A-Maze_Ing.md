@@ -19,7 +19,9 @@
 		- [x] Set up import logic to be able to test from root folder
 - [x] PerfectMazeGenerator via DFS
 - [x] Animate Genration Rendering
-	- [ ] Add Cursor to see backtracking
-- [ ] Add Logo and make DFSGenerator works with it
+	- [x] Add Cursor to see backtracking
+- [x] Add Logo and make DFSGenerator works with it
 	- [ ]  ( Bonus ) Add Logo Scaling Logic
+- [ ] Resolution Algorithm
+	- [ ] Dead end
 	
