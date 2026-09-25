@@ -25,3 +25,13 @@
 - [ ] Resolution Algorithm
 	- [ ] Dead end
 	
+
+## Logo
+
+```
+4     y 2 2 2
+4     y - - 2
+4 4 4 x 2 2 2
+    4 x 2 - -
+    4 x 2 2 2
+```
