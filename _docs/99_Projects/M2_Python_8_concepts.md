@@ -1,6 +1,6 @@
 # Python Module 08 — Concepts Guide (Virtual Environments, Dependency Management & Configuration)
 
-> Subject: *The Matrix — Welcome to the Real World of Data Engineering* (`_subjects/en.python_mod08.subject.pdf`, v3.1). Python ≥ 3.10, flake8 + mypy clean, **comprehensive** type annotations, "exception handling should protect the data streams from corruption". Authorized per exercise: ex0 → `sys`, `os`, `site`, `print()`; ex1 → `pandas`, `requests`, `matplotlib`, `numpy`, `sys`, `importlib`; ex2 → `os`, `sys`, `python-dotenv`, file operations. The subject's own last instruction: **"Test your programs in different environments (with/without virtual env, with/without dependencies)."**
+> Subject: *The Matrix — Welcome to the Real World of Data Engineering* (`_subjects/en.python_mod08.subject.pdf`, v3.2). Python ≥ 3.10, flake8 + mypy clean, **comprehensive** type annotations, "exception handling should protect the data streams from corruption". Authorized per exercise: ex0 → `sys`, `os`, `site`, `print()`; ex1 → `pandas`, `requests`, `matplotlib`, `numpy`, `sys`, `importlib`; ex2 → `os`, `sys`, `python-dotenv`, file operations. The subject's own last instruction: **"Test your programs in different environments (with/without virtual env, with/without dependencies)."**
 
 ---
 
