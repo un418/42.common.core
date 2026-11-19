@@ -56,3 +56,39 @@ remote
 ```bash
 git ls-tree -r origin/master
 ```
+
+# Clean local repo
+`--prune` only removes `origin/*` refs deleted on remote. **Local branches stay.**
+
+```bash
+git fetch --prune # or : git fetch -p
+git config --global fetch.prune true  # prune on every fetch
+```
+
+Local branches whose remote is deleted show `[origin/xxx: gone]`:
+```bash
+git branch -vv
+```
+
+List only the gone ones (filter in `--format`, no grep/awk):
+```bash
+git branch --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'
+```
+
+Delete them all (`-D` = force, needed after squash merge; else `-d`):
+```bash
+git branch -D $(git branch --format='%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)')
+```
+
+# Get a remote branch (with tracking)
+`git fetch` never links local branches to remote ones.
+
+```bash
+git switch perfect      # origin/perfect exists -> creates local branch AND links it
+git switch -c perfect   # NO: new branch with no upstream -> `git pull` fails
+```
+
+Already created without link:
+```bash
+git branch --set-upstream-to=origin/perfect perfect
+```

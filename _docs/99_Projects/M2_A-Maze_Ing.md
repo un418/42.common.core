@@ -24,6 +24,11 @@
 	- [ ]  ( Bonus ) Add Logo Scaling Logic
 - [x] Resolution Algorithm
 	- [x] Dead end
+- [ ] Animate Braider ([PR #20](https://github.com/un418/a_maze_ing/pull/20))
+	- [ ] `gen_braiding` as a generator, same pattern as `MazeGenDFS.gen()`
+	- [ ] Decide what to show: dead ends checked / every attempt / kept openings only
+	- [ ] Hook it into the render loop of the `PERFECT=False` branch
+	- Test: `poetry run python3 test_apinho-a.py testcfg.txt` (`PERFECT=False`)
 - [ ] Makefile
 	- [x] build - create package
 	- [x] clean - remove build atrifacts
@@ -37,7 +42,7 @@
 		      - the subject requires "access at least a solution", but the solver lives in `maze_solver/`. 
 		        - Need to see how to deal with that... Intergrate `maze_solver` in the package or intergrate the solving algorithm in the `maze_generator` ?
 			    - Same for core package -> Maybe put everything inside `maze_generator` package to do it simple
-- [ ] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c`
+- [x] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c` → fixed in [PR #18](https://github.com/un418/a_maze_ing/pull/18)
 
 
 ## Logo
