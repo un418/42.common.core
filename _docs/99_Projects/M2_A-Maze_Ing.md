@@ -43,6 +43,11 @@
 		        - Need to see how to deal with that... Intergrate `maze_solver` in the package or intergrate the solving algorithm in the `maze_generator` ?
 			    - Same for core package -> Maybe put everything inside `maze_generator` package to do it simple
 - [x] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c` → fixed in [PR #18](https://github.com/un418/a_maze_ing/pull/18)
+- [ ] Error handling ([PR #21](https://github.com/un418/a_maze_ing/pull/21))
+	- [ ] Output file block: `OSError` not caught + exit code
+	- [ ] `NotSolvedError` never raised (unsolved → `[]` → wrong error)
+	- [ ] Replace `except Exception` placeholders
+	- [ ] Docstrings: `config_parser` Raises (`FileNotFoundError`, `UnicodeDecodeError` is a `ValueError`), `OutputFile` Args
 - [ ] README: explain the package split (domain packages vs `maze_app` orchestration), ref: [Fowler, PresentationDomainDataLayering](https://martinfowler.com/bliki/PresentationDomainDataLayering.html)
 
 ## Optional improvements (later)
@@ -50,7 +55,10 @@
 - [ ] BFS: bounds check happens after the `grid[ny][nx]` access
 - [ ] BFS: `list.pop(0)` is O(n) → look for a proper queue structure
 - [ ] BFS: `_was_seen` also adds to `seen`, the name hides it
+- [ ] `a_maze_ing.py`: `ValidationError` redundant next to `ValueError` (pydantic's one subclasses `ValueError`)
+- [ ] Docstrings style: summary on the same line as `"""` (Google / rest of repo), André's new ones in `maze_app`, `OutputFile` start on the next line
 - [ ] Braider: `_3x3_scan` fail fast (stop at the first closed wall), Andre agreed on [PR #20](https://github.com/un418/a_maze_ing/pull/20)
+- [ ] (Very optional) Braider: sides always tried N→E→S→W, so ~3/4 of openings are N/S → pick at random, from the same seeded `Random` as the DFS so `SEED` stays reproducible
 
 ## Logo
 
