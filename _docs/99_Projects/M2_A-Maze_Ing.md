@@ -43,7 +43,14 @@
 		        - Need to see how to deal with that... Intergrate `maze_solver` in the package or intergrate the solving algorithm in the `maze_generator` ?
 			    - Same for core package -> Maybe put everything inside `maze_generator` package to do it simple
 - [x] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c` → fixed in [PR #18](https://github.com/un418/a_maze_ing/pull/18)
+- [ ] README: explain the package split (domain packages vs `maze_app` orchestration), ref: [Fowler, PresentationDomainDataLayering](https://martinfowler.com/bliki/PresentationDomainDataLayering.html)
 
+## Optional improvements (later)
+
+- [ ] BFS: bounds check happens after the `grid[ny][nx]` access
+- [ ] BFS: `list.pop(0)` is O(n) → look for a proper queue structure
+- [ ] BFS: `_was_seen` also adds to `seen`, the name hides it
+- [ ] Braider: `_3x3_scan` fail fast (stop at the first closed wall), Andre agreed on [PR #20](https://github.com/un418/a_maze_ing/pull/20)
 
 ## Logo
 
