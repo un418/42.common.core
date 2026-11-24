@@ -439,7 +439,7 @@ Ramalho stays away from packaging almost entirely. Nothing in it is required for
 | [python_custom_exceptions.md](../02_Python/04_errors/python_custom_exceptions.md) | For a dedicated configuration error in ex2 rather than a bare `KeyError`. |
 | [python_try_except_raise.md](../02_Python/04_errors/python_try_except_raise.md) | The guarded-import pattern and how narrow an `except` should be. |
 | [Git.md](../05_Others/Git.md) | `.gitignore`, and why history rewriting is not a remedy for a committed secret. |
-| [shell_101.md](../05_Others/shell_101.md) | `export`, `$PATH`, and why `source` exists — the mechanics under `activate`. |
+| [shell_101.md](../03_Linux/01_shell/shell_101.md) | `export`, `$PATH`, and why `source` exists — the mechanics under `activate`. |
 
 ### 8.4 Official docs (short, worth the detour)
 

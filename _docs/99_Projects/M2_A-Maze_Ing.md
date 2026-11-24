@@ -36,6 +36,7 @@
 	- [ ] run - inside the venv
 	- [ ] fclean - remove venv ?? 
 	- [ ] lint - inside the venv
+	- [ ] test - fix display issues
 	    
 	- [ ] `mazegen` package
 		- [ ] Package scope: 

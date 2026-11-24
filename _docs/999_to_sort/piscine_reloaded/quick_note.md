@@ -10,10 +10,6 @@
 
 ## ex02
 
-find : using 'OR' statement and '( .. )' style logic expression
-* https://stackoverflow.com/questions/71562728/find-with-shell-with-different-and-or-conditions
-
-
 vim : use command line inside vim
 * `:!./myscript.sh` : **!** is the operateur to launch command
 * https://stackoverflow.com/questions/23097842/how-to-execute-command-inside-vim
