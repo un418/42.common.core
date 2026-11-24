@@ -29,13 +29,13 @@
 	- [ ] Decide what to show: dead ends checked / every attempt / kept openings only
 	- [ ] Hook it into the render loop of the `PERFECT=False` branch
 	- Test: `poetry run python3 test_apinho-a.py testcfg.txt` (`PERFECT=False`)
-- [ ] Makefile
+- [ ] Makefile ([PR #19](https://github.com/un418/a_maze_ing/pull/19), in review)
 	- [x] build - create package
-	- [x] clean - remove build atrifacts
-	- [ ] install - create venv
-	- [ ] run - inside the venv
-	- [ ] fclean - remove venv ?? 
-	- [ ] lint - inside the venv
+	- [x] install
+	- [x] run / debug - `config.txt` by default, `CONFIG=<file>` to override
+	- [x] clean - caches + generated mazes (`*maze.txt`)
+	- [x] fclean - clean + wheel
+	- [x] lint / lint-strict
 	- [ ] test - fix display issues
 	    
 	- [ ] `mazegen` package
@@ -43,6 +43,8 @@
 		      - the subject requires "access at least a solution", but the solver lives in `maze_solver/`. 
 		        - Need to see how to deal with that... Intergrate `maze_solver` in the package or intergrate the solving algorithm in the `maze_generator` ?
 			    - Same for core package -> Maybe put everything inside `maze_generator` package to do it simple
+- [ ] `make test`: analyzer exits 0 on a bad verdict (never fails) + solution path not checked ([#12](https://github.com/un418/a_maze_ing/issues/12))
+- [ ] `make lint` fails on the code (flake8 + 16 mypy errors): clean it before the defense
 - [x] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c` → fixed in [PR #18](https://github.com/un418/a_maze_ing/pull/18)
 - [ ] Error handling ([PR #21](https://github.com/un418/a_maze_ing/pull/21))
 	- [ ] Output file block: `OSError` not caught + exit code
