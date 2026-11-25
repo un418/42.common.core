@@ -681,15 +681,15 @@ Build artefacts are normally ignored — but this subject **requires the built `
 
 Your generator is meant to be **reused by a later project**, possibly by other people. Without a licence, default copyright applies: *all rights reserved* — nobody may legally reuse or redistribute it, however public the repository is. Writing `LICENSE.md` is therefore a functional requirement, not paperwork.
 
-| Licence | Family | Obligations for the reuser | Notable |
-| --- | --- | --- | --- |
-| **MIT** | permissive | keep the copyright notice + licence text | shortest, most common, zero friction — the natural default here |
-| **BSD-2/3-Clause** | permissive | same, plus (3-clause) no endorsement using your name | equivalent to MIT in practice |
-| **Apache-2.0** | permissive | notice + state changes | adds an explicit **patent grant**; longer, more "corporate" |
-| **MPL-2.0** | weak copyleft | modified *files* must stay MPL | file-level, mixes fine with other code |
-| **GPL-3.0** | strong copyleft | the whole derived work must be GPL | allowed, but it **forces** the downstream game to be GPL too |
-| **AGPL-3.0** | strong copyleft | extends copyleft to network use | actively hostile to reuse here |
-| *no licence* | — | none possible | ✗ fails the subject's requirement |
+| Licence            | Family          | Obligations for the reuser                           | Notable                                                         |
+| ------------------ | --------------- | ---------------------------------------------------- | --------------------------------------------------------------- |
+| **MIT**            | permissive      | keep the copyright notice + licence text             | shortest, most common, zero friction — the natural default here |
+| **BSD-2/3-Clause** | permissive      | same, plus (3-clause) no endorsement using your name | equivalent to MIT in practice                                   |
+| **Apache-2.0**     | permissive      | notice + state changes                               | adds an explicit **patent grant**; longer, more "corporate"     |
+| **MPL-2.0**        | weak copyleft   | modified *files* must stay MPL                       | file-level, mixes fine with other code                          |
+| **GPL-3.0**        | strong copyleft | the whole derived work must be GPL                   | allowed, but it **forces** the downstream game to be GPL too    |
+| **AGPL-3.0**       | strong copyleft | extends copyleft to network use                      | actively hostile to reuse here                                  |
+| *no licence*       | —               | none possible                                        | ✗ fails the subject's requirement                               |
 
 ### The checklist
 

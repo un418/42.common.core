@@ -29,7 +29,7 @@
 	- [ ] Decide what to show: dead ends checked / every attempt / kept openings only
 	- [ ] Hook it into the render loop of the `PERFECT=False` branch
 	- Test: `poetry run python3 test_apinho-a.py testcfg.txt` (`PERFECT=False`)
-- [ ] Makefile ([PR #19](https://github.com/un418/a_maze_ing/pull/19), in review)
+- [x] Makefile ([PR #19](https://github.com/un418/a_maze_ing/pull/19), in review)
 	- [x] build - create package
 	- [x] install
 	- [x] run / debug - `config.txt` by default, `CONFIG=<file>` to override
@@ -37,21 +37,28 @@
 	- [x] fclean - clean + wheel
 	- [x] lint / lint-strict
 	- [ ] test - fix display issues
-	    
-	- [ ] `mazegen` package
-		- [ ] Package scope: 
-		      - the subject requires "access at least a solution", but the solver lives in `maze_solver/`. 
-		        - Need to see how to deal with that... Intergrate `maze_solver` in the package or intergrate the solving algorithm in the `maze_generator` ?
-			    - Same for core package -> Maybe put everything inside `maze_generator` package to do it simple
-- [ ] `make test`: analyzer exits 0 on a bad verdict (never fails) + solution path not checked ([#12](https://github.com/un418/a_maze_ing/issues/12))
+- [ ] `mazegen` package → [[M2_A-Maze_Ing_mazegen]]
+	- `MazeGenerator` = Facade: [Refactoring.guru – Facade](https://refactoring.guru/design-patterns/facade/python/example) · [TutorialsPoint – Facade](https://tutorialspoint.com/python_design_patterns/python_design_patterns_facade.htm)
+	- [ ] Empty commit `06a2ac1` ([PR #34](https://github.com/un418/a_maze_ing/pull/34)): squash at merge, or drop with a rebase + `push --force-with-lease`
+	- [x] Package scope: `mazegen/` = `core` + `generator` + `solver` (solver shipped for "access at least a solution"), app stays outside
+
+- [ ] Domain input guards in `mazegen` (separate PR, after [PR #34](https://github.com/un418/a_maze_ing/pull/34)): today only pydantic checks them
+	- [ ] Move the domain rules (entry ≠ exit, inside the grid, size > 0) from `config_parser/_validator.py` into `mazegen`, raise `ValueError`
+	- [ ] Pydantic and `MazeGenerator` both call them (one source of truth)
+	- [ ] Check: same app error on a bad config, facade fails loudly on bad input
+
+- [ ] `make test`: analyzer exits 0 on a bad verdict (never fails) + solution path not checked [#12](https://github.com/un418/a_maze_ing/issues/12)
 - [ ] `make lint` fails on the code (flake8 + 16 mypy errors): clean it before the defense
+
 - [x] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c` → fixed in [PR #18](https://github.com/un418/a_maze_ing/pull/18)
 - [ ] Error handling ([PR #21](https://github.com/un418/a_maze_ing/pull/21))
 	- [ ] Output file block: `OSError` not caught + exit code
 	- [ ] `NotSolvedError` never raised (unsolved → `[]` → wrong error)
 	- [ ] Replace `except Exception` placeholders
 	- [ ] Docstrings: `config_parser` Raises (`FileNotFoundError`, `UnicodeDecodeError` is a `ValueError`), `OutputFile` Args
+
 - [ ] README: explain the package split (domain packages vs `maze_app` orchestration), ref: [Fowler, PresentationDomainDataLayering](https://martinfowler.com/bliki/PresentationDomainDataLayering.html)
+	- `maze_app` = Service Layer: [Architect Handbook – Service Layer](https://herrera-ignacio.github.io/architect-handbook/legacy/design-patterns/domain-logic/service-layer)
 
 ## Optional improvements (later)
 
@@ -79,10 +86,19 @@
 | ------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------- |
 | **Dependencies**    | `poetry add` / `poetry lock`                               | Adds deps to `pyproject.toml`, pins exact versions in `poetry.lock`         |
 | **Venv**            | `poetry install`                                           | **Creates the venv automatically** if missing, then installs the deps in it |
+| **Venv (deps only)** | `poetry install --no-root`                                | Same, but without installing the project itself                             |
 | **Execution**       | `poetry run <cmd>`                                         | Runs a command inside the venv without activating it                        |
+| **Activation**      | `eval $(poetry env activate)`                              | Activates the venv in the shell (`poetry shell` is gone in Poetry 2.x)      |
 | **Venv management** | `poetry env info` / `poetry env use` / `poetry env remove` | Shows where the venv is, picks the Python version, deletes it               |
+| **Dev deps**        | `poetry add --group dev <pkg>`                             | Dev-only dependency, not shipped with the package                           |
+| **Inspect**         | `poetry remove <pkg>` / `poetry show --tree` / `poetry check` | Removes a dep / shows the dependency tree / validates `pyproject.toml`   |
+| **Version**         | `poetry version patch\|minor\|major`                       | Bumps the version, so the `mazegen-X.Y.Z-...` filename                      |
 | **Build**           | `poetry build`                                             | Produces the `.whl` and the `.tar.gz`                                       |
+| **Build (wheel)**   | `poetry build -f wheel -o .`                               | Only the `.whl`, at the root (Makefile `build` rule)                        |
 | **Publishing**      | `poetry publish`                                           | Uploads the package to PyPI                                                 |
+
+- **`pyproject.toml` blocks**: `[project]` = package info + runtime deps · `[build-system]` = who builds it (`poetry-core`) · `[tool.poetry] packages` = folders shipped in the package (`core`, `maze_generator`)
+- **Defense**: rebuild in a fresh venv, maybe without Poetry → `pip install build` then `python -m build` works thanks to `[build-system]`, test it once before
 
 - **Venv location**: global cache by default (`~/Library/Caches/pypoetry/virtualenvs/`), check with `poetry env info --path`. `virtualenvs.in-project` → `.venv/` at the root
 - **Build output**: `poetry build -o .` writes the artifacts at the root instead of `dist/`. 

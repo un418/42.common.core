@@ -89,4 +89,4 @@ Native ones are enough to start with:
 - `Ctrl+Shift+P` -> command palette ("Python: Select Interpreter")
 - `Ctrl+`` ` -> integrated terminal
 - `F8` / `Shift+F8` -> navigate between reported problems (lint/typing)
-
+- `Ctrl+Shift+P` -> `File: Revert File` -> drop unsaved changes and reload the tab from disk
