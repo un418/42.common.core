@@ -47,8 +47,14 @@
 	- [ ] Pydantic and `MazeGenerator` both call them (one source of truth)
 	- [ ] Check: same app error on a bad config, facade fails loudly on bad input
 
+- [ ] Logo (separate PR, after [PR #34](https://github.com/un418/a_maze_ing/pull/34))
+	- [ ] ⚠️ [#28](https://github.com/un418/a_maze_ing/issues/28) Maze too small for "42": subject allows omitting the pattern + asks for a console error message. From reading the code, the app exits instead → test with a 5x5 config
+	- [ ] Simplify the sequence `MazeGenDFS` → `import_logoset` → `gen()` (see `TODO` in `_maze_generator.py`)
+
 - [ ] `make test`: analyzer exits 0 on a bad verdict (never fails) + solution path not checked [#12](https://github.com/un418/a_maze_ing/issues/12)
 - [ ] `make lint` fails on the code (flake8 + 16 mypy errors): clean it before the defense
+- [ ] Decide whether `flake8` and `mypy` go in the `dev` dependency group
+- [ ] Docstrings: do another full pass (`Args` vs signatures, `Attributes`, `Returns`)
 
 - [x] Fix `config_importer` ImportError: `__init__.py` + `test_apinho-a.py` still use the old names renamed in `390573c` → fixed in [PR #18](https://github.com/un418/a_maze_ing/pull/18)
 - [ ] Error handling ([PR #21](https://github.com/un418/a_maze_ing/pull/21))
